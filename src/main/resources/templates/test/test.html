@@ -1,0 +1,57 @@
+
+<html>
+<head>
+
+</head>
+<body>
+    <div id ="test">aaaaaaaaaaaaa</div>
+    <input type="button" value="关闭" id="closebtn" />
+    <script>
+
+        if ("EventSource" in window) {
+            
+            //var source = new EventSource("http://localhost:3000/eventsource/auto");
+            
+            for (var i=0;i<1000;i++)
+			{
+            	
+            	var id = "sse_content"+i;
+            	var source = new EventSource("http://app.mtedu.com/eventsource/auto");
+            	var html = '<div id="' +id + '">aaaa'+i+'aaaa</div>';
+            	document.getElementById("test").innerHTML+=html;
+            	abc(source,id);
+			}
+            
+            
+           
+            var closebtn = document.getElementById("closebtn");
+            closebtn.addEventListener("click", function () {
+                source.close();
+            });
+        } else {
+            alert("不支持");
+        }
+        
+        
+        function abc(source,id){
+        	
+        	source.addEventListener("open", function (evt) { 
+                // … 
+            }, false);
+            source.addEventListener("error", function (evt) {
+                // handle error event 
+            }, false);
+            source.addEventListener("msg", function (evt) { 
+                //var data = event.data; 
+                //var origin = event.origin; 
+                //var lastEventId = event.lastEventId; 
+                data = evt.data;
+                document.getElementById(id).innerHTML += "\n" + data;
+                //document.getElementById(id).append( "\n" + data);
+            }, false); 
+        	
+        }
+
+    </script>
+</body>
+</html>

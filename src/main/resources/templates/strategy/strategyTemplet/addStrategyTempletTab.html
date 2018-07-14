@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+
+<style>
+</style>
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-11">
+				<div class="ibox">
+					<div class="ibox-body">
+						<ul class="nav nav-tabs">
+							<li class="active"><a data-toggle="tab" href="#tab-1"><i
+									class="fa fa-file-text"></i>主机审计</a></li>
+							<li class=""><a data-toggle="tab" href="#tab-2"><i
+									class="fa fa-briefcase"></i>违规外联</a></li>
+							<li class=""><a data-toggle="tab" href="#tab-3"><i
+									class="fa fa-briefcase"></i>设备控制</a></li>
+							<li class=""><a data-toggle="tab" href="#tab-3"><i
+									class="fa fa-briefcase"></i>光盘刻录</a></li>
+							<li class=""><a data-toggle="tab" href="#tab-3"><i
+									class="fa fa-briefcase"></i>资产管理</a></li>
+							<li class=""><a data-toggle="tab" href="#tab-3"><i
+									class="fa fa-briefcase"></i>软件分发</a></li>
+
+							<li class="">
+								<!-- <a class="btn btn-default waves-effect waves-light"
+                               onclick="returnList()">返回</a> -->
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="button" onclick="history.go(-1);return false;"
+									class="btn btn-default waves-effect waves-light">返回</button>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<button type="button" onclick="addStrategyTempletTab()"
+									class="btn btn-primary">保存全部策略设置</button>
+							</li>
+						</ul>
+
+						<form id="extendParamForm">
+							<input type="hidden" name="strategyTempletId"
+								th:value="${strategyTemplet.id}" /> <input type="hidden"
+								id="osAuditId" name="osAuditId" value="" />
+						</form>
+
+						<div class="tab-content">
+							<div id="tab-1" class="tab-pane active">
+
+								<div class="bootstrap-table">
+									<div class="fixed-table-toolbar">
+										<div class="bars pull-left"></div>
+									</div>
+									<div class="fixed-table-container" style="padding-bottom: 0px;">
+										<div class="fixed-table-body">
+											<table data-mobile-responsive="true" id="exampleTable"
+												class="table table-hover table-striped">
+
+												<tbody>
+													<tr data-index="0">
+														<td style="text-align: right;">进程监控审计：</td>
+														<td style="border-left-width: 0px;"><div
+																class="ibox-content">
+																<form class="form-horizontal m-t"
+																	id="processMonitorForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">进程黑名单：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="process_black_status"
+																					name="process_black_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="process_black_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">进程黑名单控制：</label>
+																		<div class="col-sm-8">
+																			<textarea id="process_black_rules"
+																				name="process_black_rules" class="form-control"></textarea>
+																			(黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">进程白名单：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="process_white_status"
+																					name="process_white_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="process_white_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">进程白名单控制：</label>
+																		<div class="col-sm-8">
+																			<textarea id="process_white_rules"
+																				name="process_white_rules" class="form-control"></textarea>
+																			(输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<input id="process_alarm_level_selected" value=""
+																			type="hidden"> <label
+																			class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-8">
+																			<select data-placeholder="--选择类别--"
+																				name="process_alarm_level" id="process_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+																</form>
+															</div></td>
+													</tr>
+
+													<tr data-index="0">
+														<td style="text-align: right;">服务监控审计：</td>
+														<td style="border-left-width: 0px;"><div
+																class="ibox-content">
+																<form class="form-horizontal m-t" id="serverMonitorForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">服务黑名单(禁止运行的服务)：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="server_black_status"
+																					name="server_black_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="server_black_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">服务黑名单控制：</label>
+																		<div class="col-sm-8">
+																			<textarea id="server_black_rules"
+																				name="server_black_rules" class="form-control"></textarea>
+																			(黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">服务白名单(必需运行的服务)：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="server_white_status"
+																					name="server_white_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="server_white_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">服务白名单控制：</label>
+																		<div class="col-sm-8">
+																			<textarea id="server_white_rules"
+																				name="server_white_rules" class="form-control"></textarea>
+																			(输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">网络连接(目的地址)黑名单检测：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="server_connection_black_status"
+																					name="server_connection_black_status"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="server_connection_black_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">IP/域名地址：</label>
+																		<div class="col-sm-2">
+																			<input class="form-control"
+																				id="server_connection_black_ip"
+																				name="server_connection_black_ip" type="text"
+																				required="true" >
+																		</div>
+																		<label class="col-sm-1 control-label">端口号：</label>
+																		<div class="col-sm-2">
+																			<input class="form-control"
+																				id="server_connection_black_ports"
+																				name="server_connection_black_ports" type="text" required="true" >
+																		</div>
+																		<button
+																			class="btn btn-success waves-effect waves-light"
+																			onclick="saveServerConnectionBlackAddress()"
+																			id="addressAdd" type="button">添加</button>
+
+																		<div class="form-group">
+																			<label class="col-sm-2 control-label"></label>
+																			<div class="switch  col-sm-1">
+																				<div class="onoffswitch"></div>
+																			</div>
+																		</div>
+																		<div>
+																			<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;("IP/域名地址"配置中可填写目的地址的IP或域名配置,一个地址可对应多个端口号,之间用<font
+																				color="red">半角逗号</font>分隔)
+																		</div>
+																		<label class="col-sm-2 control-label"></label>
+																		<div class="col-sm-8">
+																			<!-- <textarea id="server_connection_black_addresses"
+																				name="server_connection_black_addresses"
+																				class="form-control"></textarea> -->
+
+
+																			<select name="temp_addresses"
+																				size="10" multiple="multiple"
+																				id="temp_addresses"
+																				class="form-control">
+																			</select>
+																			
+																			<input type="hidden" id="server_connection_black_addresses" name="server_connection_black_addresses" value="">
+
+																		</div>
+																		<span><button
+																				class="btn btn-success waves-effect waves-light"
+																				id="remove" type="button">移除</button></span>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-8">
+																			<select data-placeholder="--选择类别--"
+																				name="server_alarm_level" id="server_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+																</form>
+															</div></td>
+													</tr>
+
+
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="tab-2" class="tab-pane ">
+								<table id="exampleTable2" data-mobile-responsive="true"></table>
+							</div>
+							<div id="tab-3" class="tab-pane ">
+								<table id="exampleTable3" data-mobile-responsive="true"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:include="include::footer"></div>
+
+	<script th:inline="javascript" type="text/javascript">
+        // <![CDATA[
+                var osAudit = [[${osAudit}]];
+                /* debugger;
+                console.log(osAudit);
+                console.log(JSON.stringify(osAudit));
+                console.log(String([[${osAudit?.id}]]));
+              */
+                //通过参数传递
+                //initData(osAudit);
+        // ]]>
+
+    </script>
+
+	<script type="text/javascript"
+		src="/js/appjs/strategy/strategyTemplet/addStrategyTempletTab.js">
+		
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anhuay.strategy.dao.OsAuditDao">
+
+	<select id="get" resultType="com.anhuay.strategy.domain.OsAuditDO">
+		select `id`,`templet_id`,`local_file_status`,`local_file_rules`,`disk_file_status`,`disk_file_rules`,`udisk_file_status`,`udisk_file_rules`,`os_onoff_status`,`os_onoff_rules`,`process_monitor_status`,`process_monitor_rules`,`print_monitor_status`,`print_monitor_rules`,`os_info_status`,`os_info_rules`,`system_log_status`,`system_log_rules`,`account_monitor_status`,`account_monitor_rules`,`share_monitor_status`,`share_monitor_rules`,`exception_monitor_status`,`exception_monitor_rules`,`os_config_status`,`os_config_rules`,`move_media_status`,`move_media_rules`,`port_monitor_status`,`port_monitor_rules`,`server_monitor_status`,`server_monitor_rules`,`connection_monitor_status`,`connection_monitor_rules`,`irregular_connection_status`,`irregular_connection_rules`,`install_catalog_status`,`install_catalog_rules`,`irregular_uninstall_status`,`irregular_uninstall_rules`,`regular_uninstall_status`,`regular_uninstall_rules`,`status`,`create_time`,`update_time` from ahy_os_audit where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.anhuay.strategy.domain.OsAuditDO">
+		select `id`,`templet_id`,`local_file_status`,`local_file_rules`,`disk_file_status`,`disk_file_rules`,`udisk_file_status`,`udisk_file_rules`,`os_onoff_status`,`os_onoff_rules`,`process_monitor_status`,`process_monitor_rules`,`print_monitor_status`,`print_monitor_rules`,`os_info_status`,`os_info_rules`,`system_log_status`,`system_log_rules`,`account_monitor_status`,`account_monitor_rules`,`share_monitor_status`,`share_monitor_rules`,`exception_monitor_status`,`exception_monitor_rules`,`os_config_status`,`os_config_rules`,`move_media_status`,`move_media_rules`,`port_monitor_status`,`port_monitor_rules`,`server_monitor_status`,`server_monitor_rules`,`connection_monitor_status`,`connection_monitor_rules`,`irregular_connection_status`,`irregular_connection_rules`,`install_catalog_status`,`install_catalog_rules`,`irregular_uninstall_status`,`irregular_uninstall_rules`,`regular_uninstall_status`,`regular_uninstall_rules`,`status`,`create_time`,`update_time` from ahy_os_audit
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
+		  		  <if test="localFileStatus != null and localFileStatus != ''"> and local_file_status = #{localFileStatus} </if>
+		  		  <if test="localFileRules != null and localFileRules != ''"> and local_file_rules = #{localFileRules} </if>
+		  		  <if test="diskFileStatus != null and diskFileStatus != ''"> and disk_file_status = #{diskFileStatus} </if>
+		  		  <if test="diskFileRules != null and diskFileRules != ''"> and disk_file_rules = #{diskFileRules} </if>
+		  		  <if test="udiskFileStatus != null and udiskFileStatus != ''"> and udisk_file_status = #{udiskFileStatus} </if>
+		  		  <if test="udiskFileRules != null and udiskFileRules != ''"> and udisk_file_rules = #{udiskFileRules} </if>
+		  		  <if test="osOnoffStatus != null and osOnoffStatus != ''"> and os_onoff_status = #{osOnoffStatus} </if>
+		  		  <if test="osOnoffRules != null and osOnoffRules != ''"> and os_onoff_rules = #{osOnoffRules} </if>
+		  		  <if test="processMonitorStatus != null and processMonitorStatus != ''"> and process_monitor_status = #{processMonitorStatus} </if>
+		  		  <if test="processMonitorRules != null and processMonitorRules != ''"> and process_monitor_rules = #{processMonitorRules} </if>
+		  		  <if test="printMonitorStatus != null and printMonitorStatus != ''"> and print_monitor_status = #{printMonitorStatus} </if>
+		  		  <if test="printMonitorRules != null and printMonitorRules != ''"> and print_monitor_rules = #{printMonitorRules} </if>
+		  		  <if test="osInfoStatus != null and osInfoStatus != ''"> and os_info_status = #{osInfoStatus} </if>
+		  		  <if test="osInfoRules != null and osInfoRules != ''"> and os_info_rules = #{osInfoRules} </if>
+		  		  <if test="systemLogStatus != null and systemLogStatus != ''"> and system_log_status = #{systemLogStatus} </if>
+		  		  <if test="systemLogRules != null and systemLogRules != ''"> and system_log_rules = #{systemLogRules} </if>
+		  		  <if test="accountMonitorStatus != null and accountMonitorStatus != ''"> and account_monitor_status = #{accountMonitorStatus} </if>
+		  		  <if test="accountMonitorRules != null and accountMonitorRules != ''"> and account_monitor_rules = #{accountMonitorRules} </if>
+		  		  <if test="shareMonitorStatus != null and shareMonitorStatus != ''"> and share_monitor_status = #{shareMonitorStatus} </if>
+		  		  <if test="shareMonitorRules != null and shareMonitorRules != ''"> and share_monitor_rules = #{shareMonitorRules} </if>
+		  		  <if test="exceptionMonitorStatus != null and exceptionMonitorStatus != ''"> and exception_monitor_status = #{exceptionMonitorStatus} </if>
+		  		  <if test="exceptionMonitorRules != null and exceptionMonitorRules != ''"> and exception_monitor_rules = #{exceptionMonitorRules} </if>
+		  		  <if test="osConfigStatus != null and osConfigStatus != ''"> and os_config_status = #{osConfigStatus} </if>
+		  		  <if test="osConfigRules != null and osConfigRules != ''"> and os_config_rules = #{osConfigRules} </if>
+		  		  <if test="moveMediaStatus != null and moveMediaStatus != ''"> and move_media_status = #{moveMediaStatus} </if>
+		  		  <if test="moveMediaRules != null and moveMediaRules != ''"> and move_media_rules = #{moveMediaRules} </if>
+		  		  <if test="portMonitorStatus != null and portMonitorStatus != ''"> and port_monitor_status = #{portMonitorStatus} </if>
+		  		  <if test="portMonitorRules != null and portMonitorRules != ''"> and port_monitor_rules = #{portMonitorRules} </if>
+		  		  <if test="serverMonitorStatus != null and serverMonitorStatus != ''"> and server_monitor_status = #{serverMonitorStatus} </if>
+		  		  <if test="serverMonitorRules != null and serverMonitorRules != ''"> and server_monitor_rules = #{serverMonitorRules} </if>
+		  		  <if test="connectionMonitorStatus != null and connectionMonitorStatus != ''"> and connection_monitor_status = #{connectionMonitorStatus} </if>
+		  		  <if test="connectionMonitorRules != null and connectionMonitorRules != ''"> and connection_monitor_rules = #{connectionMonitorRules} </if>
+		  		  <if test="irregularConnectionStatus != null and irregularConnectionStatus != ''"> and irregular_connection_status = #{irregularConnectionStatus} </if>
+		  		  <if test="irregularConnectionRules != null and irregularConnectionRules != ''"> and irregular_connection_rules = #{irregularConnectionRules} </if>
+		  		  <if test="installCatalogStatus != null and installCatalogStatus != ''"> and install_catalog_status = #{installCatalogStatus} </if>
+		  		  <if test="installCatalogRules != null and installCatalogRules != ''"> and install_catalog_rules = #{installCatalogRules} </if>
+		  		  <if test="irregularUninstallStatus != null and irregularUninstallStatus != ''"> and irregular_uninstall_status = #{irregularUninstallStatus} </if>
+		  		  <if test="irregularUninstallRules != null and irregularUninstallRules != ''"> and irregular_uninstall_rules = #{irregularUninstallRules} </if>
+		  		  <if test="regularUninstallStatus != null and regularUninstallStatus != ''"> and regular_uninstall_status = #{regularUninstallStatus} </if>
+		  		  <if test="regularUninstallRules != null and regularUninstallRules != ''"> and regular_uninstall_rules = #{regularUninstallRules} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from ahy_os_audit
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
+		  		  <if test="localFileStatus != null and localFileStatus != ''"> and local_file_status = #{localFileStatus} </if>
+		  		  <if test="localFileRules != null and localFileRules != ''"> and local_file_rules = #{localFileRules} </if>
+		  		  <if test="diskFileStatus != null and diskFileStatus != ''"> and disk_file_status = #{diskFileStatus} </if>
+		  		  <if test="diskFileRules != null and diskFileRules != ''"> and disk_file_rules = #{diskFileRules} </if>
+		  		  <if test="udiskFileStatus != null and udiskFileStatus != ''"> and udisk_file_status = #{udiskFileStatus} </if>
+		  		  <if test="udiskFileRules != null and udiskFileRules != ''"> and udisk_file_rules = #{udiskFileRules} </if>
+		  		  <if test="osOnoffStatus != null and osOnoffStatus != ''"> and os_onoff_status = #{osOnoffStatus} </if>
+		  		  <if test="osOnoffRules != null and osOnoffRules != ''"> and os_onoff_rules = #{osOnoffRules} </if>
+		  		  <if test="processMonitorStatus != null and processMonitorStatus != ''"> and process_monitor_status = #{processMonitorStatus} </if>
+		  		  <if test="processMonitorRules != null and processMonitorRules != ''"> and process_monitor_rules = #{processMonitorRules} </if>
+		  		  <if test="printMonitorStatus != null and printMonitorStatus != ''"> and print_monitor_status = #{printMonitorStatus} </if>
+		  		  <if test="printMonitorRules != null and printMonitorRules != ''"> and print_monitor_rules = #{printMonitorRules} </if>
+		  		  <if test="osInfoStatus != null and osInfoStatus != ''"> and os_info_status = #{osInfoStatus} </if>
+		  		  <if test="osInfoRules != null and osInfoRules != ''"> and os_info_rules = #{osInfoRules} </if>
+		  		  <if test="systemLogStatus != null and systemLogStatus != ''"> and system_log_status = #{systemLogStatus} </if>
+		  		  <if test="systemLogRules != null and systemLogRules != ''"> and system_log_rules = #{systemLogRules} </if>
+		  		  <if test="accountMonitorStatus != null and accountMonitorStatus != ''"> and account_monitor_status = #{accountMonitorStatus} </if>
+		  		  <if test="accountMonitorRules != null and accountMonitorRules != ''"> and account_monitor_rules = #{accountMonitorRules} </if>
+		  		  <if test="shareMonitorStatus != null and shareMonitorStatus != ''"> and share_monitor_status = #{shareMonitorStatus} </if>
+		  		  <if test="shareMonitorRules != null and shareMonitorRules != ''"> and share_monitor_rules = #{shareMonitorRules} </if>
+		  		  <if test="exceptionMonitorStatus != null and exceptionMonitorStatus != ''"> and exception_monitor_status = #{exceptionMonitorStatus} </if>
+		  		  <if test="exceptionMonitorRules != null and exceptionMonitorRules != ''"> and exception_monitor_rules = #{exceptionMonitorRules} </if>
+		  		  <if test="osConfigStatus != null and osConfigStatus != ''"> and os_config_status = #{osConfigStatus} </if>
+		  		  <if test="osConfigRules != null and osConfigRules != ''"> and os_config_rules = #{osConfigRules} </if>
+		  		  <if test="moveMediaStatus != null and moveMediaStatus != ''"> and move_media_status = #{moveMediaStatus} </if>
+		  		  <if test="moveMediaRules != null and moveMediaRules != ''"> and move_media_rules = #{moveMediaRules} </if>
+		  		  <if test="portMonitorStatus != null and portMonitorStatus != ''"> and port_monitor_status = #{portMonitorStatus} </if>
+		  		  <if test="portMonitorRules != null and portMonitorRules != ''"> and port_monitor_rules = #{portMonitorRules} </if>
+		  		  <if test="serverMonitorStatus != null and serverMonitorStatus != ''"> and server_monitor_status = #{serverMonitorStatus} </if>
+		  		  <if test="serverMonitorRules != null and serverMonitorRules != ''"> and server_monitor_rules = #{serverMonitorRules} </if>
+		  		  <if test="connectionMonitorStatus != null and connectionMonitorStatus != ''"> and connection_monitor_status = #{connectionMonitorStatus} </if>
+		  		  <if test="connectionMonitorRules != null and connectionMonitorRules != ''"> and connection_monitor_rules = #{connectionMonitorRules} </if>
+		  		  <if test="irregularConnectionStatus != null and irregularConnectionStatus != ''"> and irregular_connection_status = #{irregularConnectionStatus} </if>
+		  		  <if test="irregularConnectionRules != null and irregularConnectionRules != ''"> and irregular_connection_rules = #{irregularConnectionRules} </if>
+		  		  <if test="installCatalogStatus != null and installCatalogStatus != ''"> and install_catalog_status = #{installCatalogStatus} </if>
+		  		  <if test="installCatalogRules != null and installCatalogRules != ''"> and install_catalog_rules = #{installCatalogRules} </if>
+		  		  <if test="irregularUninstallStatus != null and irregularUninstallStatus != ''"> and irregular_uninstall_status = #{irregularUninstallStatus} </if>
+		  		  <if test="irregularUninstallRules != null and irregularUninstallRules != ''"> and irregular_uninstall_rules = #{irregularUninstallRules} </if>
+		  		  <if test="regularUninstallStatus != null and regularUninstallStatus != ''"> and regular_uninstall_status = #{regularUninstallStatus} </if>
+		  		  <if test="regularUninstallRules != null and regularUninstallRules != ''"> and regular_uninstall_rules = #{regularUninstallRules} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.anhuay.strategy.domain.OsAuditDO">
+		insert into ahy_os_audit
+		(
+			`id`, 
+			`templet_id`, 
+			`local_file_status`, 
+			`local_file_rules`, 
+			`disk_file_status`, 
+			`disk_file_rules`, 
+			`udisk_file_status`, 
+			`udisk_file_rules`, 
+			`os_onoff_status`, 
+			`os_onoff_rules`, 
+			`process_monitor_status`, 
+			`process_monitor_rules`, 
+			`print_monitor_status`, 
+			`print_monitor_rules`, 
+			`os_info_status`, 
+			`os_info_rules`, 
+			`system_log_status`, 
+			`system_log_rules`, 
+			`account_monitor_status`, 
+			`account_monitor_rules`, 
+			`share_monitor_status`, 
+			`share_monitor_rules`, 
+			`exception_monitor_status`, 
+			`exception_monitor_rules`, 
+			`os_config_status`, 
+			`os_config_rules`, 
+			`move_media_status`, 
+			`move_media_rules`, 
+			`port_monitor_status`, 
+			`port_monitor_rules`, 
+			`server_monitor_status`, 
+			`server_monitor_rules`, 
+			`connection_monitor_status`, 
+			`connection_monitor_rules`, 
+			`irregular_connection_status`, 
+			`irregular_connection_rules`, 
+			`install_catalog_status`, 
+			`install_catalog_rules`, 
+			`irregular_uninstall_status`, 
+			`irregular_uninstall_rules`, 
+			`regular_uninstall_status`, 
+			`regular_uninstall_rules`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{templetId}, 
+			#{localFileStatus}, 
+			#{localFileRules}, 
+			#{diskFileStatus}, 
+			#{diskFileRules}, 
+			#{udiskFileStatus}, 
+			#{udiskFileRules}, 
+			#{osOnoffStatus}, 
+			#{osOnoffRules}, 
+			#{processMonitorStatus}, 
+			#{processMonitorRules}, 
+			#{printMonitorStatus}, 
+			#{printMonitorRules}, 
+			#{osInfoStatus}, 
+			#{osInfoRules}, 
+			#{systemLogStatus}, 
+			#{systemLogRules}, 
+			#{accountMonitorStatus}, 
+			#{accountMonitorRules}, 
+			#{shareMonitorStatus}, 
+			#{shareMonitorRules}, 
+			#{exceptionMonitorStatus}, 
+			#{exceptionMonitorRules}, 
+			#{osConfigStatus}, 
+			#{osConfigRules}, 
+			#{moveMediaStatus}, 
+			#{moveMediaRules}, 
+			#{portMonitorStatus}, 
+			#{portMonitorRules}, 
+			#{serverMonitorStatus}, 
+			#{serverMonitorRules}, 
+			#{connectionMonitorStatus}, 
+			#{connectionMonitorRules}, 
+			#{irregularConnectionStatus}, 
+			#{irregularConnectionRules}, 
+			#{installCatalogStatus}, 
+			#{installCatalogRules}, 
+			#{irregularUninstallStatus}, 
+			#{irregularUninstallRules}, 
+			#{regularUninstallStatus}, 
+			#{regularUninstallRules}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.anhuay.strategy.domain.OsAuditDO">
+		update ahy_os_audit 
+		<set>
+			<if test="templetId != null">`templet_id` = #{templetId}, </if>
+			<if test="localFileStatus != null">`local_file_status` = #{localFileStatus}, </if>
+			<if test="localFileRules != null">`local_file_rules` = #{localFileRules}, </if>
+			<if test="diskFileStatus != null">`disk_file_status` = #{diskFileStatus}, </if>
+			<if test="diskFileRules != null">`disk_file_rules` = #{diskFileRules}, </if>
+			<if test="udiskFileStatus != null">`udisk_file_status` = #{udiskFileStatus}, </if>
+			<if test="udiskFileRules != null">`udisk_file_rules` = #{udiskFileRules}, </if>
+			<if test="osOnoffStatus != null">`os_onoff_status` = #{osOnoffStatus}, </if>
+			<if test="osOnoffRules != null">`os_onoff_rules` = #{osOnoffRules}, </if>
+			<if test="processMonitorStatus != null">`process_monitor_status` = #{processMonitorStatus}, </if>
+			<if test="processMonitorRules != null">`process_monitor_rules` = #{processMonitorRules}, </if>
+			<if test="printMonitorStatus != null">`print_monitor_status` = #{printMonitorStatus}, </if>
+			<if test="printMonitorRules != null">`print_monitor_rules` = #{printMonitorRules}, </if>
+			<if test="osInfoStatus != null">`os_info_status` = #{osInfoStatus}, </if>
+			<if test="osInfoRules != null">`os_info_rules` = #{osInfoRules}, </if>
+			<if test="systemLogStatus != null">`system_log_status` = #{systemLogStatus}, </if>
+			<if test="systemLogRules != null">`system_log_rules` = #{systemLogRules}, </if>
+			<if test="accountMonitorStatus != null">`account_monitor_status` = #{accountMonitorStatus}, </if>
+			<if test="accountMonitorRules != null">`account_monitor_rules` = #{accountMonitorRules}, </if>
+			<if test="shareMonitorStatus != null">`share_monitor_status` = #{shareMonitorStatus}, </if>
+			<if test="shareMonitorRules != null">`share_monitor_rules` = #{shareMonitorRules}, </if>
+			<if test="exceptionMonitorStatus != null">`exception_monitor_status` = #{exceptionMonitorStatus}, </if>
+			<if test="exceptionMonitorRules != null">`exception_monitor_rules` = #{exceptionMonitorRules}, </if>
+			<if test="osConfigStatus != null">`os_config_status` = #{osConfigStatus}, </if>
+			<if test="osConfigRules != null">`os_config_rules` = #{osConfigRules}, </if>
+			<if test="moveMediaStatus != null">`move_media_status` = #{moveMediaStatus}, </if>
+			<if test="moveMediaRules != null">`move_media_rules` = #{moveMediaRules}, </if>
+			<if test="portMonitorStatus != null">`port_monitor_status` = #{portMonitorStatus}, </if>
+			<if test="portMonitorRules != null">`port_monitor_rules` = #{portMonitorRules}, </if>
+			<if test="serverMonitorStatus != null">`server_monitor_status` = #{serverMonitorStatus}, </if>
+			<if test="serverMonitorRules != null">`server_monitor_rules` = #{serverMonitorRules}, </if>
+			<if test="connectionMonitorStatus != null">`connection_monitor_status` = #{connectionMonitorStatus}, </if>
+			<if test="connectionMonitorRules != null">`connection_monitor_rules` = #{connectionMonitorRules}, </if>
+			<if test="irregularConnectionStatus != null">`irregular_connection_status` = #{irregularConnectionStatus}, </if>
+			<if test="irregularConnectionRules != null">`irregular_connection_rules` = #{irregularConnectionRules}, </if>
+			<if test="installCatalogStatus != null">`install_catalog_status` = #{installCatalogStatus}, </if>
+			<if test="installCatalogRules != null">`install_catalog_rules` = #{installCatalogRules}, </if>
+			<if test="irregularUninstallStatus != null">`irregular_uninstall_status` = #{irregularUninstallStatus}, </if>
+			<if test="irregularUninstallRules != null">`irregular_uninstall_rules` = #{irregularUninstallRules}, </if>
+			<if test="regularUninstallStatus != null">`regular_uninstall_status` = #{regularUninstallStatus}, </if>
+			<if test="regularUninstallRules != null">`regular_uninstall_rules` = #{regularUninstallRules}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from ahy_os_audit where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from ahy_os_audit where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
