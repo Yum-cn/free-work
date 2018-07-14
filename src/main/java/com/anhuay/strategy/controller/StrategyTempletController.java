@@ -85,8 +85,6 @@ public class StrategyTempletController {
 		return result;
 	}
 	
-	
-	
 	@GetMapping("/toEditStrategyTemplet/{id}")
 	@RequiresPermissions("strategy:strategyTemplet:edit")
 	String 	toEditTemplet(@PathVariable("id") Long id,Model model){
@@ -108,10 +106,6 @@ public class StrategyTempletController {
 		
 		return result;
 	}
-	
-	
-	
-	
 	
 	@GetMapping("/toAddStrategyTempletTab")
 	@RequiresPermissions("strategy:strategyTemplet:add")
