@@ -35,12 +35,6 @@ public class DeviceControlController {
 	@Autowired
 	private DeviceControlService deviceControlService;
 	
-	/*@GetMapping()
-	@RequiresPermissions("strategy:deviceControl:deviceControl")
-	String DeviceControl(){
-	    return "strategy/deviceControl/deviceControl";
-	}
-	*/
 	private String prefix="strategy/deviceControl"  ;
 	
 	@RequiresPermissions("strategy:deviceControl:deviceControl")
