@@ -10,7 +10,7 @@ import java.util.Map;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-07 19:26:32
+ * @date 2018-07-15 17:32:57
  */
 public interface OsAuditService {
 	
@@ -27,4 +27,8 @@ public interface OsAuditService {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+	
+    int updateStatus(Long id);
+    
+    int batchUpdateStatus(Long[] ids);
 }

@@ -52,4 +52,14 @@ public class OsAuditServiceImpl implements OsAuditService {
 		return osAuditDao.batchRemove(ids);
 	}
 	
+	   
+    @Override
+    public int updateStatus(Long id){
+        return osAuditDao.updateStatus(id);
+    }
+    
+    @Override
+    public int batchUpdateStatus(Long[] ids){
+        return osAuditDao.batchUpdateStatus(ids);
+    }
 }

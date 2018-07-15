@@ -3,8 +3,6 @@ package com.anhuay.strategy.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 
 
 /**
@@ -12,16 +10,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-07 19:26:32
+ * @date 2018-07-15 17:32:57
  */
 public class OsAuditDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//主键编号
-	@JsonFormat(shape=JsonFormat.Shape.STRING)
 	private Long id;
 	//模板编号
-	@JsonFormat(shape=JsonFormat.Shape.STRING)
 	private Long templetId;
 	//本地文件审计状态
 	private Integer localFileStatus;
@@ -87,22 +83,18 @@ public class OsAuditDO implements Serializable {
 	private Integer connectionMonitorStatus;
 	//连接监控审计规则
 	private String connectionMonitorRules;
-	//违规接入审计状态
-	private Integer irregularConnectionStatus;
-	//违规接入审计规则
-	private String irregularConnectionRules;
-	//安装目录审计状态
-	private Integer installCatalogStatus;
-	//安装目录审计规则
-	private String installCatalogRules;
-	//违规卸载审计状态
-	private Integer irregularUninstallStatus;
-	//违规卸载审计规则
-	private String irregularUninstallRules;
-	//正常卸载审计状态
-	private Integer regularUninstallStatus;
-	//正常卸载审计规则
-	private String regularUninstallRules;
+	//网络流量审计状态
+	private Integer networkFlowStatus;
+	//网络流量审计规则
+	private String networkFlowRules;
+	//磁盘空间审计状态
+	private Integer diskSpaceStatus;
+	//磁盘空间审计规则
+	private String diskSpaceRules;
+	//文件控制审计状态
+	private Integer fileControlStatus;
+	//文件控制审计规则
+	private String fileControlRules;
 	//状态
 	private Integer status;
 	//创建时间
@@ -519,100 +511,76 @@ public class OsAuditDO implements Serializable {
 		return connectionMonitorRules;
 	}
 	/**
-	 * 设置：违规接入审计状态
+	 * 设置：网络流量审计状态
 	 */
-	public void setIrregularConnectionStatus(Integer irregularConnectionStatus) {
-		this.irregularConnectionStatus = irregularConnectionStatus;
+	public void setNetworkFlowStatus(Integer networkFlowStatus) {
+		this.networkFlowStatus = networkFlowStatus;
 	}
 	/**
-	 * 获取：违规接入审计状态
+	 * 获取：网络流量审计状态
 	 */
-	public Integer getIrregularConnectionStatus() {
-		return irregularConnectionStatus;
+	public Integer getNetworkFlowStatus() {
+		return networkFlowStatus;
 	}
 	/**
-	 * 设置：违规接入审计规则
+	 * 设置：网络流量审计规则
 	 */
-	public void setIrregularConnectionRules(String irregularConnectionRules) {
-		this.irregularConnectionRules = irregularConnectionRules;
+	public void setNetworkFlowRules(String networkFlowRules) {
+		this.networkFlowRules = networkFlowRules;
 	}
 	/**
-	 * 获取：违规接入审计规则
+	 * 获取：网络流量审计规则
 	 */
-	public String getIrregularConnectionRules() {
-		return irregularConnectionRules;
+	public String getNetworkFlowRules() {
+		return networkFlowRules;
 	}
 	/**
-	 * 设置：安装目录审计状态
+	 * 设置：磁盘空间审计状态
 	 */
-	public void setInstallCatalogStatus(Integer installCatalogStatus) {
-		this.installCatalogStatus = installCatalogStatus;
+	public void setDiskSpaceStatus(Integer diskSpaceStatus) {
+		this.diskSpaceStatus = diskSpaceStatus;
 	}
 	/**
-	 * 获取：安装目录审计状态
+	 * 获取：磁盘空间审计状态
 	 */
-	public Integer getInstallCatalogStatus() {
-		return installCatalogStatus;
+	public Integer getDiskSpaceStatus() {
+		return diskSpaceStatus;
 	}
 	/**
-	 * 设置：安装目录审计规则
+	 * 设置：磁盘空间审计规则
 	 */
-	public void setInstallCatalogRules(String installCatalogRules) {
-		this.installCatalogRules = installCatalogRules;
+	public void setDiskSpaceRules(String diskSpaceRules) {
+		this.diskSpaceRules = diskSpaceRules;
 	}
 	/**
-	 * 获取：安装目录审计规则
+	 * 获取：磁盘空间审计规则
 	 */
-	public String getInstallCatalogRules() {
-		return installCatalogRules;
+	public String getDiskSpaceRules() {
+		return diskSpaceRules;
 	}
 	/**
-	 * 设置：违规卸载审计状态
+	 * 设置：文件控制审计状态
 	 */
-	public void setIrregularUninstallStatus(Integer irregularUninstallStatus) {
-		this.irregularUninstallStatus = irregularUninstallStatus;
+	public void setFileControlStatus(Integer fileControlStatus) {
+		this.fileControlStatus = fileControlStatus;
 	}
 	/**
-	 * 获取：违规卸载审计状态
+	 * 获取：文件控制审计状态
 	 */
-	public Integer getIrregularUninstallStatus() {
-		return irregularUninstallStatus;
+	public Integer getFileControlStatus() {
+		return fileControlStatus;
 	}
 	/**
-	 * 设置：违规卸载审计规则
+	 * 设置：文件控制审计规则
 	 */
-	public void setIrregularUninstallRules(String irregularUninstallRules) {
-		this.irregularUninstallRules = irregularUninstallRules;
+	public void setFileControlRules(String fileControlRules) {
+		this.fileControlRules = fileControlRules;
 	}
 	/**
-	 * 获取：违规卸载审计规则
+	 * 获取：文件控制审计规则
 	 */
-	public String getIrregularUninstallRules() {
-		return irregularUninstallRules;
-	}
-	/**
-	 * 设置：正常卸载审计状态
-	 */
-	public void setRegularUninstallStatus(Integer regularUninstallStatus) {
-		this.regularUninstallStatus = regularUninstallStatus;
-	}
-	/**
-	 * 获取：正常卸载审计状态
-	 */
-	public Integer getRegularUninstallStatus() {
-		return regularUninstallStatus;
-	}
-	/**
-	 * 设置：正常卸载审计规则
-	 */
-	public void setRegularUninstallRules(String regularUninstallRules) {
-		this.regularUninstallRules = regularUninstallRules;
-	}
-	/**
-	 * 获取：正常卸载审计规则
-	 */
-	public String getRegularUninstallRules() {
-		return regularUninstallRules;
+	public String getFileControlRules() {
+		return fileControlRules;
 	}
 	/**
 	 * 设置：状态

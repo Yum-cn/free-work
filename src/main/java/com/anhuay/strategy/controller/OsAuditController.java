@@ -5,45 +5,44 @@ import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anhuay.strategy.domain.OsAuditDO;
-import com.anhuay.strategy.service.OsAuditService;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
+import com.anhuay.strategy.domain.OsAuditDO;
+import com.anhuay.strategy.service.OsAuditService;
 
 /**
  * 主机审计表
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-07 19:26:32
+ * @date 2018-07-15 17:32:57
  */
  
 @Controller
-@RequestMapping("/strategy/osAudit")
+@RequestMapping("//osAudit")
 public class OsAuditController {
 	@Autowired
 	private OsAuditService osAuditService;
 	
 	@GetMapping()
-	@RequiresPermissions("strategy:osAudit:osAudit")
+	@RequiresPermissions(":osAudit:osAudit")
 	String OsAudit(){
-	    return "strategy/osAudit/osAudit";
+	    return "/osAudit/osAudit";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("strategy:osAudit:osAudit")
+	@RequiresPermissions(":osAudit:osAudit")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
@@ -54,17 +53,17 @@ public class OsAuditController {
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("strategy:osAudit:add")
+	@RequiresPermissions(":osAudit:add")
 	String add(){
-	    return "strategy/osAudit/add";
+	    return "/osAudit/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("strategy:osAudit:edit")
+	@RequiresPermissions(":osAudit:edit")
 	String edit(@PathVariable("id") Long id,Model model){
 		OsAuditDO osAudit = osAuditService.get(id);
 		model.addAttribute("osAudit", osAudit);
-	    return "strategy/osAudit/edit";
+	    return "/osAudit/edit";
 	}
 	
 	/**
@@ -72,7 +71,7 @@ public class OsAuditController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("strategy:osAudit:add")
+	@RequiresPermissions(":osAudit:add")
 	public R save( OsAuditDO osAudit){
 		if(osAuditService.save(osAudit)>0){
 			return R.ok();
@@ -84,7 +83,7 @@ public class OsAuditController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("strategy:osAudit:edit")
+	@RequiresPermissions(":osAudit:edit")
 	public R update( OsAuditDO osAudit){
 		osAuditService.update(osAudit);
 		return R.ok();
@@ -95,9 +94,9 @@ public class OsAuditController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("strategy:osAudit:remove")
+	@RequiresPermissions(":osAudit:remove")
 	public R remove( Long id){
-		if(osAuditService.remove(id)>0){
+		if(osAuditService.updateStatus(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -108,9 +107,9 @@ public class OsAuditController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("strategy:osAudit:batchRemove")
+	@RequiresPermissions(":osAudit:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
-		osAuditService.batchRemove(ids);
+		osAuditService.batchUpdateStatus(ids);
 		return R.ok();
 	}
 	

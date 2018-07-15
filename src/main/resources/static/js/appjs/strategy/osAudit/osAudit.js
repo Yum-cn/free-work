@@ -184,36 +184,28 @@ function load() {
 									title : '连接监控审计规则' 
 								},
 																{
-									field : 'irregularConnectionStatus', 
-									title : '违规接入审计状态' 
+									field : 'networkFlowStatus', 
+									title : '网络流量审计状态' 
 								},
 																{
-									field : 'irregularConnectionRules', 
-									title : '违规接入审计规则' 
+									field : 'networkFlowRules', 
+									title : '网络流量审计规则' 
 								},
 																{
-									field : 'installCatalogStatus', 
-									title : '安装目录审计状态' 
+									field : 'diskSpaceStatus', 
+									title : '磁盘空间审计状态' 
 								},
 																{
-									field : 'installCatalogRules', 
-									title : '安装目录审计规则' 
+									field : 'diskSpaceRules', 
+									title : '磁盘空间审计规则' 
 								},
 																{
-									field : 'irregularUninstallStatus', 
-									title : '违规卸载审计状态' 
+									field : 'fileControlStatus', 
+									title : '文件控制审计状态' 
 								},
 																{
-									field : 'irregularUninstallRules', 
-									title : '违规卸载审计规则' 
-								},
-																{
-									field : 'regularUninstallStatus', 
-									title : '正常卸载审计状态' 
-								},
-																{
-									field : 'regularUninstallRules', 
-									title : '正常卸载审计规则' 
+									field : 'fileControlRules', 
+									title : '文件控制审计规则' 
 								},
 																{
 									field : 'status', 

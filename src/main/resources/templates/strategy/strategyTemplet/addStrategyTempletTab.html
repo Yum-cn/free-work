@@ -28,8 +28,6 @@
 									class="fa fa-briefcase"></i>软件分发</a></li>
 
 							<li class="">
-								<!-- <a class="btn btn-default waves-effect waves-light"
-                               onclick="returnList()">返回</a> -->
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button type="button" onclick="history.go(-1);return false;"
 									class="btn btn-default waves-effect waves-light">返回</button>
@@ -58,6 +56,171 @@
 												class="table table-hover table-striped">
 
 												<tbody>
+
+													<tr data-index="0">
+														<td style="text-align: right;">本地文件审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="localFileForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">本地文件：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="local_file_status"
+																					name="local_file_status" type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="local_file_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																		<span><label class="col-sm-8 control-label"
+																			style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配本地文件路径及名称对文件操作进行审计,可使用<font
+																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
+																				color="red">*.doc,/tmp/test.txt</font>)
+																		</label></span>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">审计内容：</label>
+																		<div class="col-sm-8">
+																			<textarea id="local_file_rules"
+																				name="local_file_rules" class="form-control"></textarea>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="1">
+														<td style="text-align: right;">光盘文件审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="diskFileForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">光盘文件：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="disk_file_status" name="disk_file_status"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="disk_file_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																		<span><label class="col-sm-8 control-label"
+																			style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配光盘文件路径及名称对文件操作进行审计,可使用<font
+																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
+																				color="red">*.doc,/tmp/test.txt</font>)
+																		</label></span>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">审计内容：</label>
+																		<div class="col-sm-8">
+																			<textarea id="disk_file_rules" name="disk_file_rules"
+																				class="form-control"></textarea>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+													<tr data-index="0">
+														<td style="text-align: right;">U盘文件审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="udiskFileForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">U盘文件：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="udisk_file_status"
+																					name="udisk_file_status" type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="udisk_file_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																		<span><label class="col-sm-8 control-label"
+																			style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配U盘文件路径及名称对文件操作进行审计,可使用<font
+																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
+																				color="red">*.doc,/tmp/test.txt</font>)
+																		</label></span>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">审计内容：</label>
+																		<div class="col-sm-8">
+																			<textarea id="udisk_file_rules"
+																				name="udisk_file_rules" class="form-control"></textarea>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="1">
+														<td style="text-align: right;">开机关机审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="osOnoffForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">开机关机：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="os_onoff_status" name="os_onoff_status"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="os_onoff_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">设置正常开关机时间：</label>
+																		<div class="col-sm-8">
+																			<div class="col-sm-8">
+																				工作日： <input name="workDay" type="checkbox">星期一
+																				<input class="bs-checkbox" name="workDay"
+																					type="checkbox">星期二 <input
+																					class="bs-checkbox" name="workDay" type="checkbox">星期三
+																				<input class="bs-checkbox" name="workDay"
+																					type="checkbox">星期四 <input
+																					class="bs-checkbox" name="workDay" type="checkbox">星期五
+																				<input class="bs-checkbox" name="workDay"
+																					type="checkbox">星期六 <input
+																					class="bs-checkbox" name="workDay" type="checkbox">星期日
+																				<br>
+																				<div>&nbsp;</div>
+																				<div>
+																					上班时间：<input class="Wdate" type="text"
+																						name="startWorkTime"
+																						onClick="WdatePicker({ dateFmt: 'HH:mm'});"
+																						placeholder="开始时间" id="startWorkTime" /> - <input
+																						class="Wdate" type="text" name="endWorkTime"
+																						onClick="WdatePicker({ dateFmt: 'HH:mm'});"
+																						placeholder="结束时间" id="endWorkTime" />
+																				</div>
+																			</div>
+
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
 													<tr data-index="0">
 														<td style="text-align: right;">进程监控审计：</td>
 														<td style="border-left-width: 0px;"><div
@@ -66,10 +229,9 @@
 																	id="processMonitorForm">
 
 																	<div class="form-group">
-																		<label class="col-sm-2 control-label">进程黑名单：</label>
+																		<label class="col-sm-2 control-label">进程黑名单(禁止运行的进程)：</label>
 																		<div class="switch  col-sm-1">
 																			<div class="onoffswitch">
-																				<!--  checked="" -->
 																				<input id="process_black_status"
 																					name="process_black_status" type="checkbox"
 																					value="1" class="onoffswitch-checkbox"> <label
@@ -82,7 +244,7 @@
 																		</div>
 																	</div>
 																	<div class="form-group">
-																		<label class="col-sm-2 control-label">进程黑名单控制：</label>
+																		<label class="col-sm-2 control-label">进程黑名单配置：</label>
 																		<div class="col-sm-8">
 																			<textarea id="process_black_rules"
 																				name="process_black_rules" class="form-control"></textarea>
@@ -106,7 +268,7 @@
 																		</div>
 																	</div>
 																	<div class="form-group">
-																		<label class="col-sm-2 control-label">进程白名单控制：</label>
+																		<label class="col-sm-2 control-label">进程白名单配置：</label>
 																		<div class="col-sm-8">
 																			<textarea id="process_white_rules"
 																				name="process_white_rules" class="form-control"></textarea>
@@ -130,6 +292,408 @@
 																</form>
 															</div></td>
 													</tr>
+
+													<tr data-index="1">
+														<td style="text-align: right;">打印监控审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="printMonitorForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">打印监控：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="print_monitor_status"
+																					name="print_monitor_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="print_monitor_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="0">
+														<td style="text-align: right;">主机信息审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="osInfoForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">主机信息：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="os_info_status" name="os_info_status"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="os_info_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="1">
+														<td style="text-align: right;">系统日志审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="systemLogForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">审计系统登录日志：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="system_log_status"
+																					name="system_log_status" type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="system_log_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-4 control-label">审计其他系统日志(其他系统日志数据量巨大,建议不勾选)：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="others_system_log_status"
+																					name="others_system_log_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="others_system_log_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="0">
+														<td style="text-align: right;">账户监控审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t"
+																	id="accountMonitorForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">账户监控：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="account_monitor_status"
+																					name="account_monitor_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="account_monitor_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="1">
+														<td style="text-align: right;">共享监控审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="shareMonitorForm">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">共享监控：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="share_monitor_status"
+																					name="share_monitor_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="share_monitor_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																		<label class="col-sm-2 control-label">共享配置：</label>
+																		<div class="col-sm-2">
+																			<select data-placeholder="--选择类别--"
+																				name="share_monitor_type" id="share_monitor_type"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="0">
+														<td style="text-align: right;">异常监控审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t"
+																	id="exceptionMonitorForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">满负荷运行审计：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="exception_monitor_status"
+																					name="exception_monitor_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="exception_monitor_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">内存占用率(%)：</label>
+																		<div class="col-sm-1">
+																			<input class="form-control"
+																				id="exception_monitor_memory"
+																				name="exception_monitor_memory" type="text"
+																				required="true">
+																		</div>
+																		<label class="col-sm-2 control-label">CPU占用率(%)：</label>
+																		<div class="col-sm-1">
+																			<input class="form-control"
+																				id="exception_monitor_cpu"
+																				name="exception_monitor_cpu" type="text"
+																				required="true">
+																		</div>
+																		<label class="col-sm-2 control-label">运行时间(单位：分钟)：</label>
+																		<div class="col-sm-1">
+																			<input class="form-control"
+																				id="exception_monitor_runtime"
+																				name="exception_monitor_runtime" type="text"
+																				required="true">
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="1">
+														<td style="text-align: right;">主机配置审计：</td>
+														<td style="border-left-width: 0px;"><div
+																class="ibox-content">
+																<form class="form-horizontal m-t" id="osConfigForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">开机自启动项黑名单：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="os_config_black_status"
+																					name="os_config_black_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="os_config_black_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">黑名单配置：</label>
+																		<div class="col-sm-8">
+																			<textarea id="os_config_black_rules"
+																				name="os_config_black_rules" class="form-control"></textarea>
+																			(多个启动项之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<input id="os_config_black_alarm_level_selected"
+																			value="" type="hidden"> <label
+																			class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-8">
+																			<select data-placeholder="--选择类别--"
+																				name="os_config_black_alarm_level"
+																				id="os_config_black_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">开机自启动项白名单：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="os_config_white_status"
+																					name="os_config_white_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="os_config_white_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">白名单配置：</label>
+																		<div class="col-sm-8">
+																			<textarea id="os_config_white_rules"
+																				name="os_config_white_rules" class="form-control"></textarea>
+																			(多个启动项之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<input id="os_config_white_alarm_level_selected"
+																			value="" type="hidden"> <label
+																			class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-8">
+																			<select data-placeholder="--选择类别--"
+																				name="os_config_white_alarm_level"
+																				id="os_config_white_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+																</form>
+															</div></td>
+													</tr>
+
+
+													<tr data-index="0">
+														<td style="text-align: right;">移动介质审计：</td>
+														<td style="border-left-width: 0px;"><div
+																class="ibox-content">
+																<form class="form-horizontal m-t" id="moveMediaForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">启用设备白名单检测：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="move_media_white_status"
+																					name="move_media_white_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="move_media_white_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">移动介质：</label>
+																		<div class="col-sm-2">
+																			<input class="form-control" id="move_media_input"
+																				name="move_media_input" type="text" required="true">
+																		</div>
+																		<button
+																			class="btn btn-success waves-effect waves-light"
+																			onclick="addMoveMedia()" type="button">添加</button>
+
+																		<div class="form-group">
+																			<label class="col-sm-2 control-label"></label>
+																			<div class="switch  col-sm-1">
+																				<div class="onoffswitch"></div>
+																			</div>
+																		</div>
+																		<label class="col-sm-2 control-label"></label>
+																		<div class="col-sm-8">
+																			<select name="move_media_show" size="10"
+																				multiple="multiple" id="move_media_show"
+																				class="form-control">
+																			</select> <input type="hidden" id="move_media_names"
+																				name="move_media_names" value="">
+																		</div>
+																		<span><button
+																				class="btn btn-success waves-effect waves-light"
+																				id="removeMoveMedia" type="button">移除</button></span>
+																	</div>
+																</form>
+															</div></td>
+													</tr>
+
+													<tr data-index="1">
+														<td style="text-align: right;">端口监控审计：</td>
+														<td style="border-left-width: 0px;"><div
+																class="ibox-content">
+																<form class="form-horizontal m-t" id="portMonitorForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">端口黑名单：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="port_monitor_status"
+																					name="port_monitor_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="port_monitor_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">端口号：</label>
+																		<div class="col-sm-2">
+																			<input class="form-control" id="port_monitor_input"
+																				name="port_monitor_input" type="text"
+																				required="true">
+																		</div>
+																		<button
+																			class="btn btn-success waves-effect waves-light"
+																			onclick="addPortMonitor()" type="button">添加</button>
+
+																		<div class="form-group">
+																			<label class="col-sm-2 control-label"></label>
+																			<div class="switch  col-sm-1">
+																				<div class="onoffswitch"></div>
+																			</div>
+																		</div>
+																		<label class="col-sm-2 control-label"></label>
+																		<div class="col-sm-8">
+																			<select name="port_monitor_show" size="10"
+																				multiple="multiple" id="port_monitor_show"
+																				class="form-control">
+																			</select> <input type="hidden" id="port_monitor_ports"
+																				name="port_monitor_ports" value="">
+																		</div>
+																		<span><button
+																				class="btn btn-success waves-effect waves-light"
+																				id="removeMoveMedia" type="button">移除</button></span>
+																	</div>
+																</form>
+															</div></td>
+													</tr>
+
 
 													<tr data-index="0">
 														<td style="text-align: right;">服务监控审计：</td>
@@ -206,13 +770,14 @@
 																			<input class="form-control"
 																				id="server_connection_black_ip"
 																				name="server_connection_black_ip" type="text"
-																				required="true" >
+																				required="true">
 																		</div>
 																		<label class="col-sm-1 control-label">端口号：</label>
 																		<div class="col-sm-2">
 																			<input class="form-control"
 																				id="server_connection_black_ports"
-																				name="server_connection_black_ports" type="text" required="true" >
+																				name="server_connection_black_ports" type="text"
+																				required="true">
 																		</div>
 																		<button
 																			class="btn btn-success waves-effect waves-light"
@@ -236,13 +801,12 @@
 																				class="form-control"></textarea> -->
 
 
-																			<select name="temp_addresses"
-																				size="10" multiple="multiple"
-																				id="temp_addresses"
+																			<select name="temp_addresses" size="10"
+																				multiple="multiple" id="temp_addresses"
 																				class="form-control">
-																			</select>
-																			
-																			<input type="hidden" id="server_connection_black_addresses" name="server_connection_black_addresses" value="">
+																			</select> <input type="hidden"
+																				id="server_connection_black_addresses"
+																				name="server_connection_black_addresses" value="">
 
 																		</div>
 																		<span><button
@@ -265,6 +829,322 @@
 															</div></td>
 													</tr>
 
+													<tr data-index="1">
+														<td style="text-align: right;">连接监控审计：</td>
+														<td style="border-left-width: 0px;"><div
+																class="ibox-content">
+																<form class="form-horizontal m-t"
+																	id="connectionMonitorForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">连接黑名单(禁止运行的连接)：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="connection_black_status"
+																					name="connection_black_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="connection_black_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">连接黑名单控制：</label>
+																		<div class="col-sm-8">
+																			<textarea id="connection_black_rules"
+																				name="connection_black_rules" class="form-control"></textarea>
+																			(多个连接之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-8">
+																			<select data-placeholder="--选择类别--"
+																				name="connection_black_alarm_level"
+																				id="connection_black_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">连接白名单(必需运行的连接)：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="connection_white_status"
+																					name="connection_white_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="connection_white_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">连接白名单控制：</label>
+																		<div class="col-sm-8">
+																			<textarea id="connection_white_rules"
+																				name="connection_white_rules" class="form-control"></textarea>
+																			(多个连接之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-8">
+																			<select data-placeholder="--选择类别--"
+																				name="connection_white_alarm_level"
+																				id="connection_white_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">网络连接(目的地址)白名单检测：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="connection_white_status"
+																					name="connection_white_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="connection_white_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">IP/域名地址：</label>
+																		<div class="col-sm-2">
+																			<input class="form-control" id="connection_white_ip"
+																				name="connection_white_ip" type="text"
+																				required="true">
+																		</div>
+																		<label class="col-sm-1 control-label">端口号：</label>
+																		<div class="col-sm-2">
+																			<input class="form-control"
+																				id="connection_white_ports"
+																				name="connection_white_ports" type="text"
+																				required="true">
+																		</div>
+																		<button
+																			class="btn btn-success waves-effect waves-light"
+																			onclick="addConnectionWhiteAddress()" type="button">添加</button>
+
+																		<div class="form-group">
+																			<label class="col-sm-2 control-label"></label>
+																			<div class="switch  col-sm-1">
+																				<div class="onoffswitch"></div>
+																			</div>
+																		</div>
+																		<div>
+																			<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;("IP/域名地址"配置中可填写目的地址的IP或域名配置,一个地址可对应多个端口号,之间用<font
+																				color="red">半角逗号</font>分隔)
+																		</div>
+																		<label class="col-sm-2 control-label"></label>
+																		<div class="col-sm-8">
+
+																			<select name="temp_connection_addresses" size="10"
+																				multiple="multiple" id="temp_connection_addresses"
+																				class="form-control">
+																			</select> <input type="hidden" id="connection_white_addresses"
+																				name="connection_white_addresses" value="">
+
+																		</div>
+																		<span><button
+																				class="btn btn-success waves-effect waves-light"
+																				id="removeWhiteConnectionAdress" type="button">移除</button></span>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-8">
+																			<select data-placeholder="--选择类别--"
+																				name="connection_alarm_level"
+																				id="connection_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+																</form>
+															</div></td>
+													</tr>
+
+													<tr data-index="0">
+														<td style="text-align: right;">网络流量监控审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="networkFlowForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">网络流量监控：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="network_flow_status"
+																					name="network_flow_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="network_flow_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">占用量(单位：M)：</label>
+																		<div class="col-sm-2">
+																			<input class="form-control" id="network_flow_size"
+																				name="network_flow_size" type="text" required="true">
+																		</div>
+																		<label class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-3">
+																			<select data-placeholder="--选择类别--"
+																				name="network_flow_alarm_level"
+																				id="network_flow_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="1">
+														<td style="text-align: right;">磁盘空间监控审计：</td>
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="diskSpaceForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">磁盘空间监控：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="disk_space_status"
+																					name="disk_space_status" type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="disk_space_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">使用率(%)：</label>
+																		<div class="col-sm-2">
+																			<input class="form-control"
+																				id="disk_space_utilizationrate"
+																				name="disk_space_utilizationrate" type="text"
+																				required="true">
+																		</div>
+																		<label class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-3">
+																			<select data-placeholder="--选择类别--"
+																				name="disk_space_alarm_level"
+																				id="disk_space_alarm_level"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+													<tr data-index="0">
+														<td style="text-align: right;">文件控制审计：</td>
+														<td style="border-left-width: 0px;"><div
+																class="ibox-content">
+																<form class="form-horizontal m-t" id="fileControlForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">文件控制(需重启终端生效)：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<input id="file_control_status"
+																					name="file_control_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="file_control_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div>
+																		<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;可使用<font
+                                                                            color="red">*</font>作为通配符,如：<font
+                                                                            color="red">/tmp/test*</font>&nbsp;&nbsp;tmp目录下以test开头的目录及其目录下的所有文件;*.txt 所有目录下的txt文件
+																	</div>
+																	<div>&nbsp;</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">文件名：</label>
+																		<div class="col-sm-3">
+																			<input class="form-control"
+																				id="file_control_input"
+																				name="file_control_input" type="text"
+																				required="true">
+																		</div>
+																		<label class="col-sm-1 control-label">类型：</label>
+																		<div class="col-sm-2">
+																			<label class="radio-inline"><input
+																				name="file_control_file_type" type="radio" value="1">&nbsp;&nbsp;&nbsp;&nbsp;只读
+																			</label> <label class="radio-inline"> <input
+																				name="file_control_file_type" type="radio" value="0">&nbsp;&nbsp;&nbsp;&nbsp;禁用
+																			</label>
+																		</div>
+																		<button
+																			class="btn btn-success waves-effect waves-light"
+																			onclick="addFileControlRules()"
+																			id="addressAdd" type="button">添加</button>
+																		<div class="form-group">
+																			<label class="col-sm-2 control-label"></label>
+																			<div class="switch  col-sm-1">
+																				<div class="onoffswitch"></div>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-2 control-label"></label>
+																		<div class="col-sm-8">
+
+																			<select name="temp_file_control_rules" size="10"
+																				multiple="multiple" id="temp_file_control_rules"
+																				class="form-control">
+																			</select> <input type="hidden"
+																				id="file_control_values"
+																				name="file_control_values" value="">
+
+																		</div>
+																		<span><button
+																				class="btn btn-success waves-effect waves-light"
+																				id="removefileControlValues" type="button">移除</button></span>
+																	</div>
+
+																</form>
+															</div></td>
+													</tr>
 
 
 												</tbody>

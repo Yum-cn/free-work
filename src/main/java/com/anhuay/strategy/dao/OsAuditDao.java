@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 主机审计表
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-07 19:26:32
+ * @date 2018-07-15 17:32:57
  */
 @Mapper
 public interface OsAuditDao {
@@ -29,4 +29,8 @@ public interface OsAuditDao {
 	int remove(Long id);
 	
 	int batchRemove(Long[] ids);
+	
+	int updateStatus(Long id);
+	
+	int batchUpdateStatus(Long[] ids);
 }
