@@ -1,32 +1,20 @@
 package com.anhuay.test.controller;
 
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.anhuay.common.utils.PageUtils;
-import com.anhuay.common.utils.Query;
-import com.anhuay.common.utils.R;
-import com.anhuay.strategy.domain.OsAuditDO;
-import com.anhuay.strategy.domain.StrategyTempletDO;
-import com.anhuay.strategy.manager.StrategyTempletManager;
-import com.anhuay.strategy.service.OsAuditService;
-import com.anhuay.strategy.service.StrategyTempletService;
-import com.common.util.BaseResult;
-import com.common.util.JsonTool;
-
-import net.sf.json.JSONObject;
 
 /**
  * 策略模板表
@@ -35,15 +23,71 @@ import net.sf.json.JSONObject;
  * @email wtuada@126.com
  * @date 2018-07-07 14:05:30
  */
- 
+
 @Controller
 @RequestMapping("/test")
 public class TestController {
-	
+
+	 /**
+     * 缓存的key
+     */
+    public static final String CACHE_KEY   = "taskLog";
+
 	@GetMapping("/sse")
-	String StrategyTemplet(){
-	    return "test/test";
+	String StrategyTemplet() {
+		return "test/test";
 	}
-	
-	
+
+	@CachePut(value = CACHE_KEY, key = "#message")
+	@GetMapping("/abc")
+	String abc(String type,String message,final HttpServletRequest request, final HttpServletResponse response) {
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+
+		response.setContentType("text/event-stream");
+		response.setCharacterEncoding("UTF-8");
+
+		PrintWriter writer;
+		try {
+			writer = response.getWriter();
+			
+			if(StringUtils.isNotBlank(type)&&StringUtils.isNotBlank(message)){
+				System.out.println("Date:" + dateFormat.format(date)+" type:"+type+" message:"+message);
+				
+				if(StringUtils.equals(type, "1")){
+					writer.write("data: " + message+"进入了直播间！");
+				}
+				
+			}
+			
+			
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "test/test";
+	}
+
+	/**
+	 * 未行通406
+	 */
+	@ResponseBody
+	@GetMapping("/abc2")
+	String abcV2(final HttpServletRequest request, final HttpServletResponse response) {
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+
+		response.setContentType("text/event-stream");
+		response.setCharacterEncoding("UTF-8");
+
+		System.out.println("Date:" + dateFormat.format(date));
+
+		return "Date:" + dateFormat.format(date);
+	}
+
 }

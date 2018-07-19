@@ -100,12 +100,24 @@ function initData() {
 function addStrategyTempletTab() {
 	
 	
-	
+	var localFileForm = $("#localFileForm").serializeJson();
+	var diskFileForm = $("#diskFileForm").serializeJson();
+	var udiskFileForm = $("#udiskFileForm").serializeJson();
+	var osOnoffForm = $("#osOnoffForm").serializeJson();
 	//localFileForm local_file_status local_file_rules
 	//diskFileForm disk_file_status disk_file_rules
 	//udiskFileForm udisk_file_status udisk_file_rules
 	//osOnoffForm os_onoff_status workDay startWorkTime endWorkTime
-	var proRuestl_1 = $("#processMonitorForm").serializeJson();// 进程监控
+	var processMonitorForm = $("#processMonitorForm").serializeJson();// 进程监控
+	var printMonitorForm = $("#printMonitorForm").serializeJson();// 打印
+	var osInfoForm = $("#osInfoForm").serializeJson();// 主机信息
+	var systemLogForm = $("#systemLogForm").serializeJson();// 系统日志
+	var accountMonitorForm = $("#accountMonitorForm").serializeJson();// 账户监控
+	var shareMonitorForm = $("#shareMonitorForm").serializeJson();// 进程监控
+	var exceptionMonitorForm = $("#exceptionMonitorForm").serializeJson();// 进程监控
+	var osConfigForm = $("#osConfigForm").serializeJson();// 进程监控
+	var moveMediaForm = $("#moveMediaForm").serializeJson();// 进程监控
+	var portMonitorForm = $("#portMonitorForm").serializeJson();// 进程监控
 	//printMonitorForm print_monitor_status
 	//osInfoForm os_info_status
 	//systemLogForm system_log_status others_system_log_status
@@ -115,20 +127,20 @@ function addStrategyTempletTab() {
 	//osConfigForm os_config_black_status os_config_black_rules os_config_black_alarm_level_selected os_config_black_alarm_level os_config_white_status os_config_white_rules os_config_white_alarm_level
 	//moveMediaForm move_media_white_status move_media_input addMoveMedia() move_media_show move_media_names removeMoveMedia
 	//portMonitorForm port_monitor_input addPortMonitor
-	var proRuestl_2 = $("#serverMonitorForm").serializeJson();// 服务监控
+	var serverMonitorForm = $("#serverMonitorForm").serializeJson();// 服务监控
 	//connectionMonitorForm connection_black_status connection_black_rules connection_black_alarm_level connection_white_status connection_white_rules connection_white_alarm_level connection_white_status connection_white_addresses
 	//networkFlowForm network_flow_status network_flow_size network_flow_alarm_level
 	//diskSpaceForm disk_space_status disk_space_utilizationrate disk_space_alarm_level
 	
-	var proRuestl_3 = $("#extendParamForm").serializeJson();// 扩展参数
+	var extendParamForm = $("#extendParamForm").serializeJson();// 扩展参数
 	
 
 	// var jsonString = '{"bar":"property","baz":3}';
 	// var jsObject = JSON.parse(proRuestl_1); //转换为json对象
 	var jsons = "{" 
-			+ "\"processMonitorForm\":" + JSON.stringify(proRuestl_1)
-			+ ",\"serverMonitorForm\":" + JSON.stringify(proRuestl_2) 
-			+ ",\"extendParamForm\":" + JSON.stringify(proRuestl_3) 
+			+ "\"processMonitorForm\":" + JSON.stringify(processMonitorForm)
+			+ ",\"serverMonitorForm\":" + JSON.stringify(serverMonitorForm) 
+			+ ",\"extendParamForm\":" + JSON.stringify(extendParamForm) 
 			+ "}"; // 转换为json类型的字符串
 
 	$.ajax({
