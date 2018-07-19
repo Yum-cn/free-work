@@ -907,7 +907,7 @@
 																					name="network_connection_white_status" type="checkbox"
 																					value="1" class="onoffswitch-checkbox"> <label
 																					class="onoffswitch-label"
-																					for="connection_white_status"> <span
+																					for="network_connection_white_status"> <span
 																					class="onoffswitch-inner"></span> <span
 																					class="onoffswitch-switch"></span>
 																				</label>
@@ -944,7 +944,7 @@
 																		<div class="col-sm-8">
 
 																			<select name="connection_addresses_show" size="10"
-																				multiple="multiple" id="temp_connection_addresses"
+																				multiple="multiple" id="connection_addresses_show"
 																				class="form-control">
 																			</select> <input type="hidden" id="connection_white_addresses"
 																				name="connection_white_addresses" value="">
@@ -1138,8 +1138,104 @@
 									</div>
 								</div>
 							</div>
+							
+							
 							<div id="tab-2" class="tab-pane ">
-								<table id="exampleTable2" data-mobile-responsive="true"></table>
+								<div class="bootstrap-table">
+                                    <div class="fixed-table-toolbar">
+                                        <div class="bars pull-left"></div>
+                                    </div>
+                                    <div class="fixed-table-container" style="padding-bottom: 0px;">
+                                        <div class="fixed-table-body">
+                                            <table data-mobile-responsive="true" id="exampleTable"
+                                                class="table table-hover table-striped">
+
+                                                <tbody>
+
+                                                    <tr data-index="0">
+                                                        <td style="border-left-width: 0px;">
+                                                            <div class="ibox-content">
+                                                                <form class="form-horizontal m-t" id="localFileForm">
+                                                                    <div class="form-group" data-index="1">
+                                                                        <label class="col-sm-2 control-label">外联监控：</label>
+                                                                        <div class="switch  col-sm-1">
+                                                                            <div class="onoffswitch">
+                                                                                <!--  checked="" -->
+                                                                                <input id="local_file_status"
+                                                                                    name="local_file_status" type="checkbox" value="1"
+                                                                                    class="onoffswitch-checkbox"> <label
+                                                                                    class="onoffswitch-label" for="local_file_status">
+                                                                                    <span class="onoffswitch-inner"></span> <span
+                                                                                    class="onoffswitch-switch"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <span><label class="col-sm-8 control-label"
+                                                                            style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配本地文件路径及名称对文件操作进行审计,可使用<font
+                                                                                color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
+                                                                                color="red">*.doc,/tmp/test.txt</font>)
+                                                                        </label></span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input id="process_alarm_level_selected" value=""
+                                                                            type="hidden"> <label
+                                                                            class="col-sm-2 control-label">报警级别：</label>
+                                                                        <div class="col-sm-8">
+                                                                            <select data-placeholder="--选择类别--"
+                                                                                name="process_alarm_level" id="process_alarm_level"
+                                                                                class="form-control chosen-select" tabindex="2"
+                                                                                required>
+                                                                                <option value="">--选择类别--</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">探测地址：</label>
+                                                                        <div class="col-sm-8">
+                                                                            <textarea id="local_file_rules"
+                                                                                name="local_file_rules" class="form-control"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">报警中心：</label>
+                                                                        <div class="col-sm-1">
+                                                                            <input class="form-control"
+                                                                                id="exception_monitor_memory"
+                                                                                name="exception_monitor_memory" type="text"
+                                                                                required="true">
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-2 control-label">报警位置：</label>
+                                                                        <div class="col-sm-2">
+                                                                            <select data-placeholder="--选择类别--"
+                                                                                name="process_alarm_level" id="process_alarm_level"
+                                                                                class="form-control chosen-select" tabindex="2"
+                                                                                required>
+                                                                                <option value="">--选择类别--</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="col-sm-2">
+                                                                            <select data-placeholder="--选择类别--"
+                                                                                name="process_alarm_level" id="process_alarm_level"
+                                                                                class="form-control chosen-select" tabindex="2"
+                                                                                required>
+                                                                                <option value="">--选择类别--</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
 							</div>
 							<div id="tab-3" class="tab-pane ">
 								<table id="exampleTable3" data-mobile-responsive="true"></table>

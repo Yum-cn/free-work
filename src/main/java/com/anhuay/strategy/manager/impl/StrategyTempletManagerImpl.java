@@ -552,8 +552,8 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 
 		JSONObject saveJson = body.optJSONObject("diskSpaceForm");
 		if (saveJson != null && checkJsonKey(saveJson)) {
-			osAudit.setDiskFileStatus(CommonEnum.STATUS.ONE.value);
-			osAudit.setDiskFileRules(saveJson.toString());
+			osAudit.setDiskSpaceStatus(CommonEnum.STATUS.ONE.value);
+			osAudit.setDiskSpaceRules(saveJson.toString());
 			osAuditSaveTag = true;
 			// saveCofigProcessForServer(strategyTempletId,
 			// serverMonitorJson.optString("server_black_rules")****, 1);
@@ -561,8 +561,8 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
-			osAudit.setDiskFileStatus(CommonEnum.STATUS.ZERO.value);
-			osAudit.setDiskFileRules(null);
+			osAudit.setDiskSpaceStatus(CommonEnum.STATUS.ZERO.value);
+			osAudit.setDiskSpaceRules(null);
 			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
 			// 0);
 		}

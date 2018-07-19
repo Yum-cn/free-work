@@ -29,7 +29,7 @@ import com.anhuay.strategy.service.OsAuditService;
  */
  
 @Controller
-@RequestMapping("//osAudit")
+@RequestMapping("/strategy/osAudit")
 public class OsAuditController {
 	@Autowired
 	private OsAuditService osAuditService;
@@ -111,6 +111,12 @@ public class OsAuditController {
 	public R remove(@RequestParam("ids[]") Long[] ids){
 		osAuditService.batchUpdateStatus(ids);
 		return R.ok();
+	}
+	
+	
+	@GetMapping("/add2")
+	String addtest(){
+	    return "/osAudit/add";
 	}
 	
 }

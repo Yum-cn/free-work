@@ -1,6 +1,14 @@
 $().ready(function() {
-	loadType("alarm_level");
-	loadType("share_type");
+	loadType("alarm_level","process_alarm_level");
+	loadType("alarm_level","os_config_black_alarm_level");
+	loadType("alarm_level","os_config_white_alarm_level");
+	loadType("alarm_level","server_alarm_level");
+	loadType("alarm_level","connection_black_alarm_level");
+	loadType("alarm_level","connection_white_alarm_level");
+	loadType("alarm_level","connection_alarm_level");
+	loadType("alarm_level","network_flow_alarm_level");
+	loadType("alarm_level","disk_space_alarm_level");
+	loadType("share_type","share_monitor_type");
 	initData();
 	validateRule();
     //console.log(osAudit);
@@ -16,7 +24,7 @@ $().ready(function() {
 	});
 	
 	
-	$("#temp_addresses").dblclick(function() {
+	$("#move_media_show").dblclick(function() {
 		$("option:selected", this).remove();
 		$("#move_media_show option:first").attr("selected", true);
 		dealOptionsValue("move_media_show","move_media_names");
@@ -212,7 +220,7 @@ function initDiskFile(osAudit){
 		if(returnData.disk_file_status=='1'){
 			 $("#disk_file_status").attr("checked",true);
 		}
-		if(returnData.local_file_rules!=undefined){
+		if(returnData.disk_file_status!=undefined){
 			$("#disk_file_rules").val(returnData.disk_file_rules);
 		}
 	}
@@ -297,8 +305,8 @@ function initAccountMonitor(osAudit){
 function initShareMonitor(osAudit){
 	var returnData = osAudit.shareMonitorRules;
 	if(returnData!=undefined){
-		if(returnData.account_monitor_status=='1'){
-			 $("#account_monitor_status").attr("checked",true);
+		if(returnData.share_monitor_status=='1'){
+			 $("#share_monitor_status").attr("checked",true);
 		}
 		if(returnData.share_monitor_type!=undefined){
 			loadType("share_type","share_monitor_type",returnData.share_monitor_type);
@@ -551,7 +559,8 @@ function initFileControl(osAudit){
 function addFileControlRules() {
     
 	var input_1 = $("#file_control_input").val();
-	var input_2 = $("#file_control_file_type").val();
+	
+	var input_2=$('input:radio[name=file_control_file_type]:checked').val();
 	//debugger;
 	
 	//校验修改密码表单
@@ -711,6 +720,9 @@ function loadType(type,id,checkedValue){
 			
 			if(id==undefined && checkedValue==undefined){
 				$(".chosen-select").append(html);
+			}else if(id!=undefined && checkedValue==undefined){
+				
+				$(".chosen-select[name="+id+"]").append(html);
 			}
 			$(".chosen-select").chosen({
 				maxHeight : 200
