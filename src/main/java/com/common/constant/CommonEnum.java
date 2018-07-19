@@ -42,6 +42,34 @@ public class CommonEnum {
 	
 
 	/**
+	 * 保存类型
+	 * @author   Yum
+	 */
+	public enum SAVETYPE {
+		
+		ADD("add", "添加"), 
+		EDIT("edit", "编辑"), 
+		;
+		
+		public final String name;
+		public final String description;
+
+		SAVETYPE(String name, String description) {
+			this.name = name;
+			this.description = description;
+		}
+
+		public static String getDescription(String key) {
+			for (SAVETYPE enumType : SAVETYPE.values()) {
+				if (StringUtils.equals(key, enumType.name)) {
+					return enumType.description;
+				}
+			}
+			return null;
+		}
+	}
+
+	/**
 	 * 目标类型
 	 * @author Yum
 	 */

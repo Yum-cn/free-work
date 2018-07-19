@@ -191,16 +191,16 @@
 																		<label class="col-sm-2 control-label">设置正常开关机时间：</label>
 																		<div class="col-sm-8">
 																			<div class="col-sm-8">
-																				工作日： <input name="workDay" type="checkbox">星期一
+																				工作日： <input name="workDay" type="checkbox" value="Monday">星期一
 																				<input class="bs-checkbox" name="workDay"
-																					type="checkbox">星期二 <input
-																					class="bs-checkbox" name="workDay" type="checkbox">星期三
+																					type="checkbox" value="Tuesday">星期二 <input
+																					class="bs-checkbox" name="workDay" type="checkbox" value="Wednesday">星期三
 																				<input class="bs-checkbox" name="workDay"
-																					type="checkbox">星期四 <input
-																					class="bs-checkbox" name="workDay" type="checkbox">星期五
+																					type="checkbox" value="Thursday">星期四 <input
+																					class="bs-checkbox" name="workDay" type="checkbox" value="Friday">星期五
 																				<input class="bs-checkbox" name="workDay"
-																					type="checkbox">星期六 <input
-																					class="bs-checkbox" name="workDay" type="checkbox">星期日
+																					type="checkbox" value="Saturday">星期六 <input
+																					class="bs-checkbox" name="workDay" type="checkbox" value="Sunday">星期日
 																				<br>
 																				<div>&nbsp;</div>
 																				<div>
@@ -248,7 +248,7 @@
 																		<div class="col-sm-8">
 																			<textarea id="process_black_rules"
 																				name="process_black_rules" class="form-control"></textarea>
-																			(黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(不要将系统关键进程加入黑名单;黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
 																		</div>
 																	</div>
 
@@ -682,7 +682,7 @@
 																		</div>
 																		<span><button
 																				class="btn btn-success waves-effect waves-light"
-																				id="removeMoveMedia" type="button">移除</button></span>
+																				id="removeMonitorPorts" type="button">移除</button></span>
 																	</div>
 																</form>
 															</div></td>
@@ -775,7 +775,7 @@
 																		</div>
 																		<button
 																			class="btn btn-success waves-effect waves-light"
-																			onclick="saveServerConnectionBlackAddress()"
+																			onclick="addServerConnectionBlackAddress()"
 																			id="addressAdd" type="button">添加</button>
 
 																		<div class="">
@@ -903,8 +903,8 @@
 																		<label class="col-sm-2 control-label">网络连接(目的地址)白名单检测：</label>
 																		<div class="switch  col-sm-1">
 																			<div class="onoffswitch">
-																				<input id="connection_white_status"
-																					name="connection_white_status" type="checkbox"
+																				<input id="network_connection_white_status"
+																					name="network_connection_white_status" type="checkbox"
 																					value="1" class="onoffswitch-checkbox"> <label
 																					class="onoffswitch-label"
 																					for="connection_white_status"> <span
@@ -943,7 +943,7 @@
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
 
-																			<select name="temp_connection_addresses" size="10"
+																			<select name="connection_addresses_show" size="10"
 																				multiple="multiple" id="temp_connection_addresses"
 																				class="form-control">
 																			</select> <input type="hidden" id="connection_white_addresses"
@@ -1100,7 +1100,7 @@
 																			<label class="radio-inline"><input
 																				name="file_control_file_type" type="radio" value="1">&nbsp;&nbsp;&nbsp;&nbsp;只读
 																			</label> <label class="radio-inline"> <input
-																				name="file_control_file_type" type="radio" value="0">&nbsp;&nbsp;&nbsp;&nbsp;禁用
+																				name="file_control_file_type" type="radio" value="2">&nbsp;&nbsp;&nbsp;&nbsp;禁用
 																			</label>
 																		</div>
 																		<button
@@ -1114,8 +1114,8 @@
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
 
-																			<select name="temp_file_control_rules" size="10"
-																				multiple="multiple" id="temp_file_control_rules"
+																			<select name="file_control_show" size="10"
+																				multiple="multiple" id="file_control_show"
 																				class="form-control">
 																			</select> <input type="hidden"
 																				id="file_control_values"
@@ -1124,7 +1124,7 @@
 																		</div>
 																		<span><button
 																				class="btn btn-success waves-effect waves-light"
-																				id="removefileControlValues" type="button">移除</button></span>
+																				id="removefileControl" type="button">移除</button></span>
 																	</div>
 
 																</form>

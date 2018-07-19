@@ -1,18 +1,66 @@
 $().ready(function() {
-	loadType();
+	loadType("alarm_level");
+	loadType("share_type");
 	initData();
 	validateRule();
     //console.log(osAudit);
 	$("#temp_addresses").dblclick(function() {
 		$("option:selected", this).remove();
 		$("#temp_addresses option:first").attr("selected", true);
-		dealOptionsValue();
+		dealOptionsValue("temp_addresses","server_connection_black_addresses");
 	});
-
 	$("#remove").click(function() {
 		$("#temp_addresses option:selected").remove();
 		$("#temp_addresses option:first").attr("selected", true);
-		dealOptionsValue();
+		dealOptionsValue("temp_addresses","server_connection_black_addresses");
+	});
+	
+	
+	$("#temp_addresses").dblclick(function() {
+		$("option:selected", this).remove();
+		$("#move_media_show option:first").attr("selected", true);
+		dealOptionsValue("move_media_show","move_media_names");
+	});
+	$("#removeMoveMedia").click(function() {
+		$("#move_media_show option:selected").remove();
+		$("#move_media_show option:first").attr("selected", true);
+		dealOptionsValue("move_media_show","move_media_names");
+	});
+	
+	
+	$("#port_monitor_show").dblclick(function() {
+		$("option:selected", this).remove();
+		$("#port_monitor_show option:first").attr("selected", true);
+		dealOptionsValue("port_monitor_show","port_monitor_ports");
+	});
+	$("#removeMonitorPorts").click(function() {
+		$("#port_monitor_show option:selected").remove();
+		$("#port_monitor_show option:first").attr("selected", true);
+		dealOptionsValue("port_monitor_show","port_monitor_ports");
+	});
+	
+	
+	$("#connection_addresses_show").dblclick(function() {
+		$("option:selected", this).remove();
+		$("#connection_addresses_show option:first").attr("selected", true);
+		dealOptionsValue("connection_addresses_show","connection_white_addresses");
+	});
+	$("#removeWhiteConnectionAdress").click(function() {
+		$("#connection_addresses_show option:selected").remove();
+		$("#connection_addresses_show option:first").attr("selected", true);
+		dealOptionsValue("connection_addresses_show","connection_white_addresses");
+	});
+	
+	
+	$("#file_control_show").dblclick(function() {
+		$("option:selected", this).remove();
+		$("#file_control_show option:first").attr("selected", true);
+		dealOptionsValue("file_control_show","file_control_values");
+	});
+	$("#removefileControl").click(function() {
+		$("#file_control_show option:selected").remove();
+		$("#file_control_show option:first").attr("selected", true);
+		dealOptionsValue("file_control_show","file_control_values");
 	});
 	
 });
@@ -26,18 +74,40 @@ $.validator.setDefaults({
 
 function initData() {
 	
-	//var obj = JSON.parse(osAudit);
-	//debugger;
-	//console.log(">>>>>>");
 	console.log(osAudit);
-	
 	if(osAudit == null||osAudit == undefined){
 		return;
 	}
 	
 	//var processMonitorRules = JSON.parse(osAudit.processMonitorRules);
-	console.log(osAudit.id);
+	//console.log(osAudit.id);
 	$("#osAuditId").val(osAudit.id);
+
+	initProcessMonitor(osAudit);
+	initServerMonitor(osAudit);
+	
+	initLocalFile(osAudit);
+	initDiskFile(osAudit);
+	initUdiskFile(osAudit);
+	initOsOnoff(osAudit);
+	initPrintMonitor(osAudit);
+	initOsInfo(osAudit);
+	initSystemLog(osAudit);
+	initAccountMonitor(osAudit);
+	initShareMonitor(osAudit);
+	initExceptionMonitor(osAudit);
+	initOsConfig(osAudit);
+	initMoveMedia(osAudit);
+	initPortMonitor(osAudit);
+	initConnectionMonitor(osAudit);
+	initNetworkFlow(osAudit);
+	initDiskSpace(osAudit);
+	initFileControl(osAudit);
+	
+}
+
+function initProcessMonitor(osAudit){
+	
 	var processMonitor = osAudit.processMonitorRules;
 	if(processMonitor!=undefined){
 		
@@ -54,10 +124,14 @@ function initData() {
 			$("#process_white_rules").val(processMonitor.process_white_rules);
 		}
 		if(processMonitor.process_alarm_level!=undefined){
-			loadType("process_alarm_level",processMonitor.process_alarm_level);
+			loadType("alarm_level","process_alarm_level",processMonitor.process_alarm_level);
 		}
 		//console.log(processMonitorRules.process_black_status);
 	}
+}
+
+function initServerMonitor(osAudit){
+	
 	var serverMonitor = osAudit.serverMonitorRules;
 	console.log(serverMonitor);
 	if(serverMonitor!=undefined){
@@ -89,13 +163,417 @@ function initData() {
 			
 		}
 		if(serverMonitor.server_alarm_level!=undefined){
-			loadType("server_alarm_level",serverMonitor.server_alarm_level);
+			loadType("alarm_level","server_alarm_level",serverMonitor.server_alarm_level);
 		}
 		//console.log(processMonitorRules.process_black_status);
 	}
+}
+
+function addServerConnectionBlackAddress() {
+    
+	var ip = $("#server_connection_black_ip").val();
+	var ports = $("#server_connection_black_ports").val();
+	//debugger;
 	
+	//校验修改密码表单
+	var flag = $("#server_connection_black_ip,#server_connection_black_ports").valid();
+	//var flag = $("#signupForm").valid();
+	//var flag = $("#signupForm").validate().element($("#server_connection_black_ip"));
+    if(!flag){
+        //没有通过验证
+        return;
+    }
+	var serverConnectionBlackAddress = ip+":"+ports;
+	
+    var html = '<option value="' +serverConnectionBlackAddress + '">' + serverConnectionBlackAddress + '</option>';
+    $("#temp_addresses").append(html);
+    $("#temp_addresses option:first").attr("selected", true);
+    dealOptionsValue("temp_addresses","server_connection_black_addresses");
+    
+}
+
+function initLocalFile(osAudit){
+	var returnData = osAudit.localFileRules;
+	if(returnData!=undefined){
+		
+		if(returnData.local_file_status=='1'){
+			 $("#local_file_status").attr("checked",true);
+		}
+		if(returnData.local_file_rules!=undefined){
+			$("#local_file_rules").val(returnData.local_file_rules);
+		}
+	}
+}
+
+function initDiskFile(osAudit){
+	var returnData = osAudit.diskFileRules;
+	if(returnData!=undefined){
+		
+		if(returnData.disk_file_status=='1'){
+			 $("#disk_file_status").attr("checked",true);
+		}
+		if(returnData.local_file_rules!=undefined){
+			$("#disk_file_rules").val(returnData.disk_file_rules);
+		}
+	}
+}
+
+function initUdiskFile(osAudit){
+	var returnData = osAudit.udiskFileRules;
+	if(returnData!=undefined){
+		
+		if(returnData.udisk_file_status=='1'){
+			 $("#udisk_file_status").attr("checked",true);
+		}
+		if(returnData.udisk_file_rules!=undefined){
+			$("#udisk_file_rules").val(returnData.udisk_file_rules);
+		}
+	}
+}
+
+function initOsOnoff(osAudit){
+	
+	var returnData = osAudit.osOnoffRules;
+	if(returnData!=undefined){
+		
+		if(returnData.os_onoff_status=='1'){
+			 $("#os_onoff_status").attr("checked",true);
+		}
+		if(returnData.workDay!=undefined){
+			var arr = returnData.workDay;
+			for(var i=0;i<arr.length;i++){
+			 $("input[name=workDay][value='"+arr[i]+"']").attr("checked",true);
+			}
+		}
+		if(returnData.startWorkTime!=undefined){
+			$("#startWorkTime").val(returnData.startWorkTime);
+		}
+		if(returnData.endWorkTime!=undefined){
+			$("#endWorkTime").val(returnData.endWorkTime);
+		}
+		
+	}
+}
+
+function initPrintMonitor(osAudit){
+	var returnData = osAudit.printMonitorRules;
+	if(returnData!=undefined){
+		if(returnData.print_monitor_status=='1'){
+			 $("#print_monitor_status").attr("checked",true);
+		}
+	}
+}
+
+function initOsInfo(osAudit){
+	var returnData = osAudit.osInfoRules;
+	if(returnData!=undefined){
+		if(returnData.os_info_status=='1'){
+			 $("#os_info_status").attr("checked",true);
+		}
+	}
+}
+
+function initSystemLog(osAudit){
+	var returnData = osAudit.systemLogRules;
+	if(returnData!=undefined){
+		if(returnData.system_log_status=='1'){
+			 $("#system_log_status").attr("checked",true);
+		}
+		if(returnData.others_system_log_status=='1'){
+			$("#others_system_log_status").attr("checked",true);
+		}
+	}
+}
+
+function initAccountMonitor(osAudit){
+	var returnData = osAudit.accountMonitorRules;
+	if(returnData!=undefined){
+		if(returnData.account_monitor_status=='1'){
+			 $("#account_monitor_status").attr("checked",true);
+		}
+	}
+}
+
+function initShareMonitor(osAudit){
+	var returnData = osAudit.shareMonitorRules;
+	if(returnData!=undefined){
+		if(returnData.account_monitor_status=='1'){
+			 $("#account_monitor_status").attr("checked",true);
+		}
+		if(returnData.share_monitor_type!=undefined){
+			loadType("share_type","share_monitor_type",returnData.share_monitor_type);
+		}
+	}
+}
+
+function initExceptionMonitor(osAudit){
+	var returnData = osAudit.exceptionMonitorRules;
+	if(returnData!=undefined){
+		
+		if(returnData.exception_monitor_status=='1'){
+			 $("#exception_monitor_status").attr("checked",true);
+		}
+		if(returnData.exception_monitor_memory!=undefined){
+			$("#exception_monitor_memory").val(returnData.exception_monitor_memory);
+		}
+		if(returnData.exception_monitor_cpu!=undefined){
+			$("#exception_monitor_cpu").val(returnData.exception_monitor_cpu);
+		}
+		if(returnData.exception_monitor_runtime!=undefined){
+			$("#exception_monitor_runtime").val(returnData.exception_monitor_runtime);
+		}
+		
+	}
+}
+
+function initOsConfig(osAudit){
+
+	var returnData = osAudit.osConfigRules;
+	if(returnData!=undefined){
+		
+		if(returnData.os_config_black_status=='1'){
+			 $("#os_config_black_status").attr("checked",true);
+		}
+		if(returnData.os_config_black_rules!=undefined){
+			$("#os_config_black_rules").val(returnData.os_config_black_rules);
+		}
+		if(returnData.os_config_black_alarm_level!=undefined){
+			loadType("alarm_level","os_config_black_alarm_level",returnData.os_config_black_alarm_level);
+		}
+		
+		
+		if(returnData.os_config_white_status=='1'){
+			$("#os_config_white_status").attr("checked",true);
+		}
+		if(returnData.os_config_white_rules!=undefined){
+			$("#os_config_white_rules").val(returnData.os_config_white_rules);
+		}
+		if(returnData.os_config_white_alarm_level!=undefined){
+			loadType("alarm_level","os_config_white_alarm_level",returnData.os_config_white_alarm_level);
+		}
+	}
 	
 }
+
+function initMoveMedia(osAudit){
+	var returnData = osAudit.moveMediaRules;
+	if(returnData!=undefined){
+		if(returnData.move_media_white_status=='1'){
+			 $("#move_media_white_status").attr("checked",true);
+		}
+		
+		var hiddenValue = returnData.move_media_names;
+		if(hiddenValue!=undefined&&hiddenValue!=""){
+			
+			$("#move_media_names").val(hiddenValue);
+			var hiddenValueArray=hiddenValue.split(";");
+		    for(var i in hiddenValueArray){
+		    	var html = '<option value="' +hiddenValueArray[i] + '">' + hiddenValueArray[i] + '</option>';
+				$("#move_media_show").append(html);
+		    }
+			
+		}
+	}
+	
+}
+function addMoveMedia() {
+    
+	var tempInput = $("#move_media_input").val();
+	//校验修改密码表单
+	var flag = $("#move_media_input").valid();
+    if(!flag){
+        //没有通过验证
+        return;
+    }
+    var html = '<option value="' +tempInput + '">' + tempInput + '</option>';
+    $("#move_media_show").append(html);
+    $("#move_media_show option:first").attr("selected", true);
+    dealOptionsValue("move_media_show","move_media_names");
+    
+}
+
+function initPortMonitor(osAudit){
+	var returnData = osAudit.portMonitorRules;
+	if(returnData!=undefined){
+		if(returnData.port_monitor_status=='1'){
+			 $("#port_monitor_status").attr("checked",true);
+		}
+		
+		var hiddenValue = returnData.port_monitor_ports;
+		if(hiddenValue!=undefined&&hiddenValue!=""){
+			
+			$("#port_monitor_ports").val(hiddenValue);
+			var hiddenValueArray=hiddenValue.split(";");
+		    for(var i in hiddenValueArray){
+		    	var html = '<option value="' +hiddenValueArray[i] + '">' + hiddenValueArray[i] + '</option>';
+				$("#port_monitor_show").append(html);
+		    }
+			
+		}
+	}
+}
+function addPortMonitor() {
+    
+	var tempInput = $("#port_monitor_input").val();
+	//校验修改密码表单
+	var flag = $("#port_monitor_input").valid();
+    if(!flag){
+        //没有通过验证
+        return;
+    }
+    var html = '<option value="' +tempInput + '">' + tempInput + '</option>';
+    $("#port_monitor_show").append(html);
+    $("#port_monitor_show option:first").attr("selected", true);
+    dealOptionsValue("port_monitor_show","port_monitor_ports");
+    
+}
+
+function initConnectionMonitor(osAudit){
+
+	var returnData = osAudit.connectionMonitorRules;
+	if(returnData!=undefined){
+		
+		if(returnData.connection_black_status=='1'){
+			 $("#connection_black_status").attr("checked",true);
+		}
+		if(returnData.connection_black_rules!=undefined){
+			$("#connection_black_rules").val(returnData.connection_black_rules);
+		}
+		if(returnData.connection_black_alarm_level!=undefined){
+			loadType("alarm_level","connection_black_alarm_level",returnData.connection_black_alarm_level);
+		}
+		
+		
+		if(returnData.connection_white_status=='1'){
+			$("#connection_white_status").attr("checked",true);
+		}
+		if(returnData.connection_white_rules!=undefined){
+			$("#connection_white_rules").val(returnData.connection_white_rules);
+		}
+		if(returnData.connection_white_alarm_level!=undefined){
+			loadType("alarm_level","connection_white_alarm_level",returnData.connection_white_alarm_level);
+		}
+		
+		if(returnData.network_connection_white_status=='1'){
+			$("#network_connection_white_status").attr("checked",true);
+		}
+		var addressValue = returnData.connection_white_addresses;
+		if(addressValue!=undefined&&addressValue!=""){
+			
+			$("#connection_white_addresses").val(addressValue);
+			var addressValueArray=addressValue.split(";");
+		    for(var i in addressValueArray){
+		    	var html = '<option value="' +addressValueArray[i] + '">' + addressValueArray[i] + '</option>';
+				$("#connection_addresses_show").append(html);
+		    }
+			
+		}
+		if(returnData.connection_alarm_level!=undefined){
+			loadType("alarm_level","connection_alarm_level",returnData.connection_alarm_level);
+		}
+	}
+}
+function addConnectionWhiteAddress() {
+    
+	var ip = $("#connection_white_ip").val();
+	var ports = $("#connection_white_ports").val();
+	//debugger;
+	
+	//校验修改密码表单
+	var flag = $("#connection_white_ip,#connection_white_ports").valid();
+	//var flag = $("#signupForm").valid();
+	//var flag = $("#signupForm").validate().element($("#server_connection_black_ip"));
+    if(!flag){
+        //没有通过验证
+        return;
+    }
+	var connectionWhiteAddress = ip+":"+ports;
+	
+    var html = '<option value="' +connectionWhiteAddress + '">' + connectionWhiteAddress + '</option>';
+    $("#connection_addresses_show").append(html);
+    $("#connection_addresses_show option:first").attr("selected", true);
+    dealOptionsValue("connection_addresses_show","connection_white_addresses");
+    
+}
+
+function initNetworkFlow(osAudit){
+	var returnData = osAudit.networkFlowRules;
+	if(returnData!=undefined){
+		if(returnData.network_flow_status=='1'){
+			 $("#network_flow_status").attr("checked",true);
+		}
+		if(returnData.network_flow_size!=undefined){
+			$("#network_flow_size").val(returnData.network_flow_size);
+		}
+		if(returnData.network_flow_alarm_level!=undefined){
+			loadType("alarm_level","network_flow_alarm_level",returnData.network_flow_alarm_level);
+		}
+	}
+}
+
+function initDiskSpace(osAudit){
+	var returnData = osAudit.diskSpaceRules;
+	if(returnData!=undefined){
+		if(returnData.disk_space_status=='1'){
+			 $("#disk_space_status").attr("checked",true);
+		}
+		if(returnData.disk_space_utilizationrate!=undefined){
+			$("#disk_space_utilizationrate").val(returnData.disk_space_utilizationrate);
+		}
+		if(returnData.disk_space_alarm_level!=undefined){
+			loadType("alarm_level","disk_space_alarm_level",returnData.disk_space_alarm_level);
+		}
+	}
+}
+
+function initFileControl(osAudit){
+	var returnData = osAudit.fileControlRules;
+	if(returnData!=undefined){
+		
+		if(returnData.file_control_status=='1'){
+			 $("#file_control_status").attr("checked",true);
+		}
+		
+		var hiddenValue = returnData.file_control_values;
+		if(hiddenValue!=undefined&&hiddenValue!=""){
+			
+			$("#file_control_values").val(hiddenValue);
+			var hiddenValueArray=hiddenValue.split(";");
+		    for(var i in hiddenValueArray){
+		    	var html = '<option value="' +hiddenValueArray[i] + '">' + hiddenValueArray[i] + '</option>';
+				$("#file_control_show").append(html);
+		    }
+			
+		}
+	}
+}
+
+function addFileControlRules() {
+    
+	var input_1 = $("#file_control_input").val();
+	var input_2 = $("#file_control_file_type").val();
+	//debugger;
+	
+	//校验修改密码表单
+	var flag = $("#file_control_input,#file_control_file_type").valid();
+	//var flag = $("#signupForm").valid();
+	//var flag = $("#signupForm").validate().element($("#server_connection_black_ip"));
+    if(!flag){
+        //没有通过验证
+        return;
+    }
+	var mergeInput = input_1+":"+input_2;
+	
+    var html = '<option value="' +mergeInput + '">' + mergeInput + '</option>';
+    $("#file_control_show").append(html);
+    $("#file_control_show option:first").attr("selected", true);
+    dealOptionsValue("file_control_show","file_control_values");
+    
+}
+
+
+
+
 
 function addStrategyTempletTab() {
 	
@@ -104,42 +582,53 @@ function addStrategyTempletTab() {
 	var diskFileForm = $("#diskFileForm").serializeJson();
 	var udiskFileForm = $("#udiskFileForm").serializeJson();
 	var osOnoffForm = $("#osOnoffForm").serializeJson();
-	//localFileForm local_file_status local_file_rules
-	//diskFileForm disk_file_status disk_file_rules
-	//udiskFileForm udisk_file_status udisk_file_rules
-	//osOnoffForm os_onoff_status workDay startWorkTime endWorkTime
+	
 	var processMonitorForm = $("#processMonitorForm").serializeJson();// 进程监控
+	
 	var printMonitorForm = $("#printMonitorForm").serializeJson();// 打印
 	var osInfoForm = $("#osInfoForm").serializeJson();// 主机信息
 	var systemLogForm = $("#systemLogForm").serializeJson();// 系统日志
 	var accountMonitorForm = $("#accountMonitorForm").serializeJson();// 账户监控
-	var shareMonitorForm = $("#shareMonitorForm").serializeJson();// 进程监控
-	var exceptionMonitorForm = $("#exceptionMonitorForm").serializeJson();// 进程监控
-	var osConfigForm = $("#osConfigForm").serializeJson();// 进程监控
-	var moveMediaForm = $("#moveMediaForm").serializeJson();// 进程监控
-	var portMonitorForm = $("#portMonitorForm").serializeJson();// 进程监控
-	//printMonitorForm print_monitor_status
-	//osInfoForm os_info_status
-	//systemLogForm system_log_status others_system_log_status
-	//accountMonitorForm account_monitor_status 
-	//shareMonitorForm share_monitor_status share_monitor_type
-	//exceptionMonitorForm exception_monitor_status exception_monitor_memory exception_monitor_cpu exception_monitor_runtime
-	//osConfigForm os_config_black_status os_config_black_rules os_config_black_alarm_level_selected os_config_black_alarm_level os_config_white_status os_config_white_rules os_config_white_alarm_level
-	//moveMediaForm move_media_white_status move_media_input addMoveMedia() move_media_show move_media_names removeMoveMedia
-	//portMonitorForm port_monitor_input addPortMonitor
+	var shareMonitorForm = $("#shareMonitorForm").serializeJson();// 共享监控
+	var exceptionMonitorForm = $("#exceptionMonitorForm").serializeJson();// 异常监控
+	var osConfigForm = $("#osConfigForm").serializeJson();// 主机配置
+	var moveMediaForm = $("#moveMediaForm").serializeJson();// 移动介质
+	var portMonitorForm = $("#portMonitorForm").serializeJson();// 端口监控
+	
 	var serverMonitorForm = $("#serverMonitorForm").serializeJson();// 服务监控
-	//connectionMonitorForm connection_black_status connection_black_rules connection_black_alarm_level connection_white_status connection_white_rules connection_white_alarm_level connection_white_status connection_white_addresses
-	//networkFlowForm network_flow_status network_flow_size network_flow_alarm_level
-	//diskSpaceForm disk_space_status disk_space_utilizationrate disk_space_alarm_level
+	var connectionMonitorForm = $("#connectionMonitorForm").serializeJson();// 连接监控
+	var networkFlowForm = $("#networkFlowForm").serializeJson();// 网络流量
+	var diskSpaceForm = $("#diskSpaceForm").serializeJson();// 磁盘空间
+	var fileControlForm = $("#fileControlForm").serializeJson();// 磁盘空间
 	
 	var extendParamForm = $("#extendParamForm").serializeJson();// 扩展参数
-	
 
 	// var jsonString = '{"bar":"property","baz":3}';
 	// var jsObject = JSON.parse(proRuestl_1); //转换为json对象
 	var jsons = "{" 
-			+ "\"processMonitorForm\":" + JSON.stringify(processMonitorForm)
+			+ "\"localFileForm\":" + JSON.stringify(localFileForm)
+			+ ",\"diskFileForm\":" + JSON.stringify(diskFileForm)
+			+ ",\"udiskFileForm\":" + JSON.stringify(udiskFileForm)
+			+ ",\"osOnoffForm\":" + JSON.stringify(osOnoffForm)
+			
+			+ ",\"processMonitorForm\":" + JSON.stringify(processMonitorForm)
+			
+			+ ",\"printMonitorForm\":" + JSON.stringify(printMonitorForm)
+			+ ",\"osInfoForm\":" + JSON.stringify(osInfoForm)
+			+ ",\"systemLogForm\":" + JSON.stringify(systemLogForm)
+			+ ",\"accountMonitorForm\":" + JSON.stringify(accountMonitorForm)
+			+ ",\"shareMonitorForm\":" + JSON.stringify(shareMonitorForm)
+			+ ",\"exceptionMonitorForm\":" + JSON.stringify(exceptionMonitorForm)
+			+ ",\"osConfigForm\":" + JSON.stringify(osConfigForm)
+			+ ",\"moveMediaForm\":" + JSON.stringify(moveMediaForm)
+			+ ",\"portMonitorForm\":" + JSON.stringify(portMonitorForm)
+			
 			+ ",\"serverMonitorForm\":" + JSON.stringify(serverMonitorForm) 
+			+ ",\"connectionMonitorForm\":" + JSON.stringify(connectionMonitorForm) 
+			+ ",\"networkFlowForm\":" + JSON.stringify(networkFlowForm) 
+			+ ",\"diskSpaceForm\":" + JSON.stringify(diskSpaceForm) 
+			+ ",\"fileControlForm\":" + JSON.stringify(fileControlForm) 
+			
 			+ ",\"extendParamForm\":" + JSON.stringify(extendParamForm) 
 			+ "}"; // 转换为json类型的字符串
 
@@ -173,41 +662,19 @@ function addStrategyTempletTab() {
 
 }
 
-function saveServerConnectionBlackAddress() {
-    
-	var ip = $("#server_connection_black_ip").val();
-	var ports = $("#server_connection_black_ports").val();
-	//debugger;
-	
-	//校验修改密码表单
-	var flag = $("#server_connection_black_ip,#server_connection_black_ports").valid();
-	//var flag = $("#signupForm").valid();
-	//var flag = $("#signupForm").validate().element($("#server_connection_black_ip"));
-    if(!flag){
-        //没有通过验证
-        return;
-    }
-	var serverConnectionBlackAddress = ip+":"+ports;
-	
-    var html = '<option value="' +serverConnectionBlackAddress + '">' + serverConnectionBlackAddress + '</option>';
-    $("#temp_addresses").append(html);
-    $("#temp_addresses option:first").attr("selected", true);
-    dealOptionsValue();
-    
-}
 
-function dealOptionsValue(){
+function dealOptionsValue(sourceId,targetId){
 	
     
     var all = "";
-    $("#temp_addresses option").each(function() {
+    $("#"+sourceId+" option").each(function() {
     	
     	if(all!=""){
     		all +=";";
     	}
         all += $(this).attr("value");
     });
-    $("#server_connection_black_addresses").val(all);
+    $("#"+targetId).val(all);
 }
 
 
@@ -230,10 +697,10 @@ function validateRule() {
 	})
 }
 
-function loadType(idName,checkedValue){
+function loadType(type,id,checkedValue){
 	var html = "";
 	$.ajax({
-		url : '/common/dict/list/alarm_level',
+		url : '/common/dict/list/'+type,
 		success : function(data) {
 			
 			//debugger;
@@ -242,14 +709,14 @@ function loadType(idName,checkedValue){
 				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
 			}
 			
-			if(idName==undefined && checkedValue==undefined){
+			if(id==undefined && checkedValue==undefined){
 				$(".chosen-select").append(html);
 			}
 			$(".chosen-select").chosen({
 				maxHeight : 200
 			});
-			if(idName!=undefined && checkedValue!=undefined){
-				$("#"+idName).val(checkedValue);
+			if(id!=undefined && checkedValue!=undefined){
+				$("#"+id).val(checkedValue);
 			}
 			$(".chosen-select").trigger("chosen:updated");
 			//点击事件
