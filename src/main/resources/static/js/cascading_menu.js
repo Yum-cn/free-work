@@ -64,7 +64,7 @@ function getDate(mmsecond) {
  */
 
 $.fn.CascadeMenu_L1 = function(htmlId,First,selectedValue,isHasSelect) {
-	debugger;
+	//debugger;
 	var _self = this;
 	// 定义默认值
 	_self.data("first", [ "请选择", "" ]);
@@ -331,11 +331,11 @@ $.fn.CascadeMenu_city_L3 = function(htmlId,First,Second,Third,selectedValue) {
 	_self.data("second", [ "请选择", "" ]);
 	_self.data("third", [ "请选择", "" ]);
 	// 插入空的下拉框
-	_self.append("<select style='width:120px;' id='first_" + htmlId
+	_self.append("<select  class='form-control-select' style='width:120px;' id='first_" + htmlId
 			+ "' name='first_" + htmlId + "'></select>");
-	_self.append("&nbsp;<select style='width:120px;' id='second_" + htmlId
+	_self.append("&nbsp;<select  class='form-control-select' style='width:120px;' id='second_" + htmlId
 			+ "' name='second_" + htmlId + "'></select>");
-	_self.append("&nbsp;<select style='width:120px;' id='third_" + htmlId
+	_self.append("&nbsp;<select  class='form-control-select' style='width:120px;' id='third_" + htmlId
 			+ "' name='third_" + htmlId + "'></select>");
 	// 分别获取对应下拉框
 	var $sel1 = _self.find("select").eq(0);
@@ -486,7 +486,7 @@ function initSecletData(data, htmlId, type,selectedValue) {
  */
 function initSecletDataCombo(data, htmlId, type,selectedValue) {
 	
-	debugger;
+	//debugger;
 	//console.log(data);
 	var First = new Array();
 	var Second = new Array();

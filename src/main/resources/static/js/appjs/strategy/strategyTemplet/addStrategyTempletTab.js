@@ -8,6 +8,7 @@ $().ready(function() {
 	loadType("alarm_level","connection_alarm_level");
 	loadType("alarm_level","network_flow_alarm_level");
 	loadType("alarm_level","disk_space_alarm_level");
+	loadType("alarm_level","alarmId");
 	loadType("share_type","share_monitor_type");
 	initData();
 	validateRule();
