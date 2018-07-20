@@ -191,17 +191,20 @@
 																		<label class="col-sm-2 control-label">设置正常开关机时间：</label>
 																		<div class="col-sm-8">
 																			<div class="col-sm-8">
-																				工作日： <input name="workDay" type="checkbox" value="Monday">星期一
-																				<input class="bs-checkbox" name="workDay"
-																					type="checkbox" value="Tuesday">星期二 <input
-																					class="bs-checkbox" name="workDay" type="checkbox" value="Wednesday">星期三
-																				<input class="bs-checkbox" name="workDay"
-																					type="checkbox" value="Thursday">星期四 <input
-																					class="bs-checkbox" name="workDay" type="checkbox" value="Friday">星期五
-																				<input class="bs-checkbox" name="workDay"
-																					type="checkbox" value="Saturday">星期六 <input
-																					class="bs-checkbox" name="workDay" type="checkbox" value="Sunday">星期日
-																				<br>
+																				工作日： <input name="workDay" type="checkbox"
+																					value="Monday">星期一 <input
+																					class="bs-checkbox" name="workDay" type="checkbox"
+																					value="Tuesday">星期二 <input
+																					class="bs-checkbox" name="workDay" type="checkbox"
+																					value="Wednesday">星期三 <input
+																					class="bs-checkbox" name="workDay" type="checkbox"
+																					value="Thursday">星期四 <input
+																					class="bs-checkbox" name="workDay" type="checkbox"
+																					value="Friday">星期五 <input
+																					class="bs-checkbox" name="workDay" type="checkbox"
+																					value="Saturday">星期六 <input
+																					class="bs-checkbox" name="workDay" type="checkbox"
+																					value="Sunday">星期日 <br>
 																				<div>&nbsp;</div>
 																				<div>
 																					上班时间：<input class="Wdate" type="text"
@@ -248,7 +251,8 @@
 																		<div class="col-sm-8">
 																			<textarea id="process_black_rules"
 																				name="process_black_rules" class="form-control"></textarea>
-																			(不要将系统关键进程加入黑名单;黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(不要将系统关键进程加入黑名单;黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font
+																				color="red">半角逗号</font>分隔,如vi,gedit)
 																		</div>
 																	</div>
 
@@ -618,9 +622,7 @@
 																			class="btn btn-success waves-effect waves-light"
 																			onclick="addMoveMedia()" type="button">添加</button>
 
-																		<div class="">
-                                                                            &nbsp;
-                                                                        </div>
+																		<div class="">&nbsp;</div>
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
 																			<select name="move_media_show" size="10"
@@ -669,9 +671,7 @@
 																			class="btn btn-success waves-effect waves-light"
 																			onclick="addPortMonitor()" type="button">添加</button>
 
-																		<div class="">
-                                                                            &nbsp;
-                                                                        </div>
+																		<div class="">&nbsp;</div>
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
 																			<select name="port_monitor_show" size="10"
@@ -778,9 +778,7 @@
 																			onclick="addServerConnectionBlackAddress()"
 																			id="addressAdd" type="button">添加</button>
 
-																		<div class="">
-                                                                            &nbsp;
-                                                                        </div>
+																		<div class="">&nbsp;</div>
 																		<div>
 																			<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;("IP/域名地址"配置中可填写目的地址的IP或域名配置,一个地址可对应多个端口号,之间用<font
 																				color="red">半角逗号</font>分隔)
@@ -904,8 +902,9 @@
 																		<div class="switch  col-sm-1">
 																			<div class="onoffswitch">
 																				<input id="network_connection_white_status"
-																					name="network_connection_white_status" type="checkbox"
-																					value="1" class="onoffswitch-checkbox"> <label
+																					name="network_connection_white_status"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
 																					class="onoffswitch-label"
 																					for="network_connection_white_status"> <span
 																					class="onoffswitch-inner"></span> <span
@@ -933,9 +932,7 @@
 																			class="btn btn-success waves-effect waves-light"
 																			onclick="addConnectionWhiteAddress()" type="button">添加</button>
 
-																		<div class="">
-                                                                            &nbsp;
-                                                                        </div>
+																		<div class="">&nbsp;</div>
 																		<div>
 																			<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;("IP/域名地址"配置中可填写目的地址的IP或域名配置,一个地址可对应多个端口号,之间用<font
 																				color="red">半角逗号</font>分隔)
@@ -1083,15 +1080,14 @@
 																	</div>
 																	<div>
 																		<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;可使用<font
-                                                                            color="red">*</font>作为通配符,如：<font
-                                                                            color="red">/tmp/test*</font>&nbsp;&nbsp;tmp目录下以test开头的目录及其目录下的所有文件;*.txt 所有目录下的txt文件
+																			color="red">*</font>作为通配符,如：<font color="red">/tmp/test*</font>&nbsp;&nbsp;tmp目录下以test开头的目录及其目录下的所有文件;*.txt
+																		所有目录下的txt文件
 																	</div>
 																	<div>&nbsp;</div>
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">文件名：</label>
 																		<div class="col-sm-3">
-																			<input class="form-control"
-																				id="file_control_input"
+																			<input class="form-control" id="file_control_input"
 																				name="file_control_input" type="text"
 																				required="true">
 																		</div>
@@ -1105,11 +1101,9 @@
 																		</div>
 																		<button
 																			class="btn btn-success waves-effect waves-light"
-																			onclick="addFileControlRules()"
-																			id="addressAdd" type="button">添加</button>
-																		<div class="">
-                                                                            &nbsp;
-                                                                        </div>
+																			onclick="addFileControlRules()" id="addressAdd"
+																			type="button">添加</button>
+																		<div class="">&nbsp;</div>
 
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
@@ -1117,8 +1111,7 @@
 																			<select name="file_control_show" size="10"
 																				multiple="multiple" id="file_control_show"
 																				class="form-control">
-																			</select> <input type="hidden"
-																				id="file_control_values"
+																			</select> <input type="hidden" id="file_control_values"
 																				name="file_control_values" value="">
 
 																		</div>
@@ -1138,104 +1131,120 @@
 									</div>
 								</div>
 							</div>
-							
-							
+
+
 							<div id="tab-2" class="tab-pane ">
 								<div class="bootstrap-table">
-                                    <div class="fixed-table-toolbar">
-                                        <div class="bars pull-left"></div>
-                                    </div>
-                                    <div class="fixed-table-container" style="padding-bottom: 0px;">
-                                        <div class="fixed-table-body">
-                                            <table data-mobile-responsive="true" id="exampleTable"
-                                                class="table table-hover table-striped">
+									<div class="fixed-table-toolbar">
+										<div class="bars pull-left"></div>
+									</div>
+									<div class="fixed-table-container" style="padding-bottom: 0px;">
+										<div class="fixed-table-body">
+											<table data-mobile-responsive="true" id="exampleTable"
+												class="table table-hover table-striped">
 
-                                                <tbody>
+												<tbody>
 
-                                                    <tr data-index="0">
-                                                        <td style="border-left-width: 0px;">
-                                                            <div class="ibox-content">
-                                                                <form class="form-horizontal m-t" id="localFileForm">
-                                                                    <div class="form-group" data-index="1">
-                                                                        <label class="col-sm-2 control-label">外联监控：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="local_file_status"
-                                                                                    name="local_file_status" type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="local_file_status">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <span><label class="col-sm-8 control-label"
-                                                                            style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配本地文件路径及名称对文件操作进行审计,可使用<font
-                                                                                color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
-                                                                                color="red">*.doc,/tmp/test.txt</font>)
-                                                                        </label></span>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input id="process_alarm_level_selected" value=""
-                                                                            type="hidden"> <label
-                                                                            class="col-sm-2 control-label">报警级别：</label>
-                                                                        <div class="col-sm-8">
-                                                                            <select data-placeholder="--选择类别--"
-                                                                                name="process_alarm_level" id="process_alarm_level"
-                                                                                class="form-control chosen-select" tabindex="2"
-                                                                                required>
-                                                                                <option value="">--选择类别--</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">探测地址：</label>
-                                                                        <div class="col-sm-8">
-                                                                            <textarea id="local_file_rules"
-                                                                                name="local_file_rules" class="form-control"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">报警中心：</label>
-                                                                        <div class="col-sm-1">
-                                                                            <input class="form-control"
-                                                                                id="exception_monitor_memory"
-                                                                                name="exception_monitor_memory" type="text"
-                                                                                required="true">
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">报警位置：</label>
-                                                                        <div class="col-sm-2">
-                                                                            <select data-placeholder="--选择类别--"
-                                                                                name="process_alarm_level" id="process_alarm_level"
-                                                                                class="form-control chosen-select" tabindex="2"
-                                                                                required>
-                                                                                <option value="">--选择类别--</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-sm-2">
-                                                                            <select data-placeholder="--选择类别--"
-                                                                                name="process_alarm_level" id="process_alarm_level"
-                                                                                class="form-control chosen-select" tabindex="2"
-                                                                                required>
-                                                                                <option value="">--选择类别--</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+													<tr data-index="0">
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="localFileForm">
+																	<div class="form-group" data-index="1">
+																		<label class="col-sm-2 control-label">外联监控：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="monitorStatus" name="monitorStatus"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="monitorStatus">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+																	</div>
+																	<div class="form-group">
+																		<input id="process_alarm_level_selected" value=""
+																			type="hidden"> <label
+																			class="col-sm-2 control-label">报警级别：</label>
+																		<div class="col-sm-8">
+																			<select data-placeholder="--选择类别--" name="alarmId"
+																				id="alarmId" class="form-control chosen-select"
+																				tabindex="2" required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																		<span><label class="col-sm-8 control-label"
+																			style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配本地文件路径及名称对文件操作进行审计,可使用<font
+																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
+																				color="red">*.doc,/tmp/test.txt</font>)
+																		</label></span>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">探测地址：</label>
+																		<div class="col-sm-8">
+																			<textarea id="probeAddress" name="probeAddress"
+																				class="form-control"></textarea>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">报警中心：</label>
+																		<div class="col-sm-1">
+																			<input class="form-control" id="alarmServer"
+																				name="alarmServer" type="text" required="true">
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">报警位置：</label>
+																		<div class="col-sm-2">
+																			<select data-placeholder="--选择类别--"
+																				name="alarmProvincePlaceId"
+																				id="alarmProvincePlaceId"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																		<div class="col-sm-2">
+																			<select data-placeholder="--选择类别--"
+																				name="alarmCityPlaceId" id="alarmCityPlaceId"
+																				class="form-control chosen-select" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+
+
+																	<div class="container">
+																		<div class="row">
+																			<div class="col-md-6">
+																				<select name="province_code"
+																					class="form-control combox" ref="city_select"
+																					refUrl="/area?pro_code={value}&city_code=SAJC">
+																				</select>
+																			</div>
+																			<div class="col-md-6">
+																				<select name="city_code" id="city_select"
+																					class="form-control">
+																				</select>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</td>
+													</tr>
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div id="tab-3" class="tab-pane ">
 								<table id="exampleTable3" data-mobile-responsive="true"></table>
@@ -1260,6 +1269,101 @@
                 //通过参数传递
                 //initData(osAudit);
         // ]]>
+        
+                (function($) {
+                    var _onchange = function(event) {
+                    	
+                    	 debugger;
+                        var $ref = $("#" + event.data.ref);
+                        if ($ref.size() == 0)
+                            return false;
+
+                        var refUrl = event.data.refUrl;
+                        var value = encodeURIComponent(event.data.$this.val());
+                        YUNM.debug(value);
+
+                        $.ajax({
+                            type : 'POST',
+                            dataType : "json",
+                            url : refUrl.replace("{value}", value),
+                            cache : false,
+                            data : {},
+                            success : function(response) {
+                                $ref.empty();
+
+                                addHtml(response, $ref);
+                                $ref.trigger("change").combox();
+                            },
+                            error : YUNM.ajaxError
+                        });
+
+                    };
+
+                    var addHtml = function(response, $this) {
+                    	
+                    	 debugger;
+                        var json = YUNM.jsonEval(response);
+                        if (!json)
+                            return;
+
+                        var html = '';
+                        $.each(json, function(i) {
+                            if (json[i]) {
+
+                                html += '<option value="' + json[i].value + '"';
+
+                                if (json[i].selected) {
+                                    html += ' selected="' + json[i].selected;
+                                }
+
+                                html += '">' + json[i].name + '</option>';
+                            }
+                        });
+
+                        $this.html(html);
+                    };
+
+                    $.extend($.fn, {
+                        combox : function() {
+
+                        	 debugger;
+                            return this.each(function(i) {
+                                var $this = $(this);
+
+                                var value = $this.val() || '';
+                                var ref = $this.attr("ref");
+
+                                var refUrl = $this.attr("refUrl") || "";
+                                if (refUrl) {
+                                    refUrl = refUrl.replace("{value}", encodeURIComponent(value));
+                                }
+
+                                if (refUrl) {
+                                    $.ajax({
+                                        type : 'POST',
+                                        dataType : "json",
+                                        url : refUrl,
+                                        cache : false,
+                                        data : {},
+                                        success : function(response) {
+                                            addHtml(response, $this);
+
+                                            if (ref && $this.attr("refUrl")) {
+                                                $this.unbind("change", _onchange).bind("change", {
+                                                    ref : ref,
+                                                    refUrl : $this.attr("refUrl"),
+                                                    $this : $this,
+                                                }, _onchange).trigger("change");
+                                            }
+                                        },
+                                        error : YUNM.ajaxError
+                                    });
+                                }
+
+                            });
+                        }
+                    });
+                })(jQuery);
 
     </script>
 

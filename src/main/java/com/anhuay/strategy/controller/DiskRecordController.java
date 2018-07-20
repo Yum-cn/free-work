@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anhuay.strategy.domain.DeviceControlDO;
-import com.anhuay.strategy.service.DeviceControlService;
+import com.anhuay.strategy.domain.DiskRecordDO;
+import com.anhuay.strategy.service.DiskRecordService;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
 
 /**
- * 设备控制表
+ * 光盘刻录表
  * 
  * @author Yum
  * @email wtuada@126.com
@@ -30,41 +30,41 @@ import com.anhuay.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/strategy/deviceControl")
-public class DeviceControlController {
+@RequestMapping("/strategy/diskRecord")
+public class DiskRecordController {
 	@Autowired
-	private DeviceControlService deviceControlService;
+	private DiskRecordService diskRecordService;
 	
 	@GetMapping()
-	@RequiresPermissions("strategy:deviceControl:deviceControl")
-	String DeviceControl(){
-	    return "strategy/deviceControl/deviceControl";
+	@RequiresPermissions("strategy:diskRecord:diskRecord")
+	String DiskRecord(){
+	    return "strategy/diskRecord/diskRecord";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("strategy:deviceControl:deviceControl")
+	@RequiresPermissions("strategy:diskRecord:diskRecord")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<DeviceControlDO> deviceControlList = deviceControlService.list(query);
-		int total = deviceControlService.count(query);
-		PageUtils pageUtils = new PageUtils(deviceControlList, total);
+		List<DiskRecordDO> diskRecordList = diskRecordService.list(query);
+		int total = diskRecordService.count(query);
+		PageUtils pageUtils = new PageUtils(diskRecordList, total);
 		return pageUtils;
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("strategy:deviceControl:add")
+	@RequiresPermissions("strategy:diskRecord:add")
 	String add(){
-	    return "strategy/deviceControl/add";
+	    return "strategy/diskRecord/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("strategy:deviceControl:edit")
+	@RequiresPermissions("strategy:diskRecord:edit")
 	String edit(@PathVariable("id") Long id,Model model){
-		DeviceControlDO deviceControl = deviceControlService.get(id);
-		model.addAttribute("deviceControl", deviceControl);
-	    return "strategy/deviceControl/edit";
+		DiskRecordDO diskRecord = diskRecordService.get(id);
+		model.addAttribute("diskRecord", diskRecord);
+	    return "strategy/diskRecord/edit";
 	}
 	
 	/**
@@ -72,9 +72,9 @@ public class DeviceControlController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("strategy:deviceControl:add")
-	public R save( DeviceControlDO deviceControl){
-		if(deviceControlService.save(deviceControl)>0){
+	@RequiresPermissions("strategy:diskRecord:add")
+	public R save( DiskRecordDO diskRecord){
+		if(diskRecordService.save(diskRecord)>0){
 			return R.ok();
 		}
 		return R.error();
@@ -84,9 +84,9 @@ public class DeviceControlController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("strategy:deviceControl:edit")
-	public R update( DeviceControlDO deviceControl){
-		deviceControlService.update(deviceControl);
+	@RequiresPermissions("strategy:diskRecord:edit")
+	public R update( DiskRecordDO diskRecord){
+		diskRecordService.update(diskRecord);
 		return R.ok();
 	}
 	
@@ -95,9 +95,9 @@ public class DeviceControlController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("strategy:deviceControl:remove")
+	@RequiresPermissions("strategy:diskRecord:remove")
 	public R remove( Long id){
-		if(deviceControlService.updateStatus(id)>0){
+		if(diskRecordService.updateStatus(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -108,9 +108,9 @@ public class DeviceControlController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("strategy:deviceControl:batchRemove")
+	@RequiresPermissions("strategy:diskRecord:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
-		deviceControlService.batchUpdateStatus(ids);
+		diskRecordService.batchUpdateStatus(ids);
 		return R.ok();
 	}
 	

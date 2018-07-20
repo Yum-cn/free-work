@@ -1,28 +1,28 @@
 package com.anhuay.strategy.service;
 
-import com.anhuay.strategy.domain.DeviceControlDO;
+import com.anhuay.strategy.domain.SoftDistributeDO;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * 设备控制表
+ * 软件分发表
  * 
  * @author Yum
  * @email wtuada@126.com
  * @date 2018-07-19 20:25:53
  */
-public interface DeviceControlService {
+public interface SoftDistributeService {
 	
-	DeviceControlDO get(Long id);
+	SoftDistributeDO get(Long id);
 	
-	List<DeviceControlDO> list(Map<String, Object> map);
+	List<SoftDistributeDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
 	
-	int save(DeviceControlDO deviceControl);
+	int save(SoftDistributeDO softDistribute);
 	
-	int update(DeviceControlDO deviceControl);
+	int update(SoftDistributeDO softDistribute);
 	
 	int remove(Long id);
 	

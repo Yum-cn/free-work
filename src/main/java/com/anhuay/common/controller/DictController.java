@@ -1,20 +1,33 @@
 package com.anhuay.common.controller;
 
-import com.anhuay.common.config.Constant;
-import com.anhuay.common.domain.DictDO;
-import com.anhuay.common.service.DictService;
-import com.anhuay.common.utils.PageUtils;
-import com.anhuay.common.utils.Query;
-import com.anhuay.common.utils.R;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.anhuay.common.config.Constant;
+import com.anhuay.common.domain.DictDO;
+import com.anhuay.common.domain.Node;
+import com.anhuay.common.manager.CommonManager;
+import com.anhuay.common.service.DictService;
+import com.anhuay.common.utils.DictUtil;
+import com.anhuay.common.utils.PageUtils;
+import com.anhuay.common.utils.Query;
+import com.anhuay.common.utils.R;
+import com.common.util.BaseResult;
 
 /**
  * 字典表
@@ -28,6 +41,8 @@ import java.util.Map;
 public class DictController extends BaseController {
 	@Autowired
 	private DictService dictService;
+	@Autowired
+	private CommonManager commonManager;
 
 	@GetMapping()
 	@RequiresPermissions("common:dict:dict")
@@ -144,5 +159,22 @@ public class DictController extends BaseController {
 		map.put("type", type);
 		List<DictDO> dictList = dictService.list(map);
 		return dictList;
+	}
+	
+	/**
+	 * 
+	 * @author   Yum
+	 */
+	@GetMapping("/citys")
+	@ResponseBody
+	public Object vancloudCitys(HttpServletRequest request, HttpServletResponse response) {
+
+		List<Node> retList = DictUtil.getNodeList(commonManager
+				.getMutiTreeCode("sys_city_level_one,sys_city_level_two,sys_city_level_three"));
+		StringBuffer returnStr = new StringBuffer();
+		String json = DictUtil.recursionFn(retList, new Node("", "-1", "省市区", ""), returnStr);
+		json = DictUtil.getJsonList(json);
+		return BaseResult.success(json);
+		//responseJson(response, json);
 	}
 }

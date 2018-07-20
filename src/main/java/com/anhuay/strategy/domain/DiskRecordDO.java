@@ -6,23 +6,23 @@ import java.util.Date;
 
 
 /**
- * 设备控制表
+ * 光盘刻录表
  * 
  * @author Yum
  * @email wtuada@126.com
  * @date 2018-07-19 20:25:53
  */
-public class DeviceControlDO implements Serializable {
+public class DiskRecordDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//主键编号
 	private Long id;
 	//模板编号
 	private Long templetId;
-	//设备控制状态
-	private Integer deviceControlStatus;
-	//设备控制规则
-	private String deviceControlRules;
+	//光盘刻录审计状态
+	private Integer diskRecordStatus;
+	//光盘刻录审计规则
+	private String diskRecordRules;
 	//状态
 	private Integer status;
 	//创建时间
@@ -55,28 +55,28 @@ public class DeviceControlDO implements Serializable {
 		return templetId;
 	}
 	/**
-	 * 设置：设备控制状态
+	 * 设置：光盘刻录审计状态
 	 */
-	public void setDeviceControlStatus(Integer deviceControlStatus) {
-		this.deviceControlStatus = deviceControlStatus;
+	public void setDiskRecordStatus(Integer diskRecordStatus) {
+		this.diskRecordStatus = diskRecordStatus;
 	}
 	/**
-	 * 获取：设备控制状态
+	 * 获取：光盘刻录审计状态
 	 */
-	public Integer getDeviceControlStatus() {
-		return deviceControlStatus;
+	public Integer getDiskRecordStatus() {
+		return diskRecordStatus;
 	}
 	/**
-	 * 设置：设备控制规则
+	 * 设置：光盘刻录审计规则
 	 */
-	public void setDeviceControlRules(String deviceControlRules) {
-		this.deviceControlRules = deviceControlRules;
+	public void setDiskRecordRules(String diskRecordRules) {
+		this.diskRecordRules = diskRecordRules;
 	}
 	/**
-	 * 获取：设备控制规则
+	 * 获取：光盘刻录审计规则
 	 */
-	public String getDeviceControlRules() {
-		return deviceControlRules;
+	public String getDiskRecordRules() {
+		return diskRecordRules;
 	}
 	/**
 	 * 设置：状态

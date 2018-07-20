@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.anhuay.strategy.dao.DeviceControlDao">
+<mapper namespace="com.anhuay.strategy.dao.AssetManagementDao">
 
-	<select id="get" resultType="com.anhuay.strategy.domain.DeviceControlDO">
-		select `id`,`templet_id`,`device_control_status`,`device_control_rules`,`status`,`create_time`,`update_time` from ahy_device_control where id = #{value}
+	<select id="get" resultType="com.anhuay.strategy.domain.AssetManagementDO">
+		select `id`,`templet_id`,`asset_management_status`,`asset_management_rules`,`status`,`create_time`,`update_time` from ahy_asset_management where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.anhuay.strategy.domain.DeviceControlDO">
-		select `id`,`templet_id`,`device_control_status`,`device_control_rules`,`status`,`create_time`,`update_time` from ahy_device_control
+	<select id="list" resultType="com.anhuay.strategy.domain.AssetManagementDO">
+		select `id`,`templet_id`,`asset_management_status`,`asset_management_rules`,`status`,`create_time`,`update_time` from ahy_asset_management
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="deviceControlStatus != null and deviceControlStatus != ''"> and device_control_status = #{deviceControlStatus} </if>
-		  		  <if test="deviceControlRules != null and deviceControlRules != ''"> and device_control_rules = #{deviceControlRules} </if>
+		  		  <if test="assetManagementStatus != null and assetManagementStatus != ''"> and asset_management_status = #{assetManagementStatus} </if>
+		  		  <if test="assetManagementRules != null and assetManagementRules != ''"> and asset_management_rules = #{assetManagementRules} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
@@ -33,25 +33,25 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from ahy_device_control
+		select count(*) from ahy_asset_management
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="deviceControlStatus != null and deviceControlStatus != ''"> and device_control_status = #{deviceControlStatus} </if>
-		  		  <if test="deviceControlRules != null and deviceControlRules != ''"> and device_control_rules = #{deviceControlRules} </if>
+		  		  <if test="assetManagementStatus != null and assetManagementStatus != ''"> and asset_management_status = #{assetManagementStatus} </if>
+		  		  <if test="assetManagementRules != null and assetManagementRules != ''"> and asset_management_rules = #{assetManagementRules} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.anhuay.strategy.domain.DeviceControlDO">
-		insert into ahy_device_control
+	<insert id="save" parameterType="com.anhuay.strategy.domain.AssetManagementDO">
+		insert into ahy_asset_management
 		(
 			`id`, 
 			`templet_id`, 
-			`device_control_status`, 
-			`device_control_rules`, 
+			`asset_management_status`, 
+			`asset_management_rules`, 
 			`status`, 
 			`create_time`, 
 			`update_time`
@@ -60,20 +60,20 @@
 		(
 			#{id}, 
 			#{templetId}, 
-			#{deviceControlStatus}, 
-			#{deviceControlRules}, 
+			#{assetManagementStatus}, 
+			#{assetManagementRules}, 
 			#{status}, 
 			#{createTime}, 
 			#{updateTime}
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.anhuay.strategy.domain.DeviceControlDO">
-		update ahy_device_control 
+	<update id="update" parameterType="com.anhuay.strategy.domain.AssetManagementDO">
+		update ahy_asset_management 
 		<set>
 			<if test="templetId != null">`templet_id` = #{templetId}, </if>
-			<if test="deviceControlStatus != null">`device_control_status` = #{deviceControlStatus}, </if>
-			<if test="deviceControlRules != null">`device_control_rules` = #{deviceControlRules}, </if>
+			<if test="assetManagementStatus != null">`asset_management_status` = #{assetManagementStatus}, </if>
+			<if test="assetManagementRules != null">`asset_management_rules` = #{assetManagementRules}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
@@ -82,22 +82,22 @@
 	</update>
 	
 	<update id="updateStatus">
-        update ahy_device_control set status = 0 where id = #{value}
+        update ahy_asset_management set status = 0 where id = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update ahy_device_control set status = 0 where id in
+        update ahy_asset_management set status = 0 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from ahy_device_control where id = #{value}
+		delete from ahy_asset_management where id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from ahy_device_control where id in 
+		delete from ahy_asset_management where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

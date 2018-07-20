@@ -15,56 +15,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anhuay.strategy.domain.DeviceControlDO;
-import com.anhuay.strategy.service.DeviceControlService;
+import com.anhuay.strategy.domain.AssetManagementDO;
+import com.anhuay.strategy.service.AssetManagementService;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
 
 /**
- * 设备控制表
+ * 资产管理表
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-19 20:25:53
+ * @date 2018-07-19 20:25:52
  */
  
 @Controller
-@RequestMapping("/strategy/deviceControl")
-public class DeviceControlController {
+@RequestMapping("/strategy/assetManagement")
+public class AssetManagementController {
 	@Autowired
-	private DeviceControlService deviceControlService;
+	private AssetManagementService assetManagementService;
 	
 	@GetMapping()
-	@RequiresPermissions("strategy:deviceControl:deviceControl")
-	String DeviceControl(){
-	    return "strategy/deviceControl/deviceControl";
+	@RequiresPermissions("strategy:assetManagement:assetManagement")
+	String AssetManagement(){
+	    return "strategy/assetManagement/assetManagement";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("strategy:deviceControl:deviceControl")
+	@RequiresPermissions("strategy:assetManagement:assetManagement")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<DeviceControlDO> deviceControlList = deviceControlService.list(query);
-		int total = deviceControlService.count(query);
-		PageUtils pageUtils = new PageUtils(deviceControlList, total);
+		List<AssetManagementDO> assetManagementList = assetManagementService.list(query);
+		int total = assetManagementService.count(query);
+		PageUtils pageUtils = new PageUtils(assetManagementList, total);
 		return pageUtils;
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("strategy:deviceControl:add")
+	@RequiresPermissions("strategy:assetManagement:add")
 	String add(){
-	    return "strategy/deviceControl/add";
+	    return "strategy/assetManagement/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("strategy:deviceControl:edit")
+	@RequiresPermissions("strategy:assetManagement:edit")
 	String edit(@PathVariable("id") Long id,Model model){
-		DeviceControlDO deviceControl = deviceControlService.get(id);
-		model.addAttribute("deviceControl", deviceControl);
-	    return "strategy/deviceControl/edit";
+		AssetManagementDO assetManagement = assetManagementService.get(id);
+		model.addAttribute("assetManagement", assetManagement);
+	    return "strategy/assetManagement/edit";
 	}
 	
 	/**
@@ -72,9 +72,9 @@ public class DeviceControlController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("strategy:deviceControl:add")
-	public R save( DeviceControlDO deviceControl){
-		if(deviceControlService.save(deviceControl)>0){
+	@RequiresPermissions("strategy:assetManagement:add")
+	public R save( AssetManagementDO assetManagement){
+		if(assetManagementService.save(assetManagement)>0){
 			return R.ok();
 		}
 		return R.error();
@@ -84,9 +84,9 @@ public class DeviceControlController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("strategy:deviceControl:edit")
-	public R update( DeviceControlDO deviceControl){
-		deviceControlService.update(deviceControl);
+	@RequiresPermissions("strategy:assetManagement:edit")
+	public R update( AssetManagementDO assetManagement){
+		assetManagementService.update(assetManagement);
 		return R.ok();
 	}
 	
@@ -95,9 +95,9 @@ public class DeviceControlController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("strategy:deviceControl:remove")
+	@RequiresPermissions("strategy:assetManagement:remove")
 	public R remove( Long id){
-		if(deviceControlService.updateStatus(id)>0){
+		if(assetManagementService.updateStatus(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -108,9 +108,9 @@ public class DeviceControlController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("strategy:deviceControl:batchRemove")
+	@RequiresPermissions("strategy:assetManagement:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
-		deviceControlService.batchUpdateStatus(ids);
+		assetManagementService.batchUpdateStatus(ids);
 		return R.ok();
 	}
 	

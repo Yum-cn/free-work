@@ -52,4 +52,14 @@ public class DeviceControlServiceImpl implements DeviceControlService {
 		return deviceControlDao.batchRemove(ids);
 	}
 	
+	   
+    @Override
+    public int updateStatus(Long id){
+        return deviceControlDao.updateStatus(id);
+    }
+    
+    @Override
+    public int batchUpdateStatus(Long[] ids){
+        return deviceControlDao.batchUpdateStatus(ids);
+    }
 }

@@ -1,6 +1,6 @@
 package com.anhuay.strategy.dao;
 
-import com.anhuay.strategy.domain.DeviceControlDO;
+import com.anhuay.strategy.domain.DiskRecordDO;
 
 import java.util.List;
 import java.util.Map;
@@ -8,23 +8,23 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 设备控制表
+ * 光盘刻录表
  * @author Yum
  * @email wtuada@126.com
  * @date 2018-07-19 20:25:53
  */
 @Mapper
-public interface DeviceControlDao {
+public interface DiskRecordDao {
 
-	DeviceControlDO get(Long id);
+	DiskRecordDO get(Long id);
 	
-	List<DeviceControlDO> list(Map<String,Object> map);
+	List<DiskRecordDO> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);
 	
-	int save(DeviceControlDO deviceControl);
+	int save(DiskRecordDO diskRecord);
 	
-	int update(DeviceControlDO deviceControl);
+	int update(DiskRecordDO diskRecord);
 	
 	int remove(Long id);
 	

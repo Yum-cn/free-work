@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anhuay.strategy.domain.DeviceControlDO;
-import com.anhuay.strategy.service.DeviceControlService;
+import com.anhuay.strategy.domain.SoftDistributeDO;
+import com.anhuay.strategy.service.SoftDistributeService;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
 
 /**
- * 设备控制表
+ * 软件分发表
  * 
  * @author Yum
  * @email wtuada@126.com
@@ -30,41 +30,41 @@ import com.anhuay.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/strategy/deviceControl")
-public class DeviceControlController {
+@RequestMapping("/strategy/softDistribute")
+public class SoftDistributeController {
 	@Autowired
-	private DeviceControlService deviceControlService;
+	private SoftDistributeService softDistributeService;
 	
 	@GetMapping()
-	@RequiresPermissions("strategy:deviceControl:deviceControl")
-	String DeviceControl(){
-	    return "strategy/deviceControl/deviceControl";
+	@RequiresPermissions("strategy:softDistribute:softDistribute")
+	String SoftDistribute(){
+	    return "strategy/softDistribute/softDistribute";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("strategy:deviceControl:deviceControl")
+	@RequiresPermissions("strategy:softDistribute:softDistribute")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<DeviceControlDO> deviceControlList = deviceControlService.list(query);
-		int total = deviceControlService.count(query);
-		PageUtils pageUtils = new PageUtils(deviceControlList, total);
+		List<SoftDistributeDO> softDistributeList = softDistributeService.list(query);
+		int total = softDistributeService.count(query);
+		PageUtils pageUtils = new PageUtils(softDistributeList, total);
 		return pageUtils;
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("strategy:deviceControl:add")
+	@RequiresPermissions("strategy:softDistribute:add")
 	String add(){
-	    return "strategy/deviceControl/add";
+	    return "strategy/softDistribute/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("strategy:deviceControl:edit")
+	@RequiresPermissions("strategy:softDistribute:edit")
 	String edit(@PathVariable("id") Long id,Model model){
-		DeviceControlDO deviceControl = deviceControlService.get(id);
-		model.addAttribute("deviceControl", deviceControl);
-	    return "strategy/deviceControl/edit";
+		SoftDistributeDO softDistribute = softDistributeService.get(id);
+		model.addAttribute("softDistribute", softDistribute);
+	    return "strategy/softDistribute/edit";
 	}
 	
 	/**
@@ -72,9 +72,9 @@ public class DeviceControlController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("strategy:deviceControl:add")
-	public R save( DeviceControlDO deviceControl){
-		if(deviceControlService.save(deviceControl)>0){
+	@RequiresPermissions("strategy:softDistribute:add")
+	public R save( SoftDistributeDO softDistribute){
+		if(softDistributeService.save(softDistribute)>0){
 			return R.ok();
 		}
 		return R.error();
@@ -84,9 +84,9 @@ public class DeviceControlController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("strategy:deviceControl:edit")
-	public R update( DeviceControlDO deviceControl){
-		deviceControlService.update(deviceControl);
+	@RequiresPermissions("strategy:softDistribute:edit")
+	public R update( SoftDistributeDO softDistribute){
+		softDistributeService.update(softDistribute);
 		return R.ok();
 	}
 	
@@ -95,9 +95,9 @@ public class DeviceControlController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("strategy:deviceControl:remove")
+	@RequiresPermissions("strategy:softDistribute:remove")
 	public R remove( Long id){
-		if(deviceControlService.updateStatus(id)>0){
+		if(softDistributeService.updateStatus(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -108,9 +108,9 @@ public class DeviceControlController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("strategy:deviceControl:batchRemove")
+	@RequiresPermissions("strategy:softDistribute:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
-		deviceControlService.batchUpdateStatus(ids);
+		softDistributeService.batchUpdateStatus(ids);
 		return R.ok();
 	}
 	

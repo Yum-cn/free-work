@@ -1,6 +1,6 @@
 package com.anhuay.strategy.dao;
 
-import com.anhuay.strategy.domain.DeviceControlDO;
+import com.anhuay.strategy.domain.AssetManagementDO;
 
 import java.util.List;
 import java.util.Map;
@@ -8,23 +8,23 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 设备控制表
+ * 资产管理表
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-19 20:25:53
+ * @date 2018-07-19 20:25:52
  */
 @Mapper
-public interface DeviceControlDao {
+public interface AssetManagementDao {
 
-	DeviceControlDO get(Long id);
+	AssetManagementDO get(Long id);
 	
-	List<DeviceControlDO> list(Map<String,Object> map);
+	List<AssetManagementDO> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);
 	
-	int save(DeviceControlDO deviceControl);
+	int save(AssetManagementDO assetManagement);
 	
-	int update(DeviceControlDO deviceControl);
+	int update(AssetManagementDO assetManagement);
 	
 	int remove(Long id);
 	

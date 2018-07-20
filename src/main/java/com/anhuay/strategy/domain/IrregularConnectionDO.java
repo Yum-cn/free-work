@@ -1,0 +1,173 @@
+package com.anhuay.strategy.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+
+
+/**
+ * 违规外联表
+ * 
+ * @author Yum
+ * @email wtuada@126.com
+ * @date 2018-07-19 20:40:01
+ */
+public class IrregularConnectionDO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	//主键编号
+	private Long id;
+	//模板编号
+	private Long templetId;
+	//外联监控状态（启用、禁用）
+	private Integer monitorStatus;
+	//告警级别编号
+	private Integer alarmId;
+	//探测地址
+	private String probeAddress;
+	//报警中心
+	private String alarmServer;
+	//报警省位置编号
+	private String alarmProvincePlaceId;
+	//报警市位置编号
+	private String alarmCityPlaceId;
+	//状态
+	private Integer status;
+	//创建时间
+	private Long createTime;
+	//修改时间
+	private Long updateTime;
+
+	/**
+	 * 设置：主键编号
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	/**
+	 * 获取：主键编号
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * 设置：模板编号
+	 */
+	public void setTempletId(Long templetId) {
+		this.templetId = templetId;
+	}
+	/**
+	 * 获取：模板编号
+	 */
+	public Long getTempletId() {
+		return templetId;
+	}
+	/**
+	 * 设置：外联监控状态（启用、禁用）
+	 */
+	public void setMonitorStatus(Integer monitorStatus) {
+		this.monitorStatus = monitorStatus;
+	}
+	/**
+	 * 获取：外联监控状态（启用、禁用）
+	 */
+	public Integer getMonitorStatus() {
+		return monitorStatus;
+	}
+	/**
+	 * 设置：告警级别编号
+	 */
+	public void setAlarmId(Integer alarmId) {
+		this.alarmId = alarmId;
+	}
+	/**
+	 * 获取：告警级别编号
+	 */
+	public Integer getAlarmId() {
+		return alarmId;
+	}
+	/**
+	 * 设置：探测地址
+	 */
+	public void setProbeAddress(String probeAddress) {
+		this.probeAddress = probeAddress;
+	}
+	/**
+	 * 获取：探测地址
+	 */
+	public String getProbeAddress() {
+		return probeAddress;
+	}
+	/**
+	 * 设置：报警中心
+	 */
+	public void setAlarmServer(String alarmServer) {
+		this.alarmServer = alarmServer;
+	}
+	/**
+	 * 获取：报警中心
+	 */
+	public String getAlarmServer() {
+		return alarmServer;
+	}
+	/**
+	 * 设置：报警省位置编号
+	 */
+	public void setAlarmProvincePlaceId(String alarmProvincePlaceId) {
+		this.alarmProvincePlaceId = alarmProvincePlaceId;
+	}
+	/**
+	 * 获取：报警省位置编号
+	 */
+	public String getAlarmProvincePlaceId() {
+		return alarmProvincePlaceId;
+	}
+	/**
+	 * 设置：报警市位置编号
+	 */
+	public void setAlarmCityPlaceId(String alarmCityPlaceId) {
+		this.alarmCityPlaceId = alarmCityPlaceId;
+	}
+	/**
+	 * 获取：报警市位置编号
+	 */
+	public String getAlarmCityPlaceId() {
+		return alarmCityPlaceId;
+	}
+	/**
+	 * 设置：状态
+	 */
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	/**
+	 * 获取：状态
+	 */
+	public Integer getStatus() {
+		return status;
+	}
+	/**
+	 * 设置：创建时间
+	 */
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
+	}
+	/**
+	 * 获取：创建时间
+	 */
+	public Long getCreateTime() {
+		return createTime;
+	}
+	/**
+	 * 设置：修改时间
+	 */
+	public void setUpdateTime(Long updateTime) {
+		this.updateTime = updateTime;
+	}
+	/**
+	 * 获取：修改时间
+	 */
+	public Long getUpdateTime() {
+		return updateTime;
+	}
+}

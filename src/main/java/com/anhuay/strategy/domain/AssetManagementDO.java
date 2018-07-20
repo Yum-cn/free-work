@@ -6,23 +6,23 @@ import java.util.Date;
 
 
 /**
- * 设备控制表
+ * 资产管理表
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-19 20:25:53
+ * @date 2018-07-19 20:25:52
  */
-public class DeviceControlDO implements Serializable {
+public class AssetManagementDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//主键编号
 	private Long id;
 	//模板编号
 	private Long templetId;
-	//设备控制状态
-	private Integer deviceControlStatus;
-	//设备控制规则
-	private String deviceControlRules;
+	//资产管理审计状态
+	private Integer assetManagementStatus;
+	//资产管理审计规则
+	private String assetManagementRules;
 	//状态
 	private Integer status;
 	//创建时间
@@ -55,28 +55,28 @@ public class DeviceControlDO implements Serializable {
 		return templetId;
 	}
 	/**
-	 * 设置：设备控制状态
+	 * 设置：资产管理审计状态
 	 */
-	public void setDeviceControlStatus(Integer deviceControlStatus) {
-		this.deviceControlStatus = deviceControlStatus;
+	public void setAssetManagementStatus(Integer assetManagementStatus) {
+		this.assetManagementStatus = assetManagementStatus;
 	}
 	/**
-	 * 获取：设备控制状态
+	 * 获取：资产管理审计状态
 	 */
-	public Integer getDeviceControlStatus() {
-		return deviceControlStatus;
+	public Integer getAssetManagementStatus() {
+		return assetManagementStatus;
 	}
 	/**
-	 * 设置：设备控制规则
+	 * 设置：资产管理审计规则
 	 */
-	public void setDeviceControlRules(String deviceControlRules) {
-		this.deviceControlRules = deviceControlRules;
+	public void setAssetManagementRules(String assetManagementRules) {
+		this.assetManagementRules = assetManagementRules;
 	}
 	/**
-	 * 获取：设备控制规则
+	 * 获取：资产管理审计规则
 	 */
-	public String getDeviceControlRules() {
-		return deviceControlRules;
+	public String getAssetManagementRules() {
+		return assetManagementRules;
 	}
 	/**
 	 * 设置：状态

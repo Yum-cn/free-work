@@ -33,7 +33,7 @@ public class TestController {
      */
     public static final String CACHE_KEY   = "taskLog";
 
-	@GetMapping("/sse")
+	@GetMapping("")
 	String StrategyTemplet() {
 		return "test/test";
 	}
