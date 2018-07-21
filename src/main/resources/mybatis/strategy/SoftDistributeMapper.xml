@@ -4,20 +4,16 @@
 <mapper namespace="com.anhuay.strategy.dao.SoftDistributeDao">
 
 	<select id="get" resultType="com.anhuay.strategy.domain.SoftDistributeDO">
-		select `id`,`templet_id`,`device_control_status`,`device_control_rules`,`download_retry_status`,`max_retry_status`,`retry_interval`,`soft_ids`,`status`,`create_time`,`update_time` from ahy_soft_distribute where id = #{value}
+		select `id`,`templet_id`,`soft_distribute_status`,`soft_distribute_rules`,`status`,`create_time`,`update_time` from ahy_soft_distribute where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.strategy.domain.SoftDistributeDO">
-		select `id`,`templet_id`,`device_control_status`,`device_control_rules`,`download_retry_status`,`max_retry_status`,`retry_interval`,`soft_ids`,`status`,`create_time`,`update_time` from ahy_soft_distribute
+		select `id`,`templet_id`,`soft_distribute_status`,`soft_distribute_rules`,`status`,`create_time`,`update_time` from ahy_soft_distribute
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="deviceControlStatus != null and deviceControlStatus != ''"> and device_control_status = #{deviceControlStatus} </if>
-		  		  <if test="deviceControlRules != null and deviceControlRules != ''"> and device_control_rules = #{deviceControlRules} </if>
-		  		  <if test="downloadRetryStatus != null and downloadRetryStatus != ''"> and download_retry_status = #{downloadRetryStatus} </if>
-		  		  <if test="maxRetryStatus != null and maxRetryStatus != ''"> and max_retry_status = #{maxRetryStatus} </if>
-		  		  <if test="retryInterval != null and retryInterval != ''"> and retry_interval = #{retryInterval} </if>
-		  		  <if test="softIds != null and softIds != ''"> and soft_ids = #{softIds} </if>
+		  		  <if test="softDistributeStatus != null and softDistributeStatus != ''"> and soft_distribute_status = #{softDistributeStatus} </if>
+		  		  <if test="softDistributeRules != null and softDistributeRules != ''"> and soft_distribute_rules = #{softDistributeRules} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
@@ -41,12 +37,8 @@
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="deviceControlStatus != null and deviceControlStatus != ''"> and device_control_status = #{deviceControlStatus} </if>
-		  		  <if test="deviceControlRules != null and deviceControlRules != ''"> and device_control_rules = #{deviceControlRules} </if>
-		  		  <if test="downloadRetryStatus != null and downloadRetryStatus != ''"> and download_retry_status = #{downloadRetryStatus} </if>
-		  		  <if test="maxRetryStatus != null and maxRetryStatus != ''"> and max_retry_status = #{maxRetryStatus} </if>
-		  		  <if test="retryInterval != null and retryInterval != ''"> and retry_interval = #{retryInterval} </if>
-		  		  <if test="softIds != null and softIds != ''"> and soft_ids = #{softIds} </if>
+		  		  <if test="softDistributeStatus != null and softDistributeStatus != ''"> and soft_distribute_status = #{softDistributeStatus} </if>
+		  		  <if test="softDistributeRules != null and softDistributeRules != ''"> and soft_distribute_rules = #{softDistributeRules} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
@@ -58,12 +50,8 @@
 		(
 			`id`, 
 			`templet_id`, 
-			`device_control_status`, 
-			`device_control_rules`, 
-			`download_retry_status`, 
-			`max_retry_status`, 
-			`retry_interval`, 
-			`soft_ids`, 
+			`soft_distribute_status`, 
+			`soft_distribute_rules`, 
 			`status`, 
 			`create_time`, 
 			`update_time`
@@ -72,12 +60,8 @@
 		(
 			#{id}, 
 			#{templetId}, 
-			#{deviceControlStatus}, 
-			#{deviceControlRules}, 
-			#{downloadRetryStatus}, 
-			#{maxRetryStatus}, 
-			#{retryInterval}, 
-			#{softIds}, 
+			#{softDistributeStatus}, 
+			#{softDistributeRules}, 
 			#{status}, 
 			#{createTime}, 
 			#{updateTime}
@@ -88,12 +72,8 @@
 		update ahy_soft_distribute 
 		<set>
 			<if test="templetId != null">`templet_id` = #{templetId}, </if>
-			<if test="deviceControlStatus != null">`device_control_status` = #{deviceControlStatus}, </if>
-			<if test="deviceControlRules != null">`device_control_rules` = #{deviceControlRules}, </if>
-			<if test="downloadRetryStatus != null">`download_retry_status` = #{downloadRetryStatus}, </if>
-			<if test="maxRetryStatus != null">`max_retry_status` = #{maxRetryStatus}, </if>
-			<if test="retryInterval != null">`retry_interval` = #{retryInterval}, </if>
-			<if test="softIds != null">`soft_ids` = #{softIds}, </if>
+			<if test="softDistributeStatus != null">`soft_distribute_status` = #{softDistributeStatus}, </if>
+			<if test="softDistributeRules != null">`soft_distribute_rules` = #{softDistributeRules}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>

@@ -8,8 +8,9 @@ $().ready(function() {
 	loadType("alarm_level","connection_alarm_level");
 	loadType("alarm_level","network_flow_alarm_level");
 	loadType("alarm_level","disk_space_alarm_level");
-	loadType("alarm_level","alarmId");
+	loadType("alarm_level","alarm_id");
 	loadType("share_type","share_monitor_type");
+	loadType("cd_access_type","cd_rom");
 	initData();
 	validateRule();
     //console.log(osAudit);
@@ -71,6 +72,17 @@ $().ready(function() {
 		$("#file_control_show option:first").attr("selected", true);
 		dealOptionsValue("file_control_show","file_control_values");
 	});
+
+	$("#device_white_show").dblclick(function() {
+		$("option:selected", this).remove();
+		$("#device_white_show option:first").attr("selected", true);
+		dealOptionsValue("device_white_show","device_white_values");
+	});
+	$("#removeDeviceId").click(function() {
+		$("#device_white_show option:selected").remove();
+		$("#device_white_show option:first").attr("selected", true);
+		dealOptionsValue("device_white_show","device_white_values");
+	});
 	
 });
 
@@ -84,34 +96,48 @@ $.validator.setDefaults({
 function initData() {
 	
 	console.log(osAudit);
-	if(osAudit == null||osAudit == undefined){
-		return;
+	if(osAudit != null&&osAudit != undefined){
+		$("#osAuditId").val(osAudit.id);
+
+		initProcessMonitor(osAudit);
+		initServerMonitor(osAudit);
+		
+		initLocalFile(osAudit);
+		initDiskFile(osAudit);
+		initUdiskFile(osAudit);
+		initOsOnoff(osAudit);
+		initPrintMonitor(osAudit);
+		initOsInfo(osAudit);
+		initSystemLog(osAudit);
+		initAccountMonitor(osAudit);
+		initShareMonitor(osAudit);
+		initExceptionMonitor(osAudit);
+		initOsConfig(osAudit);
+		initMoveMedia(osAudit);
+		initPortMonitor(osAudit);
+		initConnectionMonitor(osAudit);
+		initNetworkFlow(osAudit);
+		initDiskSpace(osAudit);
+		initFileControl(osAudit);
 	}
 	
-	//var processMonitorRules = JSON.parse(osAudit.processMonitorRules);
-	//console.log(osAudit.id);
-	$("#osAuditId").val(osAudit.id);
-
-	initProcessMonitor(osAudit);
-	initServerMonitor(osAudit);
-	
-	initLocalFile(osAudit);
-	initDiskFile(osAudit);
-	initUdiskFile(osAudit);
-	initOsOnoff(osAudit);
-	initPrintMonitor(osAudit);
-	initOsInfo(osAudit);
-	initSystemLog(osAudit);
-	initAccountMonitor(osAudit);
-	initShareMonitor(osAudit);
-	initExceptionMonitor(osAudit);
-	initOsConfig(osAudit);
-	initMoveMedia(osAudit);
-	initPortMonitor(osAudit);
-	initConnectionMonitor(osAudit);
-	initNetworkFlow(osAudit);
-	initDiskSpace(osAudit);
-	initFileControl(osAudit);
+	if(irregularConnection != null && irregularConnection != undefined){
+		$("#irregularConnectionId").val(irregularConnection.id);
+		initIrregularConnection(irregularConnection);
+	}
+	if(deviceControl != null && deviceControl != undefined){
+		debugger;
+		$("#deviceControlId").val(deviceControl.id);
+		initDeviceControl(deviceControl);
+	}
+	if(diskRecord != null && diskRecord != undefined){
+		$("#diskRecordId").val(diskRecord.id);
+		initDiskRecord(diskRecord);
+	}
+	if(softDistribute != null && softDistribute != undefined){
+		$("#softDistributeId").val(softDistribute.id);
+		initSoftDistribute(softDistribute);
+	}
 	
 }
 
@@ -581,6 +607,124 @@ function addFileControlRules() {
     
 }
 
+function initIrregularConnection(irregularConnection){
+	var returnData = irregularConnection.monitorRules;
+	if(returnData!=undefined){
+		
+		if(returnData.monitor_status=='1'){
+			 $("#monitor_status").attr("checked",true);
+		}
+		if(returnData.alarm_id!=undefined){
+			loadType("alarm_level","alarm_id",returnData.alarm_id);
+		}
+		if(returnData.probe_address!=undefined){
+			$("#probe_address").val(returnData.probe_address);
+		}
+		if(returnData.alarm_server!=undefined){
+			$("#alarm_server").val(returnData.alarm_server);
+		}
+	}
+}
+function initDeviceControl(deviceControl){
+	var returnData = deviceControl.deviceControlRules;
+	if(returnData!=undefined){
+		
+		if(returnData.device_control_status=='1'){
+			 $("#device_control_status").attr("checked",true);
+		}
+		
+		if(returnData.cd_rom!=undefined){
+			loadType("cd_access_type","cd_rom",returnData.cd_rom);
+		}
+		if(returnData.phone=='1'){
+			 $("#phone").attr("checked",true);
+		}
+		if(returnData.bluetooth=='1'){
+			$("#bluetooth").attr("checked",true);
+		}
+		if(returnData.device_1394=='1'){
+			$("#device_1394").attr("checked",true);
+		}
+		if(returnData.com_interface=='1'){
+			$("#com_interface").attr("checked",true);
+		}
+		if(returnData.infrared_device=='1'){
+			$("#infrared_device").attr("checked",true);
+		}
+		if(returnData.floppy_drive=='1'){
+			$("#floppy_drive").attr("checked",true);
+		}
+		if(returnData.modem=='1'){
+			$("#modem").attr("checked",true);
+		}
+		if(returnData.sd_adapter=='1'){
+			$("#sd_adapter").attr("checked",true);
+		}
+		
+		if(returnData.image_device=='1'){
+			$("#image_device").attr("checked",true);
+		}
+		if(returnData.print_device=='1'){
+			$("#print_device").attr("checked",true);
+		}
+		if(returnData.pcmcia_device=='1'){
+			$("#pcmcia_device").attr("checked",true);
+		}
+		if(returnData.card_reader=='1'){
+			$("#card_reader").attr("checked",true);
+		}
+		if(returnData.udisk_device=='1'){
+			$("#udisk_device").attr("checked",true);
+		}
+		if(returnData.mlan=='1'){
+			$("#mlan").attr("checked",true);
+		}
+		if(returnData.diy_device=='1'){
+			$("#diy_device").attr("checked",true);
+		}
+		if(returnData.wireless_device=='1'){
+			$("#wireless_device").attr("checked",true);
+		}
+		
+		var hiddenValue = returnData.device_white_values;
+		if(hiddenValue!=undefined&&hiddenValue!=""){
+			
+			$("#device_white_values").val(hiddenValue);
+			var hiddenValueArray=hiddenValue.split(";");
+		    for(var i in hiddenValueArray){
+		    	var html = '<option value="' +hiddenValueArray[i] + '">' + hiddenValueArray[i] + '</option>';
+				$("#device_white_show").append(html);
+		    }
+			
+		}
+	}
+	
+}
+function addDeviceId(){
+	
+var input_1 = $("#device_id_input").val();
+	
+	//校验修改密码表单
+	var flag = $("#device_id_input").valid();
+    if(!flag){
+        //没有通过验证
+        return;
+    }
+	var mergeInput = input_1;
+	
+    var html = '<option value="' +mergeInput + '">' + mergeInput + '</option>';
+    $("#device_white_show").append(html);
+    $("#device_white_show option:first").attr("selected", true);
+    dealOptionsValue("device_white_show","device_white_values");
+}
+
+
+function initDiskRecord(diskRecord){
+	
+}
+function initSoftDistribute(softDistribute){
+	
+}
 
 
 
@@ -611,6 +755,11 @@ function addStrategyTempletTab() {
 	var diskSpaceForm = $("#diskSpaceForm").serializeJson();// 磁盘空间
 	var fileControlForm = $("#fileControlForm").serializeJson();// 磁盘空间
 	
+	var irregularConnectionForm = $("#irregularConnectionForm").serializeJson();// 违规外联
+	var deviceControlForm = $("#deviceControlForm").serializeJson();// 设备控制
+	var diskRecordForm = $("#diskRecordForm").serializeJson();// 光盘刻录
+	var softDistributeForm = $("#softDistributeForm").serializeJson();// 光盘刻录
+	
 	var extendParamForm = $("#extendParamForm").serializeJson();// 扩展参数
 
 	// var jsonString = '{"bar":"property","baz":3}';
@@ -638,6 +787,11 @@ function addStrategyTempletTab() {
 			+ ",\"networkFlowForm\":" + JSON.stringify(networkFlowForm) 
 			+ ",\"diskSpaceForm\":" + JSON.stringify(diskSpaceForm) 
 			+ ",\"fileControlForm\":" + JSON.stringify(fileControlForm) 
+			
+			+ ",\"irregularConnectionForm\":" + JSON.stringify(irregularConnectionForm) 
+			+ ",\"deviceControlForm\":" + JSON.stringify(deviceControlForm) 
+			+ ",\"diskRecordForm\":" + JSON.stringify(diskRecordForm) 
+			+ ",\"softDistributeForm\":" + JSON.stringify(softDistributeForm) 
 			
 			+ ",\"extendParamForm\":" + JSON.stringify(extendParamForm) 
 			+ "}"; // 转换为json类型的字符串

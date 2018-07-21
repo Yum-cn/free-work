@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-19 20:25:53
+ * @date 2018-07-21 17:18:00
  */
 public class SoftDistributeDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,18 +19,10 @@ public class SoftDistributeDO implements Serializable {
 	private Long id;
 	//模板编号
 	private Long templetId;
-	//下载服务器地址
-	private Integer deviceControlStatus;
-	//默认保存文件目录
-	private String deviceControlRules;
-	//下载重试状态
-	private Integer downloadRetryStatus;
-	//最大重试次数
-	private Integer maxRetryStatus;
-	//重试间隔(分)
-	private Integer retryInterval;
-	//分发软件名单编号
-	private String softIds;
+	//光盘刻录审计状态
+	private Integer softDistributeStatus;
+	//光盘刻录审计规则
+	private String softDistributeRules;
 	//状态
 	private Integer status;
 	//创建时间
@@ -63,76 +55,28 @@ public class SoftDistributeDO implements Serializable {
 		return templetId;
 	}
 	/**
-	 * 设置：下载服务器地址
+	 * 设置：光盘刻录审计状态
 	 */
-	public void setDeviceControlStatus(Integer deviceControlStatus) {
-		this.deviceControlStatus = deviceControlStatus;
+	public void setSoftDistributeStatus(Integer softDistributeStatus) {
+		this.softDistributeStatus = softDistributeStatus;
 	}
 	/**
-	 * 获取：下载服务器地址
+	 * 获取：光盘刻录审计状态
 	 */
-	public Integer getDeviceControlStatus() {
-		return deviceControlStatus;
+	public Integer getSoftDistributeStatus() {
+		return softDistributeStatus;
 	}
 	/**
-	 * 设置：默认保存文件目录
+	 * 设置：光盘刻录审计规则
 	 */
-	public void setDeviceControlRules(String deviceControlRules) {
-		this.deviceControlRules = deviceControlRules;
+	public void setSoftDistributeRules(String softDistributeRules) {
+		this.softDistributeRules = softDistributeRules;
 	}
 	/**
-	 * 获取：默认保存文件目录
+	 * 获取：光盘刻录审计规则
 	 */
-	public String getDeviceControlRules() {
-		return deviceControlRules;
-	}
-	/**
-	 * 设置：下载重试状态
-	 */
-	public void setDownloadRetryStatus(Integer downloadRetryStatus) {
-		this.downloadRetryStatus = downloadRetryStatus;
-	}
-	/**
-	 * 获取：下载重试状态
-	 */
-	public Integer getDownloadRetryStatus() {
-		return downloadRetryStatus;
-	}
-	/**
-	 * 设置：最大重试次数
-	 */
-	public void setMaxRetryStatus(Integer maxRetryStatus) {
-		this.maxRetryStatus = maxRetryStatus;
-	}
-	/**
-	 * 获取：最大重试次数
-	 */
-	public Integer getMaxRetryStatus() {
-		return maxRetryStatus;
-	}
-	/**
-	 * 设置：重试间隔(分)
-	 */
-	public void setRetryInterval(Integer retryInterval) {
-		this.retryInterval = retryInterval;
-	}
-	/**
-	 * 获取：重试间隔(分)
-	 */
-	public Integer getRetryInterval() {
-		return retryInterval;
-	}
-	/**
-	 * 设置：分发软件名单编号
-	 */
-	public void setSoftIds(String softIds) {
-		this.softIds = softIds;
-	}
-	/**
-	 * 获取：分发软件名单编号
-	 */
-	public String getSoftIds() {
-		return softIds;
+	public String getSoftDistributeRules() {
+		return softDistributeRules;
 	}
 	/**
 	 * 设置：状态

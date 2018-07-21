@@ -60,24 +60,8 @@ function load() {
 									title : '外联监控状态（启用、禁用）' 
 								},
 																{
-									field : 'alarmId', 
-									title : '告警级别编号' 
-								},
-																{
-									field : 'probeAddress', 
-									title : '探测地址' 
-								},
-																{
-									field : 'alarmServer', 
-									title : '报警中心' 
-								},
-																{
-									field : 'alarmProvincePlaceId', 
-									title : '报警省位置编号' 
-								},
-																{
-									field : 'alarmCityPlaceId', 
-									title : '报警市位置编号' 
+									field : 'monitorRules', 
+									title : '外联监控规则' 
 								},
 																{
 									field : 'status', 

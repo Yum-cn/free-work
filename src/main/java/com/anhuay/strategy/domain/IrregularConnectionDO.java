@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-19 20:40:01
+ * @date 2018-07-21 17:18:00
  */
 public class IrregularConnectionDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,16 +21,8 @@ public class IrregularConnectionDO implements Serializable {
 	private Long templetId;
 	//外联监控状态（启用、禁用）
 	private Integer monitorStatus;
-	//告警级别编号
-	private Integer alarmId;
-	//探测地址
-	private String probeAddress;
-	//报警中心
-	private String alarmServer;
-	//报警省位置编号
-	private String alarmProvincePlaceId;
-	//报警市位置编号
-	private String alarmCityPlaceId;
+	//外联监控规则
+	private String monitorRules;
 	//状态
 	private Integer status;
 	//创建时间
@@ -75,64 +67,16 @@ public class IrregularConnectionDO implements Serializable {
 		return monitorStatus;
 	}
 	/**
-	 * 设置：告警级别编号
+	 * 设置：外联监控规则
 	 */
-	public void setAlarmId(Integer alarmId) {
-		this.alarmId = alarmId;
+	public void setMonitorRules(String monitorRules) {
+		this.monitorRules = monitorRules;
 	}
 	/**
-	 * 获取：告警级别编号
+	 * 获取：外联监控规则
 	 */
-	public Integer getAlarmId() {
-		return alarmId;
-	}
-	/**
-	 * 设置：探测地址
-	 */
-	public void setProbeAddress(String probeAddress) {
-		this.probeAddress = probeAddress;
-	}
-	/**
-	 * 获取：探测地址
-	 */
-	public String getProbeAddress() {
-		return probeAddress;
-	}
-	/**
-	 * 设置：报警中心
-	 */
-	public void setAlarmServer(String alarmServer) {
-		this.alarmServer = alarmServer;
-	}
-	/**
-	 * 获取：报警中心
-	 */
-	public String getAlarmServer() {
-		return alarmServer;
-	}
-	/**
-	 * 设置：报警省位置编号
-	 */
-	public void setAlarmProvincePlaceId(String alarmProvincePlaceId) {
-		this.alarmProvincePlaceId = alarmProvincePlaceId;
-	}
-	/**
-	 * 获取：报警省位置编号
-	 */
-	public String getAlarmProvincePlaceId() {
-		return alarmProvincePlaceId;
-	}
-	/**
-	 * 设置：报警市位置编号
-	 */
-	public void setAlarmCityPlaceId(String alarmCityPlaceId) {
-		this.alarmCityPlaceId = alarmCityPlaceId;
-	}
-	/**
-	 * 获取：报警市位置编号
-	 */
-	public String getAlarmCityPlaceId() {
-		return alarmCityPlaceId;
+	public String getMonitorRules() {
+		return monitorRules;
 	}
 	/**
 	 * 设置：状态

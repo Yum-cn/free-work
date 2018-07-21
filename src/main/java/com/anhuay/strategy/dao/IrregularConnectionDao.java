@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 违规外联表
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-19 20:40:01
+ * @date 2018-07-21 17:18:00
  */
 @Mapper
 public interface IrregularConnectionDao {

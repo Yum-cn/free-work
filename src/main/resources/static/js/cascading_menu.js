@@ -424,6 +424,7 @@ $.fn.CascadeMenu_city_L3 = function(htmlId,First,Second,Third,selectedValue) {
 					+ data.substr(data.indexOf(":") + 1) + "</option>");
 		});
 	});
+	
 	return _self;
 };
 

@@ -15,8 +15,8 @@
 				<div class="ibox">
 					<div class="ibox-body">
 						<ul class="nav nav-tabs">
-							<li class=""> <a data-toggle="tab" href="#tab-1"><i class="fa fa-file-text"></i>主机审计</a></li>
-							<li class="active"><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i>违规外联</a></li>
+							<li class="active"> <a data-toggle="tab" href="#tab-1"><i class="fa fa-file-text"></i>主机审计</a></li>
+							<li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i>违规外联</a></li>
 							<li class=""><a data-toggle="tab" href="#tab-3"><i class="fa fa-briefcase"></i>设备控制</a></li>
 							<li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-briefcase"></i>光盘刻录</a></li>
 							<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-briefcase"></i>资产管理</a></li>
@@ -34,12 +34,17 @@
 
 						<form id="extendParamForm">
 							<input type="hidden" name="strategyTempletId"
-								th:value="${strategyTemplet.id}" /> <input type="hidden"
-								id="osAuditId" name="osAuditId" value="" />
+								th:value="${strategyTemplet.id}" /> 
+								<input type="hidden" id="osAuditId" name="osAuditId" value="" />
+								<input type="hidden" id="irregularConnectionId" name="irregularConnectionId" value="" />
+								<input type="hidden" id="deviceControlId" name="deviceControlId" value="" />
+								<input type="hidden" id="diskRecordId" name="diskRecordId" value="" />
+								<input type="hidden" id="softDistributeId" name="softDistributeId" value="" />
+								
 						</form>
 
 						<div class="tab-content">
-							<div id="tab-1" class="tab-pane">
+							<div id="tab-1" class="tab-pane active">
 
 								<div class="bootstrap-table">
 									<div class="fixed-table-toolbar">
@@ -1148,10 +1153,10 @@
 																		<div class="switch  col-sm-1">
 																			<div class="onoffswitch">
 																				<!--  checked="" -->
-																				<input id="monitorStatus" name="monitorStatus"
+																				<input id="monitor_status" name="monitor_status"
 																					type="checkbox" value="1"
 																					class="onoffswitch-checkbox"> <label
-																					class="onoffswitch-label" for="monitorStatus">
+																					class="onoffswitch-label" for="monitor_status">
 																					<span class="onoffswitch-inner"></span> <span
 																					class="onoffswitch-switch"></span>
 																				</label>
@@ -1160,12 +1165,11 @@
 
 																	</div>
 																	<div class="form-group">
-																		<input id="process_alarm_level_selected" value=""
-																			type="hidden"> <label
+																		 <label
 																			class="col-sm-2 control-label">报警级别：</label>
 																		<div class="col-sm-2">
-																			<select data-placeholder="--选择类别--" name="alarmId"
-																				id="alarmId" class="form-control chosen-select"
+																			<select data-placeholder="--选择类别--" name="alarm_id"
+																				id="alarm_id" class="form-control chosen-select"
 																				tabindex="2" required>
 																				<option value="">--选择类别--</option>
 																			</select>
@@ -1174,7 +1178,7 @@
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">探测地址：</label>
 																		<div class="col-sm-8">
-																			<textarea id="probeAddress" name="probeAddress"
+																			<textarea id="probe_address" name="probe_address"
 																				class="form-control"></textarea>
 																		</div>
 																		
@@ -1190,8 +1194,8 @@
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">报警中心：</label>
 																		<div class="col-sm-4">
-																			<input class="form-control" id="alarmServer"
-																				name="alarmServer" type="text" required="true">
+																			<input class="form-control" id="alarm_server"
+																				name="alarm_server" type="text" required="true">
 																				
 																		</div>
 																		(如：http://192.168.11.222:8080/cc_alarm)
@@ -1200,7 +1204,7 @@
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">报警位置：</label>
 																		
-																		<div  class="col-sm-4" id="alermPlace"></div>
+																		<div  class="col-sm-4" id="alerm_place"></div>
 																	</div>
 																</form>
 															</div>
@@ -1215,7 +1219,7 @@
 							</div>
 							
 							
-							<div id="tab-3" class="tab-pane ">
+							<div id="tab-3" class="tab-pane active">
 								<div class="bootstrap-table">
                                     <div class="fixed-table-toolbar">
                                         <div class="bars pull-left"></div>
@@ -1236,10 +1240,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="device_control_status" name="device_control_status"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="device_control_status">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1248,12 +1252,11 @@
                                                                     </div>
                                                                     
                                                                     <div class="form-group">
-                                                                        <input id="process_alarm_level_selected" value=""
-                                                                            type="hidden"> <label
-                                                                            class="col-sm-2 control-label">光盘刻录：</label>
-                                                                        <div class="col-sm-2">
-                                                                            <select data-placeholder="--选择类别--" name="alarmId"
-                                                                                id="alarmId" class="form-control chosen-select"
+                                                                        <label
+                                                                            class="col-sm-2 control-label">光驱：</label>
+                                                                        <div class="col-sm-3">
+                                                                            <select data-placeholder="--选择类别--" name="cd_rom"
+                                                                                id="cd_rom" class="form-control chosen-select"
                                                                                 tabindex="2" required>
                                                                                 <option value="">--选择类别--</option>
                                                                             </select>
@@ -1264,10 +1267,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="phone" name="phone"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="phone">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1280,10 +1283,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="bluetooth" name="bluetooth"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="bluetooth">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1294,10 +1297,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="device_1394" name="device_1394"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="device_1394">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1310,10 +1313,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="com_interface" name="com_interface"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="com_interface">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1324,10 +1327,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="infrared_device" name="infrared_device"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="infrared_device">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1340,10 +1343,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="floppy_drive" name="floppy_drive"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="floppy_drive">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1354,10 +1357,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="modem" name="modem"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="modem">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1370,10 +1373,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="sd_adapter" name="sd_adapter"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="sd_adapter">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1384,10 +1387,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="image_device" name="image_device"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="image_device">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1400,10 +1403,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="print_device" name="print_device"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="print_device">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1414,10 +1417,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="pcmcia_device" name="pcmcia_device"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="pcmcia_device">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1430,10 +1433,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="card_reader" name="card_reader"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="card_reader">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1444,10 +1447,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="udisk_device" name="udisk_device"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="udisk_device">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1460,10 +1463,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="mlan" name="mlan"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="mlan">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1474,10 +1477,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="diy_device" name="diy_device"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="diy_device">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1490,10 +1493,10 @@
                                                                         <div class="switch  col-sm-1">
                                                                             <div class="onoffswitch">
                                                                                 <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
+                                                                                <input id="wireless_device" name="wireless_device"
                                                                                     type="checkbox" value="1"
                                                                                     class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
+                                                                                    class="onoffswitch-label" for="wireless_device">
                                                                                     <span class="onoffswitch-inner"></span> <span
                                                                                     class="onoffswitch-switch"></span>
                                                                                 </label>
@@ -1504,30 +1507,29 @@
                                                                     <div class="form-group">
                                                                         <label class="col-sm-2 control-label">设备硬件ID：</label>
                                                                         <div class="col-sm-3">
-                                                                            <input class="form-control" id="file_control_input"
-                                                                                name="file_control_input" type="text"
+                                                                            <input class="form-control" id="device_id_input"
+                                                                                name="device_id_input" type="text"
                                                                                 required="true">
                                                                         </div>
                                                                         
                                                                         <button
                                                                             class="btn btn-success waves-effect waves-light"
-                                                                            onclick="addFileControlRules()" id="addressAdd"
-                                                                            type="button">添加</button>
+                                                                            onclick="addDeviceId()" type="button">添加</button>
                                                                         <div class="">&nbsp;</div>
 
                                                                         <label class="col-sm-2 control-label">设备硬件ID白名单检测</label>
                                                                         <div class="col-sm-8">
 
-                                                                            <select name="file_control_show" size="10"
-                                                                                multiple="multiple" id="file_control_show"
+                                                                            <select name="device_white_show" size="10"
+                                                                                multiple="multiple" id="device_white_show"
                                                                                 class="form-control">
-                                                                            </select> <input type="hidden" id="file_control_values"
-                                                                                name="file_control_values" value="">
+                                                                            </select> <input type="hidden" id="device_white_values"
+                                                                                name="device_white_values" value="">
 
                                                                         </div>
                                                                         <span><button
                                                                                 class="btn btn-success waves-effect waves-light"
-                                                                                id="removefileControl" type="button">移除</button></span>
+                                                                                id="removeDeviceId" type="button">移除</button></span>
                                                                     </div>
                                                                     
                                                                 </form>
@@ -1542,7 +1544,7 @@
                                 </div>
 							</div>
 							
-							<div id="tab-4" class="tab-pane ">
+							<div id="tab-4" class="tab-pane active">
 								<div class="bootstrap-table">
                                     <div class="fixed-table-toolbar">
                                         <div class="bars pull-left"></div>
@@ -1556,7 +1558,7 @@
                                                     <tr data-index="0">
                                                         <td style="border-left-width: 0px;">
                                                             <div class="ibox-content">
-                                                                <form class="form-horizontal m-t" id="irregularConnectionForm">
+                                                                <form class="form-horizontal m-t" id="diskRecordForm">
                                                                     <div class="form-group" data-index="1">
                                                                         <label class="col-sm-2 control-label">刻录审计：</label>
                                                                         <div class="switch  col-sm-1">
@@ -1585,7 +1587,15 @@
                                                                             </select>
                                                                         </div>
                                                                     </div>
-                                                                    
+                                                                     <div class="form-group">
+                                                                     &nbsp;
+                                                                     </div>
+                                                                     <div class="form-group">
+                                                                     &nbsp;
+                                                                     </div>
+                                                                     <div class="form-group">
+                                                                     &nbsp;
+                                                                     </div>
                                                                 </form>
                                                             </div>
                                                         </td>
@@ -1602,7 +1612,7 @@
 								<table id="exampleTable3" data-mobile-responsive="true"></table>
 							</div>
 							
-							<div id="tab-6" class="tab-pane ">
+							<div id="tab-6" class="tab-pane active">
 								<div class="bootstrap-table">
                                     <div class="fixed-table-toolbar">
                                         <div class="bars pull-left"></div>
@@ -1616,7 +1626,7 @@
                                                     <tr data-index="0">
                                                         <td style="border-left-width: 0px;">
                                                             <div class="ibox-content">
-                                                                <form class="form-horizontal m-t" id="irregularConnectionForm">
+                                                                <form class="form-horizontal m-t" id="softDistributeForm">
                                                                 
                                                                 <div class="form-group">
                                                                         <label class="col-sm-2 control-label">默认软件服务器下载地址：</label>
@@ -1690,6 +1700,11 @@
 	<script th:inline="javascript" type="text/javascript">
         // <![CDATA[
                 var osAudit = [[${osAudit}]];
+                var irregularConnection = [[${irregularConnection}]];
+                var deviceControl = [[${deviceControl}]];
+                var diskRecord = [[${diskRecord}]];
+                var softDistribute = [[${softDistribute}]];
+                
                 /* debugger;
                 console.log(osAudit);
                 console.log(JSON.stringify(osAudit));

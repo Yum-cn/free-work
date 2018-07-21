@@ -56,28 +56,12 @@ function load() {
 									title : '模板编号' 
 								},
 																{
-									field : 'deviceControlStatus', 
-									title : '下载服务器地址' 
+									field : 'softDistributeStatus', 
+									title : '光盘刻录审计状态' 
 								},
 																{
-									field : 'deviceControlRules', 
-									title : '默认保存文件目录' 
-								},
-																{
-									field : 'downloadRetryStatus', 
-									title : '下载重试状态' 
-								},
-																{
-									field : 'maxRetryStatus', 
-									title : '最大重试次数' 
-								},
-																{
-									field : 'retryInterval', 
-									title : '重试间隔(分)' 
-								},
-																{
-									field : 'softIds', 
-									title : '分发软件名单编号' 
+									field : 'softDistributeRules', 
+									title : '光盘刻录审计规则' 
 								},
 																{
 									field : 'status', 

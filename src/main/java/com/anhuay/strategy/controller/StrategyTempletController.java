@@ -17,11 +17,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
-import com.anhuay.common.utils.R;
+import com.anhuay.strategy.domain.DeviceControlDO;
+import com.anhuay.strategy.domain.DiskRecordDO;
+import com.anhuay.strategy.domain.IrregularConnectionDO;
 import com.anhuay.strategy.domain.OsAuditDO;
+import com.anhuay.strategy.domain.SoftDistributeDO;
 import com.anhuay.strategy.domain.StrategyTempletDO;
 import com.anhuay.strategy.manager.StrategyTempletManager;
+import com.anhuay.strategy.service.DeviceControlService;
+import com.anhuay.strategy.service.DiskRecordService;
+import com.anhuay.strategy.service.IrregularConnectionService;
 import com.anhuay.strategy.service.OsAuditService;
+import com.anhuay.strategy.service.SoftDistributeService;
 import com.anhuay.strategy.service.StrategyTempletService;
 import com.common.util.BaseResult;
 import com.common.util.JsonTool;
@@ -43,6 +50,14 @@ public class StrategyTempletController {
 	private StrategyTempletService strategyTempletService;
 	@Autowired
 	private OsAuditService osAuditService;
+	@Autowired
+	private IrregularConnectionService irregularConnectionService;
+	@Autowired
+	private DeviceControlService deviceControlService;
+	@Autowired
+	private DiskRecordService diskRecordService;
+	@Autowired
+	private SoftDistributeService softDistributeService;
 	@Autowired
 	private StrategyTempletManager strategyTempletManager;
 	
@@ -119,9 +134,28 @@ public class StrategyTempletController {
 				model.addAttribute("osAudit", JsonTool.fromObject(osAudit));//JsonTool.fromObject(osAudit)
 			}
 			
+			if(strategyTemplet.getIrregularConnectionId()!=null && strategyTemplet.getIrregularConnectionId()>0) {
+				IrregularConnectionDO irregularConnection = irregularConnectionService.get(strategyTemplet.getIrregularConnectionId());
+				model.addAttribute("irregularConnection", JsonTool.fromObject(irregularConnection));//JsonTool.fromObject(osAudit)
+			}
+			
+			if(strategyTemplet.getDeviceControlId()!=null && strategyTemplet.getDeviceControlId()>0) {
+				DeviceControlDO deviceControl = deviceControlService.get(strategyTemplet.getDeviceControlId());
+				model.addAttribute("deviceControl", JsonTool.fromObject(deviceControl));//JsonTool.fromObject(osAudit)
+			}
+			
+			if(strategyTemplet.getDiskRecordId()!=null && strategyTemplet.getDiskRecordId()>0) {
+				DiskRecordDO diskRecord = diskRecordService.get(strategyTemplet.getDiskRecordId());
+				model.addAttribute("diskRecord", JsonTool.fromObject(diskRecord));//JsonTool.fromObject(osAudit)
+			}
+			
+			if(strategyTemplet.getSoftDistributeId()!=null && strategyTemplet.getSoftDistributeId()>0) {
+				SoftDistributeDO softDistribute = softDistributeService.get(strategyTemplet.getSoftDistributeId());
+				model.addAttribute("softDistribute", JsonTool.fromObject(softDistribute));//JsonTool.fromObject(osAudit)
+			}
+			
 		}
 		model.addAttribute("strategyTemplet", strategyTemplet);
-		model.addAttribute("test", 123);
 	    return "strategy/strategyTemplet/addStrategyTempletTab";
 	}
 	

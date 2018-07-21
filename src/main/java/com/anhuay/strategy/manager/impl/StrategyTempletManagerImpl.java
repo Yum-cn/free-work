@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +21,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.anhuay.common.utils.ShiroUtils;
+import com.anhuay.strategy.domain.DeviceControlDO;
+import com.anhuay.strategy.domain.DiskRecordDO;
+import com.anhuay.strategy.domain.IrregularConnectionDO;
 import com.anhuay.strategy.domain.OsAuditDO;
+import com.anhuay.strategy.domain.SoftDistributeDO;
 import com.anhuay.strategy.domain.StrategyTempletDO;
 import com.anhuay.strategy.manager.StrategyTempletManager;
+import com.anhuay.strategy.service.DeviceControlService;
+import com.anhuay.strategy.service.DiskRecordService;
+import com.anhuay.strategy.service.IrregularConnectionService;
 import com.anhuay.strategy.service.OsAuditService;
+import com.anhuay.strategy.service.SoftDistributeService;
 import com.anhuay.strategy.service.StrategyTempletService;
 import com.anhuay.system.domain.UserDO;
 import com.common.constant.CommonEnum;
@@ -43,6 +52,14 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 	private StrategyTempletService strategyTempletService;
 	@Autowired
 	private OsAuditService osAuditService;
+	@Autowired
+	private DeviceControlService deviceControlService;
+	@Autowired
+	private DiskRecordService diskRecordService;
+	@Autowired
+	private SoftDistributeService softDistributeService;
+	@Autowired
+	private IrregularConnectionService irregularConnectionService;
 	@Resource
 	private JdbcTemplate jdbcTemplate;
 
@@ -206,34 +223,229 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 				strategyTemplet.setUpdateTime(System.currentTimeMillis() / 1000);
 				strategyTempletService.update(strategyTemplet);
 			}
+			
+			//违规外联
+			IrregularConnectionDO irregularConnection = saveIrregularConnection(body, extendParamJson,
+					strategyTempletId);
+			//设备控制
+			DeviceControlDO deviceControl = saveDeviceControl(body, extendParamJson,
+					strategyTempletId);
+			//光盘刻录
+			DiskRecordDO diskRecord = saveDiskRecord(body, extendParamJson,
+					strategyTempletId);
+			//软件分发
+			SoftDistributeDO softDistribute = saveSoftDistribute(body, extendParamJson,
+					strategyTempletId);
 
-			return BaseResultHelper.success(osAudit);
+			Map<String,Object> resultMap = new HashMap<String,Object>();
+			resultMap.put("osAuditId", osAudit.getId());
+			resultMap.put("irregularConnectionId", irregularConnection.getId());
+			resultMap.put("deviceControlId", deviceControl.getId());
+			resultMap.put("diskRecordId", diskRecord.getId());
+			resultMap.put("softDistributeId", softDistribute.getId());
+			
+			return BaseResultHelper.success(resultMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return BaseResultHelper.error();
 		}
 	}
 
+	
+	
+	private SoftDistributeDO saveSoftDistribute(JSONObject body, JSONObject extendParamJson,
+			long strategyTempletId) {
+		JSONObject saveJson = body.optJSONObject("softDistributeForm");
+		Long id = 0L;
+		boolean saveTag = false;
+		SoftDistributeDO bean = new SoftDistributeDO();
+		if (saveJson != null && checkJsonKey(saveJson)) {
+			
+			bean.setSoftDistributeStatus(NumberUtils.toInt(saveJson.optString("soft_distribute_status")));
+			bean.setSoftDistributeRules(saveJson.toString());
+			saveTag = true;
+		}else{
+			bean.setSoftDistributeStatus(CommonEnum.STATUS.ZERO.value);
+			bean.setSoftDistributeRules(null);
+		}
+		
+		if (extendParamJson.optLong("softDistributeId") > 0) {// EDIT
+			id = extendParamJson.optLong("softDistributeId");
+			bean.setId(id);
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+			softDistributeService.update(bean);
+
+		} else {// ADD
+
+			bean.setTempletId(strategyTempletId);
+			bean.setStatus(CommonEnum.STATUS.ONE.value);
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+			bean.setCreateTime(System.currentTimeMillis() / 1000);
+
+			if (saveTag) {
+				id = idWorker.nextId();
+				bean.setId(id);
+				softDistributeService.save(bean);
+			}
+		}
+		if (id > 0) {
+			StrategyTempletDO strategyTemplet = strategyTempletService.get(strategyTempletId);
+			strategyTemplet.setSoftDistributeId(id);
+			strategyTemplet.setUpdateTime(System.currentTimeMillis() / 1000);
+			strategyTempletService.update(strategyTemplet);
+		}
+		return bean;
+	}
+	
+	private DiskRecordDO saveDiskRecord(JSONObject body, JSONObject extendParamJson,
+			long strategyTempletId) {
+		JSONObject saveJson = body.optJSONObject("diskRecordForm");
+		Long id = 0L;
+		boolean saveTag = false;
+		DiskRecordDO bean = new DiskRecordDO();
+		if (saveJson != null && checkJsonKey(saveJson)) {
+			
+			bean.setDiskRecordStatus(NumberUtils.toInt(saveJson.optString("disk_record_status")));
+			bean.setDiskRecordRules(saveJson.toString());
+			saveTag = true;
+		}else{
+			bean.setDiskRecordStatus(CommonEnum.STATUS.ZERO.value);
+			bean.setDiskRecordRules(null);
+		}
+		
+		if (extendParamJson.optLong("diskRecordId") > 0) {// EDIT
+			id = extendParamJson.optLong("diskRecordId");
+			bean.setId(id);
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+			diskRecordService.update(bean);
+			
+		} else {// ADD
+			
+			bean.setTempletId(strategyTempletId);
+			bean.setStatus(CommonEnum.STATUS.ONE.value);
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+			bean.setCreateTime(System.currentTimeMillis() / 1000);
+			
+			if (saveTag) {
+				id = idWorker.nextId();
+				bean.setId(id);
+				diskRecordService.save(bean);
+			}
+		}
+		if (id > 0) {
+			StrategyTempletDO strategyTemplet = strategyTempletService.get(strategyTempletId);
+			strategyTemplet.setDiskRecordId(id);
+			strategyTemplet.setUpdateTime(System.currentTimeMillis() / 1000);
+			strategyTempletService.update(strategyTemplet);
+		}
+		return bean;
+	}
+	
+	private DeviceControlDO saveDeviceControl(JSONObject body, JSONObject extendParamJson,
+			long strategyTempletId) {
+		JSONObject saveJson = body.optJSONObject("deviceControlForm");
+		Long id = 0L;
+		boolean saveTag = false;
+		DeviceControlDO bean = new DeviceControlDO();
+		if (saveJson != null && checkJsonKey(saveJson)) {
+			
+			bean.setDeviceControlStatus(NumberUtils.toInt(saveJson.optString("device_control_status")));
+			bean.setDeviceControlRules(saveJson.toString());
+			saveTag = true;
+		}else{
+			bean.setDeviceControlStatus(CommonEnum.STATUS.ZERO.value);
+			bean.setDeviceControlRules(null);
+		}
+		
+		if (extendParamJson.optLong("deviceControlId") > 0) {// EDIT
+			id = extendParamJson.optLong("deviceControlId");
+			bean.setId(id);
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+			deviceControlService.update(bean);
+
+		} else {// ADD
+
+			bean.setTempletId(strategyTempletId);
+			bean.setStatus(CommonEnum.STATUS.ONE.value);
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+			bean.setCreateTime(System.currentTimeMillis() / 1000);
+
+			if (saveTag) {
+				id = idWorker.nextId();
+				bean.setId(id);
+				deviceControlService.save(bean);
+			}
+		}
+		if (id > 0) {
+			StrategyTempletDO strategyTemplet = strategyTempletService.get(strategyTempletId);
+			strategyTemplet.setDeviceControlId(id);
+			strategyTemplet.setUpdateTime(System.currentTimeMillis() / 1000);
+			strategyTempletService.update(strategyTemplet);
+		}
+		return bean;
+	}
+	
+	private IrregularConnectionDO saveIrregularConnection(JSONObject body, JSONObject extendParamJson,
+			long strategyTempletId) {
+		JSONObject saveJson = body.optJSONObject("irregularConnectionForm");
+		Long id = 0L;
+		boolean saveTag = false;
+		IrregularConnectionDO bean = new IrregularConnectionDO();
+		if (saveJson != null && checkJsonKey(saveJson)) {
+			
+			bean.setMonitorStatus(NumberUtils.toInt(saveJson.optString("monitor_status")));
+			bean.setMonitorRules(saveJson.toString());
+			saveTag = true;
+		}else{
+			bean.setMonitorStatus(CommonEnum.STATUS.ZERO.value);
+			bean.setMonitorRules(null);
+		}
+		
+		if (extendParamJson.optLong("irregularConnectionId") > 0) {// EDIT
+			id = extendParamJson.optLong("irregularConnectionId");
+			bean.setId(id);
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+			irregularConnectionService.update(bean);
+
+		} else {// ADD
+
+			bean.setTempletId(strategyTempletId);
+			bean.setStatus(CommonEnum.STATUS.ONE.value);
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+			bean.setCreateTime(System.currentTimeMillis() / 1000);
+
+			if (saveTag) {
+				id = idWorker.nextId();
+				bean.setId(id);
+				irregularConnectionService.save(bean);
+			}
+		}
+		if (id > 0) {
+			StrategyTempletDO strategyTemplet = strategyTempletService.get(strategyTempletId);
+			strategyTemplet.setIrregularConnectionId(id);
+			strategyTemplet.setUpdateTime(System.currentTimeMillis() / 1000);
+			strategyTempletService.update(strategyTemplet);
+		}
+		return bean;
+	}
+
+	
 	private boolean saveLocalFile(JSONObject body, long strategyTempletId, OsAuditDO osAudit, String saveType) {
 		boolean osAuditSaveTag = false;
-
+		
 		JSONObject saveJson = body.optJSONObject("localFileForm");
 		if (saveJson != null && checkJsonKey(saveJson)) {
 			osAudit.setLocalFileStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setLocalFileRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
-
+		
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setLocalFileStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setLocalFileRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
-
+		
 		return osAuditSaveTag;
 	}
 
@@ -245,16 +457,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setDiskFileStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setDiskFileRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setDiskFileStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setDiskFileRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		
 		return osAuditSaveTag;
@@ -268,16 +476,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setUdiskFileStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setUdiskFileRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setUdiskFileStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setUdiskFileRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 
 		return osAuditSaveTag;
@@ -291,16 +495,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setOsOnoffStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setOsOnoffRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setOsOnoffStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setOsOnoffRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -313,16 +513,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setPrintMonitorStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setPrintMonitorRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setPrintMonitorStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setPrintMonitorRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -335,16 +531,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setOsInfoStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setOsInfoRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setOsInfoStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setOsInfoRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -357,16 +549,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setSystemLogStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setSystemLogRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setSystemLogStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setSystemLogRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -379,16 +567,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setAccountMonitorStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setAccountMonitorRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setAccountMonitorStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setAccountMonitorRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -401,16 +585,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setShareMonitorStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setShareMonitorRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setShareMonitorStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setShareMonitorRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -423,16 +603,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setExceptionMonitorStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setExceptionMonitorRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setExceptionMonitorStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setExceptionMonitorRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -445,16 +621,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setOsConfigStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setOsConfigRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setOsConfigStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setOsConfigRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -467,16 +639,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setMoveMediaStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setMoveMediaRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setMoveMediaStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setMoveMediaRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -489,16 +657,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setPortMonitorStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setPortMonitorRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setPortMonitorStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setPortMonitorRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -511,16 +675,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setConnectionMonitorStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setConnectionMonitorRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setConnectionMonitorStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setConnectionMonitorRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -533,16 +693,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setNetworkFlowStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setNetworkFlowRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setNetworkFlowStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setNetworkFlowRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -555,16 +711,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setDiskSpaceStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setDiskSpaceRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setDiskSpaceStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setDiskSpaceRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
@@ -583,16 +735,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 			osAudit.setFileControlStatus(CommonEnum.STATUS.ONE.value);
 			osAudit.setFileControlRules(saveJson.toString());
 			osAuditSaveTag = true;
-			// saveCofigProcessForServer(strategyTempletId,
-			// serverMonitorJson.optString("server_black_rules")****, 1);
 			return osAuditSaveTag;
 		}
 
 		if (StringUtils.equals(saveType, CommonEnum.SAVETYPE.EDIT.name)) {
 			osAudit.setFileControlStatus(CommonEnum.STATUS.ZERO.value);
 			osAudit.setFileControlRules(null);
-			// saveCofigProcessForServer(strategyTempletId, null, null, null, 0,
-			// 0);
 		}
 		return osAuditSaveTag;
 	}
