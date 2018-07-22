@@ -15,21 +15,21 @@
 						<ul class="nav nav-tabs">
 							<li class="active"><a data-toggle="tab" href="#tab-1"><i
 									class="fa fa-file-text"></i>主机审计</a></li>
-									
-							<li class=""><a data-toggle="tab" href="#tab-2" onclick="tabInitLoadType(2)"><i
-									class="fa fa-briefcase"></i>违规外联</a></li>
-									
-							<li class=""><a data-toggle="tab" href="#tab-3" onclick="tabInitLoadType(3)"><i
-									class="fa fa-briefcase"></i>设备控制</a></li>
-									
-							<li class=""><a data-toggle="tab" href="#tab-4" onclick="tabInitLoadType(4)"><i
-									class="fa fa-briefcase"></i>光盘刻录</a></li>
-									
-							<li class=""><a data-toggle="tab" href="#tab-5" onclick="tabInitLoadType(5)"><i
-									class="fa fa-briefcase"></i>资产管理</a></li>
-									
-							<li class=""><a data-toggle="tab" href="#tab-6" onclick="tabInitLoadType(6)"><i
-									class="fa fa-briefcase"></i>软件分发</a></li>
+
+							<li class=""><a data-toggle="tab" href="#tab-2"
+								onclick="tabInitLoadType(2)"><i class="fa fa-briefcase"></i>违规外联</a></li>
+
+							<li class=""><a data-toggle="tab" href="#tab-3"
+								onclick="tabInitLoadType(3)"><i class="fa fa-briefcase"></i>设备控制</a></li>
+
+							<li class=""><a data-toggle="tab" href="#tab-4"
+								onclick="tabInitLoadType(4)"><i class="fa fa-briefcase"></i>光盘刻录</a></li>
+
+							<li class=""><a data-toggle="tab" href="#tab-5"
+								onclick="tabInitLoadType(5)"><i class="fa fa-briefcase"></i>资产管理</a></li>
+
+							<li class=""><a data-toggle="tab" href="#tab-6"
+								onclick="tabInitLoadType(6)"><i class="fa fa-briefcase"></i>软件分发</a></li>
 
 							<li class="">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -42,12 +42,15 @@
 						</ul>
 
 						<form id="extendParamForm">
-							<input type="hidden" name="strategyTempletId" th:value="${strategyTemplet.id}" /> 
-							<input type="hidden" id="osAuditId" name="osAuditId" value="" />
-                            <input type="hidden" id="irregularConnectionId" name="irregularConnectionId" value="" /> 
-                            <input type="hidden" id="deviceControlId" name="deviceControlId" value="" /> 
-							<input type="hidden" id="diskRecordId" name="diskRecordId" value="" />
-							<input type="hidden" id="softDistributeId" name="softDistributeId" value="" />
+							<input type="hidden" name="strategyTempletId"
+								th:value="${strategyTemplet.id}" /> <input type="hidden"
+								id="osAuditId" name="osAuditId" value="" /> <input
+								type="hidden" id="irregularConnectionId"
+								name="irregularConnectionId" value="" /> <input type="hidden"
+								id="deviceControlId" name="deviceControlId" value="" /> <input
+								type="hidden" id="diskRecordId" name="diskRecordId" value="" />
+							<input type="hidden" id="softDistributeId"
+								name="softDistributeId" value="" />
 
 						</form>
 
@@ -629,8 +632,9 @@
 																		<button
 																			class="btn btn-success waves-effect waves-light"
 																			onclick="addMoveMedia()" type="button">添加</button>
+																	</div>
 
-																		<div class="">&nbsp;</div>
+																	<div class="form-group">
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
 																			<select name="move_media_show" size="10"
@@ -643,6 +647,7 @@
 																				class="btn btn-success waves-effect waves-light"
 																				id="removeMoveMedia" type="button">移除</button></span>
 																	</div>
+
 																</form>
 															</div></td>
 													</tr>
@@ -678,8 +683,8 @@
 																		<button
 																			class="btn btn-success waves-effect waves-light"
 																			onclick="addPortMonitor()" type="button">添加</button>
-
-																		<div class="">&nbsp;</div>
+																	</div>
+																	<div class="form-group">
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
 																			<select name="port_monitor_show" size="10"
@@ -785,8 +790,8 @@
 																			class="btn btn-success waves-effect waves-light"
 																			onclick="addServerConnectionBlackAddress()"
 																			id="addressAdd" type="button">添加</button>
-
-																		<div class="">&nbsp;</div>
+																	</div>
+																	<div class="form-group">
 																		<div>
 																			<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;("IP/域名地址"配置中可填写目的地址的IP或域名配置,一个地址可对应多个端口号,之间用<font
 																				color="red">半角逗号</font>分隔)
@@ -794,8 +799,8 @@
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
 																			<!-- <textarea id="server_connection_black_addresses"
-																				name="server_connection_black_addresses"
-																				class="form-control"></textarea> -->
+                                                                                name="server_connection_black_addresses"
+                                                                                class="form-control"></textarea> -->
 
 
 																			<select name="temp_addresses" size="10"
@@ -810,6 +815,7 @@
 																				class="btn btn-success waves-effect waves-light"
 																				id="remove" type="button">移除</button></span>
 																	</div>
+
 
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">报警级别：</label>
@@ -939,8 +945,8 @@
 																		<button
 																			class="btn btn-success waves-effect waves-light"
 																			onclick="addConnectionWhiteAddress()" type="button">添加</button>
-
-																		<div class="">&nbsp;</div>
+																	</div>
+																	<div class="form-group">
 																		<div>
 																			<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;("IP/域名地址"配置中可填写目的地址的IP或域名配置,一个地址可对应多个端口号,之间用<font
 																				color="red">半角逗号</font>分隔)
@@ -1111,7 +1117,8 @@
 																			class="btn btn-success waves-effect waves-light"
 																			onclick="addFileControlRules()" id="addressAdd"
 																			type="button">添加</button>
-																		<div class="">&nbsp;</div>
+																	</div>
+																	<div class="form-group">
 
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
@@ -1127,7 +1134,6 @@
 																				class="btn btn-success waves-effect waves-light"
 																				id="removefileControl" type="button">移除</button></span>
 																	</div>
-
 																</form>
 															</div></td>
 													</tr>
@@ -1631,7 +1637,8 @@
 																		<label class="col-sm-2 control-label">默认软件服务器下载地址：</label>
 																		<div class="col-sm-6">
 																			<input class="form-control" id="default_download_url"
-																				name="default_download_url" type="text" required="true">
+																				name="default_download_url" type="text"
+																				required="true">
 																		</div>
 
 																	</div>
@@ -1652,17 +1659,13 @@
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">下载失败最大重试次数：</label>
 																		<div class="col-sm-1">
-																			<input class="form-control"
-																				id="retry_times"
-																				name="retry_times" type="text"
-																				required="true">
+																			<input class="form-control" id="retry_times"
+																				name="retry_times" type="text" required="true">
 																		</div>
 																		<label class="col-sm-2 control-label">重试间隔：</label>
 																		<div class="col-sm-1">
-																			<input class="form-control"
-																				id="retry_interval"
-																				name="retry_interval" type="text"
-																				required="true">
+																			<input class="form-control" id="retry_interval"
+																				name="retry_interval" type="text" required="true">
 																		</div>
 																	</div>
 																	<div class="form-group">
@@ -1681,16 +1684,17 @@
 																				id="removeUploadFile" type="button">移除</button>
 																		</span>
 																	</div>
-																	
+
 																	<div class="form-group">
 
-                                                                        <label class="col-sm-2 control-label"></label>
-                                                                        <div class="col-sm-8">
-                                                                        <button type="button" class="layui-btn" id="uploadFile">
-                                                                            <i class="fa fa-cloud"></i>上传文件
-                                                                        </button>
-                                                                        </div>
-                                                                    </div>
+																		<label class="col-sm-2 control-label"></label>
+																		<div class="col-sm-8">
+																			<button type="button" class="layui-btn"
+																				id="uploadFile">
+																				<i class="fa fa-cloud"></i>上传文件
+																			</button>
+																		</div>
+																	</div>
 																</form>
 															</div>
 														</td>

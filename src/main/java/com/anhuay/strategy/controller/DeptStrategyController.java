@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.strategy.domain.DeptStrategyDO;
 import com.anhuay.strategy.service.DeptStrategyService;
+import com.common.constant.CommonEnum;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -64,7 +65,7 @@ public class DeptStrategyController {
 	String edit(@PathVariable("id") Long id,Model model){
 		DeptStrategyDO deptStrategy = deptStrategyService.get(id);
 		model.addAttribute("deptStrategy", deptStrategy);
-	    return "strategy/deptStrategy/edit";
+	    return "strategy/deptStrategy/add";
 	}
 	
 	/**
@@ -74,9 +75,25 @@ public class DeptStrategyController {
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:deptStrategy:add")
 	public R save( DeptStrategyDO deptStrategy){
-		if(deptStrategyService.save(deptStrategy)>0){
-			return R.ok();
+		
+		deptStrategy.setUpdateTime(System.currentTimeMillis() / 1000);
+		if(deptStrategy.getId()!=null && deptStrategy.getId()>0){
+			if(deptStrategyService.update(deptStrategy)>0){
+				return R.ok();
+			}
+		}else{
+			deptStrategy.setStatus(CommonEnum.STATUS.ONE.value);
+			
+			deptStrategy.setCreateTime(System.currentTimeMillis() / 1000);
+			
+			if(deptStrategyService.save(deptStrategy)>0){
+				return R.ok();
+			}
 		}
+		
+		
+		
+		
 		return R.error();
 	}
 	/**

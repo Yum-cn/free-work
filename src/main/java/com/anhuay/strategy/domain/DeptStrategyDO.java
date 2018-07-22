@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-22 17:07:47
+ * @date 2018-07-22 19:39:02
  */
 public class DeptStrategyDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,10 +19,12 @@ public class DeptStrategyDO implements Serializable {
 	private Long id;
 	//模板编号
 	private Long templetId;
+	//模板名称
+	private String templetName;
 	//部门编号
 	private Long deptIds;
 	//部门名称
-	private Long deptNames;
+	private String deptNames;
 	//状态
 	private Integer status;
 	//创建时间
@@ -55,6 +57,18 @@ public class DeptStrategyDO implements Serializable {
 		return templetId;
 	}
 	/**
+	 * 设置：模板名称
+	 */
+	public void setTempletName(String templetName) {
+		this.templetName = templetName;
+	}
+	/**
+	 * 获取：模板名称
+	 */
+	public String getTempletName() {
+		return templetName;
+	}
+	/**
 	 * 设置：部门编号
 	 */
 	public void setDeptIds(Long deptIds) {
@@ -69,13 +83,13 @@ public class DeptStrategyDO implements Serializable {
 	/**
 	 * 设置：部门名称
 	 */
-	public void setDeptNames(Long deptNames) {
+	public void setDeptNames(String deptNames) {
 		this.deptNames = deptNames;
 	}
 	/**
 	 * 获取：部门名称
 	 */
-	public Long getDeptNames() {
+	public String getDeptNames() {
 		return deptNames;
 	}
 	/**

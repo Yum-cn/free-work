@@ -42,18 +42,19 @@
 		select count(*) from ahy_strategy_templet
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="templetName != null and templetName != ''"> and templet_name = #{templetName} </if>
-		  		  <if test="templetDesc != null and templetDesc != ''"> and templet_desc = #{templetDesc} </if>
-		  		  <if test="templetType != null and templetType != ''"> and templet_type = #{templetType} </if>
-		  		  <if test="osAuditId != null and osAuditId != ''"> and os_audit_id = #{osAuditId} </if>
-		  		  <if test="irregularConnectionId != null and irregularConnectionId != ''"> and irregular_connection_id = #{irregularConnectionId} </if>
-		  		  <if test="deviceControlId != null and deviceControlId != ''"> and device_control_id = #{deviceControlId} </if>
-		  		  <if test="diskRecordId != null and diskRecordId != ''"> and disk_record_id = #{diskRecordId} </if>
-		  		  <if test="assetManagementId != null and assetManagementId != ''"> and asset_management_id = #{assetManagementId} </if>
-		  		  <if test="softDistributeId != null and softDistributeId != ''"> and soft_distribute_id = #{softDistributeId} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+                  <if test="templetName != null and templetName != ''"> and templet_name LIKE CONCAT('%',#{templetName},'%')  </if>
+                  <if test="templetDesc != null and templetDesc != ''"> and templet_desc = #{templetDesc} </if>
+                  <if test="templetType != null and templetType != ''"> and templet_type = #{templetType} </if>
+                  <if test="osAuditId != null and osAuditId != ''"> and os_audit_id = #{osAuditId} </if>
+                  <if test="irregularConnectionId != null and irregularConnectionId != ''"> and irregular_connection_id = #{irregularConnectionId} </if>
+                  <if test="deviceControlId != null and deviceControlId != ''"> and device_control_id = #{deviceControlId} </if>
+                  <if test="diskRecordId != null and diskRecordId != ''"> and disk_record_id = #{diskRecordId} </if>
+                  <if test="assetManagementId != null and assetManagementId != ''"> and asset_management_id = #{assetManagementId} </if>
+                  <if test="softDistributeId != null and softDistributeId != ''"> and soft_distribute_id = #{softDistributeId} </if>
+                  <if test="status != null and status != ''"> and status = #{status} </if>
+                  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+                  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+                  and status = 1
 		  		</where>
 	</select>
 	 

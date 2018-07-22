@@ -34,6 +34,7 @@
 		  #foreach($column in $columns)
 		  <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
 		  #end
+		  and status = 1
 		</where>
 	</select>
 	 

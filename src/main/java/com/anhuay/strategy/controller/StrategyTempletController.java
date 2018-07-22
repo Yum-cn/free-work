@@ -77,6 +77,12 @@ public class StrategyTempletController {
 	}
 	
 	
+	@GetMapping("/select")
+	@RequiresPermissions("strategy:strategyTemplet")
+	String SelectStrategyTemplet(){
+	    return "strategy/strategyTemplet/strategyTempletSelect";
+	}
+	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("strategy:strategyTemplet")

@@ -9,43 +9,59 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-							<div class="form-group">	
-								<label class="col-sm-3 control-label">模板编号：</label>
-								<div class="col-sm-8">
-									<input id="templetId" name="templetId" class="form-control" type="text">
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label">部门：</label>
+								<div class="col-sm-3">
+								
+								<input class="form-control" id="deptSelect" name="deptSelect" onclick="selectDept()" placeholder="选择部门" readonly="readonly" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">部门编号：</label>
-								<div class="col-sm-8">
-									<input id="deptIds" name="deptIds" class="form-control" type="text">
+							<div class="form-group">
+
+								<label class="col-sm-3 control-label"></label>
+								<div class="col-sm-3">
+
+									<select name="dept_name_show" size="5" multiple="multiple"
+										id="dept_name_show" class="form-control">
+									</select> <input type="hidden" id="deptIds"
+										name="deptIds" th:value="${deptStrategy?.deptIds}">
+									</select> <input type="hidden" id="deptNames"
+										name="deptNames" th:value="${deptStrategy?.deptNames}">
+
+								</div>
+								<span><button
+										class="btn btn-success waves-effect waves-light"
+										id="removeDept" type="button">移除</button></span>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">策略模板：</label>
+								<div class="col-sm-3">
+								
+								<input class="form-control" id="templetIdSelect" name="templetIdSelect" onclick="selectStrategyTemplet()" placeholder="选择策略模板" readonly="readonly" type="text">
 								</div>
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">部门名称：</label>
-								<div class="col-sm-8">
-									<input id="deptNames" name="deptNames" class="form-control" type="text">
+							<div class="form-group">
+
+								<label class="col-sm-3 control-label"></label>
+								<div class="col-sm-3">
+
+									<select name="templet_name_show" size="5" multiple="multiple"
+										id="templet_name_show" class="form-control">
+									</select> <input type="hidden" id="templetId"
+										name="templetId"  th:value="${deptStrategy?.templetId}">
+										<input type="hidden" id="templetName"
+                                        name="templetName" th:value="${deptStrategy?.templetName}">
+
 								</div>
+								<span><button
+										class="btn btn-success waves-effect waves-light"
+										id="removeTemplet" type="button">移除</button></span>
+										<input id="id" name="id" th:value="${deptStrategy?.id}"
+                                type="hidden">
 							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">状态：</label>
-								<div class="col-sm-8">
-									<input id="status" name="status" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">创建时间：</label>
-								<div class="col-sm-8">
-									<input id="createTime" name="createTime" class="form-control" type="text">
-								</div>
-							</div>
-														<div class="form-group">	
-								<label class="col-sm-3 control-label">修改时间：</label>
-								<div class="col-sm-8">
-									<input id="updateTime" name="updateTime" class="form-control" type="text">
-								</div>
-							</div>
-																					<div class="form-group">
+							
+							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>
 								</div>
@@ -54,10 +70,19 @@
 					</div>
 				</div>
 			</div>
-	</div>
+		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/strategy/deptStrategy/add.js">
+	<script th:inline="javascript" type="text/javascript">
+        // <![CDATA[
+                var deptStrategy = [[${deptStrategy}]];
+        // ]]>
+        
+    </script>
+	
+	<script type="text/javascript"
+		src="/js/appjs/strategy/deptStrategy/add.js">
+		
 	</script>
 </body>
 </html>

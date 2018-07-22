@@ -4,16 +4,17 @@
 <mapper namespace="com.anhuay.strategy.dao.DeptStrategyDao">
 
 	<select id="get" resultType="com.anhuay.strategy.domain.DeptStrategyDO">
-		select `id`,`templet_id`,`dept_ids`,`dept_names`,`status`,`create_time`,`update_time` from ahy_dept_strategy where id = #{value}
+		select `id`,`templet_id`,`templet_name`,`dept_ids`,`dept_names`,`status`,`create_time`,`update_time` from ahy_dept_strategy where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.strategy.domain.DeptStrategyDO">
-		select `id`,`templet_id`,`dept_ids`,`dept_names`,`status`,`create_time`,`update_time` from ahy_dept_strategy
+		select `id`,`templet_id`,`templet_name`,`dept_ids`,`dept_names`,`status`,`create_time`,`update_time` from ahy_dept_strategy
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
+		  		  <if test="templetName != null and templetName != ''"> and templet_name LIKE CONCAT('%',#{templetName},'%') </if>
 		  		  <if test="deptIds != null and deptIds != ''"> and dept_ids = #{deptIds} </if>
-		  		  <if test="deptNames != null and deptNames != ''"> and dept_names = #{deptNames} </if>
+		  		  <if test="deptNames != null and deptNames != ''"> and dept_names LIKE CONCAT('%',#{deptNames},'%') </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
@@ -35,13 +36,15 @@
  	<select id="count" resultType="int">
 		select count(*) from ahy_dept_strategy
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="deptIds != null and deptIds != ''"> and dept_ids = #{deptIds} </if>
-		  		  <if test="deptNames != null and deptNames != ''"> and dept_names = #{deptNames} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		   <if test="id != null and id != ''"> and id = #{id} </if>
+                  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
+                  <if test="templetName != null and templetName != ''"> and templet_name LIKE CONCAT('%',#{templetName},'%') </if>
+                  <if test="deptIds != null and deptIds != ''"> and dept_ids = #{deptIds} </if>
+                  <if test="deptNames != null and deptNames != ''"> and dept_names LIKE CONCAT('%',#{deptNames},'%') </if>
+                  <if test="status != null and status != ''"> and status = #{status} </if>
+                  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+                  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+                  and status = 1
 		  		</where>
 	</select>
 	 
@@ -50,6 +53,7 @@
 		(
 			`id`, 
 			`templet_id`, 
+			`templet_name`, 
 			`dept_ids`, 
 			`dept_names`, 
 			`status`, 
@@ -60,6 +64,7 @@
 		(
 			#{id}, 
 			#{templetId}, 
+			#{templetName}, 
 			#{deptIds}, 
 			#{deptNames}, 
 			#{status}, 
@@ -72,6 +77,7 @@
 		update ahy_dept_strategy 
 		<set>
 			<if test="templetId != null">`templet_id` = #{templetId}, </if>
+			<if test="templetName != null">`templet_name` = #{templetName}, </if>
 			<if test="deptIds != null">`dept_ids` = #{deptIds}, </if>
 			<if test="deptNames != null">`dept_names` = #{deptNames}, </if>
 			<if test="status != null">`status` = #{status}, </if>
