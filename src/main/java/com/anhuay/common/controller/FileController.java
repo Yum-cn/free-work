@@ -4,6 +4,8 @@ import com.anhuay.common.config.BootdoConfig;
 import com.anhuay.common.domain.FileDO;
 import com.anhuay.common.service.FileService;
 import com.anhuay.common.utils.*;
+import com.common.id.IdWorker;
+
 import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,9 +145,12 @@ public class FileController extends BaseController {
 		if ("test".equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
-		String fileName = file.getOriginalFilename();
-		fileName = FileUtil.renameToUUID(fileName);
-		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+		String sourceFileName = file.getOriginalFilename();
+		String fileName = FileUtil.renameToUUID(sourceFileName);
+		FileDO sysFile = new FileDO(FileType.fileType(fileName), bootdoConfig.getUploadPath() + fileName, new Date(),sourceFileName);
+		IdWorker idWorker = new IdWorker(2);
+		long id = idWorker.nextId();
+		sysFile.setId(id);
 		try {
 			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
 		} catch (Exception e) {
@@ -153,7 +158,7 @@ public class FileController extends BaseController {
 		}
 
 		if (sysFileService.save(sysFile) > 0) {
-			return R.ok().put("fileName",sysFile.getUrl());
+			return R.ok().put("fileName",sysFile.getUrl()).put("sourceName", sourceFileName).put("id", id);
 		}
 		return R.error();
 	}

@@ -2,9 +2,7 @@
 <html>
 <meta charset="utf-8">
 <head th:include="include :: header">
-
 <style>
-
 </style>
 </head>
 
@@ -15,12 +13,23 @@
 				<div class="ibox">
 					<div class="ibox-body">
 						<ul class="nav nav-tabs">
-							<li class="active"> <a data-toggle="tab" href="#tab-1"><i class="fa fa-file-text"></i>主机审计</a></li>
-							<li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-briefcase"></i>违规外联</a></li>
-							<li class=""><a data-toggle="tab" href="#tab-3"><i class="fa fa-briefcase"></i>设备控制</a></li>
-							<li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-briefcase"></i>光盘刻录</a></li>
-							<li class=""><a data-toggle="tab" href="#tab-5"><i class="fa fa-briefcase"></i>资产管理</a></li>
-							<li class=""><a data-toggle="tab" href="#tab-6"><i class="fa fa-briefcase"></i>软件分发</a></li>
+							<li class="active"><a data-toggle="tab" href="#tab-1"><i
+									class="fa fa-file-text"></i>主机审计</a></li>
+									
+							<li class=""><a data-toggle="tab" href="#tab-2" onclick="tabInitLoadType(2)"><i
+									class="fa fa-briefcase"></i>违规外联</a></li>
+									
+							<li class=""><a data-toggle="tab" href="#tab-3" onclick="tabInitLoadType(3)"><i
+									class="fa fa-briefcase"></i>设备控制</a></li>
+									
+							<li class=""><a data-toggle="tab" href="#tab-4" onclick="tabInitLoadType(4)"><i
+									class="fa fa-briefcase"></i>光盘刻录</a></li>
+									
+							<li class=""><a data-toggle="tab" href="#tab-5" onclick="tabInitLoadType(5)"><i
+									class="fa fa-briefcase"></i>资产管理</a></li>
+									
+							<li class=""><a data-toggle="tab" href="#tab-6" onclick="tabInitLoadType(6)"><i
+									class="fa fa-briefcase"></i>软件分发</a></li>
 
 							<li class="">
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -33,14 +42,13 @@
 						</ul>
 
 						<form id="extendParamForm">
-							<input type="hidden" name="strategyTempletId"
-								th:value="${strategyTemplet.id}" /> 
-								<input type="hidden" id="osAuditId" name="osAuditId" value="" />
-								<input type="hidden" id="irregularConnectionId" name="irregularConnectionId" value="" />
-								<input type="hidden" id="deviceControlId" name="deviceControlId" value="" />
-								<input type="hidden" id="diskRecordId" name="diskRecordId" value="" />
-								<input type="hidden" id="softDistributeId" name="softDistributeId" value="" />
-								
+							<input type="hidden" name="strategyTempletId" th:value="${strategyTemplet.id}" /> 
+							<input type="hidden" id="osAuditId" name="osAuditId" value="" />
+                            <input type="hidden" id="irregularConnectionId" name="irregularConnectionId" value="" /> 
+                            <input type="hidden" id="deviceControlId" name="deviceControlId" value="" /> 
+							<input type="hidden" id="diskRecordId" name="diskRecordId" value="" />
+							<input type="hidden" id="softDistributeId" name="softDistributeId" value="" />
+
 						</form>
 
 						<div class="tab-content">
@@ -1133,7 +1141,7 @@
 							</div>
 
 
-							<div id="tab-2" class="tab-pane active">
+							<div id="tab-2" class="tab-pane">
 								<div class="bootstrap-table">
 									<div class="fixed-table-toolbar">
 										<div class="bars pull-left"></div>
@@ -1147,7 +1155,8 @@
 													<tr data-index="0">
 														<td style="border-left-width: 0px;">
 															<div class="ibox-content">
-																<form class="form-horizontal m-t" id="irregularConnectionForm">
+																<form class="form-horizontal m-t"
+																	id="irregularConnectionForm">
 																	<div class="form-group" data-index="1">
 																		<label class="col-sm-2 control-label">外联监控：</label>
 																		<div class="switch  col-sm-1">
@@ -1165,11 +1174,10 @@
 
 																	</div>
 																	<div class="form-group">
-																		 <label
-																			class="col-sm-2 control-label">报警级别：</label>
+																		<label class="col-sm-2 control-label">报警级别：</label>
 																		<div class="col-sm-2">
 																			<select data-placeholder="--选择类别--" name="alarm_id"
-																				id="alarm_id" class="form-control chosen-select"
+																				id="alarm_id" class="form-control chosen-select2"
 																				tabindex="2" required>
 																				<option value="">--选择类别--</option>
 																			</select>
@@ -1181,14 +1189,14 @@
 																			<textarea id="probe_address" name="probe_address"
 																				class="form-control"></textarea>
 																		</div>
-																		
+
 																	</div>
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">&nbsp;</label>
 																		<div class="col-sm-8">
-                                                                        (无自定义探测地址请保持为空,多个地址请用<font color="red">半角逗号</font>,如：192.168.20.250:80,192.168.20.151:9000)
+																			(无自定义探测地址请保持为空,多个地址请用<font color="red">半角逗号</font>,如：192.168.20.250:80,192.168.20.151:9000)
 																		</div>
-																		
+
 																	</div>
 
 																	<div class="form-group">
@@ -1196,15 +1204,15 @@
 																		<div class="col-sm-4">
 																			<input class="form-control" id="alarm_server"
 																				name="alarm_server" type="text" required="true">
-																				
+
 																		</div>
 																		(如：http://192.168.11.222:8080/cc_alarm)
 																	</div>
 
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">报警位置：</label>
-																		
-																		<div  class="col-sm-4" id="alerm_place"></div>
+
+																		<div class="col-sm-4" id="alerm_place"></div>
 																	</div>
 																</form>
 															</div>
@@ -1217,476 +1225,482 @@
 									</div>
 								</div>
 							</div>
-							
-							
-							<div id="tab-3" class="tab-pane active">
+
+
+							<div id="tab-3" class="tab-pane">
 								<div class="bootstrap-table">
-                                    <div class="fixed-table-toolbar">
-                                        <div class="bars pull-left"></div>
-                                    </div>
-                                    <div class="fixed-table-container" style="padding-bottom: 0px;">
-                                        <div class="fixed-table-body">
-                                            <table data-mobile-responsive="true" id="exampleTable"
-                                                class="table table-hover table-striped">
+									<div class="fixed-table-toolbar">
+										<div class="bars pull-left"></div>
+									</div>
+									<div class="fixed-table-container" style="padding-bottom: 0px;">
+										<div class="fixed-table-body">
+											<table data-mobile-responsive="true" id="exampleTable"
+												class="table table-hover table-striped">
 
-                                                <tbody>
-                                                    <tr data-index="0">
-                                                        <td style="border-left-width: 0px;">
-                                                            <div class="ibox-content">
-                                                                <form class="form-horizontal m-t" id="deviceControlForm">
-                                                                
-                                                                    <div class="form-group" data-index="1">
-                                                                        <label class="col-sm-2 control-label">设备监控：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="device_control_status" name="device_control_status"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="device_control_status">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label
-                                                                            class="col-sm-2 control-label">光驱：</label>
-                                                                        <div class="col-sm-3">
-                                                                            <select data-placeholder="--选择类别--" name="cd_rom"
-                                                                                id="cd_rom" class="form-control chosen-select"
-                                                                                tabindex="2" required>
-                                                                                <option value="">--选择类别--</option>
-                                                                            </select>
-                                                                            <font color="red">您可以到光盘刻录策略中设置详细策略</font>
-                                                                        </div>
-                                                                    
-                                                                        <label class="col-sm-2 control-label">智能手机：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="phone" name="phone"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="phone">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">蓝牙设备：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="bluetooth" name="bluetooth"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="bluetooth">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-                                                                        <label class="col-sm-2 control-label">1394设备：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="device_1394" name="device_1394"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="device_1394">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">串并口：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="com_interface" name="com_interface"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="com_interface">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-                                                                        <label class="col-sm-2 control-label">红外设备：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="infrared_device" name="infrared_device"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="infrared_device">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">软驱：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="floppy_drive" name="floppy_drive"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="floppy_drive">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-                                                                        <label class="col-sm-2 control-label">调制解调器：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="modem" name="modem"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="modem">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">SD适配器：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="sd_adapter" name="sd_adapter"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="sd_adapter">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-                                                                        <label class="col-sm-2 control-label">图像设备：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="image_device" name="image_device"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="image_device">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">打印服务：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="print_device" name="print_device"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="print_device">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-                                                                        <label class="col-sm-2 control-label">PCMCIA：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="pcmcia_device" name="pcmcia_device"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="pcmcia_device">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">智能卡读卡器：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="card_reader" name="card_reader"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="card_reader">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-                                                                        <label class="col-sm-2 control-label">其它厂商安全U盘：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="udisk_device" name="udisk_device"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="udisk_device">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">有线网卡：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="mlan" name="mlan"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="mlan">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    
-                                                                        <label class="col-sm-2 control-label">厂商自定义设备：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="diy_device" name="diy_device"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="diy_device">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">无线网卡：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="wireless_device" name="wireless_device"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="wireless_device">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">设备硬件ID：</label>
-                                                                        <div class="col-sm-3">
-                                                                            <input class="form-control" id="device_id_input"
-                                                                                name="device_id_input" type="text"
-                                                                                required="true">
-                                                                        </div>
-                                                                        
-                                                                        <button
-                                                                            class="btn btn-success waves-effect waves-light"
-                                                                            onclick="addDeviceId()" type="button">添加</button>
-                                                                        <div class="">&nbsp;</div>
+												<tbody>
+													<tr data-index="0">
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="deviceControlForm">
 
-                                                                        <label class="col-sm-2 control-label">设备硬件ID白名单检测</label>
-                                                                        <div class="col-sm-8">
+																	<div class="form-group" data-index="1">
+																		<label class="col-sm-2 control-label">设备监控：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="device_control_status"
+																					name="device_control_status" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label"
+																					for="device_control_status"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
 
-                                                                            <select name="device_white_show" size="10"
-                                                                                multiple="multiple" id="device_white_show"
-                                                                                class="form-control">
-                                                                            </select> <input type="hidden" id="device_white_values"
-                                                                                name="device_white_values" value="">
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">光驱：</label>
+																		<div class="col-sm-3">
+																			<select data-placeholder="--选择类别--" name="cd_rom"
+																				id="cd_rom" class="form-control chosen-select3"
+																				tabindex="2" required>
+																				<option value="">--选择类别--</option>
+																			</select> <font color="red">您可以到光盘刻录策略中设置详细策略</font>
+																		</div>
 
-                                                                        </div>
-                                                                        <span><button
-                                                                                class="btn btn-success waves-effect waves-light"
-                                                                                id="removeDeviceId" type="button">移除</button></span>
-                                                                    </div>
-                                                                    
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+																		<label class="col-sm-2 control-label">智能手机：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="phone" name="phone" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="phone"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">蓝牙设备：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="bluetooth" name="bluetooth"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="bluetooth">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-2 control-label">1394设备：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="device_1394" name="device_1394"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="device_1394">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">串并口：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="com_interface" name="com_interface"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="com_interface">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-2 control-label">红外设备：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="infrared_device" name="infrared_device"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="infrared_device">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">软驱：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="floppy_drive" name="floppy_drive"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="floppy_drive">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-2 control-label">调制解调器：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="modem" name="modem" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="modem"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">SD适配器：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="sd_adapter" name="sd_adapter"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="sd_adapter">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-2 control-label">图像设备：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="image_device" name="image_device"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="image_device">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">打印服务：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="print_device" name="print_device"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="print_device">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-2 control-label">PCMCIA：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="pcmcia_device" name="pcmcia_device"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="pcmcia_device">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">智能卡读卡器：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="card_reader" name="card_reader"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="card_reader">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-2 control-label">其它厂商安全U盘：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="udisk_device" name="udisk_device"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="udisk_device">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">有线网卡：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="mlan" name="mlan" type="checkbox"
+																					value="1" class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="mlan"> <span
+																					class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+
+																		<label class="col-sm-2 control-label">厂商自定义设备：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="diy_device" name="diy_device"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="diy_device">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">无线网卡：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="wireless_device" name="wireless_device"
+																					type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="wireless_device">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">设备硬件ID：</label>
+																		<div class="col-sm-3">
+																			<input class="form-control" id="device_id_input"
+																				name="device_id_input" type="text" required="true">
+																		</div>
+
+																		<button
+																			class="btn btn-success waves-effect waves-light"
+																			onclick="addDeviceId()" type="button">添加</button>
+																		<div class="">&nbsp;</div>
+
+																		<label class="col-sm-2 control-label">设备硬件ID白名单检测</label>
+																		<div class="col-sm-8">
+
+																			<select name="device_white_show" size="10"
+																				multiple="multiple" id="device_white_show"
+																				class="form-control">
+																			</select> <input type="hidden" id="device_white_values"
+																				name="device_white_values" value="">
+
+																		</div>
+																		<span><button
+																				class="btn btn-success waves-effect waves-light"
+																				id="removeDeviceId" type="button">移除</button></span>
+																	</div>
+
+																</form>
+															</div>
+														</td>
+													</tr>
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
 							</div>
-							
-							<div id="tab-4" class="tab-pane active">
+
+							<div id="tab-4" class="tab-pane">
 								<div class="bootstrap-table">
-                                    <div class="fixed-table-toolbar">
-                                        <div class="bars pull-left"></div>
-                                    </div>
-                                    <div class="fixed-table-container" style="padding-bottom: 0px;">
-                                        <div class="fixed-table-body">
-                                            <table data-mobile-responsive="true" id="exampleTable"
-                                                class="table table-hover table-striped">
+									<div class="fixed-table-toolbar">
+										<div class="bars pull-left"></div>
+									</div>
+									<div class="fixed-table-container" style="padding-bottom: 0px;">
+										<div class="fixed-table-body">
+											<table data-mobile-responsive="true" id="exampleTable"
+												class="table table-hover table-striped">
 
-                                                <tbody>
-                                                    <tr data-index="0">
-                                                        <td style="border-left-width: 0px;">
-                                                            <div class="ibox-content">
-                                                                <form class="form-horizontal m-t" id="diskRecordForm">
-                                                                    <div class="form-group" data-index="1">
-                                                                        <label class="col-sm-2 control-label">刻录审计：</label>
-                                                                        <div class="switch  col-sm-1">
-                                                                            <div class="onoffswitch">
-                                                                                <!--  checked="" -->
-                                                                                <input id="monitorStatus" name="monitorStatus"
-                                                                                    type="checkbox" value="1"
-                                                                                    class="onoffswitch-checkbox"> <label
-                                                                                    class="onoffswitch-label" for="monitorStatus">
-                                                                                    <span class="onoffswitch-inner"></span> <span
-                                                                                    class="onoffswitch-switch"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
+												<tbody>
+													<tr data-index="0">
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t" id="diskRecordForm">
+																	<div class="form-group" data-index="1">
+																		<label class="col-sm-2 control-label">刻录审计：</label>
+																		<div class="switch  col-sm-1">
+																			<div class="onoffswitch">
+																				<!--  checked="" -->
+																				<input id="disk_record_status"
+																					name="disk_record_status" type="checkbox" value="1"
+																					class="onoffswitch-checkbox"> <label
+																					class="onoffswitch-label" for="disk_record_status">
+																					<span class="onoffswitch-inner"></span> <span
+																					class="onoffswitch-switch"></span>
+																				</label>
+																			</div>
+																		</div>
 
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input id="process_alarm_level_selected" value=""
-                                                                            type="hidden"> <label
-                                                                            class="col-sm-2 control-label">续刻模式：</label>
-                                                                        <div class="col-sm-2">
-                                                                            <select data-placeholder="--选择类别--" name="alarmId"
-                                                                                id="alarmId" class="form-control chosen-select"
-                                                                                tabindex="2" required>
-                                                                                <option value="">--选择类别--</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                     <div class="form-group">
-                                                                     &nbsp;
-                                                                     </div>
-                                                                     <div class="form-group">
-                                                                     &nbsp;
-                                                                     </div>
-                                                                     <div class="form-group">
-                                                                     &nbsp;
-                                                                     </div>
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+																	</div>
+																	<div class="form-group">
+																		<input id="process_alarm_level_selected" value=""
+																			type="hidden"> <label
+																			class="col-sm-2 control-label">续刻模式：</label>
+																		<div class="col-sm-4">
+																			<select data-placeholder="--选择类别--"
+																				name="record_mode" id="record_mode"
+																				class="form-control chosen-select4" tabindex="2"
+																				required>
+																				<option value="">--选择类别--</option>
+																			</select>
+																		</div>
+																	</div>
+																	<div class="form-group">&nbsp;</div>
+																	<div class="form-group">&nbsp;</div>
+																	<div class="form-group">&nbsp;</div>
+																</form>
+															</div>
+														</td>
+													</tr>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
 							</div>
-							
+
 							<div id="tab-5" class="tab-pane ">
 								<table id="exampleTable3" data-mobile-responsive="true"></table>
 							</div>
-							
-							<div id="tab-6" class="tab-pane active">
-								<div class="bootstrap-table">
-                                    <div class="fixed-table-toolbar">
-                                        <div class="bars pull-left"></div>
-                                    </div>
-                                    <div class="fixed-table-container" style="padding-bottom: 0px;">
-                                        <div class="fixed-table-body">
-                                            <table data-mobile-responsive="true" id="exampleTable"
-                                                class="table table-hover table-striped">
 
-                                                <tbody>
-                                                    <tr data-index="0">
-                                                        <td style="border-left-width: 0px;">
-                                                            <div class="ibox-content">
-                                                                <form class="form-horizontal m-t" id="softDistributeForm">
-                                                                
-                                                                <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">默认软件服务器下载地址：</label>
-                                                                        <div class="col-sm-6">
-                                                                            <input class="form-control" id="alarmServer"
-                                                                                name="alarmServer" type="text" required="true">
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">默认软件保存文件夹目录：</label>
-                                                                        <div class="col-sm-6">
-                                                                            <input class="form-control" id="alarmServer"
-                                                                                name="alarmServer" type="text" required="true">
-                                                                        </div>
-                                                                       (若为空,windows系统则默认"系统分区:\receive";若该文件夹所在的分区不存在,将在系统分区创建该文件夹。Linux系统默认保存到"/tmp"文件夹下) 
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-2 control-label">下载失败最大重试次数：</label>
-                                                                        <div class="col-sm-1">
-                                                                            <input class="form-control"
-                                                                                id="exception_monitor_memory"
-                                                                                name="exception_monitor_memory" type="text"
-                                                                                required="true">
-                                                                        </div>
-                                                                        <label class="col-sm-2 control-label">重试间隔：</label>
-                                                                        <div class="col-sm-1">
-                                                                            <input class="form-control"
-                                                                                id="exception_monitor_cpu"
-                                                                                name="exception_monitor_cpu" type="text"
-                                                                                required="true">
-                                                                        </div>
-                                                                    </div>
-                                                                <div class="form-group">
-                                                                        
+							<div id="tab-6" class="tab-pane">
+								<div class="bootstrap-table">
+									<div class="fixed-table-toolbar">
+										<div class="bars pull-left"></div>
+									</div>
+									<div class="fixed-table-container" style="padding-bottom: 0px;">
+										<div class="fixed-table-body">
+											<table data-mobile-responsive="true" id="exampleTable"
+												class="table table-hover table-striped">
+
+												<tbody>
+													<tr data-index="0">
+														<td style="border-left-width: 0px;">
+															<div class="ibox-content">
+																<form class="form-horizontal m-t"
+																	id="softDistributeForm">
+
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">默认软件服务器下载地址：</label>
+																		<div class="col-sm-6">
+																			<input class="form-control" id="default_download_url"
+																				name="default_download_url" type="text" required="true">
+																		</div>
+
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">默认软件保存文件夹目录：</label>
+																		<div class="col-sm-6">
+																			<input class="form-control" id="default_file_path"
+																				name="default_file_path" type="text" required="true">
+																		</div>
+																	</div>
+																	<div class="form-group">
+
+																		<label class="col-sm-2 control-label">&nbsp;</label>
+																		<div class="col-sm-8">
+																			(若为空,windows系统则默认"系统分区:\receive";若该文件夹所在的分区不存在,将在系统分区创建该文件夹。Linux系统默认保存到"/tmp"文件夹下)
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<label class="col-sm-2 control-label">下载失败最大重试次数：</label>
+																		<div class="col-sm-1">
+																			<input class="form-control"
+																				id="retry_times"
+																				name="retry_times" type="text"
+																				required="true">
+																		</div>
+																		<label class="col-sm-2 control-label">重试间隔：</label>
+																		<div class="col-sm-1">
+																			<input class="form-control"
+																				id="retry_interval"
+																				name="retry_interval" type="text"
+																				required="true">
+																		</div>
+																	</div>
+																	<div class="form-group">
+
+																		<label class="col-sm-2 control-label"></label>
+																		<div class="col-sm-8">
+																			<select name="upload_file_show" size="10"
+																				multiple="multiple" id="upload_file_show"
+																				class="form-control">
+																			</select> <input type="hidden" id="upload_files"
+																				name="upload_files" value="">
+																		</div>
+																		<span>
+																			<button
+																				class="btn btn-success waves-effect waves-light"
+																				id="removeUploadFile" type="button">移除</button>
+																		</span>
+																	</div>
+																	
+																	<div class="form-group">
+
                                                                         <label class="col-sm-2 control-label"></label>
                                                                         <div class="col-sm-8">
-                                                                            <select name="move_media_show" size="10"
-                                                                                multiple="multiple" id="move_media_show"
-                                                                                class="form-control">
-                                                                            </select> <input type="hidden" id="move_media_names"
-                                                                                name="move_media_names" value="">
+                                                                        <button type="button" class="layui-btn" id="uploadFile">
+                                                                            <i class="fa fa-cloud"></i>上传文件
+                                                                        </button>
                                                                         </div>
-                                                                        <span> <button
-                                                                            class="btn btn-success waves-effect waves-light"
-                                                                            onclick="addMoveMedia()" type="button">软件选择</button><button
-                                                                                class="btn btn-success waves-effect waves-light"
-                                                                                id="removeMoveMedia" type="button">移除</button></span>
                                                                     </div>
-                                                                    
-                                                                </form>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+																</form>
+															</div>
+														</td>
+													</tr>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -1716,8 +1730,71 @@
         
     </script>
 
-	<script type="text/javascript" src="/js/appjs/strategy/strategyTemplet/addStrategyTempletTab.js"></script>
-	<script type="text/javascript" src="/js/appjs/strategy/strategyTemplet/strategy_irregular_connection.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/strategy/strategyTemplet/addStrategyTempletTab.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/strategy/strategyTemplet/strategy_irregular_connection.js"></script>
 
+	<!-- 上传文件 -->
+	<script src="/js/layui.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+
+	<script type="text/javascript">
+
+    layui.use('upload', function () {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#uploadFile', //绑定元素
+            url: '/common/sysFile/upload', //上传接口
+            size: 102400,
+            accept: 'file',
+            done: function (r) {
+            	var id = r.id;
+            	var name = r.sourceName;
+            	if(id!=null&& id!=undefined&&name!=null&& name!=undefined){
+            		addSoftDistributeFile(id,name);
+            	}
+            	
+                layer.msg(r.msg);
+                console.log(r);
+            },
+            error: function (r) {
+                layer.msg(r.msg);
+            }
+        });
+    });
+
+    function tabInitLoadType(type){
+        if(type==2){
+        	loadTypeTab("chosen-select2","alarm_level","alarm_id");
+        	if(irregularConnection != null && irregularConnection != undefined){
+                $("#irregularConnectionId").val(irregularConnection.id);
+                initIrregularConnection(irregularConnection);
+            }
+        }else if(type==3){
+        	loadTypeTab("chosen-select3","cd_access_type","cd_rom");
+        	if(deviceControl != null && deviceControl != undefined){
+                debugger;
+                $("#deviceControlId").val(deviceControl.id);
+                initDeviceControl(deviceControl);
+            }
+            
+        }else if(type==4){
+        	loadTypeTab("chosen-select4","record_mode","record_mode");
+        	if(diskRecord != null && diskRecord != undefined){
+                $("#diskRecordId").val(diskRecord.id);
+                initDiskRecord(diskRecord);
+            }
+        }
+       
+        
+    }
+    // function changeType(i) {
+    //     app.type = i;
+    //     app.offset = 0;
+    //     app.getData();
+    // }
+</script>
 </body>
 </html>

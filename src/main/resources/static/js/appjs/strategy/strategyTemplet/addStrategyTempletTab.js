@@ -8,12 +8,14 @@ $().ready(function() {
 	loadType("alarm_level","connection_alarm_level");
 	loadType("alarm_level","network_flow_alarm_level");
 	loadType("alarm_level","disk_space_alarm_level");
-	loadType("alarm_level","alarm_id");
 	loadType("share_type","share_monitor_type");
-	loadType("cd_access_type","cd_rom");
+	 //loadTypeTab("yum-select2","alarm_level","alarm_id");
+//	loadType("alarm_level","alarm_id");
+//	loadType("cd_access_type","cd_rom");
+//	loadType("record_mode","record_mode");
 	initData();
 	validateRule();
-    //console.log(osAudit);
+    // console.log(osAudit);
 	$("#temp_addresses").dblclick(function() {
 		$("option:selected", this).remove();
 		$("#temp_addresses option:first").attr("selected", true);
@@ -84,6 +86,17 @@ $().ready(function() {
 		dealOptionsValue("device_white_show","device_white_values");
 	});
 	
+	$("#upload_file_show").dblclick(function() {
+		$("option:selected", this).remove();
+		$("#upload_file_show option:first").attr("selected", true);
+		dealOptionsValue("upload_file_show","upload_files");
+	});
+	$("#removeUploadFile").click(function() {
+		$("#upload_file_show option:selected").remove();
+		$("#upload_file_show option:first").attr("selected", true);
+		dealOptionsValue("upload_file_show","upload_files");
+	});
+	
 });
 
 $.validator.setDefaults({
@@ -91,7 +104,6 @@ $.validator.setDefaults({
 		save();
 	}
 });
-
 
 function initData() {
 	
@@ -122,21 +134,17 @@ function initData() {
 	}
 	
 	if(irregularConnection != null && irregularConnection != undefined){
-		$("#irregularConnectionId").val(irregularConnection.id);
-		initIrregularConnection(irregularConnection);
-	}
+        $("#irregularConnectionId").val(irregularConnection.id);
+    }
 	if(deviceControl != null && deviceControl != undefined){
-		debugger;
-		$("#deviceControlId").val(deviceControl.id);
-		initDeviceControl(deviceControl);
-	}
+        $("#deviceControlId").val(deviceControl.id);
+    }
 	if(diskRecord != null && diskRecord != undefined){
-		$("#diskRecordId").val(diskRecord.id);
-		initDiskRecord(diskRecord);
-	}
+        $("#diskRecordId").val(diskRecord.id);
+    }
 	if(softDistribute != null && softDistribute != undefined){
-		$("#softDistributeId").val(softDistribute.id);
-		initSoftDistribute(softDistribute);
+	     $("#softDistributeId").val(softDistribute.id);
+	     initSoftDistribute(softDistribute);
 	}
 	
 }
@@ -161,7 +169,7 @@ function initProcessMonitor(osAudit){
 		if(processMonitor.process_alarm_level!=undefined){
 			loadType("alarm_level","process_alarm_level",processMonitor.process_alarm_level);
 		}
-		//console.log(processMonitorRules.process_black_status);
+		// console.log(processMonitorRules.process_black_status);
 	}
 }
 
@@ -200,7 +208,7 @@ function initServerMonitor(osAudit){
 		if(serverMonitor.server_alarm_level!=undefined){
 			loadType("alarm_level","server_alarm_level",serverMonitor.server_alarm_level);
 		}
-		//console.log(processMonitorRules.process_black_status);
+		// console.log(processMonitorRules.process_black_status);
 	}
 }
 
@@ -208,14 +216,15 @@ function addServerConnectionBlackAddress() {
     
 	var ip = $("#server_connection_black_ip").val();
 	var ports = $("#server_connection_black_ports").val();
-	//debugger;
+	// debugger;
 	
-	//校验修改密码表单
+	// 校验修改密码表单
 	var flag = $("#server_connection_black_ip,#server_connection_black_ports").valid();
-	//var flag = $("#signupForm").valid();
-	//var flag = $("#signupForm").validate().element($("#server_connection_black_ip"));
+	// var flag = $("#signupForm").valid();
+	// var flag =
+	// $("#signupForm").validate().element($("#server_connection_black_ip"));
     if(!flag){
-        //没有通过验证
+        // 没有通过验证
         return;
     }
 	var serverConnectionBlackAddress = ip+":"+ports;
@@ -267,7 +276,7 @@ function initUdiskFile(osAudit){
 }
 
 function initOsOnoff(osAudit){
-	
+	debugger;
 	var returnData = osAudit.osOnoffRules;
 	if(returnData!=undefined){
 		
@@ -276,9 +285,16 @@ function initOsOnoff(osAudit){
 		}
 		if(returnData.workDay!=undefined){
 			var arr = returnData.workDay;
-			for(var i=0;i<arr.length;i++){
-			 $("input[name=workDay][value='"+arr[i]+"']").attr("checked",true);
+			
+			if(Array.isArray(arr)){
+				for(var i=0;i<arr.length;i++){
+					 $("input[name=workDay][value='"+arr[i]+"']").attr("checked",true);
+					}
+			}else{
+				 $("input[name=workDay][value='"+arr+"']").attr("checked",true);
 			}
+			
+			
 		}
 		if(returnData.startWorkTime!=undefined){
 			$("#startWorkTime").val(returnData.startWorkTime);
@@ -414,10 +430,10 @@ function initMoveMedia(osAudit){
 function addMoveMedia() {
     
 	var tempInput = $("#move_media_input").val();
-	//校验修改密码表单
+	// 校验修改密码表单
 	var flag = $("#move_media_input").valid();
     if(!flag){
-        //没有通过验证
+        // 没有通过验证
         return;
     }
     var html = '<option value="' +tempInput + '">' + tempInput + '</option>';
@@ -450,10 +466,10 @@ function initPortMonitor(osAudit){
 function addPortMonitor() {
     
 	var tempInput = $("#port_monitor_input").val();
-	//校验修改密码表单
+	// 校验修改密码表单
 	var flag = $("#port_monitor_input").valid();
     if(!flag){
-        //没有通过验证
+        // 没有通过验证
         return;
     }
     var html = '<option value="' +tempInput + '">' + tempInput + '</option>';
@@ -512,14 +528,15 @@ function addConnectionWhiteAddress() {
     
 	var ip = $("#connection_white_ip").val();
 	var ports = $("#connection_white_ports").val();
-	//debugger;
+	// debugger;
 	
-	//校验修改密码表单
+	// 校验修改密码表单
 	var flag = $("#connection_white_ip,#connection_white_ports").valid();
-	//var flag = $("#signupForm").valid();
-	//var flag = $("#signupForm").validate().element($("#server_connection_black_ip"));
+	// var flag = $("#signupForm").valid();
+	// var flag =
+	// $("#signupForm").validate().element($("#server_connection_black_ip"));
     if(!flag){
-        //没有通过验证
+        // 没有通过验证
         return;
     }
 	var connectionWhiteAddress = ip+":"+ports;
@@ -588,14 +605,15 @@ function addFileControlRules() {
 	var input_1 = $("#file_control_input").val();
 	
 	var input_2=$('input:radio[name=file_control_file_type]:checked').val();
-	//debugger;
+	// debugger;
 	
-	//校验修改密码表单
+	// 校验修改密码表单
 	var flag = $("#file_control_input,#file_control_file_type").valid();
-	//var flag = $("#signupForm").valid();
-	//var flag = $("#signupForm").validate().element($("#server_connection_black_ip"));
+	// var flag = $("#signupForm").valid();
+	// var flag =
+	// $("#signupForm").validate().element($("#server_connection_black_ip"));
     if(!flag){
-        //没有通过验证
+        // 没有通过验证
         return;
     }
 	var mergeInput = input_1+":"+input_2;
@@ -615,7 +633,8 @@ function initIrregularConnection(irregularConnection){
 			 $("#monitor_status").attr("checked",true);
 		}
 		if(returnData.alarm_id!=undefined){
-			loadType("alarm_level","alarm_id",returnData.alarm_id);
+			 //loadTypeTab("chosen-select2","alarm_level","alarm_id");
+			 loadTypeTab("chosen-select2","alarm_level","alarm_id",returnData.alarm_id);
 		}
 		if(returnData.probe_address!=undefined){
 			$("#probe_address").val(returnData.probe_address);
@@ -634,7 +653,8 @@ function initDeviceControl(deviceControl){
 		}
 		
 		if(returnData.cd_rom!=undefined){
-			loadType("cd_access_type","cd_rom",returnData.cd_rom);
+			loadTypeTab("chosen-select3","cd_access_type","cd_rom",returnData.cd_rom);
+			//loadType("cd_access_type","cd_rom",returnData.cd_rom);
 		}
 		if(returnData.phone=='1'){
 			 $("#phone").attr("checked",true);
@@ -704,10 +724,10 @@ function addDeviceId(){
 	
 var input_1 = $("#device_id_input").val();
 	
-	//校验修改密码表单
+	// 校验修改密码表单
 	var flag = $("#device_id_input").valid();
     if(!flag){
-        //没有通过验证
+        // 没有通过验证
         return;
     }
 	var mergeInput = input_1;
@@ -720,14 +740,62 @@ var input_1 = $("#device_id_input").val();
 
 
 function initDiskRecord(diskRecord){
-	
+	var returnData = diskRecord.diskRecordRules;
+	if(returnData!=undefined){
+		
+		if(returnData.disk_record_status=='1'){
+			 $("#disk_record_status").attr("checked",true);
+		}
+		if(returnData.record_mode!=undefined){
+			loadTypeTab("chosen-select4","record_mode","record_mode",returnData.record_mode);
+			//loadType("record_mode","record_mode",returnData.record_mode);
+		}
+	}
 }
-function initSoftDistribute(softDistribute){
-	
+
+function initSoftDistribute(diskRecord){
+	var returnData = diskRecord.softDistributeRules;
+	if(returnData!=undefined){
+		
+		if(returnData.default_download_url!=undefined){
+			$("#default_download_url").val(returnData.default_download_url);
+		}
+		if(returnData.default_file_path!=undefined){
+			$("#default_file_path").val(returnData.default_file_path);
+		}
+		if(returnData.retry_times!=undefined){
+			$("#retry_times").val(returnData.retry_times);
+		}
+		if(returnData.retry_interval!=undefined){
+			$("#retry_interval").val(returnData.retry_interval);
+		}
+		
+		var hiddenValue = returnData.upload_files;
+		if(hiddenValue!=undefined&&hiddenValue!=""){
+			
+			$("#upload_files").val(hiddenValue);
+			var hiddenValueArray=hiddenValue.split(";");
+		    for(var i in hiddenValueArray){
+		    	var html = '<option value="' +hiddenValueArray[i] + '">' + hiddenValueArray[i] + '</option>';
+				$("#upload_file_show").append(html);
+		    }
+			
+		}
+	}
 }
 
-
-
+function addSoftDistributeFile(id,fileName){
+	
+	var defaultFiles = $("#upload_files").val();
+	if(defaultFiles!=null &&defaultFiles!=undefined){
+		defaultFiles+=";"+id+"-"+fileName;
+	}
+	var mergeInput = id+"-"+fileName;
+    var html = '<option value="' +mergeInput + '">' + mergeInput + '</option>';
+    $("#upload_file_show").append(html);
+    $("#upload_file_show option:first").attr("selected", true);
+    dealOptionsValue("upload_file_show","upload_files");
+}
 
 function addStrategyTempletTab() {
 	
@@ -809,14 +877,24 @@ function addStrategyTempletTab() {
 			parent.layer.alert("Connection error");
 		},
 		success : function(data) {
-			//debugger;
+			// debugger;
 			if (data.success == true) {
 				parent.layer.msg("操作成功");
 				parent.reLoad();
-				var id = data.data.id;
-				$("#osAuditId").val(id);
-				//var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-				//parent.layer.close(index);
+				
+				var osAuditId = data.data.osAuditId;
+				var irregularConnectionId = data.data.irregularConnectionId;
+				var deviceControlId = data.data.deviceControlId;
+				var diskRecordId = data.data.diskRecordId;
+				var softDistributeId = data.data.softDistributeId;
+				$("#osAuditId").val(osAuditId);
+				$("#irregularConnectionId").val(irregularConnectionId);
+				$("#deviceControlId").val(deviceControlId);
+				$("#diskRecordId").val(diskRecordId);
+				$("#softDistributeId").val(softDistributeId);
+				// var index = parent.layer.getFrameIndex(window.name); //
+				// 获取窗口索引
+				// parent.layer.close(index);
 			} else {
 				parent.layer.alert(data.msg)
 			}
@@ -867,8 +945,8 @@ function loadType(type,id,checkedValue){
 		url : '/common/dict/list/'+type,
 		success : function(data) {
 			
-			//debugger;
-			//加载数据
+			// debugger;
+			// 加载数据
 			for (var i = 0; i < data.length; i++) {
 				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
 			}
@@ -886,8 +964,48 @@ function loadType(type,id,checkedValue){
 				$("#"+id).val(checkedValue);
 			}
 			$(".chosen-select").trigger("chosen:updated");
-			//点击事件
+			// 点击事件
 			$('.chosen-select').on('change', function(e, params) {
+				console.log(params.selected);
+				var opt = {
+					query : {
+						type : params.selected,
+					}
+				}
+				$('#exampleTable').bootstrapTable('refresh', opt);
+			});
+		}
+	});
+}
+
+
+function loadTypeTab(className,type,id,checkedValue){
+	var html = "";
+	$.ajax({
+		url : '/common/dict/list/'+type,
+		success : function(data) {
+			
+			 debugger;
+			//alert(className+">>>"+type+">>>"+id+">>>"+checkedValue);
+			// 加载数据
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+			}
+			
+			if(id!=undefined && checkedValue==undefined){
+				//alert($("."+className+"[name="+id+"]").text());
+				//alert(html);
+				$("."+className+"[name="+id+"]").append(html);
+			}
+			$("."+className).chosen({
+				maxHeight : 200
+			});
+			if(id!=undefined && checkedValue!=undefined){
+				$("#"+id).val(checkedValue);
+			}
+			$("."+className).trigger("chosen:updated");
+			// 点击事件
+			$('.'+className).on('change', function(e, params) {
 				console.log(params.selected);
 				var opt = {
 					query : {
