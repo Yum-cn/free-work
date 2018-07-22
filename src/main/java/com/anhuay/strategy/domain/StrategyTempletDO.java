@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-07 14:05:30
+ * @date 2018-07-22 15:48:51
  */
 public class StrategyTempletDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +21,8 @@ public class StrategyTempletDO implements Serializable {
 	private String templetName;
 	//模板描述
 	private String templetDesc;
+	//模板类型(0-普通模板 1-默认模板)
+	private Integer templetType;
 	//主机审计编号
 	private Long osAuditId;
 	//违规外联编号
@@ -75,6 +77,18 @@ public class StrategyTempletDO implements Serializable {
 	 */
 	public String getTempletDesc() {
 		return templetDesc;
+	}
+	/**
+	 * 设置：模板类型(0-普通模板 1-默认模板)
+	 */
+	public void setTempletType(Integer templetType) {
+		this.templetType = templetType;
+	}
+	/**
+	 * 获取：模板类型(0-普通模板 1-默认模板)
+	 */
+	public Integer getTempletType() {
+		return templetType;
 	}
 	/**
 	 * 设置：主机审计编号

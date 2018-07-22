@@ -69,6 +69,14 @@ public class StrategyTempletController {
 	    return "strategy/strategyTemplet/strategyTemplet";
 	}
 	
+	
+	@GetMapping("/default")
+	@RequiresPermissions("strategy:strategyTemplet:default")
+	String DefaultStrategyTemplet(){
+	    return "strategy/strategyTemplet/defaultStrategyTemplet";
+	}
+	
+	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("strategy:strategyTemplet")

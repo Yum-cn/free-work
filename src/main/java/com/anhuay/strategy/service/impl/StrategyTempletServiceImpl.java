@@ -52,14 +52,14 @@ public class StrategyTempletServiceImpl implements StrategyTempletService {
 		return strategyTempletDao.batchRemove(ids);
 	}
 	
-	@Override
-	public int updateStatus(Long id){
-		return strategyTempletDao.updateStatus(id);
-	}
-	
-	@Override
-	public int batchUpdateStatus(Long[] ids){
-		return strategyTempletDao.batchUpdateStatus(ids);
-	}
-	
+	   
+    @Override
+    public int updateStatus(Long id){
+        return strategyTempletDao.updateStatus(id);
+    }
+    
+    @Override
+    public int batchUpdateStatus(Long[] ids){
+        return strategyTempletDao.batchUpdateStatus(ids);
+    }
 }

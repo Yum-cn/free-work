@@ -92,6 +92,7 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 				strategyTemplet.setId(strategyTempletId);
 				strategyTemplet.setTempletName(body.optString("templetName"));
 				strategyTemplet.setTempletDesc(body.optString("templetDesc"));
+				strategyTemplet.setTempletType(CommonEnum.STATUS.ZERO.value);
 				strategyTemplet.setStatus(CommonEnum.STATUS.ONE.value);
 				strategyTemplet.setUpdateTime(System.currentTimeMillis() / 1000);
 				strategyTemplet.setCreateTime(System.currentTimeMillis() / 1000);

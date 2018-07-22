@@ -1,6 +1,6 @@
 package com.anhuay.strategy.dao;
 
-import com.anhuay.strategy.domain.StrategyTempletDO;
+import com.anhuay.strategy.domain.DeptStrategyDO;
 
 import java.util.List;
 import java.util.Map;
@@ -8,23 +8,23 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 策略模板表
+ * 部门策略表
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-22 15:48:51
+ * @date 2018-07-22 17:07:47
  */
 @Mapper
-public interface StrategyTempletDao {
+public interface DeptStrategyDao {
 
-	StrategyTempletDO get(Long id);
+	DeptStrategyDO get(Long id);
 	
-	List<StrategyTempletDO> list(Map<String,Object> map);
+	List<DeptStrategyDO> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);
 	
-	int save(StrategyTempletDO strategyTemplet);
+	int save(DeptStrategyDO deptStrategy);
 	
-	int update(StrategyTempletDO strategyTemplet);
+	int update(DeptStrategyDO deptStrategy);
 	
 	int remove(Long id);
 	

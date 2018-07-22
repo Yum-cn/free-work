@@ -10,7 +10,7 @@ import java.util.Map;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-07 14:05:30
+ * @date 2018-07-22 15:48:51
  */
 public interface StrategyTempletService {
 	
@@ -28,7 +28,7 @@ public interface StrategyTempletService {
 	
 	int batchRemove(Long[] ids);
 	
-	int updateStatus(Long id);
-	
-	int batchUpdateStatus(Long[] ids);
+    int updateStatus(Long id);
+    
+    int batchUpdateStatus(Long[] ids);
 }

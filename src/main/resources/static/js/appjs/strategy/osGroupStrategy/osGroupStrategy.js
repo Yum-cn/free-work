@@ -1,5 +1,5 @@
 
-var prefix = "/strategy/strategyTemplet"
+var prefix = "/strategy/osGroupStrategy"
 $(function() {
 	load();
 });
@@ -32,9 +32,8 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset,
-								templetName:$('#searchName').val(),
-								templetType : 0
+								offset:params.offset
+					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
 						},
@@ -53,26 +52,28 @@ function load() {
 									title : '主键编号' 
 								},
 																{
-									field : 'templetName', 
-									title : '模板名称' 
+									field : 'templetId', 
+									title : '模板编号' 
 								},
 																{
-									field : 'templetDesc', 
-									title : '模板描述' 
+									field : 'osGroupIds', 
+									title : '主机组编号' 
+								},
+																{
+									field : 'osGroupNames', 
+									title : '主机组名称' 
+								},
+																{
+									field : 'status', 
+									title : '状态' 
 								},
 																{
 									field : 'createTime', 
-									title : '创建时间' ,
-									formatter : function(value, row, index) {
-										return formatUnixTime(value);
-									}
+									title : '创建时间' 
 								},
 																{
 									field : 'updateTime', 
-									title : '修改时间' ,
-									formatter : function(value, row, index) {
-										return formatUnixTime(value);
-									}
+									title : '修改时间' 
 								},
 																{
 									title : '操作',
@@ -94,58 +95,27 @@ function load() {
 					});
 }
 function reLoad() {
-	
-	var opt = {
-			query : {
-				templetName : $('#searchName').val(),
-			}
-		}
-		$('#exampleTable').bootstrapTable('refresh', opt);
-	
-	//$('#exampleTable').bootstrapTable('refresh');
+	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	
-	var index = layer.open({
-		  type: 2,
-		  content: prefix + '/add',
-		  area: ['800px', '520px'],
-		  maxmin: true
-		});
-		layer.full(index);
-	
-	
-}
-function toAddTemplet() {
-	
-	var index = layer.open({
-		type: 2,
-		title : '添加策略模板',
-		content: prefix + '/toAddStrategyTemplet',
-		area: ['800px', '520px'],
-		maxmin: true
+	layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '520px' ],
+		content : prefix + '/add' // iframe的url
 	});
-	layer.full(index);
-	
 }
 function edit(id) {
-	/*layer.open({
+	layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
-	});*/
-	
-	var index = layer.open({
-		type: 2,
-		title : '编辑策略模板',
-		content: prefix + '/toEditStrategyTemplet/' + id ,
-		area: ['800px', '520px'],
-		maxmin: true
 	});
-	layer.full(index);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
@@ -158,7 +128,7 @@ function remove(id) {
 				'id' : id
 			},
 			success : function(r) {
-				if (r.code==1) {
+				if (r.code==0) {
 					layer.msg(r.msg);
 					reLoad();
 				}else{
@@ -193,7 +163,7 @@ function batchRemove() {
 			},
 			url : prefix + '/batchRemove',
 			success : function(r) {
-				if (r.code == 1) {
+				if (r.code == 0) {
 					layer.msg(r.msg);
 					reLoad();
 				} else {
