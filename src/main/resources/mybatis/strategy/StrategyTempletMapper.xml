@@ -15,7 +15,7 @@
 		from ahy_strategy_templet
 		<where>
 			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="templetName != null and templetName != ''"> and templet_name = #{templetName} </if>
+			<if test="templetName != null and templetName != ''"> and templet_name LIKE CONCAT('%',#{templetName},'%')  </if>
 			<if test="templetDesc != null and templetDesc != ''"> and templet_desc = #{templetDesc} </if>
 			<if test="osAuditId != null and osAuditId != ''"> and os_audit_id = #{osAuditId} </if>
 			<if test="irregularConnectionId != null and irregularConnectionId != ''"> and irregular_connection_id = #{irregularConnectionId}
