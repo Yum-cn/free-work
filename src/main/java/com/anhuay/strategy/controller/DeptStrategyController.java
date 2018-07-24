@@ -83,17 +83,12 @@ public class DeptStrategyController {
 			}
 		}else{
 			deptStrategy.setStatus(CommonEnum.STATUS.ONE.value);
-			
 			deptStrategy.setCreateTime(System.currentTimeMillis() / 1000);
 			
 			if(deptStrategyService.save(deptStrategy)>0){
 				return R.ok();
 			}
 		}
-		
-		
-		
-		
 		return R.error();
 	}
 	/**
