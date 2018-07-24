@@ -4,7 +4,7 @@ $().ready(function() {
 	$("#removeDept").click(function() {
 		$("#dept_name_show option:selected").remove();
 		$("#dept_name_show option:first").attr("selected", true);
-		dealOptions("dept_name_show","deptIds", "deptNames");
+		dealOptions("dept_name_show","deptId", "deptName");
 
 	});
 	

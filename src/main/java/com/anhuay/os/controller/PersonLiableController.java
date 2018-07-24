@@ -42,6 +42,12 @@ public class PersonLiableController {
 	    return "os/personLiable/personLiable";
 	}
 	
+	@GetMapping("/select")
+	@RequiresPermissions("os:personLiable:personLiable")
+	String PersonLiableSelect(){
+	    return "os/personLiable/personLiableSelect";
+	}
+	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("os:personLiable:personLiable")

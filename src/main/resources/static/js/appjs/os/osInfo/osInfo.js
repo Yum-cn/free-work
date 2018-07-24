@@ -142,14 +142,14 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+	var index = layer.open({
 		type : 2,
-		title : '增加',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
+		title : '添加部门策略',
+		content : prefix + '/add',
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		maxmin : true
 	});
+	layer.full(index);
 }
 function edit(id) {
 	layer.open({
