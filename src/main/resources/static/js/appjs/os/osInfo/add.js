@@ -1,11 +1,18 @@
 $().ready(function() {
+
+	$("#templet_name_show").click(function() {
+		$("#templet_name_show option:selected").remove();
+		$("#templet_name_show option:first").attr("selected", true);
+		dealOptions("templet_name_show","deptId", "deptName");
+	});
 	
-	loadType("security_classification","level");
-	loadType("os_type","osType");
-	loadType("install_status","installStatus");
-	loadType("online_status","onlineStatus");
-	loadType("sync_status","syncStatus");
+	loadType("security_classification", "level");
+	loadType("os_type", "osType");
+	loadType("install_status", "installStatus");
+	loadType("online_status", "onlineStatus");
+	loadType("sync_status", "syncStatus");
 	validateRule();
+	initData();
 });
 
 $.validator.setDefaults({
@@ -13,6 +20,44 @@ $.validator.setDefaults({
 		save();
 	}
 });
+
+function initData() {
+
+	if (bean != null && bean != undefined) {
+
+		var hiddenValue = bean.personLiableName;
+		if (hiddenValue != undefined && hiddenValue != "") {
+			$("#personLiableName").val(hiddenValue);
+			var hiddenValueArray = hiddenValue.split(";");
+			for ( var i in hiddenValueArray) {
+				var html = '<option value="' + hiddenValueArray[i] + '">'
+						+ hiddenValueArray[i] + '</option>';
+				$("#templet_name_show").append(html);
+				$("#templet_name_show option:first").attr("selected", true);
+			}
+
+		}
+		var hiddenValue2 = bean.deptName;
+		if (hiddenValue2 != undefined && hiddenValue2 != "") {
+			$("#deptName").val(hiddenValue2);
+			var hiddenValueArray = hiddenValue2.split(";");
+			for ( var i in hiddenValueArray) {
+				var html = '<option value="' + hiddenValueArray[i] + '">'
+						+ hiddenValueArray[i] + '</option>';
+				$("#dept_name_show").append(html);
+				$("#dept_name_show option:first").attr("selected", true);
+			}
+
+		}
+
+		loadType("security_classification", "level", bean.level);
+		loadType("os_type", "osType", bean.level);
+		loadType("install_status", "installStatus", bean.level);
+		loadType("online_status", "onlineStatus", bean.level);
+		loadType("sync_status", "syncStatus", bean.level);
+	}
+}
+
 function save() {
 	$.ajax({
 		cache : true,
@@ -42,33 +87,45 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			installCode : {
+				required : true
+			},
+			templet_name_show : {
+				required : true
+			},
+			dept_name_show : {
 				required : true
 			}
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
+			installCode : {
+				required : icon + "安装码"
+			},
+			templet_name_show : {
+				required : icon + "责任人"
+			},
+			dept_name_show : {
+				required : icon + "部门"
 			}
+
 		}
 	})
 }
 
-function geneInstallCode(){
-	$("#installCode").val(randomWord(false,6,8));
+function geneInstallCode() {
+	$("#installCode").val(randomWord(false, 6, 8));
 }
 
 /*
- ** randomWord 产生任意长度随机字母数字组合
- ** randomFlag-是否任意长度 min-任意长度最小位[固定位数] max-任意长度最大位
+ * * randomWord 产生任意长度随机字母数字组合 * randomFlag-是否任意长度 min-任意长度最小位[固定位数] max-任意长度最大位
  */
 function randomWord(randomFlag, min, max) {
-	var str = "", range = min, arr = [ '0', '1', '2', '3', '4', '5',
-			'6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-			'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-			'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',
-			'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-			'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
+	var str = "", range = min, arr = [ '0', '1', '2', '3', '4', '5', '6', '7',
+			'8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+			'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+			'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+			'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+			'Y', 'Z' ];
 
 	// 随机产生
 	if (randomFlag) {
@@ -89,7 +146,7 @@ function selectTemplet() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : '/system/sysDept/treeView' // iframe的url
+		content : '/os/personLiable/select' // iframe的url
 	});
 
 }
@@ -98,15 +155,15 @@ function loadTemplet(id, name) {
 	var html = '<option value="' + id + '">' + name + '</option>';
 	$("#templet_name_show").html(html);
 	$("#templet_name_show option:first").attr("selected", true);
-	dealOptions("templet_name_show","personLiableId", "personLiableName");
+	dealOptions("templet_name_show", "personLiableId", "personLiableName");
 
 }
 
 function removeTemplet() {
 	$("#templet_name_show option:selected").remove();
 	$("#templet_name_show option:first").attr("selected", true);
-	dealOptions("templet_name_show","personLiableId", "personLiableName");
-	
+	dealOptions("templet_name_show", "personLiableId", "personLiableName");
+
 }
 
 function selectDept() {
@@ -119,47 +176,48 @@ function selectDept() {
 		area : [ '800px', '520px' ],
 		content : '/system/sysDept/treeView' // iframe的url
 	});
-	
+
 }
 
 function loadDept(deptId, deptName) {
 	var html = '<option value="' + deptId + '">' + deptName + '</option>';
 	$("#dept_name_show").html(html);
 	$("#dept_name_show option:first").attr("selected", true);
-	dealOptions("dept_name_show","deptId", "deptName");
-	
+	dealOptions("dept_name_show", "deptId", "deptName");
+
 }
 
 function removeDept() {
 	$("#dept_name_show option:selected").remove();
 	$("#dept_name_show option:first").attr("selected", true);
-	dealOptions("dept_name_show","deptId", "deptName");
-	
+	dealOptions("dept_name_show", "deptId", "deptName");
+
 }
 
-function loadType(type,id,checkedValue){
+function loadType(type, id, checkedValue) {
 	var html = "";
 	$.ajax({
-		url : '/common/dict/list/'+type,
+		url : '/common/dict/list/' + type,
 		success : function(data) {
-			
+
 			// debugger;
 			// 加载数据
 			for (var i = 0; i < data.length; i++) {
-				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+				html += '<option value="' + data[i].value + '">' + data[i].name
+						+ '</option>'
 			}
-			
-			if(id==undefined && checkedValue==undefined){
+
+			if (id == undefined && checkedValue == undefined) {
 				$(".chosen-select").append(html);
-			}else if(id!=undefined && checkedValue==undefined){
-				
-				$(".chosen-select[name="+id+"]").append(html);
+			} else if (id != undefined && checkedValue == undefined) {
+
+				$(".chosen-select[name=" + id + "]").append(html);
 			}
 			$(".chosen-select").chosen({
 				maxHeight : 200
 			});
-			if(id!=undefined && checkedValue!=undefined){
-				$("#"+id).val(checkedValue);
+			if (id != undefined && checkedValue != undefined) {
+				$("#" + id).val(checkedValue);
 			}
 			$(".chosen-select").trigger("chosen:updated");
 			// 点击事件
@@ -176,12 +234,12 @@ function loadType(type,id,checkedValue){
 	});
 }
 
-function dealOptions(sourceId, targetId,targetName) {
-	
+function dealOptions(sourceId, targetId, targetName) {
+
 	var allIds = "";
 	var allValues = "";
 	$("#" + sourceId + " option").each(function() {
-		
+
 		if (allIds != "") {
 			allIds += ";";
 			allValues += ";";

@@ -7,21 +7,21 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">主机IP：</label>
                                 <div class="col-sm-4">
-                                    <input id="osIp" name="osIp" class="form-control" type="text">
+                                    <input id="osIp" name="osIp" class="form-control" type="text" th:value="${osInfo?.osIp}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">主机名：</label>
                                 <div class="col-sm-4">
                                     <input id="osName" name="osName" class="form-control"
-                                        type="text">
+                                        type="text" th:value="${osInfo?.osName}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">安装码：</label>
                                 <div class="col-sm-4">
                                     <input id="installCode" name="installCode" class="form-control"
-                                        type="text">
+                                        type="text" th:value="${osInfo?.installCode}" readOnly>
                                 </div>
                                 <span><button
                                         class="btn btn-success waves-effect waves-light"
@@ -31,7 +31,7 @@
                                 <label class="col-sm-3 control-label">终端标识：</label>
                                 <div class="col-sm-4">
                                     <input id="terminalTag" name="terminalTag" class="form-control"
-                                        type="text">
+                                        type="text" th:value="${osInfo?.terminalTag}">
                                 </div>
                             </div>
 
@@ -52,32 +52,17 @@
                                     <select name="templet_name_show" size="5" multiple="multiple"
                                         id="templet_name_show" class="form-control">
                                     </select> <input type="hidden" id="personLiableId" name="personLiableId"
-                                        th:value="${personLiable?.personLiableId}"> <input
+                                        th:value="${osInfo?.personLiableId}"> <input
                                         type="hidden" id="personLiableName" name="personLiableName"
-                                        th:value="${personLiable?.personLiableName}">
+                                        th:value="${osInfo?.personLiableName}">
 
                                 </div>
                                 <span><button
                                         class="btn btn-success waves-effect waves-light"
-                                        onclick="removePersonLiable()" type="button">移除</button></span> <input
-                                    id="id" name="id" th:value="${personLiable?.id}" type="hidden">
+                                        onclick="removeTemplet()" type="button">移除</button></span> <input
+                                    id="id" name="id" th:value="${osInfo?.id}" type="hidden">
                             </div>
 
-
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">责任人编号：</label>
-                                <div class="col-sm-4">
-                                    <input id="personLiableId" name="personLiableId"
-                                        class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">责任人名称：</label>
-                                <div class="col-sm-4">
-                                    <input id="personLiableName" name="personLiableName"
-                                        class="form-control" type="text">
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">部门：</label>
                                 <div class="col-sm-4">
@@ -95,9 +80,9 @@
                                     <select name="dept_name_show" size="5" multiple="multiple"
                                         id="dept_name_show" class="form-control">
                                     </select> <input type="hidden" id="deptId" name="deptId"
-                                        th:value="${personLiable?.deptId}"> </select> <input
+                                        th:value="${osInfo?.deptId}"> </select> <input
                                         type="hidden" id="deptName" name="deptName"
-                                        th:value="${personLiable?.deptName}">
+                                        th:value="${osInfo?.deptName}">
 
                                 </div>
                                 <span><button
@@ -175,7 +160,7 @@
 	<div th:include="include::footer"></div>
 	<script th:inline="javascript" type="text/javascript">
         // <![CDATA[
-                var bean = [[${personLiable}]];
+                var bean = [[${osInfo}]];
         // ]]>
         
     </script>

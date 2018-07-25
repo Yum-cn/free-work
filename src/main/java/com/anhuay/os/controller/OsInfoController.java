@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.os.domain.OsInfoDO;
 import com.anhuay.os.service.OsInfoService;
+import com.common.constant.CommonEnum;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -64,7 +65,7 @@ public class OsInfoController {
 	String edit(@PathVariable("id") Long id,Model model){
 		OsInfoDO osInfo = osInfoService.get(id);
 		model.addAttribute("osInfo", osInfo);
-	    return "os/osInfo/edit";
+	    return "os/osInfo/add";
 	}
 	
 	/**
@@ -74,8 +75,19 @@ public class OsInfoController {
 	@PostMapping("/save")
 	@RequiresPermissions("os:osInfo:add")
 	public R save( OsInfoDO osInfo){
-		if(osInfoService.save(osInfo)>0){
-			return R.ok();
+
+		osInfo.setUpdateTime(System.currentTimeMillis() / 1000);
+		if(osInfo.getId()!=null && osInfo.getId()>0){
+			if(osInfoService.update(osInfo)>0){
+				return R.ok();
+			}
+		}else{
+			osInfo.setStatus(CommonEnum.STATUS.ONE.value);
+			osInfo.setCreateTime(System.currentTimeMillis() / 1000);
+			
+			if(osInfoService.save(osInfo)>0){
+				return R.ok();
+			}
 		}
 		return R.error();
 	}

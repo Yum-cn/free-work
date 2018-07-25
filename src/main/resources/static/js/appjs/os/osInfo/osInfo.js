@@ -144,7 +144,7 @@ function reLoad() {
 function add() {
 	var index = layer.open({
 		type : 2,
-		title : '添加部门策略',
+		title : '添加主机信息',
 		content : prefix + '/add',
 		area : [ '800px', '520px' ],
 		maxmin : true
@@ -152,14 +152,22 @@ function add() {
 	layer.full(index);
 }
 function edit(id) {
-	layer.open({
+	/*layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
+	});*/
+	var index = layer.open({
+		type : 2,
+		title : '编辑主机信息',
+		content : prefix + '/edit/' + id,
+		area : [ '800px', '520px' ],
+		maxmin : true
 	});
+	layer.full(index);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
