@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anhuay.terminal.dao.TerminalFileDao">
+
+	<select id="get" resultType="com.anhuay.terminal.domain.TerminalFileDO">
+		select `id`,`upload_url`,`file_name`,`file_tag`,`file_size`,`upload_time`,`crc_value`,`down_url`,`status`,`create_time`,`update_time` from ahy_terminal_file where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.anhuay.terminal.domain.TerminalFileDO">
+		select `id`,`upload_url`,`file_name`,`file_tag`,`file_size`,`upload_time`,`crc_value`,`down_url`,`status`,`create_time`,`update_time` from ahy_terminal_file
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uploadUrl != null and uploadUrl != ''"> and upload_url = #{uploadUrl} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
+		  		  <if test="fileTag != null and fileTag != ''"> and file_tag = #{fileTag} </if>
+		  		  <if test="fileSize != null and fileSize != ''"> and file_size = #{fileSize} </if>
+		  		  <if test="uploadTime != null and uploadTime != ''"> and upload_time = #{uploadTime} </if>
+		  		  <if test="crcValue != null and crcValue != ''"> and crc_value = #{crcValue} </if>
+		  		  <if test="downUrl != null and downUrl != ''"> and down_url = #{downUrl} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from ahy_terminal_file
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uploadUrl != null and uploadUrl != ''"> and upload_url = #{uploadUrl} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
+		  		  <if test="fileTag != null and fileTag != ''"> and file_tag = #{fileTag} </if>
+		  		  <if test="fileSize != null and fileSize != ''"> and file_size = #{fileSize} </if>
+		  		  <if test="uploadTime != null and uploadTime != ''"> and upload_time = #{uploadTime} </if>
+		  		  <if test="crcValue != null and crcValue != ''"> and crc_value = #{crcValue} </if>
+		  		  <if test="downUrl != null and downUrl != ''"> and down_url = #{downUrl} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.anhuay.terminal.domain.TerminalFileDO">
+		insert into ahy_terminal_file
+		(
+			`id`, 
+			`upload_url`, 
+			`file_name`, 
+			`file_tag`, 
+			`file_size`, 
+			`upload_time`, 
+			`crc_value`, 
+			`down_url`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{uploadUrl}, 
+			#{fileName}, 
+			#{fileTag}, 
+			#{fileSize}, 
+			#{uploadTime}, 
+			#{crcValue}, 
+			#{downUrl}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.anhuay.terminal.domain.TerminalFileDO">
+		update ahy_terminal_file 
+		<set>
+			<if test="uploadUrl != null">`upload_url` = #{uploadUrl}, </if>
+			<if test="fileName != null">`file_name` = #{fileName}, </if>
+			<if test="fileTag != null">`file_tag` = #{fileTag}, </if>
+			<if test="fileSize != null">`file_size` = #{fileSize}, </if>
+			<if test="uploadTime != null">`upload_time` = #{uploadTime}, </if>
+			<if test="crcValue != null">`crc_value` = #{crcValue}, </if>
+			<if test="downUrl != null">`down_url` = #{downUrl}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+        update ahy_terminal_file set status = 0 where id = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update ahy_terminal_file set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from ahy_terminal_file where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from ahy_terminal_file where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

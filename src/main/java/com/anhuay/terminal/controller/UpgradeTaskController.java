@@ -1,4 +1,4 @@
-package com.anhuay.os.controller;
+package com.anhuay.terminal.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -15,63 +15,56 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anhuay.os.domain.OsInfoDO;
-import com.anhuay.os.service.OsInfoService;
-import com.common.constant.CommonEnum;
+import com.anhuay.terminal.domain.UpgradeTaskDO;
+import com.anhuay.terminal.service.UpgradeTaskService;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
 
 /**
- * 主机信息表
+ * 升级任务管理
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-24 14:45:03
+ * @date 2018-07-28 15:55:35
  */
  
 @Controller
-@RequestMapping("/os/osInfo")
-public class OsInfoController {
+@RequestMapping("/terminal/upgradeTask")
+public class UpgradeTaskController {
 	@Autowired
-	private OsInfoService osInfoService;
+	private UpgradeTaskService upgradeTaskService;
 	
 	@GetMapping()
-	@RequiresPermissions("os:osInfo:osInfo")
-	String OsInfo(){
-	    return "os/osInfo/osInfo";
-	}
-	
-	@GetMapping("/select")
-	@RequiresPermissions("os:osInfo:osInfo")
-	String OsInfoSelect(){
-	    return "os/osInfo/osInfoSelect";
+	@RequiresPermissions("terminal:upgradeTask:upgradeTask")
+	String UpgradeTask(){
+	    return "terminal/upgradeTask/upgradeTask";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("os:osInfo:osInfo")
+	@RequiresPermissions("terminal:upgradeTask:upgradeTask")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<OsInfoDO> osInfoList = osInfoService.list(query);
-		int total = osInfoService.count(query);
-		PageUtils pageUtils = new PageUtils(osInfoList, total);
+		List<UpgradeTaskDO> upgradeTaskList = upgradeTaskService.list(query);
+		int total = upgradeTaskService.count(query);
+		PageUtils pageUtils = new PageUtils(upgradeTaskList, total);
 		return pageUtils;
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("os:osInfo:add")
+	@RequiresPermissions("terminal:upgradeTask:add")
 	String add(){
-	    return "os/osInfo/add";
+	    return "terminal/upgradeTask/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("os:osInfo:edit")
+	@RequiresPermissions("terminal:upgradeTask:edit")
 	String edit(@PathVariable("id") Long id,Model model){
-		OsInfoDO osInfo = osInfoService.get(id);
-		model.addAttribute("osInfo", osInfo);
-	    return "os/osInfo/add";
+		UpgradeTaskDO upgradeTask = upgradeTaskService.get(id);
+		model.addAttribute("upgradeTask", upgradeTask);
+	    return "terminal/upgradeTask/add";
 	}
 	
 	/**
@@ -79,21 +72,10 @@ public class OsInfoController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("os:osInfo:add")
-	public R save( OsInfoDO osInfo){
-
-		osInfo.setUpdateTime(System.currentTimeMillis() / 1000);
-		if(osInfo.getId()!=null && osInfo.getId()>0){
-			if(osInfoService.update(osInfo)>0){
-				return R.ok();
-			}
-		}else{
-			osInfo.setStatus(CommonEnum.STATUS.ONE.value);
-			osInfo.setCreateTime(System.currentTimeMillis() / 1000);
-			
-			if(osInfoService.save(osInfo)>0){
-				return R.ok();
-			}
+	@RequiresPermissions("terminal:upgradeTask:add")
+	public R save( UpgradeTaskDO upgradeTask){
+		if(upgradeTaskService.save(upgradeTask)>0){
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -102,9 +84,9 @@ public class OsInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("os:osInfo:edit")
-	public R update( OsInfoDO osInfo){
-		osInfoService.update(osInfo);
+	@RequiresPermissions("terminal:upgradeTask:edit")
+	public R update( UpgradeTaskDO upgradeTask){
+		upgradeTaskService.update(upgradeTask);
 		return R.ok();
 	}
 	
@@ -113,9 +95,9 @@ public class OsInfoController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("os:osInfo:remove")
+	@RequiresPermissions("terminal:upgradeTask:remove")
 	public R remove( Long id){
-		if(osInfoService.updateStatus(id)>0){
+		if(upgradeTaskService.updateStatus(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -126,9 +108,9 @@ public class OsInfoController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("os:osInfo:batchRemove")
+	@RequiresPermissions("terminal:upgradeTask:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
-		osInfoService.batchUpdateStatus(ids);
+		upgradeTaskService.batchUpdateStatus(ids);
 		return R.ok();
 	}
 	

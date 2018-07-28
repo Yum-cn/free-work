@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anhuay.terminal.dao.UpgradeTaskDao">
+
+	<select id="get" resultType="com.anhuay.terminal.domain.UpgradeTaskDO">
+		select `id`,`terminal_file_id`,`terminal_file_download_url`,`upgrade_name`,`os_ids`,`os_ips`,`upgrade_time`,`upgrade_version`,`notice_status`,`task_status`,`upgrade_rules`,`status`,`create_time`,`update_time` from ahy_upgrade_task where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.anhuay.terminal.domain.UpgradeTaskDO">
+		select `id`,`terminal_file_id`,`terminal_file_download_url`,`upgrade_name`,`os_ids`,`os_ips`,`upgrade_time`,`upgrade_version`,`notice_status`,`task_status`,`upgrade_rules`,`status`,`create_time`,`update_time` from ahy_upgrade_task
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="terminalFileId != null and terminalFileId != ''"> and terminal_file_id = #{terminalFileId} </if>
+		  		  <if test="terminalFileDownloadUrl != null and terminalFileDownloadUrl != ''"> and terminal_file_download_url = #{terminalFileDownloadUrl} </if>
+		  		  <if test="upgradeName != null and upgradeName != ''"> and upgrade_name = #{upgradeName} </if>
+		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
+		  		  <if test="osIps != null and osIps != ''"> and os_ips = #{osIps} </if>
+		  		  <if test="upgradeTime != null and upgradeTime != ''"> and upgrade_time = #{upgradeTime} </if>
+		  		  <if test="upgradeVersion != null and upgradeVersion != ''"> and upgrade_version = #{upgradeVersion} </if>
+		  		  <if test="noticeStatus != null and noticeStatus != ''"> and notice_status = #{noticeStatus} </if>
+		  		  <if test="taskStatus != null and taskStatus != ''"> and task_status = #{taskStatus} </if>
+		  		  <if test="upgradeRules != null and upgradeRules != ''"> and upgrade_rules = #{upgradeRules} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from ahy_upgrade_task
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="terminalFileId != null and terminalFileId != ''"> and terminal_file_id = #{terminalFileId} </if>
+		  		  <if test="terminalFileDownloadUrl != null and terminalFileDownloadUrl != ''"> and terminal_file_download_url = #{terminalFileDownloadUrl} </if>
+		  		  <if test="upgradeName != null and upgradeName != ''"> and upgrade_name = #{upgradeName} </if>
+		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
+		  		  <if test="osIps != null and osIps != ''"> and os_ips = #{osIps} </if>
+		  		  <if test="upgradeTime != null and upgradeTime != ''"> and upgrade_time = #{upgradeTime} </if>
+		  		  <if test="upgradeVersion != null and upgradeVersion != ''"> and upgrade_version = #{upgradeVersion} </if>
+		  		  <if test="noticeStatus != null and noticeStatus != ''"> and notice_status = #{noticeStatus} </if>
+		  		  <if test="taskStatus != null and taskStatus != ''"> and task_status = #{taskStatus} </if>
+		  		  <if test="upgradeRules != null and upgradeRules != ''"> and upgrade_rules = #{upgradeRules} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.anhuay.terminal.domain.UpgradeTaskDO">
+		insert into ahy_upgrade_task
+		(
+			`id`, 
+			`terminal_file_id`, 
+			`terminal_file_download_url`, 
+			`upgrade_name`, 
+			`os_ids`, 
+			`os_ips`, 
+			`upgrade_time`, 
+			`upgrade_version`, 
+			`notice_status`, 
+			`task_status`, 
+			`upgrade_rules`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{terminalFileId}, 
+			#{terminalFileDownloadUrl}, 
+			#{upgradeName}, 
+			#{osIds}, 
+			#{osIps}, 
+			#{upgradeTime}, 
+			#{upgradeVersion}, 
+			#{noticeStatus}, 
+			#{taskStatus}, 
+			#{upgradeRules}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.anhuay.terminal.domain.UpgradeTaskDO">
+		update ahy_upgrade_task 
+		<set>
+			<if test="terminalFileId != null">`terminal_file_id` = #{terminalFileId}, </if>
+			<if test="terminalFileDownloadUrl != null">`terminal_file_download_url` = #{terminalFileDownloadUrl}, </if>
+			<if test="upgradeName != null">`upgrade_name` = #{upgradeName}, </if>
+			<if test="osIds != null">`os_ids` = #{osIds}, </if>
+			<if test="osIps != null">`os_ips` = #{osIps}, </if>
+			<if test="upgradeTime != null">`upgrade_time` = #{upgradeTime}, </if>
+			<if test="upgradeVersion != null">`upgrade_version` = #{upgradeVersion}, </if>
+			<if test="noticeStatus != null">`notice_status` = #{noticeStatus}, </if>
+			<if test="taskStatus != null">`task_status` = #{taskStatus}, </if>
+			<if test="upgradeRules != null">`upgrade_rules` = #{upgradeRules}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+        update ahy_upgrade_task set status = 0 where id = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update ahy_upgrade_task set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from ahy_upgrade_task where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from ahy_upgrade_task where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

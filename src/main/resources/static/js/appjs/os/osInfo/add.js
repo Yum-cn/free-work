@@ -4,6 +4,8 @@ $().ready(function() {
 		$("#templet_name_show option:selected").remove();
 		$("#templet_name_show option:first").attr("selected", true);
 		dealOptions("templet_name_show","deptId", "deptName");
+		$("#deptId").val("");
+		$("#deptName").val("");
 	});
 	
 	loadType("security_classification", "level");
@@ -51,10 +53,10 @@ function initData() {
 		}
 
 		loadType("security_classification", "level", bean.level);
-		loadType("os_type", "osType", bean.level);
-		loadType("install_status", "installStatus", bean.level);
-		loadType("online_status", "onlineStatus", bean.level);
-		loadType("sync_status", "syncStatus", bean.level);
+		loadType("os_type", "osType", bean.osType);
+		loadType("install_status", "installStatus", bean.installStatus);
+		loadType("online_status", "onlineStatus", bean.onlineStatus);
+		loadType("sync_status", "syncStatus", bean.syncStatus);
 	}
 }
 
@@ -151,21 +153,25 @@ function selectTemplet() {
 
 }
 
-function loadTemplet(id, name) {
+function loadTemplet(id, name,deptId,deptName) {
 	var html = '<option value="' + id + '">' + name + '</option>';
 	$("#templet_name_show").html(html);
 	$("#templet_name_show option:first").attr("selected", true);
 	dealOptions("templet_name_show", "personLiableId", "personLiableName");
-
+	console.log(deptId+">>"+deptName);
+	$("#deptId").val(deptId);
+	$("#deptName").val(deptName);
 }
 
 function removeTemplet() {
 	$("#templet_name_show option:selected").remove();
 	$("#templet_name_show option:first").attr("selected", true);
 	dealOptions("templet_name_show", "personLiableId", "personLiableName");
-
+	$("#deptId").val("");
+	$("#deptName").val("");
 }
 
+/*
 function selectDept() {
 	// 获取当前窗口名称
 	layer.open({
@@ -192,7 +198,7 @@ function removeDept() {
 	$("#dept_name_show option:first").attr("selected", true);
 	dealOptions("dept_name_show", "deptId", "deptName");
 
-}
+}*/
 
 function loadType(type, id, checkedValue) {
 	var html = "";

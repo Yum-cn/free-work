@@ -1,5 +1,6 @@
 anhuay:
   uploadPath: D:/var/uploaded_files/
+  downloadUrl: http://localhost/terminal/terminalFile/download/
 logging:
   level:
     root: info

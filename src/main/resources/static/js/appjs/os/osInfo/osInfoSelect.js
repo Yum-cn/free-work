@@ -1,7 +1,6 @@
 var prefix = "/os/osInfo"
 $(function() {
 	var deptId = '';
-	getTreeData();
 	load(deptId);
 });
 
@@ -79,90 +78,8 @@ function load(deptId) {
 								{
 									field : 'deptName',
 									title : '部门名称'
-								},
-								{
-									field : 'level',
-									title : '等级',
-									formatter : function(value, row, index){
-										if(value==1){
-											return '<span class=" ">公开</span>';
-										}else if(value==2){
-											return '<span class=" ">保密</span>';
-										}
-									}
-								},
-								{
-									field : 'osType',
-									title : '终端类型',
-									formatter : function(value, row, index){
-										if(value==1){
-											return '<span class=" ">单机</span>';
-										}else if(value==2){
-											return '<span class=" ">联网主机</span>';
-										}
-									}
-								},
-								{
-									field : 'installStatus',
-									title : '安装状态',
-									formatter : function(value, row, index){
-										if(value==1){
-											return '<span class=" ">未安装</span>';
-										}else if(value==2){
-											return '<span class=" ">已安装</span>';
-										}else if(value==3){
-											return '<span class=" ">待卸载</span>';
-										}
-									}
-								},
-								{
-									field : 'onlineStatus',
-									title : '在线状态',
-									formatter : function(value, row, index){
-										if(value==1){
-											return '<span class=" ">在线</span>';
-										}else if(value==2){
-											return '<span class=" ">离线</span>';
-										}
-									}
-								},
-								{
-									field : 'syncStatus',
-									title : '同步状态',
-									formatter : function(value, row, index){
-										if(value==1){
-											return '<span class=" ">未同步</span>';
-										}else if(value==2){
-											return '<span class=" ">已同步</span>';
-										}
-									}
-								},
-								{
-									field : 'createTime',
-									title : '创建时间'
-								},
-								{
-									title : '操作',
-									field : 'id',
-									align : 'center',
-									width:150,
-									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '
-												+ s_edit_h
-												+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.id
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var f = '<a class="btn btn-warning btn-sm '
-												+ s_remove_h
-												+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var d = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-group"></i></a> ';
-										return e + d+f;
-									}
-								} ]
+								}
+								]
 					});
 }
 function reLoad() {
@@ -217,74 +134,30 @@ function remove(id) {
 
 function resetPwd(id) {
 }
-function batchRemove() {
+function selectSubmit() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
+		layer.msg("请选择数据");
 		return;
 	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+	layer.confirm("确认要选中的'" + rows.length + "'条数据吗?", {
 		btn : [ '确定', '取消' ]
 	// 按钮
 	}, function() {
 		var ids = new Array();
+		var ips = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
 			ids[i] = row['id'];
+			ips[i] = row['osIp'];
 		});
-		$.ajax({
-			type : 'POST',
-			data : {
-				"ids" : ids
-			},
-			url : prefix + '/batchRemove',
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
+		
+		parent.loadOsInfo(ids,ips);
+		var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+		parent.layer.close(index);
+		
 	}, function() {
 
 	});
 }
 
-function getTreeData() {
-	$.ajax({
-		type : "GET",
-		url : "/system/sysDept/tree",
-		success : function(tree) {
-			loadTree(tree);
-		}
-	});
-}
-function loadTree(tree) {
-	$('#jstree').jstree({
-		'core' : {
-			'data' : tree
-		},
-		"plugins" : [ "search" ]
-	});
-	$('#jstree').jstree().open_all();
-}
-$('#jstree').on("changed.jstree", function(e, data) {
-	if (data.selected == -1) {
-		var opt = {
-			query : {
-				deptId : '',
-			}
-		}
-		$('#exampleTable').bootstrapTable('refresh', opt);
-	} else {
-		var opt = {
-			query : {
-				deptId : data.selected[0],
-			}
-		}
-		$('#exampleTable').bootstrapTable('refresh',opt);
-	}
-
-});

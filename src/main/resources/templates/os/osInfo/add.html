@@ -64,23 +64,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">部门：</label>
-                                <div class="col-sm-4">
-
-                                    <input class="form-control" id="deptSelect" name="deptSelect"
-                                        onclick="selectDept()" placeholder="选择部门" readonly="readonly"
-                                        type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
 
                                 <label class="col-sm-3 control-label"></label>
                                 <div class="col-sm-4">
 
-                                    <select name="dept_name_show" size="5" multiple="multiple"
+                                    <!-- <select name="dept_name_show" size="5" multiple="multiple"
                                         id="dept_name_show" class="form-control">
-                                    </select> <input type="hidden" id="deptId" name="deptId"
-                                        th:value="${osInfo?.deptId}"> </select> <input
+                                    </select> --> 
+                                    <input type="hidden" id="deptId" name="deptId"
+                                        th:value="${osInfo?.deptId}">
+                                    
+                                     <input
                                         type="hidden" id="deptName" name="deptName"
                                         th:value="${osInfo?.deptName}">
 
