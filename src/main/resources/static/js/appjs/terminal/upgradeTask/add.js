@@ -1,6 +1,19 @@
 $().ready(function() {
 	validateRule();
 	initData();
+	
+	$("#templet_name_show").dblclick(function() {
+		$("#templet_name_show option:selected").remove();
+		document.getElementById('templet_name_show')[0].selected = true;
+		dealOptions("templet_name_show", "terminalFileId",
+		"terminalFileName");
+	});
+	
+	$("#os_info_show").dblclick(function() {
+		$("#os_info_show option:selected").remove();
+		document.getElementById('os_info_show')[0].selected = true;
+		dealOptions("os_info_show","osIds", "osIps");
+	});
 });
 
 $.validator.setDefaults({

@@ -64,16 +64,18 @@ function load() {
 									title : '备注' 
 								},
 																{
-									field : 'status', 
-									title : '状态' 
-								},
-																{
 									field : 'createTime', 
-									title : '创建时间' 
+									title : '创建时间' ,
+									formatter : function(value, row, index) {
+										return formatUnixTime(value);
+									} 
 								},
 																{
 									field : 'updateTime', 
-									title : '修改时间' 
+									title : '修改时间' ,
+									formatter : function(value, row, index) {
+										return formatUnixTime(value);
+									} 
 								},
 																{
 									title : '操作',
@@ -98,24 +100,24 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+	var index = layer.open({
 		type : 2,
-		title : '增加',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
+		title : '添加主机组',
+		content : prefix + '/add',
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		maxmin : true
 	});
+	layer.full(index);
 }
 function edit(id) {
-	layer.open({
+	var index = layer.open({
 		type : 2,
-		title : '编辑',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
+		title : '编辑主机组',
+		content : prefix + '/edit/' + id,
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		maxmin : true
 	});
+	layer.full(index);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

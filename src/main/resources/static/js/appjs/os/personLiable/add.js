@@ -1,9 +1,9 @@
 $().ready(function() {
 	validateRule();
 
-	$("#removeDept").click(function() {
+	$("#removeDept").dblclick(function() {
 		$("#dept_name_show option:selected").remove();
-		$("#dept_name_show option:first").attr("selected", true);
+		document.getElementById('dept_name_show')[0].selected = true;
 		dealOptions("dept_name_show","deptId", "deptName");
 
 	});

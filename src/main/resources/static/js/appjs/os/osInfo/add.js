@@ -1,8 +1,8 @@
 $().ready(function() {
 
-	$("#templet_name_show").click(function() {
+	$("#templet_name_show").dblclick(function() {
 		$("#templet_name_show option:selected").remove();
-		$("#templet_name_show option:first").attr("selected", true);
+		document.getElementById('templet_name_show')[0].selected = true;
 		dealOptions("templet_name_show","deptId", "deptName");
 		$("#deptId").val("");
 		$("#deptName").val("");

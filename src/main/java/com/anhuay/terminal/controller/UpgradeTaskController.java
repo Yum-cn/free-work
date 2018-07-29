@@ -98,10 +98,6 @@ public class UpgradeTaskController {
 		}
 		return R.error();
 		
-		/*if(upgradeTaskService.save(upgradeTask)>0){
-			return R.ok();
-		}
-		return R.error();*/
 	}
 	/**
 	 * 修改

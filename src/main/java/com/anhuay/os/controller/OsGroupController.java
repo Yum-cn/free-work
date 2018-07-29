@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.os.domain.OsGroupDO;
 import com.anhuay.os.service.OsGroupService;
+import com.common.constant.CommonEnum;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -64,7 +65,7 @@ public class OsGroupController {
 	String edit(@PathVariable("id") Long id,Model model){
 		OsGroupDO osGroup = osGroupService.get(id);
 		model.addAttribute("osGroup", osGroup);
-	    return "os/osGroup/edit";
+	    return "os/osGroup/add";
 	}
 	
 	/**
@@ -74,8 +75,19 @@ public class OsGroupController {
 	@PostMapping("/save")
 	@RequiresPermissions("os:osGroup:add")
 	public R save( OsGroupDO osGroup){
-		if(osGroupService.save(osGroup)>0){
-			return R.ok();
+		
+		osGroup.setUpdateTime(System.currentTimeMillis() / 1000);
+		if(osGroup.getId()!=null && osGroup.getId()>0){
+			if(osGroupService.update(osGroup)>0){
+				return R.ok();
+			}
+		}else{
+			osGroup.setStatus(CommonEnum.STATUS.ONE.value);
+			osGroup.setCreateTime(System.currentTimeMillis() / 1000);
+			
+			if(osGroupService.save(osGroup)>0){
+				return R.ok();
+			}
 		}
 		return R.error();
 	}

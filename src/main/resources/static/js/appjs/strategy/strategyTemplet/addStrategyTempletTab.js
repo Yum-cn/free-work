@@ -18,7 +18,7 @@ $().ready(function() {
     // console.log(osAudit);
 	$("#temp_addresses").dblclick(function() {
 		$("option:selected", this).remove();
-		$("#temp_addresses option:first").attr("selected", true);
+		document.getElementById('temp_addresses')[0].selected = true;
 		dealOptionsValue("temp_addresses","server_connection_black_addresses");
 	});
 	$("#remove").click(function() {
@@ -30,7 +30,7 @@ $().ready(function() {
 	
 	$("#move_media_show").dblclick(function() {
 		$("option:selected", this).remove();
-		$("#move_media_show option:first").attr("selected", true);
+		document.getElementById('move_media_show')[0].selected = true;
 		dealOptionsValue("move_media_show","move_media_names");
 	});
 	$("#removeMoveMedia").click(function() {
@@ -42,7 +42,7 @@ $().ready(function() {
 	
 	$("#port_monitor_show").dblclick(function() {
 		$("option:selected", this).remove();
-		$("#port_monitor_show option:first").attr("selected", true);
+		document.getElementById('port_monitor_show')[0].selected = true;
 		dealOptionsValue("port_monitor_show","port_monitor_ports");
 	});
 	$("#removeMonitorPorts").click(function() {
@@ -54,7 +54,7 @@ $().ready(function() {
 	
 	$("#connection_addresses_show").dblclick(function() {
 		$("option:selected", this).remove();
-		$("#connection_addresses_show option:first").attr("selected", true);
+		document.getElementById('connection_addresses_show')[0].selected = true;
 		dealOptionsValue("connection_addresses_show","connection_white_addresses");
 	});
 	$("#removeWhiteConnectionAdress").click(function() {
@@ -66,7 +66,7 @@ $().ready(function() {
 	
 	$("#file_control_show").dblclick(function() {
 		$("option:selected", this).remove();
-		$("#file_control_show option:first").attr("selected", true);
+		document.getElementById('file_control_show')[0].selected = true;
 		dealOptionsValue("file_control_show","file_control_values");
 	});
 	$("#removefileControl").click(function() {
@@ -77,7 +77,7 @@ $().ready(function() {
 
 	$("#device_white_show").dblclick(function() {
 		$("option:selected", this).remove();
-		$("#device_white_show option:first").attr("selected", true);
+		document.getElementById('device_white_show')[0].selected = true;
 		dealOptionsValue("device_white_show","device_white_values");
 	});
 	$("#removeDeviceId").click(function() {
@@ -88,7 +88,7 @@ $().ready(function() {
 	
 	$("#upload_file_show").dblclick(function() {
 		$("option:selected", this).remove();
-		$("#upload_file_show option:first").attr("selected", true);
+		document.getElementById('upload_file_show')[0].selected = true;
 		dealOptionsValue("upload_file_show","upload_files");
 	});
 	$("#removeUploadFile").click(function() {
