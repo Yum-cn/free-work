@@ -4,15 +4,17 @@
 <mapper namespace="com.anhuay.os.dao.OsGroupDao">
 
 	<select id="get" resultType="com.anhuay.os.domain.OsGroupDO">
-		select `id`,`os_group_name`,`os_count`,`remark`,`status`,`create_time`,`update_time` from ahy_os_group where id = #{value}
+		select `id`,`os_group_name`,`os_count`,`os_ids`,`os_ips`,`remark`,`status`,`create_time`,`update_time` from ahy_os_group where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.os.domain.OsGroupDO">
-		select `id`,`os_group_name`,`os_count`,`remark`,`status`,`create_time`,`update_time` from ahy_os_group
+		select `id`,`os_group_name`,`os_count`,`os_ids`,`os_ips`,`remark`,`status`,`create_time`,`update_time` from ahy_os_group
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="osGroupName != null and osGroupName != ''"> and os_group_name = #{osGroupName} </if>
 		  		  <if test="osCount != null and osCount != ''"> and os_count = #{osCount} </if>
+		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
+		  		  <if test="osIps != null and osIps != ''"> and os_ips = #{osIps} </if>
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
@@ -38,6 +40,8 @@
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="osGroupName != null and osGroupName != ''"> and os_group_name = #{osGroupName} </if>
 		  		  <if test="osCount != null and osCount != ''"> and os_count = #{osCount} </if>
+		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
+		  		  <if test="osIps != null and osIps != ''"> and os_ips = #{osIps} </if>
 		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
@@ -52,6 +56,8 @@
 			`id`, 
 			`os_group_name`, 
 			`os_count`, 
+			`os_ids`, 
+			`os_ips`, 
 			`remark`, 
 			`status`, 
 			`create_time`, 
@@ -62,6 +68,8 @@
 			#{id}, 
 			#{osGroupName}, 
 			#{osCount}, 
+			#{osIds}, 
+			#{osIps}, 
 			#{remark}, 
 			#{status}, 
 			#{createTime}, 
@@ -74,6 +82,8 @@
 		<set>
 			<if test="osGroupName != null">`os_group_name` = #{osGroupName}, </if>
 			<if test="osCount != null">`os_count` = #{osCount}, </if>
+			<if test="osIds != null">`os_ids` = #{osIds}, </if>
+			<if test="osIps != null">`os_ips` = #{osIps}, </if>
 			<if test="remark != null">`remark` = #{remark}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="createTime != null">`create_time` = #{createTime}, </if>

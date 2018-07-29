@@ -9,7 +9,7 @@ $().ready(function() {
 	loadType("alarm_level","network_flow_alarm_level");
 	loadType("alarm_level","disk_space_alarm_level");
 	loadType("share_type","share_monitor_type");
-	 //loadTypeTab("yum-select2","alarm_level","alarm_id");
+	 loadTypeTab("yum-select2","alarm_level","alarm_id");
 //	loadType("alarm_level","alarm_id");
 //	loadType("cd_access_type","cd_rom");
 //	loadType("record_mode","record_mode");

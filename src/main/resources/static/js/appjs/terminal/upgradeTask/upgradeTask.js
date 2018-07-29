@@ -73,7 +73,7 @@ function load() {
 								},
 																{
 									field : 'taskStatus', 
-									title : '任务状态(1待下发 2升级中 3已更新)',
+									title : '任务状态',
 									formatter : function(value, row, index){
 										if(value==1){
 											return '<span class=" ">待下发</span>';
@@ -83,11 +83,6 @@ function load() {
 											return '<span class=" ">已更新</span>';
 										}
 									} 
-								},
-									
-																{
-									field : 'status', 
-									title : '状态' 
 								},
 																{
 									field : 'createTime', 

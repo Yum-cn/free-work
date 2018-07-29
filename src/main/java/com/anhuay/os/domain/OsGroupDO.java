@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-24 14:45:03
+ * @date 2018-07-29 14:03:49
  */
 public class OsGroupDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +21,10 @@ public class OsGroupDO implements Serializable {
 	private String osGroupName;
 	//主机数目
 	private String osCount;
+	//升级主机编号
+	private String osIds;
+	//升级主机IP
+	private String osIps;
 	//备注
 	private String remark;
 	//状态
@@ -65,6 +69,30 @@ public class OsGroupDO implements Serializable {
 	 */
 	public String getOsCount() {
 		return osCount;
+	}
+	/**
+	 * 设置：升级主机编号
+	 */
+	public void setOsIds(String osIds) {
+		this.osIds = osIds;
+	}
+	/**
+	 * 获取：升级主机编号
+	 */
+	public String getOsIds() {
+		return osIds;
+	}
+	/**
+	 * 设置：升级主机IP
+	 */
+	public void setOsIps(String osIps) {
+		this.osIps = osIps;
+	}
+	/**
+	 * 获取：升级主机IP
+	 */
+	public String getOsIps() {
+		return osIps;
 	}
 	/**
 	 * 设置：备注

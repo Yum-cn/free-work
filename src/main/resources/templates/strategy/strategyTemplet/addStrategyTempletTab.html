@@ -1108,9 +1108,9 @@
 																		<label class="col-sm-1 control-label">类型：</label>
 																		<div class="col-sm-2">
 																			<label class="radio-inline"><input
-																				name="file_control_file_type" type="radio" value="1">&nbsp;&nbsp;&nbsp;&nbsp;只读
+																				name="file_control_file_type" type="radio" value="1">&nbsp;&nbsp;&nbsp;&nbsp;1.只读
 																			</label> <label class="radio-inline"> <input
-																				name="file_control_file_type" type="radio" value="2">&nbsp;&nbsp;&nbsp;&nbsp;禁用
+																				name="file_control_file_type" type="radio" value="2">&nbsp;&nbsp;&nbsp;&nbsp;2.禁用
 																			</label>
 																		</div>
 																		<button
@@ -1768,16 +1768,27 @@
             }
         });
     });
-
+    $().ready(function() {
+    	
+    	
+    });
     function tabInitLoadType(type){
         if(type==2){
-        	loadTypeTab("chosen-select2","alarm_level","alarm_id");
+        	
+        	var maxIndex=$(".chosen-select2").find("option").length;
+        	if(maxIndex==1){
+        		loadTypeTab("chosen-select2","alarm_level","alarm_id");
+        	}
         	if(irregularConnection != null && irregularConnection != undefined){
                 $("#irregularConnectionId").val(irregularConnection.id);
                 initIrregularConnection(irregularConnection);
             }
         }else if(type==3){
-        	loadTypeTab("chosen-select3","cd_access_type","cd_rom");
+        	var maxIndex=$(".chosen-select3").find("option").length;
+            if(maxIndex==1){
+            	loadTypeTab("chosen-select3","cd_access_type","cd_rom");
+            }
+        	
         	if(deviceControl != null && deviceControl != undefined){
                 debugger;
                 $("#deviceControlId").val(deviceControl.id);
@@ -1785,7 +1796,11 @@
             }
             
         }else if(type==4){
-        	loadTypeTab("chosen-select4","record_mode","record_mode");
+        	var maxIndex=$(".chosen-select4").find("option").length;
+            if(maxIndex==1){
+            	loadTypeTab("chosen-select4","record_mode","record_mode");
+            }
+        	
         	if(diskRecord != null && diskRecord != undefined){
                 $("#diskRecordId").val(diskRecord.id);
                 initDiskRecord(diskRecord);
