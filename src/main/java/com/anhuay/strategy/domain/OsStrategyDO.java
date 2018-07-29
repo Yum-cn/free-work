@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-22 17:07:47
+ * @date 2018-07-29 16:01:41
  */
 public class OsStrategyDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,10 +19,12 @@ public class OsStrategyDO implements Serializable {
 	private Long id;
 	//模板编号
 	private Long templetId;
+	//模板名称
+	private String templetName;
 	//主机编号
-	private Long osIds;
+	private String osIds;
 	//主机名称
-	private Long osNames;
+	private String osNames;
 	//状态
 	private Integer status;
 	//创建时间
@@ -55,27 +57,39 @@ public class OsStrategyDO implements Serializable {
 		return templetId;
 	}
 	/**
+	 * 设置：模板名称
+	 */
+	public void setTempletName(String templetName) {
+		this.templetName = templetName;
+	}
+	/**
+	 * 获取：模板名称
+	 */
+	public String getTempletName() {
+		return templetName;
+	}
+	/**
 	 * 设置：主机编号
 	 */
-	public void setOsIds(Long osIds) {
+	public void setOsIds(String osIds) {
 		this.osIds = osIds;
 	}
 	/**
 	 * 获取：主机编号
 	 */
-	public Long getOsIds() {
+	public String getOsIds() {
 		return osIds;
 	}
 	/**
 	 * 设置：主机名称
 	 */
-	public void setOsNames(Long osNames) {
+	public void setOsNames(String osNames) {
 		this.osNames = osNames;
 	}
 	/**
 	 * 获取：主机名称
 	 */
-	public Long getOsNames() {
+	public String getOsNames() {
 		return osNames;
 	}
 	/**

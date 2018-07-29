@@ -1,15 +1,15 @@
 $().ready(function() {
 	validateRule();
 
-	$("#removeDept").click(function() {
+	$("#dept_name_show").dblclick(function() {
 		$("#dept_name_show option:selected").remove();
-		$("#dept_name_show option:first").attr("selected", true);
+		document.getElementById('dept_name_show')[0].selected = true;
 		dealOptions("dept_name_show","deptIds", "deptNames");
 
 	});
-	$("#removeTemplet").click(function() {
+	$("#templet_name_show").dblclick(function() {
 		$("#templet_name_show option:selected").remove();
-		$("#templet_name_show option:first").attr("selected", true);
+		document.getElementById('templet_name_show')[0].selected = true;
 		dealOptions("templet_name_show","templetId", "templetName");
 	});
 	
@@ -100,6 +100,13 @@ function loadTemplet(id, name) {
 	$("#templet_name_show option:first").attr("selected", true);
 	dealOptions("templet_name_show","templetId", "templetName");
 
+}
+
+
+function removeTemplet() {
+	$("#templet_name_show option:selected").remove();
+	$("#templet_name_show option:first").attr("selected", true);
+	dealOptions("templet_name_show", "templetId", "templetName");
 }
 
 function dealOptions(sourceId, targetId,targetName) {

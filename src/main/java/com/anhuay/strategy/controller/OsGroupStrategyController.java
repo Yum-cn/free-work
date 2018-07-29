@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.strategy.domain.OsGroupStrategyDO;
 import com.anhuay.strategy.service.OsGroupStrategyService;
+import com.common.constant.CommonEnum;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -64,7 +65,7 @@ public class OsGroupStrategyController {
 	String edit(@PathVariable("id") Long id,Model model){
 		OsGroupStrategyDO osGroupStrategy = osGroupStrategyService.get(id);
 		model.addAttribute("osGroupStrategy", osGroupStrategy);
-	    return "strategy/osGroupStrategy/edit";
+	    return "strategy/osGroupStrategy/add";
 	}
 	
 	/**
@@ -74,8 +75,19 @@ public class OsGroupStrategyController {
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:osGroupStrategy:add")
 	public R save( OsGroupStrategyDO osGroupStrategy){
-		if(osGroupStrategyService.save(osGroupStrategy)>0){
-			return R.ok();
+		
+		osGroupStrategy.setUpdateTime(System.currentTimeMillis() / 1000);
+		if(osGroupStrategy.getId()!=null && osGroupStrategy.getId()>0){
+			if(osGroupStrategyService.update(osGroupStrategy)>0){
+				return R.ok();
+			}
+		}else{
+			osGroupStrategy.setStatus(CommonEnum.STATUS.ONE.value);
+			osGroupStrategy.setCreateTime(System.currentTimeMillis() / 1000);
+			
+			if(osGroupStrategyService.save(osGroupStrategy)>0){
+				return R.ok();
+			}
 		}
 		return R.error();
 	}

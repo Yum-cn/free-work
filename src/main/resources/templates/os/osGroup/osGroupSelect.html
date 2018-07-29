@@ -8,21 +8,12 @@
 			<div class="ibox">
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
-							<button shiro:hasPermission="strategy:osStrategy:add" type="button" class="btn  btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
-							</button>
-							<button shiro:hasPermission="strategy:osStrategy:batchRemove" type="button" class="btn  btn-danger"
-								onclick="batchRemove()">
-								<i class="fa fa-trash" aria-hidden="true"></i>删除
-							</button>
-						</div>
 						<div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="searchName" type="text" class="form-control"
-								placeholder="主机IP">
+								placeholder="">
 						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
@@ -39,23 +30,23 @@
 				var s_resetPwd_h = 'hidden';
 			</script>
 		</div>
-		<div shiro:hasPermission="strategy:osStrategy:edit">
+		<div shiro:hasPermission="os:osGroup:edit">
 			<script type="text/javascript">
 				s_edit_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="strategy:osStrategy:remove">
+		<div shiro:hasPermission="os:osGroup:remove">
 			<script type="text/javascript">
 				var s_remove_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="strategy:osStrategy:resetPwd">
+		<div shiro:hasPermission="os:osGroup:resetPwd">
 			<script type="text/javascript">
 				var s_resetPwd_h = '';
 			</script>
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/strategy/osStrategy/osStrategy.js"></script>
+	<script type="text/javascript" src="/js/appjs/os/osGroup/osGroupSelect.js"></script>
 </body>
 </html>

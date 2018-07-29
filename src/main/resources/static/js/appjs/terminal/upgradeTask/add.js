@@ -159,7 +159,7 @@ function selectOsInfo() {
 	// 获取当前窗口名称
 	layer.open({
 		type : 2,
-		title : '选择终端程序升级文件',
+		title : '选择主机',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
@@ -171,9 +171,13 @@ function selectOsInfo() {
 function loadOsInfo(id, name) {
 	console.log(id);
 	console.log(name);
-
-	var html = '<option value="' + id + '">' + name + '</option>';
-	$("#os_info_show").html(html);
+	$("#os_info_show").html("");
+	for (x in id)
+	{
+	//console.log(id[x]+">>>"+name[x]);
+		var html = '<option value="' + id[x] + '">' + name[x] + '</option>';
+		$("#os_info_show").append(html);
+	}
 	$("#os_info_show option:first").attr("selected", true);
 	dealOptions("os_info_show", "osIds", "osIps");
 }

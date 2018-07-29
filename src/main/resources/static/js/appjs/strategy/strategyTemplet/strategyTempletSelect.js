@@ -51,10 +51,7 @@ function load() {
                     return e;
             }
 			
-		}, {
-			field : 'id',
-			title : '主键编号'
-		}, {
+		},{
 			field : 'templetName',
 			title : '模板名称'
 		}, {

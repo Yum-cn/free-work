@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-22 17:07:47
+ * @date 2018-07-29 16:01:40
  */
 public class OsGroupStrategyDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +19,8 @@ public class OsGroupStrategyDO implements Serializable {
 	private Long id;
 	//模板编号
 	private Long templetId;
+	//模板名称
+	private String templetName;
 	//主机组编号
 	private Long osGroupIds;
 	//主机组名称
@@ -53,6 +55,18 @@ public class OsGroupStrategyDO implements Serializable {
 	 */
 	public Long getTempletId() {
 		return templetId;
+	}
+	/**
+	 * 设置：模板名称
+	 */
+	public void setTempletName(String templetName) {
+		this.templetName = templetName;
+	}
+	/**
+	 * 获取：模板名称
+	 */
+	public String getTempletName() {
+		return templetName;
 	}
 	/**
 	 * 设置：主机组编号

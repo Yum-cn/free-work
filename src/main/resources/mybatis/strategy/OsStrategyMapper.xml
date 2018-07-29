@@ -4,16 +4,17 @@
 <mapper namespace="com.anhuay.strategy.dao.OsStrategyDao">
 
 	<select id="get" resultType="com.anhuay.strategy.domain.OsStrategyDO">
-		select `id`,`templet_id`,`os_ids`,`os_names`,`status`,`create_time`,`update_time` from ahy_os_strategy where id = #{value}
+		select `id`,`templet_id`,`templet_name`,`os_ids`,`os_names`,`status`,`create_time`,`update_time` from ahy_os_strategy where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.strategy.domain.OsStrategyDO">
-		select `id`,`templet_id`,`os_ids`,`os_names`,`status`,`create_time`,`update_time` from ahy_os_strategy
+		select `id`,`templet_id`,`templet_name`,`os_ids`,`os_names`,`status`,`create_time`,`update_time` from ahy_os_strategy
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
+		  		  <if test="templetName != null and templetName != ''"> and templet_name = #{templetName} </if>
 		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
-		  		  <if test="osNames != null and osNames != ''"> and os_names = #{osNames} </if>
+		  		  <if test="osNames != null and osNames != ''"> and os_names  LIKE CONCAT('%',#{osNames},'%') </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
@@ -37,19 +38,21 @@
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
+		  		  <if test="templetName != null and templetName != ''"> and templet_name = #{templetName} </if>
 		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
-		  		  <if test="osNames != null and osNames != ''"> and os_names = #{osNames} </if>
+		  		  <if test="osNames != null and osNames != ''"> and os_names  LIKE CONCAT('%',#{osNames},'%') </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-		  		</where>
+		  		  and status = 1
+		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.anhuay.strategy.domain.OsStrategyDO">
+	<insert id="save" parameterType="com.anhuay.strategy.domain.OsStrategyDO" useGeneratedKeys="true" keyProperty="id">
 		insert into ahy_os_strategy
 		(
-			`id`, 
 			`templet_id`, 
+			`templet_name`, 
 			`os_ids`, 
 			`os_names`, 
 			`status`, 
@@ -58,8 +61,8 @@
 		)
 		values
 		(
-			#{id}, 
 			#{templetId}, 
+			#{templetName}, 
 			#{osIds}, 
 			#{osNames}, 
 			#{status}, 
@@ -72,6 +75,7 @@
 		update ahy_os_strategy 
 		<set>
 			<if test="templetId != null">`templet_id` = #{templetId}, </if>
+			<if test="templetName != null">`templet_name` = #{templetName}, </if>
 			<if test="osIds != null">`os_ids` = #{osIds}, </if>
 			<if test="osNames != null">`os_names` = #{osNames}, </if>
 			<if test="status != null">`status` = #{status}, </if>

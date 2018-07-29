@@ -42,6 +42,12 @@ public class OsGroupController {
 	    return "os/osGroup/osGroup";
 	}
 	
+	@GetMapping("/select")
+	@RequiresPermissions("os:osGroup:osGroup")
+	String OsGroupSelect(){
+	    return "os/osGroup/osGroupSelect";
+	}
+	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("os:osGroup:osGroup")
