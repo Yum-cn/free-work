@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.terminal.domain.UpgradeTaskDO;
 import com.anhuay.terminal.service.UpgradeTaskService;
+import com.common.constant.CommonEnum;
+
+import net.sf.json.JSONObject;
+
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -74,10 +78,30 @@ public class UpgradeTaskController {
 	@PostMapping("/save")
 	@RequiresPermissions("terminal:upgradeTask:add")
 	public R save( UpgradeTaskDO upgradeTask){
-		if(upgradeTaskService.save(upgradeTask)>0){
-			return R.ok();
+		
+
+		upgradeTask.setUpgradeRules(JSONObject.fromObject(upgradeTask).toString());
+		
+		upgradeTask.setUpdateTime(System.currentTimeMillis() / 1000);
+		if(upgradeTask.getId()!=null && upgradeTask.getId()>0){
+			if(upgradeTaskService.update(upgradeTask)>0){
+				return R.ok();
+			}
+		}else{
+			upgradeTask.setStatus(CommonEnum.STATUS.ONE.value);
+			upgradeTask.setTaskStatus(CommonEnum.STATUS.ONE.value);
+			upgradeTask.setCreateTime(System.currentTimeMillis() / 1000);
+			
+			if(upgradeTaskService.save(upgradeTask)>0){
+				return R.ok();
+			}
 		}
 		return R.error();
+		
+		/*if(upgradeTaskService.save(upgradeTask)>0){
+			return R.ok();
+		}
+		return R.error();*/
 	}
 	/**
 	 * 修改

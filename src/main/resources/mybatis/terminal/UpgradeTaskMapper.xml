@@ -4,14 +4,15 @@
 <mapper namespace="com.anhuay.terminal.dao.UpgradeTaskDao">
 
 	<select id="get" resultType="com.anhuay.terminal.domain.UpgradeTaskDO">
-		select `id`,`terminal_file_id`,`terminal_file_download_url`,`upgrade_name`,`os_ids`,`os_ips`,`upgrade_time`,`upgrade_version`,`notice_status`,`task_status`,`upgrade_rules`,`status`,`create_time`,`update_time` from ahy_upgrade_task where id = #{value}
+		select `id`,`terminal_file_id`,`terminal_file_name`,`terminal_file_download_url`,`upgrade_name`,`os_ids`,`os_ips`,`upgrade_time`,`upgrade_version`,`notice_status`,`task_status`,`upgrade_rules`,`status`,`create_time`,`update_time` from ahy_upgrade_task where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.terminal.domain.UpgradeTaskDO">
-		select `id`,`terminal_file_id`,`terminal_file_download_url`,`upgrade_name`,`os_ids`,`os_ips`,`upgrade_time`,`upgrade_version`,`notice_status`,`task_status`,`upgrade_rules`,`status`,`create_time`,`update_time` from ahy_upgrade_task
+		select `id`,`terminal_file_id`,`terminal_file_name`,`terminal_file_download_url`,`upgrade_name`,`os_ids`,`os_ips`,`upgrade_time`,`upgrade_version`,`notice_status`,`task_status`,`upgrade_rules`,`status`,`create_time`,`update_time` from ahy_upgrade_task
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="terminalFileId != null and terminalFileId != ''"> and terminal_file_id = #{terminalFileId} </if>
+		  		  <if test="terminalFileName != null and terminalFileName != ''"> and terminal_file_name = #{terminalFileName} </if>
 		  		  <if test="terminalFileDownloadUrl != null and terminalFileDownloadUrl != ''"> and terminal_file_download_url = #{terminalFileDownloadUrl} </if>
 		  		  <if test="upgradeName != null and upgradeName != ''"> and upgrade_name = #{upgradeName} </if>
 		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
@@ -44,6 +45,7 @@
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="terminalFileId != null and terminalFileId != ''"> and terminal_file_id = #{terminalFileId} </if>
+		  		  <if test="terminalFileName != null and terminalFileName != ''"> and terminal_file_name = #{terminalFileName} </if>
 		  		  <if test="terminalFileDownloadUrl != null and terminalFileDownloadUrl != ''"> and terminal_file_download_url = #{terminalFileDownloadUrl} </if>
 		  		  <if test="upgradeName != null and upgradeName != ''"> and upgrade_name = #{upgradeName} </if>
 		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
@@ -60,11 +62,11 @@
 		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.anhuay.terminal.domain.UpgradeTaskDO">
+	<insert id="save" parameterType="com.anhuay.terminal.domain.UpgradeTaskDO" useGeneratedKeys="true" keyProperty="id">
 		insert into ahy_upgrade_task
 		(
-			`id`, 
 			`terminal_file_id`, 
+			`terminal_file_name`, 
 			`terminal_file_download_url`, 
 			`upgrade_name`, 
 			`os_ids`, 
@@ -80,8 +82,8 @@
 		)
 		values
 		(
-			#{id}, 
 			#{terminalFileId}, 
+			#{terminalFileName}, 
 			#{terminalFileDownloadUrl}, 
 			#{upgradeName}, 
 			#{osIds}, 
@@ -101,6 +103,7 @@
 		update ahy_upgrade_task 
 		<set>
 			<if test="terminalFileId != null">`terminal_file_id` = #{terminalFileId}, </if>
+			<if test="terminalFileName != null">`terminal_file_name` = #{terminalFileName}, </if>
 			<if test="terminalFileDownloadUrl != null">`terminal_file_download_url` = #{terminalFileDownloadUrl}, </if>
 			<if test="upgradeName != null">`upgrade_name` = #{upgradeName}, </if>
 			<if test="osIds != null">`os_ids` = #{osIds}, </if>

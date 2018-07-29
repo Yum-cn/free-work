@@ -1,5 +1,6 @@
 $().ready(function() {
 	validateRule();
+	initData();
 });
 
 $.validator.setDefaults({
@@ -7,7 +8,46 @@ $.validator.setDefaults({
 		save();
 	}
 });
+
+function initData() {
+
+	if (bean != null && bean != undefined) {
+
+		var hiddenValue = bean.terminalFileName;
+		if (hiddenValue != undefined && hiddenValue != "") {
+			//$("#personLiableName").val(hiddenValue);
+			var hiddenValueArray = hiddenValue.split(";");
+			for ( var i in hiddenValueArray) {
+				var html = '<option value="' + hiddenValueArray[i] + '">'
+						+ hiddenValueArray[i] + '</option>';
+				$("#templet_name_show").append(html);
+				$("#templet_name_show option:first").attr("selected", true);
+			}
+
+		}
+		var hiddenValue2 = bean.osIps;
+		if (hiddenValue2 != undefined && hiddenValue2 != "") {
+			//$("#deptName").val(hiddenValue2);
+			var hiddenValueArray = hiddenValue2.split(";");
+			for ( var i in hiddenValueArray) {
+				var html = '<option value="' + hiddenValueArray[i] + '">'
+						+ hiddenValueArray[i] + '</option>';
+				$("#os_info_show").append(html);
+				$("#os_info_show option:first").attr("selected", true);
+			}
+
+		}
+	}
+}
+
 function save() {
+	
+	/*var flag = $("#signupForm").valid();
+    if(!flag){
+        //没有通过验证
+        return;
+    }*/
+	
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -36,18 +76,41 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			templet_name_show : {
+				required : true
+			},
+			upgradeName : {
+				required : true
+			},
+			upgradeTime : {
+				required : true
+			},
+			upgradeVersion : {
+				required : true
+			},
+			os_info_show : {
 				required : true
 			}
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
+			templet_name_show : {
+				required : icon + "请选择要升级的终端程序"
+			},
+			upgradeName : {
+				required : icon + "请输入升级任务名称"
+			},
+			upgradeTime : {
+				required : icon + "请输入升级时间"
+			},
+			upgradeVersion : {
+				required : icon + "请输入版本号"
+			},
+			os_info_show : {
+				required : icon + "请选择要升级的主机"
 			}
 		}
 	})
 }
-
 
 function selectTemplet() {
 	// 获取当前窗口名称
@@ -62,20 +125,22 @@ function selectTemplet() {
 
 }
 
-function loadTemplet(id, name) {
+function loadTemplet(id, name,url) {
 	var html = '<option value="' + id + '">' + name + '</option>';
 	$("#templet_name_show").html(html);
 	$("#templet_name_show option:first").attr("selected", true);
-	dealOptions("templet_name_show", "terminalFileId", "terminalFileDownloadUrl");
+	dealOptions("templet_name_show", "terminalFileId",
+			"terminalFileName");
+	$("#terminalFileDownloadUrl").val(url);
 }
 
 function removeTemplet() {
 	$("#templet_name_show option:selected").remove();
 	$("#templet_name_show option:first").attr("selected", true);
-	dealOptions("templet_name_show", "terminalFileId", "terminalFileDownloadUrl");
+	dealOptions("templet_name_show", "terminalFileId",
+			"terminalFileName");
+	$("#terminalFileDownloadUrl").val("");
 }
-
-
 
 function selectOsInfo() {
 	// 获取当前窗口名称
@@ -93,21 +158,18 @@ function selectOsInfo() {
 function loadOsInfo(id, name) {
 	console.log(id);
 	console.log(name);
-	
+
 	var html = '<option value="' + id + '">' + name + '</option>';
 	$("#os_info_show").html(html);
 	$("#os_info_show option:first").attr("selected", true);
-	dealOptions("os_info_show", "terminalFileId", "terminalFileDownloadUrl");
+	dealOptions("os_info_show", "osIds", "osIps");
 }
 
 function removeOsInfo() {
 	$("#os_info_show option:selected").remove();
 	$("#os_info_show option:first").attr("selected", true);
-	dealOptions("os_info_show", "terminalFileId", "terminalFileDownloadUrl");
+	dealOptions("os_info_show", "osIds", "osIps");
 }
-
-
-
 
 function dealOptions(sourceId, targetId, targetName) {
 

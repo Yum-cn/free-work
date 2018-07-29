@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * @author Yum
  * @email wtuada@126.com
- * @date 2018-07-28 15:55:35
+ * @date 2018-07-29 11:47:53
  */
 public class UpgradeTaskDO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +19,8 @@ public class UpgradeTaskDO implements Serializable {
 	private Long id;
 	//终端程序编号
 	private Long terminalFileId;
+	//终端文件名称
+	private String terminalFileName;
 	//终端程序下载地址
 	private String terminalFileDownloadUrl;
 	//升级任务名称
@@ -67,6 +69,18 @@ public class UpgradeTaskDO implements Serializable {
 	 */
 	public Long getTerminalFileId() {
 		return terminalFileId;
+	}
+	/**
+	 * 设置：终端文件名称
+	 */
+	public void setTerminalFileName(String terminalFileName) {
+		this.terminalFileName = terminalFileName;
+	}
+	/**
+	 * 获取：终端文件名称
+	 */
+	public String getTerminalFileName() {
+		return terminalFileName;
 	}
 	/**
 	 * 设置：终端程序下载地址

@@ -48,6 +48,12 @@ public class OsInfoController {
 	    return "os/osInfo/osInfoSelect";
 	}
 	
+	@GetMapping("/v2")
+	@RequiresPermissions("os:osInfo:osInfo")
+	String OsInfoSelectV2(){
+		return "os/osInfo/osInfoV2";
+	}
+	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("os:osInfo:osInfo")

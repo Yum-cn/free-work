@@ -51,6 +51,7 @@ function load() {
 									formatter : function(value, row, index) {
 										var e = '<a class="btn btn-success btn-xs" href="#" mce_href="#" title="点击选中" onclick="selectTemplet(\''
 												+ row.id+ '\',\''
+												+ row.fileName+ '\',\''
 												+ row.downUrl
 												+ '\')"><i class="fa fa-hand-paper-o" aria-hidden="true"></i> ';
 										return e;
@@ -172,10 +173,10 @@ function batchRemove() {
 }
 
 
-function selectTemplet(id,name) {
+function selectTemplet(id,name,url) {
 	//debugger;
 	//console.log(deptId+"11>2>22"+deptName);
-	parent.loadTemplet(id,name);
+	parent.loadTemplet(id,name,url);
 	var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 	parent.layer.close(index);
 }

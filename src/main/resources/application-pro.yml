@@ -1,16 +1,17 @@
 anhuay:
-  uploadPath: /var/uploaded_files/
+  uploadPath: D:/var/uploaded_files/
+  downloadUrl: http://localhost/terminal/terminalFile/download/
 logging:
   level:
-    root: error
-    com.anhuay: info
+    root: info
+    com.anhuay: debug
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/bootdo?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/anhuay?useUnicode=true&characterEncoding=utf8
     username: root
-    password: root
+    password: 123456
     initialSize: 1
     minIdle: 3
     maxActive: 20
