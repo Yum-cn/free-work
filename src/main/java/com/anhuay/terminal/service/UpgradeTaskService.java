@@ -1,9 +1,9 @@
 package com.anhuay.terminal.service;
 
-import com.anhuay.terminal.domain.UpgradeTaskDO;
-
 import java.util.List;
 import java.util.Map;
+
+import com.anhuay.terminal.domain.UpgradeTaskDO;
 
 /**
  * 升级任务管理
@@ -31,4 +31,6 @@ public interface UpgradeTaskService {
     int updateStatus(Long id);
     
     int batchUpdateStatus(Long[] ids);
+    
+    int updateTaskStatus(UpgradeTaskDO upgradeTask);
 }

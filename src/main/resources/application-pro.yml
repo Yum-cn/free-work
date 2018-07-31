@@ -1,6 +1,7 @@
 anhuay:
-  uploadPath: D:/var/uploaded_files/
-  downloadUrl: http://192.168.0.2/terminal/terminalFile/download/
+  #uploadPath: D:/var/uploaded_files/
+  uploadPath: /var/uploaded_files/
+  downloadUrl: http://10.15.0.12/terminal/terminalFile/download/
 logging:
   level:
     root: info

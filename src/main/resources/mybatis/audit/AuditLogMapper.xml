@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anhuay.audit.dao.AuditLogDao">
+
+	<select id="get" resultType="com.anhuay.audit.domain.AuditLogDO">
+		select `logid`,`os_ip`,`os_id`,`info`,`details`,`result`,`entry_time`,`level`,`type`,`be_type`,`log_type`,`notes`,`create_by`,`create_time`,`update_by`,`update_time` from cli_log where logid = #{value}
+	</select>
+
+	<select id="list" resultType="com.anhuay.audit.domain.AuditLogDO">
+		select `logid`,`os_ip`,`os_id`,`info`,`details`,`result`,`entry_time`,`level`,`type`,`be_type`,`log_type`,`notes`,`create_by`,`create_time`,`update_by`,`update_time` from cli_log
+        <where>  
+		  		  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+		  		  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
+		  		  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+		  		  <if test="info != null and info != ''"> and info = #{info} </if>
+		  		  <if test="details != null and details != ''"> and details LIKE CONCAT('%',#{details},'%') </if>
+		  		  <if test="result != null and result != ''"> and result = #{result} </if>
+		  		  <if test="entryTime != null and entryTime != ''"> and entry_time = #{entryTime} </if>
+		  		  <if test="level != null and level != ''"> and level = #{level} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="beType != null and beType != ''"> and be_type = #{beType} </if>
+		  		  <if test="logType != null and logType != ''"> and log_type = #{logType} </if>
+		  		  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by logid desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from cli_log
+		 <where>  
+		  		  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+		  		  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
+		  		  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+		  		  <if test="info != null and info != ''"> and info = #{info} </if>
+		  		  <if test="details != null and details != ''"> and details  LIKE CONCAT('%',#{details},'%')  </if>
+		  		  <if test="result != null and result != ''"> and result = #{result} </if>
+		  		  <if test="entryTime != null and entryTime != ''"> and entry_time = #{entryTime} </if>
+		  		  <if test="level != null and level != ''"> and level = #{level} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="beType != null and beType != ''"> and be_type = #{beType} </if>
+		  		  <if test="logType != null and logType != ''"> and log_type = #{logType} </if>
+		  		  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.anhuay.audit.domain.AuditLogDO" useGeneratedKeys="true" keyProperty="logid">
+		insert into cli_log
+		(
+			`os_ip`, 
+			`os_id`, 
+			`info`, 
+			`details`, 
+			`result`, 
+			`entry_time`, 
+			`level`, 
+			`type`, 
+			`be_type`, 
+			`log_type`, 
+			`notes`, 
+			`create_by`, 
+			`create_time`, 
+			`update_by`, 
+			`update_time`
+		)
+		values
+		(
+			#{osIp}, 
+			#{osId}, 
+			#{info}, 
+			#{details}, 
+			#{result}, 
+			#{entryTime}, 
+			#{level}, 
+			#{type}, 
+			#{beType}, 
+			#{logType}, 
+			#{notes}, 
+			#{createBy}, 
+			#{createTime}, 
+			#{updateBy}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.anhuay.audit.domain.AuditLogDO">
+		update cli_log 
+		<set>
+			<if test="osIp != null">`os_ip` = #{osIp}, </if>
+			<if test="osId != null">`os_id` = #{osId}, </if>
+			<if test="info != null">`info` = #{info}, </if>
+			<if test="details != null">`details` = #{details}, </if>
+			<if test="result != null">`result` = #{result}, </if>
+			<if test="entryTime != null">`entry_time` = #{entryTime}, </if>
+			<if test="level != null">`level` = #{level}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="beType != null">`be_type` = #{beType}, </if>
+			<if test="logType != null">`log_type` = #{logType}, </if>
+			<if test="notes != null">`notes` = #{notes}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where logid = #{logid}
+	</update>
+	
+	<update id="updateStatus">
+        update cli_log set status = 0 where logid = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update cli_log set status = 0 where logid in
+        <foreach item="logid" collection="array" open="(" separator="," close=")">
+            #{logid}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from cli_log where logid = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from cli_log where logid in 
+		<foreach item="logid" collection="array" open="(" separator="," close=")">
+			#{logid}
+		</foreach>
+	</delete>
+
+</mapper>

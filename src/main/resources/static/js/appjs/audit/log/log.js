@@ -1,10 +1,11 @@
 
-var prefix = "/terminal/upgradeTask"
+var prefix = "/audit/log"
 $(function() {
-	load();
+	console.log("type:"+type);
+	load(type);
 });
 
-function load() {
+function load(type) {
 	$('#exampleTable')
 			.bootstrapTable(
 					{
@@ -32,8 +33,9 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
-					           // name:$('#searchName').val(),
+								offset:params.offset,
+								logType:type,
+								details:$('#searchName').val()
 					           // username:$('#searchName').val()
 							};
 						},
@@ -48,124 +50,135 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'id', 
-									title : '主键编号' 
+									field : 'logid', 
+									title : '日志id' 
 								},
 																{
-									field : 'terminalFileName', 
-									title : '终端程序包名称' 
+									field : 'osIp', 
+									title : '客户端ip地址' 
 								},
 																{
-									field : 'upgradeName', 
-									title : '升级任务名称' 
+									field : 'info', 
+									title : '事件客体' 
 								},
 																{
-									field : 'osIps', 
-									title : '升级主机IP' 
+									field : 'details', 
+									title : '事件内容（详细信息）' 
 								},
 																{
-									field : 'upgradeTime', 
-									title : '升级时间' 
+									field : 'result', 
+									title : '事件结果' 
 								},
 																{
-									field : 'upgradeVersion', 
-									title : '版本号' 
+									field : 'entryTime', 
+									title : '事件发生时间' ,
+									formatter : function(value, row, index) {
+										return formatTimeStamp(value);
+									}
 								},
 																{
-									field : 'taskStatus', 
-									title : '任务状态',
+									field : 'level', 
+									title : '风险级别',
+									formatter : function(value, row, index){
+										if(value==0){
+											return '<span class=" ">紧急</span>';
+										}else if(value==1){
+											return '<span class=" ">警报</span>';
+										}else if(value==2){
+											return '<span class=" ">关键</span>';
+										}else if(value==3){
+											return '<span class=" ">错误</span>';
+										}else if(value==4){
+											return '<span class=" ">警告</span>';
+										}else if(value==5){
+											return '<span class=" ">通知</span>';
+										}else if(value==6){
+											return '<span class=" ">信息</span>';
+										}else if(value==7){
+											return '<span class=" ">调试</span>';
+										}else{
+											return '<span class=" "></span>';
+										}
+									}
+								},
+																{
+									field : 'type', 
+									title : '事件种类' ,
+									formatter : function(value, row, index){
+										if(value=='m'){
+											return '<span class=" ">管理操作</span>';
+										}else if(value=='a'){
+											return '<span class=" ">用户操作</span>';
+										}else if(value=='s'){
+											return '<span class=" ">其他</span>';
+										}else{
+											return '<span class=" "></span>';
+										}
+									}
+								},
+																{
+									field : 'beType', 
+									title : '行为类别',
 									formatter : function(value, row, index){
 										if(value==1){
-											return '<span class=" ">待下发</span>';
+											return '<span class=" ">违规行为</span>';
 										}else if(value==2){
-											return '<span class=" ">升级中</span>';
+											return '<span class=" ">异常行为</span>';
 										}else if(value==3){
-											return '<span class=" ">已更新</span>';
+											return '<span class=" ">一般行为</span>';
 										}else{
-											return '<span class=" ">未开启</span>';
+											return '<span class=" "></span>';
 										}
 									} 
 								},
 																{
 									field : 'createTime', 
-									title : '创建时间',
+									title : '创建时间' ,
 									formatter : function(value, row, index) {
-										return formatUnixTime(value);
-									} 
-								},
+										return formatTimeStamp(value);
+									}
+								}/*,
 																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										
-										
-										var a = "";
-			                            if (row.taskStatus == 0||row.taskStatus==null) {
-			                            	a = '<a class="btn btn-success btn-sm" href="#" mce_href="#" title="点击开启" onclick="changeStatus(\''
-				                                + row.id + '\',\'' + row.taskStatus
-				                                + '\')"><i class=""></i>开启</a> ';
-			                            } 
-			                            if (row.taskStatus == 1) {
-			                            	a = '<a class="btn btn-danger btn-sm" href="#" mce_href="#" title="点击关闭" onclick="changeStatus(\''
-				                                + row.id + '\',\'' + row.taskStatus
-				                                + '\')"><i class="">关闭</i></a> ';
-			                            }
-										
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.id
+												+ row.logid
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
+												+ row.logid
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
+												+ row.logid
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d+a ;
+										return e + d ;
 									}
-								} ]
+								}*/ ]
 					});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	/*layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
-	});*/
-	
-	var index = layer.open({
-		type : 2,
-		title : '添加升级任务',
-		content : prefix + '/add',
-		area : [ '800px', '520px' ],
-		maxmin : true
 	});
-	layer.full(index);
 }
 function edit(id) {
-	/*layer.open({
+	layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
-	});*/
-	
-	var index = layer.open({
-		type : 2,
-		title : '编辑升级任务',
-		content : prefix + '/edit/' + id,
-		area : [ '800px', '520px' ],
-		maxmin : true
 	});
-	layer.full(index);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
@@ -175,7 +188,7 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'id' : id
+				'logid' : id
 			},
 			success : function(r) {
 				if (r.code==0) {
@@ -204,7 +217,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['id'];
+			ids[i] = row['logid'];
 		});
 		$.ajax({
 			type : 'POST',
@@ -224,37 +237,4 @@ function batchRemove() {
 	}, function() {
 
 	});
-}
-
-
-function changeStatus(id, status) {
-    var actCh;
-    var cmd;
-    if (status == 0) {
-        cmd = '1';
-        actCh = "确认要开启任务吗？";
-    } else {
-        cmd = '0';
-        actCh = "确认要停止任务吗？";
-    }
-    layer.confirm(actCh, {
-        btn: ['确定', '取消']
-    }, function () {
-        $.ajax({
-            url: prefix + "/updateTaskStatus",
-            type: "post",
-            data: {
-                'id': id,
-                'taskStatus': cmd
-            },
-            success: function (r) {
-                if (r.code == 0) {
-                    layer.msg(r.msg);
-                    reLoad();
-                } else {
-                    layer.msg(r.msg);
-                }
-            }
-        });
-    })
 }

@@ -123,6 +123,10 @@
 	<update id="updateStatus">
         update ahy_upgrade_task set status = 0 where id = #{value}
     </update>
+	
+	<update id="updateTaskStatus">
+        update ahy_upgrade_task set task_status = #{taskStatus} where id = #{id}
+    </update>
 
     <update id="batchUpdateStatus">
         update ahy_upgrade_task set status = 0 where id in

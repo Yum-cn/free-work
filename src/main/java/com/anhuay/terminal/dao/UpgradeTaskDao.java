@@ -33,4 +33,6 @@ public interface UpgradeTaskDao {
 	int updateStatus(Long id);
 	
 	int batchUpdateStatus(Long[] ids);
+
+	int updateTaskStatus(UpgradeTaskDO upgradeTask);
 }

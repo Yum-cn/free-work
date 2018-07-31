@@ -62,4 +62,9 @@ public class UpgradeTaskServiceImpl implements UpgradeTaskService {
     public int batchUpdateStatus(Long[] ids){
         return upgradeTaskDao.batchUpdateStatus(ids);
     }
+    
+    @Override
+    public int updateTaskStatus(UpgradeTaskDO upgradeTask){
+    	return upgradeTaskDao.updateTaskStatus(upgradeTask);
+    }
 }

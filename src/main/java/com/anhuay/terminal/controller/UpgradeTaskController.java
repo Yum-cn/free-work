@@ -109,6 +109,16 @@ public class UpgradeTaskController {
 		upgradeTaskService.update(upgradeTask);
 		return R.ok();
 	}
+	/**
+	 * 修改
+	 */
+	@ResponseBody
+	@RequestMapping("/updateTaskStatus")
+	@RequiresPermissions("terminal:upgradeTask:edit")
+	public R updateTaskStatus( UpgradeTaskDO upgradeTask){
+		upgradeTaskService.updateTaskStatus(upgradeTask);
+		return R.ok();
+	}
 	
 	/**
 	 * 删除
