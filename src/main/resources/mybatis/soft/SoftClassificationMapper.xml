@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.anhuay.soft.dao.SoftClassificationDao">
+
+	<select id="get" resultType="com.anhuay.soft.domain.SoftClassificationDO">
+		select `id`,`file_name`,`file_version`,`upload_time`,`file_tag`,`remark`,`dict_id`,`dict_name`,`status`,`create_time`,`update_time` from ahy_soft_classification where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.anhuay.soft.domain.SoftClassificationDO">
+		select `id`,`file_name`,`file_version`,`upload_time`,`file_tag`,`remark`,`dict_id`,`dict_name`,`status`,`create_time`,`update_time` from ahy_soft_classification
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
+		  		  <if test="fileVersion != null and fileVersion != ''"> and file_version = #{fileVersion} </if>
+		  		  <if test="uploadTime != null and uploadTime != ''"> and upload_time = #{uploadTime} </if>
+		  		  <if test="fileTag != null and fileTag != ''"> and file_tag = #{fileTag} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="dictId != null and dictId != ''"> and dict_id = #{dictId} </if>
+		  		  <if test="dictName != null and dictName != ''"> and dict_name = #{dictName} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from ahy_soft_classification
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
+		  		  <if test="fileVersion != null and fileVersion != ''"> and file_version = #{fileVersion} </if>
+		  		  <if test="uploadTime != null and uploadTime != ''"> and upload_time = #{uploadTime} </if>
+		  		  <if test="fileTag != null and fileTag != ''"> and file_tag = #{fileTag} </if>
+		  		  <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+		  		  <if test="dictId != null and dictId != ''"> and dict_id = #{dictId} </if>
+		  		  <if test="dictName != null and dictName != ''"> and dict_name = #{dictName} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
+		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.anhuay.soft.domain.SoftClassificationDO">
+		insert into ahy_soft_classification
+		(
+			`id`, 
+			`file_name`, 
+			`file_version`, 
+			`upload_time`, 
+			`file_tag`, 
+			`remark`, 
+			`dict_id`, 
+			`dict_name`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{id}, 
+			#{fileName}, 
+			#{fileVersion}, 
+			#{uploadTime}, 
+			#{fileTag}, 
+			#{remark}, 
+			#{dictId}, 
+			#{dictName}, 
+			#{status}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.anhuay.soft.domain.SoftClassificationDO">
+		update ahy_soft_classification 
+		<set>
+			<if test="fileName != null">`file_name` = #{fileName}, </if>
+			<if test="fileVersion != null">`file_version` = #{fileVersion}, </if>
+			<if test="uploadTime != null">`upload_time` = #{uploadTime}, </if>
+			<if test="fileTag != null">`file_tag` = #{fileTag}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="dictId != null">`dict_id` = #{dictId}, </if>
+			<if test="dictName != null">`dict_name` = #{dictName}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+        update ahy_soft_classification set status = 0 where id = #{value}
+    </update>
+
+    <update id="batchUpdateStatus">
+        update ahy_soft_classification set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+	
+	<delete id="remove">
+		delete from ahy_soft_classification where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from ahy_soft_classification where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

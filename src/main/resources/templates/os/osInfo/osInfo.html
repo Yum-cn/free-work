@@ -24,73 +24,27 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 
-			<div class="col-sm-3">
-				<div class="ibox ibox-body">
-					<div class="ibox-title">
-						<h5>选择部门</h5>
-					</div>
-					<div class="ibox-content">
-						<div id="jstree"></div>
-					</div>
+		<div class="col-sm-3">
+			<div class="ibox ibox-body">
+				<div class="ibox-title">
+					<h5>选择部门</h5>
+				</div>
+				<div class="ibox-content">
+					<div id="jstree"></div>
 				</div>
 			</div>
-			<div class="col-sm-9">
-				<div class="ibox">
-					<div class="ibox-body">
-						<div class="fixed-table-toolbar">
-							<div class="columns pull-left">
-								<button shiro:hasPermission="os:osInfo:add" type="button"
-									class="btn  btn-primary" onclick="add()">
-									<i class="fa fa-plus" aria-hidden="true"></i>添加(上线隐藏)
-								</button>
-								<button shiro:hasPermission="os:osInfo:batchRemove"
-									type="button" class="btn  btn-danger" onclick="batchRemove()">
-									<i class="fa fa-trash" aria-hidden="true"></i>删除
-								</button>
-							</div>
-							<div class="columns pull-right">
-								<button class="btn btn-success" onclick="reLoad()">查询</button>
-							</div>
-							<div class="columns pull-right col-md-2 nopadding">
-								<input id="searchName" type="text" class="form-control"
-									placeholder="主机IP">
-							</div>
-						</div>
-						<table id="exampleTable">
-						</table>
-						<br>
-						<style>
-.table-striped{
-  word-wrap:break-word;
-  table-layout:fixed;
-white-space:pre-wrap;
-}
-.fixed-table-container tbody td .th-inner, .fixed-table-container thead th .th-inner {
-    line-height: 20px;
-    vertical-align: top;
-    text-overflow: ellipsis;
-    white-space:pre-wrap;
-    padding: 8px;
-    overflow: hidden;
-    word-wrap:break-word;
-}
-
-</style>
-					</div>
-				</div>
 		</div>
-
-
-		<!-- <div class="col-sm-12">
+		<div class="col-sm-9">
 			<div class="ibox">
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="os:osInfo:add" type="button" class="btn  btn-primary" onclick="add()">
+							<button shiro:hasPermission="os:osInfo:add" type="button"
+								class="btn  btn-primary" onclick="add()">
 								<i class="fa fa-plus" aria-hidden="true"></i>添加(上线隐藏)
 							</button>
-							<button shiro:hasPermission="os:osInfo:batchRemove" type="button" class="btn  btn-danger"
-								onclick="batchRemove()">
+							<button shiro:hasPermission="os:osInfo:batchRemove" type="button"
+								class="btn  btn-danger" onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button>
 						</div>
@@ -99,15 +53,35 @@ white-space:pre-wrap;
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="searchName" type="text" class="form-control"
-								placeholder="">
+								placeholder="主机IP">
 						</div>
 					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
+					<table id="exampleTable">
 					</table>
+					<br>
+
 				</div>
 			</div>
-		</div> -->
+		</div>
 	</div>
+	                   <style>
+						.table-striped {
+						    word-wrap: break-word;
+						    table-layout: fixed;
+						    white-space: pre-wrap;
+						}
+						
+						.fixed-table-container tbody td .th-inner, .fixed-table-container thead th .th-inner
+						    {
+						    line-height: 20px;
+						    vertical-align: top;
+						    text-overflow: ellipsis;
+						    white-space: pre-wrap;
+						    padding: 8px;
+						    overflow: hidden;
+						    word-wrap: break-word;
+						}
+						</style>
 	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
 	<div>
 		<script type="text/javascript">

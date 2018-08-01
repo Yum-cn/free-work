@@ -119,11 +119,23 @@ function load(deptId) {
 									field : 'onlineStatus',
 									title : '在线状态',
 									formatter : function(value, row, index){
-										if(value==1){
+										
+										var d =new Date();
+										//console.log("当前时间："+d.getTime()/1000);
+										//console.log("活跃时间1："+row.lastActiveTime);
+										//console.log("活跃时间2："+(parseInt(row.lastActiveTime)+parseInt(2*60)));
+										
+										if((parseInt(row.lastActiveTime)+parseInt(2*60))>=d.getTime()/1000){
+											return '<span class=" ">在线</span>'
+										}else{
+											return '<span class=" ">离线</span>';
+										}
+										
+										/*if(value==1){
 											return '<span class=" ">在线</span>';
 										}else if(value==2){
 											return '<span class=" ">离线</span>';
-										}
+										}*/
 									}
 								},
 								{
@@ -138,8 +150,18 @@ function load(deptId) {
 									}
 								},
 								{
+									field : 'lastActiveTime',
+									title : '最后活跃时间',
+									formatter : function(value, row, index) {
+										return formatUnixTime(value);
+									}
+								},
+								{
 									field : 'createTime',
-									title : '创建时间'
+									title : '创建时间',
+									formatter : function(value, row, index) {
+										return formatUnixTime(value);
+									}
 								},
 								{
 									title : '操作',

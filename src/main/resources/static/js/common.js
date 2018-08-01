@@ -78,6 +78,11 @@ function getDate(mmsecond) {
 }
 
 function formatUnixTime(time) {
+	
+	if(time == null || time == undefined){
+		return "";
+	}
+	
 	let unixtime = time;
 	let unixTimestamp = new Date(unixtime * 1000);
 	let Y = unixTimestamp.getFullYear();
@@ -99,7 +104,7 @@ function formatUnixTime(time) {
 
 
 function formatTimeStamp(time) {
-	console.log(">>>"+time);
+	//console.log(">>>"+time);
 	let unixtime = time;
 	console.log(unixtime);
 	let unixTimestamp = new Date(unixtime);

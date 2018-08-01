@@ -88,4 +88,25 @@ public class DateUtils {
         r += "前";
         return r;
     }
+    
+    /**
+	 * 转换为Unix时间戳
+	 * @author Yum
+	 */
+	public static long getTimestamp(String date) {
+
+		try {
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
+			Date dateFormat = df.parse(date);
+			return dateFormat.getTime() / 1000;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getTimestamp("2018-01-01 02:15:03"));
+	}
 }
