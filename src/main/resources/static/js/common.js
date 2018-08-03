@@ -124,3 +124,83 @@ function formatTimeStamp(time) {
 	let toDay = Y + '-' + M + '-' + D+ ' ' + h + ':' + minute + ':' + second;
 	return toDay;
 }
+
+
+function loadType(type,id,checkedValue){
+	var html = "";
+	$.ajax({
+		url : '/common/dict/list/'+type,
+		success : function(data) {
+			
+			// debugger;
+			// 加载数据
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+			}
+			
+			if(id==undefined && checkedValue==undefined){
+				$(".chosen-select").append(html);
+			}else if(id!=undefined && checkedValue==undefined){
+				
+				$(".chosen-select[name="+id+"]").append(html);
+			}
+			$(".chosen-select").chosen({
+				maxHeight : 200
+			});
+			if(id!=undefined && checkedValue!=undefined){
+				$("#"+id).val(checkedValue);
+			}
+			$(".chosen-select").trigger("chosen:updated");
+			// 点击事件
+			$('.chosen-select').on('change', function(e, params) {
+				console.log(params.selected);
+				var opt = {
+					query : {
+						type : params.selected,
+					}
+				}
+				$('#exampleTable').bootstrapTable('refresh', opt);
+			});
+		}
+	});
+}
+
+
+function loadTypeTab(className,type,id,checkedValue){
+	var html = "";
+	$.ajax({
+		url : '/common/dict/list/'+type,
+		success : function(data) {
+			
+			 debugger;
+			//alert(className+">>>"+type+">>>"+id+">>>"+checkedValue);
+			// 加载数据
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+			}
+			
+			if(id!=undefined && checkedValue==undefined){
+				//alert($("."+className+"[name="+id+"]").text());
+				//alert(html);
+				$("."+className+"[name="+id+"]").append(html);
+			}
+			$("."+className).chosen({
+				maxHeight : 200
+			});
+			if(id!=undefined && checkedValue!=undefined){
+				$("#"+id).val(checkedValue);
+			}
+			$("."+className).trigger("chosen:updated");
+			// 点击事件
+			$('.'+className).on('change', function(e, params) {
+				console.log(params.selected);
+				var opt = {
+					query : {
+						type : params.selected,
+					}
+				}
+				$('#exampleTable').bootstrapTable('refresh', opt);
+			});
+		}
+	});
+}

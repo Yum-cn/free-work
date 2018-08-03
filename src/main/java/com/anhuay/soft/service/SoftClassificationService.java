@@ -1,5 +1,7 @@
 package com.anhuay.soft.service;
 
+import com.anhuay.common.domain.DictDO;
+import com.anhuay.common.domain.Tree;
 import com.anhuay.soft.domain.SoftClassificationDO;
 
 import java.util.List;
@@ -31,4 +33,6 @@ public interface SoftClassificationService {
     int updateStatus(Long id);
     
     int batchUpdateStatus(Long[] ids);
+
+	Tree<DictDO> getTree(Map<String, Object> map);
 }

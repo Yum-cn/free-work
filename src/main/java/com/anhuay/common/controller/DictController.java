@@ -167,7 +167,7 @@ public class DictController extends BaseController {
 	 */
 	@GetMapping("/citys")
 	@ResponseBody
-	public Object vancloudCitys(HttpServletRequest request, HttpServletResponse response) {
+	public Object citys(HttpServletRequest request, HttpServletResponse response) {
 
 		List<Node> retList = DictUtil.getNodeList(commonManager
 				.getMutiTreeCode("sys_city_level_one,sys_city_level_two,sys_city_level_three"));
