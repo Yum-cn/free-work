@@ -22,7 +22,7 @@
                 <div class="tab-content">
                     <!--basic info-->
                     <div class="ibox-content tab-pane fade in active"  id="basic_info">
-                        <form class="gg-form" role="form" id="basicInfoForm">
+                        <form class="gg-form" role="form" id="basicInfoForm" style="margin-top: 0px;">
                             <input name="userId" type="hidden" th:value="${user.userId}"/>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
@@ -103,7 +103,7 @@
                                     <input type="text" class="form-control" id="address" name="liveAddress" th:value="${user.liveAddress}" placeholder="请输入居住地址" />
                                 </div>
                             </div>
-                            <div class="gg-formGroup">
+                            <!-- <div class="gg-formGroup">
                                 <div class="gg-formTitle">
                                     <em class="gg-star">*</em>
                                     <span>爱好:</span>
@@ -116,7 +116,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
                         <div class="gg-btnGroup">
                             <button type="button" class="btn btn-sm btn-primary" id="base_save">保存</button>

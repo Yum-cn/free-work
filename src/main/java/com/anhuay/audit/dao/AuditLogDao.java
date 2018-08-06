@@ -1,5 +1,6 @@
 package com.anhuay.audit.dao;
 
+import com.anhuay.audit.domain.AuditAlarmLogVO;
 import com.anhuay.audit.domain.AuditLogDO;
 
 import java.util.List;
@@ -33,4 +34,8 @@ public interface AuditLogDao {
 	int updateStatus(Long logid);
 	
 	int batchUpdateStatus(Long[] logids);
+
+	List<AuditAlarmLogVO> listAlarm(Map<String, Object> map);
+
+	int countAlarm(Map<String, Object> map);
 }

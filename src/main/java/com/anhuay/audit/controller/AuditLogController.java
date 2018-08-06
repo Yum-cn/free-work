@@ -5,16 +5,16 @@ import java.util.Map;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.audit.domain.AuditAlarmLogVO;
 import com.anhuay.audit.domain.AuditLogDO;
 import com.anhuay.audit.service.AuditLogService;
 import com.anhuay.common.utils.PageUtils;
@@ -45,6 +45,12 @@ public class AuditLogController {
 	    return "audit/log/log";
 	}
 	
+	@GetMapping("/alarm")
+	@RequiresPermissions("audit:log")
+	String LogAlarm(){
+	    return "audit/log/alarm";
+	}
+	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("audit:log:log")
@@ -56,6 +62,20 @@ public class AuditLogController {
 		PageUtils pageUtils = new PageUtils(logList, total);
 		return pageUtils;
 	}
+	
+	
+	@ResponseBody
+	@GetMapping("/listAlarm")
+	@RequiresPermissions("audit:log:log")
+	public PageUtils listAlarm(@RequestParam Map<String, Object> params){
+		//查询列表数据
+        Query query = new Query(params);
+		List<AuditAlarmLogVO> logList = logService.listAlarm(query);
+		int total = logService.countAlarm(query);
+		PageUtils pageUtils = new PageUtils(logList, total);
+		return pageUtils;
+	}
+	
 	
 	@GetMapping("/add")
 	@RequiresPermissions("audit:log:add")

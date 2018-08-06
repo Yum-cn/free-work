@@ -1,8 +1,7 @@
 anhuay:
   #uploadPath: D:/var/uploaded_files/
   uploadPath: /var/uploaded_files/
-  #downloadUrl: http://192.168.1.150:8080/terminal/terminalFile/download/
-  downloadUrl: http://127.0.0.1:8080/terminal/terminalFile/download/
+  downloadUrl: http://192.168.0.2/terminal/terminalFile/download/
 logging:
   level:
     root: info
@@ -11,9 +10,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/server?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/anhuay?useUnicode=true&characterEncoding=utf8
     username: root
-    password: 1qaz2wsx
+    password: 123456
     initialSize: 1
     minIdle: 3
     maxActive: 20

@@ -6,6 +6,7 @@ import net.sf.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class JsonTool {
 	
@@ -38,6 +39,32 @@ public class JsonTool {
 
 		return jsonObject;
 	}
+	
+	/**
+	 * 检测空值
+	 * 
+	 * @author Yum
+	 */
+	public static boolean checkJsonKey(JSONObject jsonObject) {
+
+		boolean jsonBlankTag = false;
+
+		if (jsonObject == null) {
+			return jsonBlankTag;
+		}
+
+		Collection collection = jsonObject.values();
+		for (Iterator iterator = collection.iterator(); iterator.hasNext();) {
+			String value = (String) iterator.next();
+			if (StringUtils.isNotBlank(value)) {
+				jsonBlankTag = true;
+				return jsonBlankTag;
+			}
+		}
+
+		return jsonBlankTag;
+	}
+	
 	
 	/*public static String objToJson(Object obj) {
 		Field[] fields = obj.getClass().getDeclaredFields();

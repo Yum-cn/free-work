@@ -1,9 +1,11 @@
 package com.anhuay.audit.service;
 
-import com.anhuay.audit.domain.AuditLogDO;
-
 import java.util.List;
 import java.util.Map;
+
+import com.anhuay.audit.domain.AuditAlarmLogVO;
+import com.anhuay.audit.domain.AuditLogDO;
+import com.anhuay.common.utils.Query;
 
 /**
  * 
@@ -31,4 +33,12 @@ public interface AuditLogService {
     int updateStatus(Long logid);
     
     int batchUpdateStatus(Long[] logids);
+
+    /**
+     * 告警日志
+     * @author   Yum
+     */
+	List<AuditAlarmLogVO> listAlarm(Map<String, Object> map);
+
+	int countAlarm(Map<String, Object> map);
 }

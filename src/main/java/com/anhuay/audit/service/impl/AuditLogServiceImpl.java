@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.anhuay.audit.dao.AuditLogDao;
+import com.anhuay.audit.domain.AuditAlarmLogVO;
 import com.anhuay.audit.domain.AuditLogDO;
 import com.anhuay.audit.service.AuditLogService;
 
@@ -62,4 +63,14 @@ public class AuditLogServiceImpl implements AuditLogService {
     public int batchUpdateStatus(Long[] logids){
         return logDao.batchUpdateStatus(logids);
     }
+
+	@Override
+	public List<AuditAlarmLogVO> listAlarm(Map<String, Object> map) {
+		return logDao.listAlarm(map);
+	}
+
+	@Override
+	public int countAlarm(Map<String, Object> map) {
+		return logDao.countAlarm(map);
+	}
 }

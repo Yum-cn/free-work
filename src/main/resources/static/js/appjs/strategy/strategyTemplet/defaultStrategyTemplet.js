@@ -74,6 +74,21 @@ function load() {
 									}
 								},
 								{
+									field : 'status', 
+									title : '状态',
+									formatter : function(value, row, index){
+										if(value==1){
+											return '<span class=" ">待下发</span>';
+										}else if(value==2){
+											return '<span class=" ">下发中</span>';
+										}else if(value==3){
+											return '<span class=" ">已更新</span>';
+										}else{
+											return '<span class=" ">未开启</span>';
+										}
+									} 
+								},
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',

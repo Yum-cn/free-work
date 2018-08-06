@@ -151,6 +151,7 @@ function initData() {
 
 function initProcessMonitor(osAudit){
 	
+	debugger;
 	var processMonitor = osAudit.processMonitorRules;
 	if(processMonitor!=undefined){
 		
