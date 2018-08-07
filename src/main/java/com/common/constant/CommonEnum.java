@@ -118,12 +118,10 @@ public class CommonEnum {
 		USERNAME_OR_PASSWORD_INCORRECT(1003, "用户名或密码不正确"), 
 		USERNAME_INCORRECT(1004, "账号格式不正确"), 
 		PASSWORD_INCORRECT(1005, "密码格式不正确"), 
-		EMAIL_ACCOUNT_UNBINDING(1006, "邮箱账户未绑定手机号"), 
-		EMAIL_ACCOUNT_BINDING(1007, "邮箱账户已绑定手机号"), 
-		USER_BINDING(1008, "用户已绑定"), 
-		USER_UNBINDING(1009, "用户未绑定"), 
-		USER_NO_PASSWORD(1010, "用户未设置密码"), 
-		VERIFICATION_CODE_INCORRECT(1011, "验证码不正确"), 
+		LOGIN_TIME_UNAUTHORIZED(1006, "登录时间未授权"), 
+		WHITE_IP_UNAUTHORIZED(1007, "访问IP未授权"), 
+		PASSWORD_EXPIRED(1008, "密码已过期"), 
+		PASSWORD_DEFAULT(1009, "初始密码未修改"), 
 		//USER_INFO_MISSING(1100, "用户信息异常"), 
 
 	
@@ -140,6 +138,35 @@ public class CommonEnum {
 		public static String getDescription(int key) {
 			for (CODE enumType : CODE.values()) {
 				if (key == enumType.code) {
+					return enumType.description;
+				}
+			}
+			return null;
+		}
+	}
+	
+	/**
+	 * 目标类型
+	 * @author Yum
+	 */
+	public enum TIMETYPE {
+		
+		WEEK("week", "周"), 
+		MONTH("month", "月"), 
+		YEAR("year", "年"), 
+		;
+		
+		public final String name;
+		public final String description;
+
+		TIMETYPE(String name, String description) {
+			this.name = name;
+			this.description = description;
+		}
+
+		public static String getDescription(String key) {
+			for (TARGETTYPE enumType : TARGETTYPE.values()) {
+				if (StringUtils.equals(key, enumType.name)) {
 					return enumType.description;
 				}
 			}

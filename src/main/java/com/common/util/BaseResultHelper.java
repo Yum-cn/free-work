@@ -4,6 +4,10 @@ import com.common.constant.CommonEnum;
 
 public class BaseResultHelper {
 
+	public static BaseResult<Object> success() {
+		return new BaseResult<Object>(CommonEnum.CODE.SUCCESS.code, CommonEnum.CODE.SUCCESS.description);
+	}
+	
 	public static BaseResult<Object> success(Object object) {
 		return new BaseResult<Object>(CommonEnum.CODE.SUCCESS.code, object, CommonEnum.CODE.SUCCESS.description);
 	}

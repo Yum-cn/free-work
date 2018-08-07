@@ -21,6 +21,11 @@ public class BaseResult<T> implements Serializable{
 		this.code = code;
 	}
 	
+	public BaseResult(int code,String message) {
+		this.code = code;
+		this.message = message;
+	}
+	
 	public BaseResult(int code, T data, String message) {
 		this.code = code;
 		this.data = data;

@@ -19,6 +19,8 @@ public class UserVO {
      * 新密码
      */
     private String pwdNew;
+    
+    private String expiredType;
 
     public UserDO getUserDO() {
         return userDO;
@@ -43,4 +45,14 @@ public class UserVO {
     public void setPwdNew(String pwdNew) {
         this.pwdNew = pwdNew;
     }
+
+	public String getExpiredType() {
+		return expiredType;
+	}
+
+	public void setExpiredType(String expiredType) {
+		this.expiredType = expiredType;
+	}
+    
+    
 }

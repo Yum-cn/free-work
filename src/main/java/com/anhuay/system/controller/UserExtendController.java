@@ -1,11 +1,12 @@
 package com.anhuay.system.controller;
 
-import java.util.Collection;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,13 +25,14 @@ import com.anhuay.common.service.DictService;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
-import com.anhuay.system.domain.RoleDO;
 import com.anhuay.system.domain.UserDO;
 import com.anhuay.system.domain.UserExtendDO;
 import com.anhuay.system.service.RoleService;
 import com.anhuay.system.service.UserExtendService;
 import com.anhuay.system.service.UserService;
+import com.anhuay.system.vo.UserVO;
 import com.common.constant.CommonEnum;
+import com.common.util.BaseResult;
 import com.common.util.BaseResultHelper;
 
 import net.sf.json.JSONObject;
@@ -115,6 +117,74 @@ public class UserExtendController extends BaseController {
 		 */
 	}
 
+	@GetMapping("/setPassword")
+	@RequiresPermissions("system:userExtend:userExtend")
+	String setPassword(Model model) {
+		model.addAttribute("user", getUser());
+		return "system/userExtend/setPassword";
+	}
+	
+
+	@Log("提交更改用户密码")
+	@PostMapping("/resetPwd")
+	@ResponseBody
+	BaseResult<Object> resetPwd(UserVO userVO) {
+	
+		try{
+			userService.resetPwd(userVO,getUser());
+			
+			Long userId = userVO.getUserDO().getUserId();
+			
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("userId", userId);
+			List<UserExtendDO> userExtendList = userExtendService.list(map);
+			
+			UserExtendDO bean = CollectionUtils.isNotEmpty(userExtendList)?userExtendList.get(0):new UserExtendDO();
+			bean.setUserId(getUserId()); 
+			
+			JSONObject jsonObject = new JSONObject();
+			long lastUpdateTime = System.currentTimeMillis() / 1000;
+			String expiredType = userVO.getExpiredType();
+			jsonObject.put("lastUpdateTime", lastUpdateTime);
+			jsonObject.put("expired_type", userVO.getExpiredType());
+			
+			String str = String.valueOf(lastUpdateTime);
+			if (str.length() <= 10) {
+				lastUpdateTime = lastUpdateTime * 1000L;
+			}
+			Calendar expiredCal = Calendar.getInstance();
+			expiredCal.setTimeInMillis(lastUpdateTime);
+			
+			if(StringUtils.isNotBlank(expiredType)){
+				
+				if(StringUtils.equals(expiredType, CommonEnum.TIMETYPE.WEEK.name)){
+					expiredCal.add(Calendar.DATE, 7);
+				}else if(StringUtils.equals(expiredType, CommonEnum.TIMETYPE.MONTH.name)){
+					expiredCal.add(Calendar.DATE, 30);
+				}else if(StringUtils.equals(expiredType, CommonEnum.TIMETYPE.YEAR.name)){
+					expiredCal.add(Calendar.DATE, 365);
+				}
+			}
+			
+			jsonObject.put("expired_time", expiredCal.getTimeInMillis()/1000);
+			bean.setPasswordRules(jsonObject.toString());
+			bean.setUpdateTime(System.currentTimeMillis() / 1000);
+
+			if(bean.getId()!=null &&bean.getId()>0){
+				userExtendService.update(bean);
+			}else{
+				bean.setStatus(CommonEnum.STATUS.ONE.value);
+				bean.setCreateTime(System.currentTimeMillis() / 1000);
+				userExtendService.save(bean);
+			}
+			
+			return BaseResultHelper.success();
+		}catch (Exception e){
+			return  BaseResultHelper.error(e.getMessage());
+		}
+
+	}
+	
 	@GetMapping()
 	@RequiresPermissions("system:userExtend:userExtend")
 	String UserExtend() {
