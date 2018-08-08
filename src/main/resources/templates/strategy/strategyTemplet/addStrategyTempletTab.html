@@ -89,8 +89,8 @@
 																		</div>
 																		<span><label class="col-sm-8 control-label"
 																			style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配本地文件路径及名称对文件操作进行审计,可使用<font
-																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
-																				color="red">*.doc,/tmp/test.txt</font>)
+																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角分号</font>分隔如<font
+																				color="red">*.doc;/tmp/test.txt</font>)
 																		</label></span>
 																	</div>
 																	<div class="form-group">
@@ -126,8 +126,8 @@
 																		</div>
 																		<span><label class="col-sm-8 control-label"
 																			style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配光盘文件路径及名称对文件操作进行审计,可使用<font
-																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
-																				color="red">*.doc,/tmp/test.txt</font>)
+																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角分号</font>分隔如<font
+																				color="red">*.doc;/tmp/test.txt</font>)
 																		</label></span>
 																	</div>
 																	<div class="form-group">
@@ -162,8 +162,8 @@
 																		</div>
 																		<span><label class="col-sm-8 control-label"
 																			style="text-align: left; padding-top: 2px; margin-left: -50px;">(匹配U盘文件路径及名称对文件操作进行审计,可使用<font
-																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角逗号</font>分隔如<font
-																				color="red">*.doc,/tmp/test.txt</font>)
+																				color="red">*</font>作为名称通配符,多条审计条目用<font color="red">半角分号</font>分隔如<font
+																				color="red">*.doc;/tmp/test.txt</font>)
 																		</label></span>
 																	</div>
 																	<div class="form-group">
@@ -263,7 +263,7 @@
 																			<textarea id="process_black_rules"
 																				name="process_black_rules" class="form-control"></textarea>
 																			(不要将系统关键进程加入黑名单;黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font
-																				color="red">半角逗号</font>分隔,如vi,gedit)
+																				color="red">半角分号</font>分隔,如vi;gedit)
 																		</div>
 																	</div>
 
@@ -287,7 +287,7 @@
 																		<div class="col-sm-8">
 																			<textarea id="process_white_rules"
 																				name="process_white_rules" class="form-control"></textarea>
-																			(输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(输入内容为进程名,它们之间用<font color="red">半角分号</font>分隔,如vi;gedit)
 																		</div>
 																	</div>
 
@@ -540,7 +540,7 @@
 																		<div class="col-sm-8">
 																			<textarea id="os_config_black_rules"
 																				name="os_config_black_rules" class="form-control"></textarea>
-																			(多个启动项之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(多个启动项之间用<font color="red">半角分号</font>分隔,如vi;gedit)
 																		</div>
 																	</div>
 																	<div class="form-group">
@@ -578,7 +578,7 @@
 																		<div class="col-sm-8">
 																			<textarea id="os_config_white_rules"
 																				name="os_config_white_rules" class="form-control"></textarea>
-																			(多个启动项之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(多个启动项之间用<font color="red">半角分号</font>分隔,如vi;gedit)
 																		</div>
 																	</div>
 
@@ -727,7 +727,7 @@
 																		<div class="col-sm-8">
 																			<textarea id="server_black_rules"
 																				name="server_black_rules" class="form-control"></textarea>
-																			(黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(黑名单中进程可能因为保护无法停止;输入内容为进程名,它们之间用<font color="red">半角分号</font>分隔,如vi;gedit)
 																		</div>
 																	</div>
 
@@ -750,7 +750,7 @@
 																		<div class="col-sm-8">
 																			<textarea id="server_white_rules"
 																				name="server_white_rules" class="form-control"></textarea>
-																			(输入内容为进程名,它们之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(输入内容为进程名,它们之间用<font color="red">半角分号</font>分隔,如vi;gedit)
 																		</div>
 																	</div>
 
@@ -794,7 +794,7 @@
 																	<div class="form-group">
 																		<div>
 																			<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;("IP/域名地址"配置中可填写目的地址的IP或域名配置,一个地址可对应多个端口号,之间用<font
-																				color="red">半角逗号</font>分隔)
+																				color="red">半角分号</font>分隔)
 																		</div>
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
@@ -859,7 +859,7 @@
 																		<div class="col-sm-8">
 																			<textarea id="connection_black_rules"
 																				name="connection_black_rules" class="form-control"></textarea>
-																			(多个连接之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(多个连接之间用<font color="red">半角分号</font>分隔,如vi;gedit)
 																		</div>
 																	</div>
 																	<div class="form-group">
@@ -895,7 +895,7 @@
 																		<div class="col-sm-8">
 																			<textarea id="connection_white_rules"
 																				name="connection_white_rules" class="form-control"></textarea>
-																			(多个连接之间用<font color="red">半角逗号</font>分隔,如vi,gedit)
+																			(多个连接之间用<font color="red">半角分号</font>分隔,如vi;gedit)
 																		</div>
 																	</div>
 																	<div class="form-group">
@@ -949,7 +949,7 @@
 																	<div class="form-group">
 																		<div>
 																			<label class="col-sm-2 control-label"></label>&nbsp;&nbsp;&nbsp;&nbsp;("IP/域名地址"配置中可填写目的地址的IP或域名配置,一个地址可对应多个端口号,之间用<font
-																				color="red">半角逗号</font>分隔)
+																				color="red">半角分号</font>分隔)
 																		</div>
 																		<label class="col-sm-2 control-label"></label>
 																		<div class="col-sm-8">
@@ -1200,7 +1200,7 @@
 																	<div class="form-group">
 																		<label class="col-sm-2 control-label">&nbsp;</label>
 																		<div class="col-sm-8">
-																			(无自定义探测地址请保持为空,多个地址请用<font color="red">半角逗号</font>,如：192.168.20.250:80,192.168.20.151:9000)
+																			(无自定义探测地址请保持为空,多个地址请用<font color="red">半角分号</font>,如：192.168.20.250:80;192.168.20.151:9000)
 																		</div>
 
 																	</div>
