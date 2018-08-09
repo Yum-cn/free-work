@@ -120,12 +120,12 @@ function load(deptId) {
 									title : '在线状态',
 									formatter : function(value, row, index){
 										
-										var d =new Date();
+										//var d =new Date();
 										//console.log("当前时间："+d.getTime()/1000);
 										//console.log("活跃时间1："+row.lastActiveTime);
 										//console.log("活跃时间2："+(parseInt(row.lastActiveTime)+parseInt(2*60)));
-										
-										if((parseInt(row.lastActiveTime)+parseInt(2*60))>=d.getTime()/1000){
+										//console.log(row.serverTime);
+										if((parseInt(row.lastActiveTime)+parseInt(2*60))>=parseInt(row.serverTime)){
 											return '<span class=" ">在线</span>'
 										}else{
 											return '<span class=" ">离线</span>';

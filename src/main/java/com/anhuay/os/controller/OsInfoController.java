@@ -1,26 +1,30 @@
 package com.anhuay.os.controller;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anhuay.os.domain.OsInfoDO;
-import com.anhuay.os.service.OsInfoService;
-import com.common.constant.CommonEnum;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
+import com.anhuay.os.domain.OsInfoDO;
+import com.anhuay.os.domain.OsInfoVO;
+import com.anhuay.os.service.OsInfoService;
+import com.common.constant.CommonEnum;
 
 /**
  * 主机信息表
@@ -61,8 +65,25 @@ public class OsInfoController {
 		//查询列表数据
         Query query = new Query(params);
 		List<OsInfoDO> osInfoList = osInfoService.list(query);
+		
+		List<OsInfoVO> osInfoVOList = new ArrayList<OsInfoVO>();
+		if(CollectionUtils.isNotEmpty(osInfoList)){
+			for (int j = 0; j < osInfoList.size(); j++) {
+				OsInfoVO osInfoVO = new OsInfoVO();
+				try {
+					BeanUtils.copyProperties(osInfoVO, osInfoList.get(j));
+				}catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				osInfoVO.setServerTime(System.currentTimeMillis()/1000);
+				osInfoVOList.add(osInfoVO);
+			}
+			
+		}
+		
 		int total = osInfoService.count(query);
-		PageUtils pageUtils = new PageUtils(osInfoList, total);
+		PageUtils pageUtils = new PageUtils(osInfoVOList, total);
 		return pageUtils;
 	}
 	

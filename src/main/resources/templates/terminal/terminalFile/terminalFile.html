@@ -78,7 +78,7 @@
             accept: 'file',
             done: function (data) {
         	console.log(data);
-            	if (data.success == true) {
+            	if (data.code != -1) {
                     parent.layer.msg("操作成功");
                    reLoad();
                     $('#exampleTable').bootstrapTable('refresh');
@@ -86,7 +86,7 @@
                     // 获取窗口索引
                     // parent.layer.close(index);
                 } else {
-                    parent.layer.alert(data.msg)
+                    parent.layer.alert(data.message)
                 }
                 
                 

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,8 @@ import com.anhuay.common.utils.FileUtil;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
+import com.anhuay.system.domain.PropertyDO;
+import com.anhuay.system.service.PropertyService;
 import com.anhuay.terminal.domain.TerminalFileDO;
 import com.anhuay.terminal.service.TerminalFileService;
 import com.common.constant.CommonEnum;
@@ -61,6 +65,8 @@ public class TerminalFileController  extends BaseController {
 	private BootdoConfig bootdoConfig;
 	@Autowired
 	private FileService sysFileService;
+	@Autowired
+	private PropertyService propertyService;
 	
 	@GetMapping()
 	@RequiresPermissions("terminal:terminalFile:terminalFile")
@@ -130,7 +136,24 @@ public class TerminalFileController  extends BaseController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		terminalFile.setDownUrl(bootdoConfig.getDownloadUrl()+tempFilePath+sourceFileName);
+		String downPath = "";
+		
+		try {
+			Map<String,Object> queryMap = new HashMap<String,Object>();
+			queryMap.put("propName", "download_url");
+			List<PropertyDO> propertyList = propertyService.list(queryMap);
+			PropertyDO property = CollectionUtils.isEmpty(propertyList)?new PropertyDO():propertyList.get(0);
+			if(StringUtils.isNotBlank(property.getPropValue())){
+				downPath = property.getPropValue();
+			}else{
+				downPath = bootdoConfig.getDownloadUrl();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			downPath = bootdoConfig.getDownloadUrl();
+		}
+		
+		terminalFile.setDownUrl(downPath+tempFilePath+sourceFileName);
 		terminalFileService.save(terminalFile);
 		
 		return BaseResultHelper.success(terminalFile);

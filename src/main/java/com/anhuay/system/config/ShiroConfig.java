@@ -1,13 +1,13 @@
 package com.anhuay.system.config;
 
-import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import com.anhuay.common.config.Constant;
-import com.anhuay.common.redis.shiro.RedisCacheManager;
-import com.anhuay.common.redis.shiro.RedisManager;
-import com.anhuay.common.redis.shiro.RedisSessionDAO;
-import com.anhuay.system.shiro.UserRealm;
-//import org.apache.shiro.cache.CacheManager;
-import net.sf.ehcache.CacheManager;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
@@ -20,15 +20,21 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
+import com.anhuay.common.config.Constant;
+import com.anhuay.common.redis.shiro.RedisCacheManager;
+import com.anhuay.common.redis.shiro.RedisManager;
+import com.anhuay.common.redis.shiro.RedisSessionDAO;
+import com.anhuay.system.domain.PropertyDO;
+import com.anhuay.system.domain.ServerConfigDO;
+import com.anhuay.system.service.ServerConfigService;
+import com.anhuay.system.shiro.UserRealm;
+
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+//import org.apache.shiro.cache.CacheManager;
+import net.sf.ehcache.CacheManager;
 
 /**
  * @author bootdo 1992lcg@163.com
@@ -49,6 +55,9 @@ public class ShiroConfig {
 
     @Value("${server.session-timeout}")
     private int tomcatTimeout;
+    
+    @Autowired
+	private ServerConfigService serverConfigService;
 
 //    @Autowired
 //    CacheManager cacheManager;
@@ -184,6 +193,20 @@ public class ShiroConfig {
      */
     @Bean
     public DefaultWebSessionManager sessionManager() {
+    	
+    	try {
+			Map<String,Object> queryMap = new HashMap<String,Object>();
+			List<ServerConfigDO> serverConfigList = serverConfigService.list(queryMap);
+			
+			ServerConfigDO serverConfig = CollectionUtils.isEmpty(serverConfigList)?null:serverConfigList.get(0);
+			
+			if(serverConfig!=null &&serverConfig.getSessionTimeout()>0){
+				tomcatTimeout = serverConfig.getSessionTimeout()*60;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setGlobalSessionTimeout(tomcatTimeout * 1000);
         sessionManager.setSessionDAO(sessionDAO());
