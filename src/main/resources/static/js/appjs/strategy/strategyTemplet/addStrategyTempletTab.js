@@ -244,6 +244,19 @@ function initLocalFile(osAudit){
 		if(returnData.local_file_status=='1'){
 			 $("#local_file_status").attr("checked",true);
 		}
+		if(returnData.local_file_options!=undefined){
+			var arr = returnData.local_file_options;
+			
+			if(Array.isArray(arr)){
+				for(var i=0;i<arr.length;i++){
+					 $("input[name=local_file_options][value='"+arr[i]+"']").attr("checked",true);
+					}
+			}else{
+				 $("input[name=local_file_options][value='"+arr+"']").attr("checked",true);
+			}
+			
+			
+		}
 		if(returnData.local_file_rules!=undefined){
 			$("#local_file_rules").val(returnData.local_file_rules);
 		}
@@ -257,6 +270,19 @@ function initDiskFile(osAudit){
 		if(returnData.disk_file_status=='1'){
 			 $("#disk_file_status").attr("checked",true);
 		}
+		if(returnData.disk_file_options!=undefined){
+			var arr = returnData.disk_file_options;
+			
+			if(Array.isArray(arr)){
+				for(var i=0;i<arr.length;i++){
+					 $("input[name=disk_file_options][value='"+arr[i]+"']").attr("checked",true);
+					}
+			}else{
+				 $("input[name=disk_file_options][value='"+arr+"']").attr("checked",true);
+			}
+			
+			
+		}
 		if(returnData.disk_file_status!=undefined){
 			$("#disk_file_rules").val(returnData.disk_file_rules);
 		}
@@ -269,6 +295,19 @@ function initUdiskFile(osAudit){
 		
 		if(returnData.udisk_file_status=='1'){
 			 $("#udisk_file_status").attr("checked",true);
+		}
+		if(returnData.udisk_file_options!=undefined){
+			var arr = returnData.udisk_file_options;
+			
+			if(Array.isArray(arr)){
+				for(var i=0;i<arr.length;i++){
+					 $("input[name=udisk_file_options][value='"+arr[i]+"']").attr("checked",true);
+					}
+			}else{
+				 $("input[name=udisk_file_options][value='"+arr+"']").attr("checked",true);
+			}
+			
+			
 		}
 		if(returnData.udisk_file_rules!=undefined){
 			$("#udisk_file_rules").val(returnData.udisk_file_rules);
