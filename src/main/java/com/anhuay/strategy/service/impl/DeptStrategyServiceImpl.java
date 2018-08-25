@@ -62,4 +62,9 @@ public class DeptStrategyServiceImpl implements DeptStrategyService {
     public int batchUpdateStatus(Long[] ids){
         return deptStrategyDao.batchUpdateStatus(ids);
     }
+
+	@Override
+	public String selectDeptStrategy(String[] deptIds) {
+		return deptStrategyDao.selectDeptStrategy(deptIds);
+	}
 }

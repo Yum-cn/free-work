@@ -157,6 +157,21 @@ function load(deptId) {
 									}
 								},
 								{
+									field : 'templetType',
+									title : '当前生效策略',
+									formatter : function(value, row, index){
+										if(value==1){
+											return '<span class=" ">主机策略</span>';
+										}else if(value==2){
+											return '<span class=" ">主机组策略</span>';
+										}else if(value==3){
+											return '<span class=" ">部门策略</span>';
+										}else{
+											return '<span class=" ">默认策略</span>';
+										}
+									}
+								},
+								{
 									field : 'createTime',
 									title : '创建时间',
 									formatter : function(value, row, index) {
@@ -179,8 +194,8 @@ function load(deptId) {
 												+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.id
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var d = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
+										var d = '<a class="btn btn-success btn-sm" href="#" title="查看策略"  mce_href="#" onclick="showStrategy(\''
+												+ row.templetName
 												+ '\')"><i class="fa fa-group"></i></a> ';
 										return e + d+f;
 									}
@@ -237,7 +252,8 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
+function showStrategy(content) {
+	layer.alert(content);
 }
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组

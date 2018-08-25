@@ -53,6 +53,11 @@ public class OsInfoVO implements Serializable {
 	private Long updateTime;
 	
 	private Long serverTime;
+	
+	//模板类型
+	private Integer templetType;
+	//模板名称
+	private String templetName;
 
 	/**
 	 * 设置：主键编号
@@ -276,5 +281,18 @@ public class OsInfoVO implements Serializable {
 	public void setServerTime(Long serverTime) {
 		this.serverTime = serverTime;
 	}
+	public Integer getTempletType() {
+		return templetType;
+	}
+	public void setTempletType(Integer templetType) {
+		this.templetType = templetType;
+	}
+	public String getTempletName() {
+		return templetName;
+	}
+	public void setTempletName(String templetName) {
+		this.templetName = templetName;
+	}
+	
 	
 }

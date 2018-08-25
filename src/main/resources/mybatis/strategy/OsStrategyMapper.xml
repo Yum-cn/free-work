@@ -104,5 +104,10 @@
 			#{id}
 		</foreach>
 	</delete>
+	
+	
+    <select id="selectOsStrategy" resultType="String">
+        SELECT GROUP_CONCAT(distinct t.templet_name ORDER BY t.templet_id DESC SEPARATOR ';') FROM ahy_os_strategy t where   t.os_names  LIKE CONCAT('%',#{osIp},'%') GROUP BY t.os_names
+    </select>
 
 </mapper>

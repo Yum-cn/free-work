@@ -33,4 +33,6 @@ public interface DeptStrategyDao {
 	int updateStatus(Long id);
 	
 	int batchUpdateStatus(Long[] ids);
+
+	String selectDeptStrategy(String[] deptIds);
 }

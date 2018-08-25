@@ -2,11 +2,13 @@ package com.anhuay.os.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +21,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.common.annotation.Log;
+import com.anhuay.common.domain.Tree;
+import com.anhuay.common.domain.TreeCode;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
+import com.anhuay.common.utils.TreeCodeUtil;
 import com.anhuay.os.domain.OsInfoDO;
 import com.anhuay.os.domain.OsInfoVO;
 import com.anhuay.os.service.OsInfoService;
+import com.anhuay.strategy.service.DeptStrategyService;
+import com.anhuay.strategy.service.OsGroupStrategyService;
+import com.anhuay.strategy.service.OsStrategyService;
+import com.anhuay.strategy.service.StrategyTempletService;
+import com.anhuay.system.domain.DeptDO;
+import com.anhuay.system.service.DeptService;
 import com.common.constant.CommonEnum;
 
 /**
@@ -40,6 +51,16 @@ import com.common.constant.CommonEnum;
 public class OsInfoController {
 	@Autowired
 	private OsInfoService osInfoService;
+	@Autowired
+	private OsStrategyService osStrategyService;
+	@Autowired
+	private OsGroupStrategyService osGroupStrategyService;
+	@Autowired
+	private DeptStrategyService deptStrategyService;
+	@Autowired
+	private DeptService sysDeptService;
+	@Autowired
+	private StrategyTempletService strategyTempletService;
 	
 	@GetMapping()
 	@RequiresPermissions("os:osInfo:osInfo")
@@ -74,6 +95,54 @@ public class OsInfoController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				//默认策略
+				osInfoVO.setTempletType(4);
+				osInfoVO.setTempletName("默认策略");
+				
+				//主机、主机组、部门、默认
+				String osIp = osInfoVO.getOsIp();
+				Long id = osInfoVO.getId();
+				String strategyNames = osStrategyService.selectOsStrategy(osIp);
+				if(StringUtils.isNotBlank(strategyNames)){
+					osInfoVO.setTempletType(1);
+					osInfoVO.setTempletName(strategyNames);
+				}else{
+					//主机组策略
+					strategyNames = osGroupStrategyService.selectOsGroupStrategy(osIp);
+					if(StringUtils.isNotBlank(strategyNames)){
+						osInfoVO.setTempletType(2);
+						osInfoVO.setTempletName(strategyNames);
+					}else{
+						//部门策略
+						Integer deptId = osInfoVO.getDeptId();
+						if(deptId!=null&&deptId>0){
+							
+							List<TreeCode> treeCodeList = new ArrayList<TreeCode>();
+							List<DeptDO> sysDepts = sysDeptService.list(new HashMap<String,Object>(16));
+							for (DeptDO sysDept : sysDepts) {
+								TreeCode tree = new TreeCode();
+								tree.setTreeCodeId(sysDept.getDeptId().toString());
+								tree.setParentId(sysDept.getParentId().toString());
+								tree.setTreeCodeName(sysDept.getName());
+								treeCodeList.add(tree);
+							}
+							TreeCodeUtil treeCodeUtil = new TreeCodeUtil();
+							String deptIds = treeCodeUtil.getAllChildId(treeCodeList, String.valueOf(deptId));
+							if(StringUtils.isNotBlank(deptIds)){
+								strategyNames = deptStrategyService.selectDeptStrategy(deptIds.split(","));
+								if(StringUtils.isNotBlank(strategyNames)){
+									osInfoVO.setTempletType(3);
+									osInfoVO.setTempletName(strategyNames);
+								}
+							}
+							
+							
+						}
+					}
+				}
+				
+				
 				osInfoVO.setServerTime(System.currentTimeMillis()/1000);
 				osInfoVOList.add(osInfoVO);
 			}

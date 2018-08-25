@@ -33,4 +33,6 @@ public interface OsGroupStrategyDao {
 	int updateStatus(Long id);
 	
 	int batchUpdateStatus(Long[] ids);
+
+	String selectOsGroupStrategy(String osIp);
 }

@@ -5,6 +5,8 @@ import com.anhuay.strategy.domain.DeptStrategyDO;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 /**
  * 部门策略表
  * 
@@ -31,4 +33,6 @@ public interface DeptStrategyService {
     int updateStatus(Long id);
     
     int batchUpdateStatus(Long[] ids);
+
+	String selectDeptStrategy(@Param("deptIds")String[] strings);
 }

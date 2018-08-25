@@ -5,6 +5,8 @@ import com.anhuay.strategy.domain.OsStrategyDO;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 /**
  * 主机策略表
  * 
@@ -31,4 +33,6 @@ public interface OsStrategyService {
     int updateStatus(Long id);
     
     int batchUpdateStatus(Long[] ids);
+
+	String selectOsStrategy(@Param("osIp") String osIp);
 }

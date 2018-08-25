@@ -62,4 +62,9 @@ public class OsStrategyServiceImpl implements OsStrategyService {
     public int batchUpdateStatus(Long[] ids){
         return osStrategyDao.batchUpdateStatus(ids);
     }
+
+	@Override
+	public String selectOsStrategy(String osIp) {
+		return osStrategyDao.selectOsStrategy(osIp);
+	}
 }

@@ -63,4 +63,27 @@ public class TreeCodeUtil {
 
 		return tempString;
 	}
+	
+
+	public  String getAllChildId(List<TreeCode> list, String id) {
+		String tempId = id;
+		if (StringUtils.isNotBlank(tempString)) {
+			if (StringUtils.isBlank(tempId)) {
+				tempId = tempString;
+			} else {
+				tempId = tempId + "," + tempString;
+			}
+			tempString = tempId;
+		} else {
+			tempString = tempId;
+		}
+
+		for (TreeCode treeCode : list) {
+			if (StringUtils.equals(id, treeCode.getParentId())) {
+				getAllChildId(list, treeCode.getTreeCodeId());
+			}
+		}
+
+		return tempString;
+	}
 }
