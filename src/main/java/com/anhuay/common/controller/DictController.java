@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.config.Constant;
 import com.anhuay.common.domain.DictDO;
 import com.anhuay.common.domain.Node;
@@ -61,13 +62,13 @@ public class DictController extends BaseController {
 		PageUtils pageUtils = new PageUtils(dictList, total);
 		return pageUtils;
 	}
-
+	
 	@GetMapping("/add")
 	@RequiresPermissions("common:dict:add")
 	String add() {
 		return "common/dict/add";
 	}
-
+	@Log("编辑数据字典配置")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("common:dict:edit")
 	String edit(@PathVariable("id") Long id, Model model) {
@@ -79,6 +80,7 @@ public class DictController extends BaseController {
 	/**
 	 * 保存
 	 */
+	@Log("保存数据字典")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("common:dict:add")
@@ -109,6 +111,7 @@ public class DictController extends BaseController {
 	/**
 	 * 删除
 	 */
+	@Log("删除数据字典")
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("common:dict:remove")

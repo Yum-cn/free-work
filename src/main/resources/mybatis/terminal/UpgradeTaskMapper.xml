@@ -12,7 +12,7 @@
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="terminalFileId != null and terminalFileId != ''"> and terminal_file_id = #{terminalFileId} </if>
-		  		  <if test="terminalFileName != null and terminalFileName != ''"> and terminal_file_name = #{terminalFileName} </if>
+		  		  <if test="terminalFileName != null and terminalFileName != ''"> and terminal_file_name LIKE CONCAT('%',#{terminalFileName},'%') </if>
 		  		  <if test="terminalFileDownloadUrl != null and terminalFileDownloadUrl != ''"> and terminal_file_download_url = #{terminalFileDownloadUrl} </if>
 		  		  <if test="upgradeName != null and upgradeName != ''"> and upgrade_name = #{upgradeName} </if>
 		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
@@ -45,7 +45,7 @@
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="terminalFileId != null and terminalFileId != ''"> and terminal_file_id = #{terminalFileId} </if>
-		  		  <if test="terminalFileName != null and terminalFileName != ''"> and terminal_file_name = #{terminalFileName} </if>
+		  		  <if test="terminalFileName != null and terminalFileName != ''"> and terminal_file_name  LIKE CONCAT('%',#{terminalFileName},'%') </if>
 		  		  <if test="terminalFileDownloadUrl != null and terminalFileDownloadUrl != ''"> and terminal_file_download_url = #{terminalFileDownloadUrl} </if>
 		  		  <if test="upgradeName != null and upgradeName != ''"> and upgrade_name = #{upgradeName} </if>
 		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>

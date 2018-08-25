@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.config.BootdoConfig;
 import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.domain.FileDO;
@@ -89,7 +90,7 @@ public class TerminalFileController  extends BaseController {
 		PageUtils pageUtils = new PageUtils(terminalFileList, total);
 		return pageUtils;
 	}
-	
+	@Log("上传终端更新包")
 	@ResponseBody
 	@PostMapping("/upload")
 	Object upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {

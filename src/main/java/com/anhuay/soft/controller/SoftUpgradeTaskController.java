@@ -22,6 +22,7 @@ import com.common.constant.CommonEnum;
 
 import net.sf.json.JSONObject;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -63,7 +64,7 @@ public class SoftUpgradeTaskController {
 	String add(){
 	    return "soft/softUpgradeTask/add";
 	}
-
+	@Log("编辑软件分发任务")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("soft:softUpgradeTask:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -75,6 +76,7 @@ public class SoftUpgradeTaskController {
 	/**
 	 * 保存
 	 */
+	@Log("保存软件分发任务")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("soft:softUpgradeTask:add")
@@ -120,6 +122,7 @@ public class SoftUpgradeTaskController {
 	/**
 	 * 删除
 	 */
+	@Log("删除软件分发任务")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("soft:softUpgradeTask:remove")

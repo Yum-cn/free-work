@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -73,7 +74,7 @@ public class DataBackupController {
 	String add() {
 		return "system/dataBackup/add";
 	}
-
+	@Log("编辑数据备份")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("system:dataBackup:edit")
 	String edit(@PathVariable("id") Long id, Model model) {
@@ -85,6 +86,7 @@ public class DataBackupController {
 	/**
 	 * 备份
 	 */
+	@Log("数据备份")
 	@ResponseBody
 	@GetMapping("/backup")
 	@RequiresPermissions("system:dataBackup:dataBackup")
@@ -123,6 +125,7 @@ public class DataBackupController {
 	/**
 	 * 删除
 	 */
+	@Log("删除数据备份")
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("system:dataBackup:remove")

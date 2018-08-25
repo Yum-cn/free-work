@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.alarm.domain.EmailConfigDO;
 import com.anhuay.alarm.service.EmailConfigService;
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -59,7 +60,7 @@ public class EmailConfigController {
 	String add(){
 	    return "alarm/emailConfig/add";
 	}
-
+	@Log("编辑邮件配置")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("alarm:emailConfig:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -71,6 +72,7 @@ public class EmailConfigController {
 	/**
 	 * 保存
 	 */
+	@Log("保存邮件配置")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("alarm:emailConfig:add")
@@ -104,6 +106,7 @@ public class EmailConfigController {
 	/**
 	 * 删除
 	 */
+	@Log("删除邮件配置")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("alarm:emailConfig:remove")

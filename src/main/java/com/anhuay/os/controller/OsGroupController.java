@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.anhuay.os.domain.OsGroupDO;
 import com.anhuay.os.service.OsGroupService;
 import com.common.constant.CommonEnum;
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -63,7 +64,7 @@ public class OsGroupController {
 	String add(){
 	    return "os/osGroup/add";
 	}
-
+	@Log("编辑主机组")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("os:osGroup:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -75,6 +76,7 @@ public class OsGroupController {
 	/**
 	 * 保存
 	 */
+	@Log("保存主机组")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("os:osGroup:add")
@@ -109,6 +111,7 @@ public class OsGroupController {
 	/**
 	 * 删除
 	 */
+	@Log("删除主机组")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("os:osGroup:remove")

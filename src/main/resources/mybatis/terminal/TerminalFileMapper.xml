@@ -12,7 +12,7 @@
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="uploadUrl != null and uploadUrl != ''"> and upload_url = #{uploadUrl} </if>
-		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name LIKE CONCAT('%',#{fileName},'%') </if>
 		  		  <if test="fileTag != null and fileTag != ''"> and file_tag = #{fileTag} </if>
 		  		  <if test="fileSize != null and fileSize != ''"> and file_size = #{fileSize} </if>
 		  		  <if test="uploadTime != null and uploadTime != ''"> and upload_time = #{uploadTime} </if>
@@ -41,7 +41,7 @@
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="uploadUrl != null and uploadUrl != ''"> and upload_url = #{uploadUrl} </if>
-		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name  LIKE CONCAT('%',#{fileName},'%') </if>
 		  		  <if test="fileTag != null and fileTag != ''"> and file_tag = #{fileTag} </if>
 		  		  <if test="fileSize != null and fileSize != ''"> and file_size = #{fileSize} </if>
 		  		  <if test="uploadTime != null and uploadTime != ''"> and upload_time = #{uploadTime} </if>

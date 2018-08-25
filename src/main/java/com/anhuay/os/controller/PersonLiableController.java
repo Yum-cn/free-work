@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -64,7 +65,7 @@ public class PersonLiableController {
 	String add(){
 	    return "os/personLiable/add";
 	}
-
+	@Log("编辑责任人")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("os:personLiable:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -76,6 +77,7 @@ public class PersonLiableController {
 	/**
 	 * 保存
 	 */
+	@Log("保存责任人")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("os:personLiable:add")
@@ -110,6 +112,7 @@ public class PersonLiableController {
 	/**
 	 * 删除
 	 */
+	@Log("删除责任人")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("os:personLiable:remove")

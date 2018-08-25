@@ -47,18 +47,18 @@ function load() {
 								{
 									checkbox : true
 								},
-																{
+									/*							{
 									field : 'id', 
 									title : '主键编号' 
-								},
+								},*/
 																{
 									field : 'fileName', 
 									title : '文件名称' 
 								},
-																{
+								/*								{
 									field : 'fileTag', 
 									title : '文件标识' 
-								},
+								},*/
 																{
 									field : 'fileSize', 
 									title : '文件大小(KB)' ,
@@ -78,10 +78,10 @@ function load() {
 										return formatUnixTime(value);
 									} 
 								},
-																{
+									/*							{
 									field : 'crcValue', 
 									title : 'CRC值' 
-								},
+								},*/
 																{
 									field : 'downUrl', 
 									title : '下载地址',

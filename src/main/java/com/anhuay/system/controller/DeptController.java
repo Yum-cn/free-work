@@ -1,5 +1,6 @@
 package com.anhuay.system.controller;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.config.Constant;
 import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.domain.Tree;
@@ -46,7 +47,7 @@ public class DeptController extends BaseController {
 		List<DeptDO> sysDeptList = sysDeptService.list(query);
 		return sysDeptList;
 	}
-
+	
 	@GetMapping("/add/{pId}")
 	@RequiresPermissions("system:sysDept:add")
 	String add(@PathVariable("pId") Long pId, Model model) {
@@ -58,7 +59,7 @@ public class DeptController extends BaseController {
 		}
 		return  prefix + "/add";
 	}
-
+	@Log("编辑部门")
 	@GetMapping("/edit/{deptId}")
 	@RequiresPermissions("system:sysDept:edit")
 	String edit(@PathVariable("deptId") Long deptId, Model model) {
@@ -76,6 +77,7 @@ public class DeptController extends BaseController {
 	/**
 	 * 保存
 	 */
+	@Log("保存部门")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("system:sysDept:add")
@@ -108,6 +110,7 @@ public class DeptController extends BaseController {
 	/**
 	 * 删除
 	 */
+	@Log("删除部门")
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("system:sysDept:remove")

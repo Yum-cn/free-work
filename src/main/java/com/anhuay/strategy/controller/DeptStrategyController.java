@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.anhuay.strategy.domain.DeptStrategyDO;
 import com.anhuay.strategy.service.DeptStrategyService;
 import com.common.constant.CommonEnum;
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -59,7 +60,7 @@ public class DeptStrategyController {
 	String add(){
 	    return "strategy/deptStrategy/add";
 	}
-
+	@Log("编辑部门策略")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("strategy:deptStrategy:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -71,6 +72,7 @@ public class DeptStrategyController {
 	/**
 	 * 保存
 	 */
+	@Log("保存部门策略")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:deptStrategy:add")
@@ -105,6 +107,7 @@ public class DeptStrategyController {
 	/**
 	 * 删除
 	 */
+	@Log("删除部门策略")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("strategy:deptStrategy:remove")

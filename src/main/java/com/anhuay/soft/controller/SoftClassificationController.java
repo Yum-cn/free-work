@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.config.BootdoConfig;
 import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.domain.DictDO;
@@ -105,7 +106,7 @@ public class SoftClassificationController   extends BaseController{
 		return "soft/softClassification/add";
 	}
 
-
+	@Log("编辑软件分发文件")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("soft:softClassification:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -117,6 +118,7 @@ public class SoftClassificationController   extends BaseController{
 	/**
 	 * 保存
 	 */
+	@Log("保存软件分发文件")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("soft:softClassification:add")
@@ -151,6 +153,7 @@ public class SoftClassificationController   extends BaseController{
 	/**
 	 * 删除
 	 */
+	@Log("删除软件分发文件")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("soft:softClassification:remove")

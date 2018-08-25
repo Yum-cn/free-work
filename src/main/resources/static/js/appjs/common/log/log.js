@@ -75,14 +75,14 @@ function load() {
                         field: 'time',
                         title: '用时'
                     },
-                    {
+                    /*{
                         field: 'method',
                         title: '方法'
                     },
                     {
                         field: 'params',
                         title: '参数'
-                    },
+                    },*/
                     {
                         field: 'ip',
                         title: 'IP地址'

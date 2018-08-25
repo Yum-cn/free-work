@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.anhuay.strategy.domain.OsStrategyDO;
 import com.anhuay.strategy.service.OsStrategyService;
 import com.common.constant.CommonEnum;
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -59,7 +60,7 @@ public class OsStrategyController {
 	String add(){
 	    return "strategy/osStrategy/add";
 	}
-
+	@Log("编辑主机策略")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("strategy:osStrategy:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -71,6 +72,7 @@ public class OsStrategyController {
 	/**
 	 * 保存
 	 */
+	@Log("保存主机策略")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:osStrategy:add")
@@ -104,6 +106,7 @@ public class OsStrategyController {
 	/**
 	 * 删除
 	 */
+	@Log("删除主机策略")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("strategy:osStrategy:remove")

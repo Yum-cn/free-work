@@ -225,7 +225,7 @@ public class LoginController extends BaseController {
 		}
 		return BaseResultHelper.success();
 	}
-
+	@Log("退出登录")
 	@GetMapping("/logout")
 	String logout() {
 		ShiroUtils.logout();

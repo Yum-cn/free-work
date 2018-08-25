@@ -25,7 +25,7 @@ public class OsStrategyDO implements Serializable {
 	private String osIds;
 	//主机名称
 	private String osNames;
-	//状态
+	//状态 1待下发 2下发中 3已更新
 	private Integer status;
 	//创建时间
 	private Long createTime;

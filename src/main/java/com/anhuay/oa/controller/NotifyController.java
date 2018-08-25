@@ -1,5 +1,6 @@
 package com.anhuay.oa.controller;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.config.Constant;
 import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.domain.DictDO;
@@ -58,13 +59,13 @@ public class NotifyController extends BaseController {
 		PageUtils pageUtils = new PageUtils(notifyList, total);
 		return pageUtils;
 	}
-
+	
 	@GetMapping("/add")
 	@RequiresPermissions("oa:notify:add")
 	String add() {
 		return "oa/notify/add";
 	}
-
+	@Log("编辑通知")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("oa:notify:edit")
 	String edit(@PathVariable("id") Long id, Model model) {
@@ -84,6 +85,7 @@ public class NotifyController extends BaseController {
 	/**
 	 * 保存
 	 */
+	@Log("保存通知")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("oa:notify:add")
@@ -115,6 +117,7 @@ public class NotifyController extends BaseController {
 	/**
 	 * 删除
 	 */
+	@Log("删除通知")
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("oa:notify:remove")

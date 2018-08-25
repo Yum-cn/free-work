@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -89,7 +90,7 @@ public class OsInfoController {
 	String add(){
 	    return "os/osInfo/add";
 	}
-
+	@Log("编辑主机信息")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("os:osInfo:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -101,6 +102,7 @@ public class OsInfoController {
 	/**
 	 * 保存
 	 */
+	@Log("保存主机信息")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("os:osInfo:add")
@@ -135,6 +137,7 @@ public class OsInfoController {
 	/**
 	 * 删除
 	 */
+	@Log("删除主机信息")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("os:osInfo:remove")

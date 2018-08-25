@@ -21,6 +21,7 @@ import com.common.constant.CommonEnum;
 
 import net.sf.json.JSONObject;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -62,7 +63,7 @@ public class UpgradeTaskController {
 	String add(){
 	    return "terminal/upgradeTask/add";
 	}
-
+	@Log("编辑升级任务")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("terminal:upgradeTask:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -74,6 +75,7 @@ public class UpgradeTaskController {
 	/**
 	 * 保存
 	 */
+	@Log("保存升级任务")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("terminal:upgradeTask:add")
@@ -112,6 +114,7 @@ public class UpgradeTaskController {
 	/**
 	 * 修改
 	 */
+	@Log("更改下发任务状态")
 	@ResponseBody
 	@RequestMapping("/updateTaskStatus")
 	@RequiresPermissions("terminal:upgradeTask:edit")

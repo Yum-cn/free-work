@@ -84,7 +84,7 @@ function selectOsInfo() {
 	// 获取当前窗口名称
 	layer.open({
 		type : 2,
-		title : '选择终端程序升级文件',
+		title : '选择主机',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],

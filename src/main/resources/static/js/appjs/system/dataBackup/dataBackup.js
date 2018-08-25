@@ -62,11 +62,17 @@ function load() {
 								},
 																{
 									field : 'updateTime', 
-									title : '修改时间' 
+									title : '修改时间' ,
+									formatter : function(value, row, index) {
+										return formatUnixTime(value);
+									} 
 								},
 																{
 									field : 'createTime', 
-									title : '创建时间' 
+									title : '创建时间' ,
+									formatter : function(value, row, index) {
+										return formatUnixTime(value);
+									} 
 								},
 																{
 									title : '操作',

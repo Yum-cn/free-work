@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.domain.LogDO;
 import com.anhuay.common.domain.PageDO;
 import com.anhuay.common.service.LogService;
@@ -39,7 +40,7 @@ public class LogController {
 		PageDO<LogDO> page = logService.queryList(query);
 		return page;
 	}
-	
+	@Log("删除操作日志")
 	@ResponseBody
 	@PostMapping("/remove")
 	R remove(Long id) {

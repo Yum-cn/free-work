@@ -1,5 +1,5 @@
 
-var prefix = "/soft/softUpgradeTask"
+var prefix = "/terminal/autoupdate"
 $(function() {
 	load();
 });
@@ -32,9 +32,9 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
 					           // name:$('#searchName').val(),
-					           // username:$('#searchName').val()
+								osIp:$('#searchName').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -44,87 +44,51 @@ function load() {
 						// sortOrder.
 						// 返回false将会终止请求
 						columns : [
-								{
-									checkbox : true
+								
+																{
+									field : 'osIp', 
+									title : '客户端ip' 
 								},
 																{
-									field : 'id', 
-									title : '主键编号' 
+									field : 'url', 
+									title : '升级文件地址' 
 								},
 																{
-									field : 'softFileName', 
-									title : '软件包名称' 
+									field : 'srvVersion', 
+									title : '服务端版本' 
 								},
 																{
-									field : 'upgradeName', 
-									title : '升级任务名称' 
-								},
-																{
-									field : 'osIps', 
-									title : '升级主机IP' 
-								},
-																{
-									field : 'upgradeTime', 
-									title : '升级时间' 
-								},
-																{
-									field : 'upgradeVersion', 
-									title : '版本号' 
-								},
-																{
-									field : 'taskStatus', 
-									title : '任务状态',
+									field : 'status', 
+									title : '更新标识' ,
 									formatter : function(value, row, index){
 										if(value==1){
-											return '<span class=" ">待下发</span>';
+											return '<span class=" ">待更新</span>';
 										}else if(value==2){
-											return '<span class=" ">升级中</span>';
+											return '<span class=" ">已下发</span>';
 										}else if(value==3){
-											return '<span class=" ">已更新</span>';
+											return '<span class=" ">更新完成</span>';
 										}else if(value==4){
 											return '<span class=" ">升级失败</span>';
-										}else{
-											return '<span class=" ">未开启</span>';
 										}
-									} 
-								},
-																{
-									field : 'createTime', 
-									title : '创建时间',
-									formatter : function(value, row, index) {
-										return formatUnixTime(value);
-									} 
-								},
-																{
-									title : '操作',
-									field : 'id',
-									align : 'center',
-									formatter : function(value, row, index) {
-										
-										
-										var a = "";
-			                            if (row.taskStatus == 0||row.taskStatus==null) {
-			                            	a = '<a class="btn btn-success btn-sm" href="#" mce_href="#" title="点击开启" onclick="changeStatus(\''
-				                                + row.id + '\',\'' + row.taskStatus
-				                                + '\')"><i class=""></i>开启</a> ';
-			                            } 
-			                            if (row.taskStatus == 1) {
-			                            	a = '<a class="btn btn-danger btn-sm" href="#" mce_href="#" title="点击关闭" onclick="changeStatus(\''
-				                                + row.id + '\',\'' + row.taskStatus
-				                                + '\')"><i class="">关闭</i></a> ';
-			                            }
-										
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.id
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.id
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.id
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d+a ;
 									}
+								},
+																{
+									field : 'createtime', 
+									title : '创建时间' ,
+									formatter : function(value, row, index) {
+										return formatTimeStamp(value);
+									} 
+								},
+																{
+									field : 'updatetime', 
+									title : '更新时间' ,
+									formatter : function(value, row, index) {
+										return formatTimeStamp(value);
+									} 
+								},
+																{
+									field : 'notes', 
+									title : '备注' 
 								} ]
 					});
 }
@@ -132,42 +96,24 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	/*layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
-	});*/
-	
-	var index = layer.open({
-		type : 2,
-		title : '添加升级任务',
-		content : prefix + '/add',
-		area : [ '800px', '520px' ],
-		maxmin : true
 	});
-	layer.full(index);
 }
 function edit(id) {
-	/*layer.open({
+	layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
-	});*/
-	
-	var index = layer.open({
-		type : 2,
-		title : '编辑升级任务',
-		content : prefix + '/edit/' + id,
-		area : [ '800px', '520px' ],
-		maxmin : true
 	});
-	layer.full(index);
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
@@ -226,37 +172,4 @@ function batchRemove() {
 	}, function() {
 
 	});
-}
-
-
-function changeStatus(id, status) {
-    var actCh;
-    var cmd;
-    if (status == 0) {
-        cmd = '1';
-        actCh = "确认要开启任务吗？";
-    } else {
-        cmd = '0';
-        actCh = "确认要停止任务吗？";
-    }
-    layer.confirm(actCh, {
-        btn: ['确定', '取消']
-    }, function () {
-        $.ajax({
-            url: prefix + "/updateTaskStatus",
-            type: "post",
-            data: {
-                'id': id,
-                'taskStatus': cmd
-            },
-            success: function (r) {
-                if (r.code == 0) {
-                    layer.msg(r.msg);
-                    reLoad();
-                } else {
-                    layer.msg(r.msg);
-                }
-            }
-        });
-    })
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -57,7 +58,7 @@ public class OsAuditController {
 	String add(){
 	    return "/osAudit/add";
 	}
-
+	@Log("编辑主机审计信息")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions(":osAudit:edit")
 	String edit(@PathVariable("id") Long id,Model model){
@@ -69,6 +70,7 @@ public class OsAuditController {
 	/**
 	 * 保存
 	 */
+	@Log("保存主机审计信息")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions(":osAudit:add")

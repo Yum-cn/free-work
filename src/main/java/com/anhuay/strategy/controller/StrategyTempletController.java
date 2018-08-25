@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.common.annotation.Log;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.strategy.domain.DeviceControlDO;
@@ -102,6 +103,7 @@ public class StrategyTempletController {
 	/**
 	 * 保存
 	 */
+	@Log("保存策略模板")
 	@ResponseBody
 	@PostMapping("/addStrategyTemplet")
 	@RequiresPermissions("strategy:strategyTemplet:add")
@@ -124,6 +126,7 @@ public class StrategyTempletController {
 	/**
 	 * 编辑
 	 */
+	@Log("编辑策略模板")
 	@ResponseBody
 	@PostMapping("/editStrategyTemplet")
 	@RequiresPermissions("strategy:strategyTemplet:edit")
@@ -186,6 +189,7 @@ public class StrategyTempletController {
 	/**
 	 * 删除
 	 */
+	@Log("删除策略模板")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("strategy:strategyTemplet:remove")
