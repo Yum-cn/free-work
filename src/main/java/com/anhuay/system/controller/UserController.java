@@ -66,7 +66,6 @@ public class UserController extends BaseController {
 		return prefix + "/add";
 	}
 
-	@RequiresPermissions("sys:user:edit")
 	@Log("编辑用户")
 	@GetMapping("/edit/{id}")
 	String edit(Model model, @PathVariable("id") Long id) {
@@ -92,7 +91,6 @@ public class UserController extends BaseController {
 		return R.error();
 	}
 
-	@RequiresPermissions("sys:user:edit")
 	@Log("更新用户")
 	@PostMapping("/update")
 	@ResponseBody
@@ -107,7 +105,6 @@ public class UserController extends BaseController {
 	}
 
 
-	@RequiresPermissions("sys:user:edit")
 	@Log("更新用户")
 	@PostMapping("/updatePeronal")
 	@ResponseBody
