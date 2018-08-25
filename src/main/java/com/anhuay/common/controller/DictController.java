@@ -147,7 +147,6 @@ public class DictController extends BaseController {
 
 	// 类别已经指定增加
 	@GetMapping("/add/{type}/{description}")
-	@RequiresPermissions("common:dict:add")
 	String addD(Model model, @PathVariable("type") String type, @PathVariable("description") String description) {
 		model.addAttribute("type", type);
 		model.addAttribute("description", description);
