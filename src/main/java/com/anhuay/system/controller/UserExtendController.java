@@ -118,7 +118,6 @@ public class UserExtendController extends BaseController {
 	}
 
 	@GetMapping("/setPassword")
-	@RequiresPermissions("system:userExtend:userExtend")
 	String setPassword(Model model) {
 		model.addAttribute("user", getUser());
 		return "system/userExtend/setPassword";
@@ -186,14 +185,12 @@ public class UserExtendController extends BaseController {
 	}
 	
 	@GetMapping()
-	@RequiresPermissions("system:userExtend:userExtend")
 	String UserExtend() {
 		return "system/userExtend/userExtend";
 	}
 
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("system:userExtend:userExtend")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
 		Query query = new Query(params);
