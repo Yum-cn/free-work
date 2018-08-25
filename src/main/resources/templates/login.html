@@ -5,9 +5,9 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Anhuay</title>
-<meta name="keywords" content="BootDo管理系统">
-<meta name="description" content="BootDo管理系统">
+<title>安华易终端安全管理系统</title>
+<meta name="keywords" content="安华易终端安全管理系统">
+<meta name="description" content="安华易终端安全管理系统">
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
 <link href="/css/animate.css" rel="stylesheet">
@@ -17,19 +17,20 @@
 
 
 
-    <link href="/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
-    <link href="/css/plugins/jsTree/style.min.css" rel="stylesheet" />
-    <!--summernote css -->
-    <link href="/css/animate.css" rel="stylesheet" />
-    <link href="/css/style.css?v=4.1.0" rel="stylesheet" />
+<link href="/css/plugins/bootstrap-table/bootstrap-table.min.css"
+	rel="stylesheet" />
+<link href="/css/plugins/jsTree/style.min.css" rel="stylesheet" />
+<!--summernote css -->
+<link href="/css/animate.css" rel="stylesheet" />
+<link href="/css/style.css?v=4.1.0" rel="stylesheet" />
 <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
-    <style type="text/css">
-    body.signin {
-    color: #8a8c8e;
+<style type="text/css">
+body.signin {
+	color: #8a8c8e;
 }
-    </style>
+</style>
 <script>
         if (window.top !== window.self) {
             window.top.location = window.location;
@@ -39,10 +40,10 @@
 </head>
 
 <body class="signin">
-	<div class="signinpanel">
+	<div class="signinpanel" style="width: 500px;">
 		<div class="row">
-			<div class="col-sm-7">
-				<!-- <div class="signin-info">
+			<!-- <div class="col-sm-7">
+				<div class="signin-info">
                 <div class="logopanel m-b">
                     <h1>BootDo</h1>
                 </div>
@@ -63,12 +64,12 @@
                         bootstrap
                     </li>
                 </ul>
-            </div> -->
-			</div>
-			<div class="col-sm-5">
+            </div>
+			</div> -->
+			<div style="">
 				<form id="signupForm">
 					<h3 class="text-center">用户登录</h3>
-					<p class="m-t-md text-center">欢迎登录后台管理系统</p>
+					<p class="m-t-md text-center">欢迎登录安华易终端安全管理系统</p>
 					<input type="text" name="username" class="form-control uname"
 						value="admin" /> <input type="password" name="password"
 						class="form-control pword m-b" value="111111" /> <a id="login"
@@ -99,8 +100,11 @@
 				</form>
 			</div>
 		</div>
-		<div class="signup-footer">
-			<div class="pull-left">&copy; 2018 All Rights Reserved.</div>
+		<div class="signup-footer" style="text-align: center;font-weight: 100;">
+			<div>
+				<font style="color: #333;">2018 All Rights
+					Reserved.安全保障价值，科技成就梦想！ </font>
+			</div>
 		</div>
 	</div>
 	<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
@@ -115,9 +119,12 @@
 
 	<!-- jQuery Validation plugin javascript-->
 	<script src="/js/ajax-util.js"></script>
-	<script src="/js/plugins/validate/jquery.validate.min.js" th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
-	<script src="/js/plugins/validate/messages_zh.min.js" th:src="@{/js/plugins/validate/messages_zh.min.js}"></script>
-	<script src="/js/plugins/layer/layer.min.js" th:src="@{/js/plugins/layer/layer.min.js}"></script>
+	<script src="/js/plugins/validate/jquery.validate.min.js"
+		th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
+	<script src="/js/plugins/validate/messages_zh.min.js"
+		th:src="@{/js/plugins/validate/messages_zh.min.js}"></script>
+	<script src="/js/plugins/layer/layer.min.js"
+		th:src="@{/js/plugins/layer/layer.min.js}"></script>
 	<script type="text/javascript">
     $(document).ready(function () {
         $("#login").on('click',function(){$("#signupForm").submit();});
