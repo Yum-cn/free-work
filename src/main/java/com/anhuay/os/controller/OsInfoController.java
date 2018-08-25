@@ -47,20 +47,17 @@ public class OsInfoController {
 	}
 	
 	@GetMapping("/select")
-	@RequiresPermissions("os:osInfo:osInfo")
 	String OsInfoSelect(){
 	    return "os/osInfo/osInfoSelect";
 	}
 	
 	@GetMapping("/v2")
-	@RequiresPermissions("os:osInfo:osInfo")
 	String OsInfoSelectV2(){
 		return "os/osInfo/osInfoV2";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("os:osInfo:osInfo")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);

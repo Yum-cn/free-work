@@ -16,6 +16,11 @@
 <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 <link href="/css/animate.css" rel="stylesheet">
 <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+<style type="text/css">
+.img-circle {
+    border-radius: 15%;
+}
+</style>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg"
 	style="overflow: hidden">
@@ -29,8 +34,8 @@
 				<ul class="nav" id="side-menu">
 					<li class="nav-header">
 						<div>
-							<span><img alt="image" class="img-circle" height="60"
-								width="60" th:src="${picUrl}" /></span>
+							<span><img alt="image" class="img-circle" height="90"
+								width="160" src="/img/logo-a.jpg" /></span>
 							<h3 class="" style="color: #ffffff">
 								</i>内网安全综合管理系统<!-- 面向学习型的开源框架  内网安全综合管理系统-->
 							</h3>
@@ -126,7 +131,7 @@
 										</a>
 										<div class="media-body">
 											<small class="pull-right">{{row.before}}</small> <strong>{{row.sender}}</strong>
-											{{row.title}} <br> <small class="text-muted">{{row.updateDate}}</small>
+											{{row.title}} <br> <small class="text-muted" >{{row.updateDate}}</small>
 										</div>
 									</div>
 									<div class="divider"></div>
@@ -166,9 +171,9 @@
 						关闭操作<span class="caret"></span>
 					</button>
 					<ul role="menu" class="dropdown-menu dropdown-menu-right">
-						<li class="J_tabShowActive"><a>定位当前选项卡</a></li>
-						<li class="divider"></li>
+						<!-- <li class="J_tabShowActive"><a>定位当前选项卡</a></li> -->
 						<li class="J_tabCloseAll"><a>关闭全部选项卡</a></li>
+						<li class="divider"></li>
 						<li class="J_tabCloseOther"><a>关闭其他选项卡</a></li>
 					</ul>
 				</div>
@@ -359,7 +364,14 @@
 				notify : function() {
 					$.getJSON('/oa/notify/message', function(r) {
 						wrapper.total = r.total;
+						
+						if(r.rows!=undefined){
+		                        for(var i=0;i<r.rows.length;i++){
+		                            r.rows[i].updateDate=formatTimeStamp(r.rows[i].updateDate);
+		                        }
+						}
 						wrapper.rows = r.rows;
+						
 					});
 				},
 				personal : function() {
@@ -376,7 +388,31 @@
 			created : function() {
 				this.notify()
 			}
-		})
+		});
+		
+		function formatTimeStamp(time) {
+		    //console.log(">>>"+time);
+		    let unixtime = time;
+		    console.log(unixtime);
+		    let unixTimestamp = new Date(unixtime);
+		    let Y = unixTimestamp.getFullYear();
+		    let M = ((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1)
+		            : '0' + (unixTimestamp.getMonth() + 1));
+		    let D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0'
+		            + unixTimestamp.getDate());
+		    
+		     var h = unixTimestamp.getHours();
+		        h = h < 10 ? ('0' + h) : h;
+		        var minute = unixTimestamp.getMinutes();
+		        var second = unixTimestamp.getSeconds();
+		        minute = minute < 10 ? ('0' + minute) : minute;
+		        second = second < 10 ? ('0' + second) : second;
+		    
+		    let toDay = Y + '-' + M + '-' + D+ ' ' + h + ':' + minute + ':' + second;
+		    return toDay;
+		}
+		
+		
 	</script>
 </body>
 </html>

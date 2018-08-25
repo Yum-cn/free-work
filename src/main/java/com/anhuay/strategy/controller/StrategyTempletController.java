@@ -78,14 +78,12 @@ public class StrategyTempletController {
 	
 	
 	@GetMapping("/select")
-	@RequiresPermissions("strategy:strategyTemplet")
 	String SelectStrategyTemplet(){
 	    return "strategy/strategyTemplet/strategyTempletSelect";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("strategy:strategyTemplet")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);

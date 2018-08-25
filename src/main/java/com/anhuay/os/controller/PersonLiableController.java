@@ -43,14 +43,12 @@ public class PersonLiableController {
 	}
 	
 	@GetMapping("/select")
-	@RequiresPermissions("os:personLiable:personLiable")
 	String PersonLiableSelect(){
 	    return "os/personLiable/personLiableSelect";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("os:personLiable:personLiable")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);

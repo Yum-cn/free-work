@@ -43,14 +43,12 @@ public class OsGroupController {
 	}
 	
 	@GetMapping("/select")
-	@RequiresPermissions("os:osGroup:osGroup")
 	String OsGroupSelect(){
 	    return "os/osGroup/osGroupSelect";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("os:osGroup:osGroup")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);

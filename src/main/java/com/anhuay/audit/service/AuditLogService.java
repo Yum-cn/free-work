@@ -41,4 +41,6 @@ public interface AuditLogService {
 	List<AuditAlarmLogVO> listAlarm(Map<String, Object> map);
 
 	int countAlarm(Map<String, Object> map);
+	
+	List<AuditLogDO> listLog(Map<String, Object> map);
 }

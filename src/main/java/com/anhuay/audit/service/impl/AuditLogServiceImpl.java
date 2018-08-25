@@ -73,4 +73,10 @@ public class AuditLogServiceImpl implements AuditLogService {
 	public int countAlarm(Map<String, Object> map) {
 		return logDao.countAlarm(map);
 	}
+	
+
+	@Override
+	public List<AuditLogDO> listLog(Map<String, Object> map){
+		return logDao.listLog(map);
+	}
 }

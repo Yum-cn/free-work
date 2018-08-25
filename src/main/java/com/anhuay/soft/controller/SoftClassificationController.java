@@ -10,6 +10,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,8 @@ import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
 import com.anhuay.soft.domain.SoftClassificationDO;
 import com.anhuay.soft.service.SoftClassificationService;
+import com.anhuay.system.domain.PropertyDO;
+import com.anhuay.system.service.PropertyService;
 import com.common.constant.CommonEnum;
 import com.common.id.IdWorker;
 import com.common.util.BaseResultHelper;
@@ -57,6 +61,8 @@ public class SoftClassificationController   extends BaseController{
 	private BootdoConfig bootdoConfig;
 	@Autowired
 	private FileService sysFileService;
+	@Autowired
+	private PropertyService propertyService;
 	
 	
 	@GetMapping()
@@ -203,7 +209,26 @@ public class SoftClassificationController   extends BaseController{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		resultMap.put("downUrl",bootdoConfig.getDownloadUrl()+tempFilePath+sourceFileName);
+		
+		String downPath = "";
+		
+		try {
+            Map<String,Object> queryMap = new HashMap<String,Object>();
+            queryMap.put("propName", "download_url");
+            List<PropertyDO> propertyList = propertyService.list(queryMap);
+            PropertyDO property = CollectionUtils.isEmpty(propertyList)?new PropertyDO():propertyList.get(0);
+            if(StringUtils.isNotBlank(property.getPropValue())){
+                 downPath = property.getPropValue();
+            }else{
+                 downPath = bootdoConfig.getDownloadUrl();
+            }
+       } catch (Exception e) {
+            e.printStackTrace();
+            downPath = bootdoConfig.getDownloadUrl();
+       }
+
+		
+		resultMap.put("downUrl",downPath+tempFilePath+sourceFileName);
 		
 		return BaseResultHelper.success(resultMap);
 	}

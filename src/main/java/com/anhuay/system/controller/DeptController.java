@@ -41,7 +41,6 @@ public class DeptController extends BaseController {
 	@ApiOperation(value="获取部门列表", notes="")
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("system:sysDept:sysDept")
 	public List<DeptDO> list() {
 		Map<String, Object> query = new HashMap<>(16);
 		List<DeptDO> sysDeptList = sysDeptService.list(query);
