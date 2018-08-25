@@ -99,7 +99,7 @@ public class TerminalFileController  extends BaseController {
 		//System.out.println("value:"+StringUtils.substringAfterLast(sourceFileName, "tar.gz"));
 		if(StringUtils.indexOf(sourceFileName, "tar.gz")<0||StringUtils.isNotBlank(StringUtils.substringAfterLast(sourceFileName, "tar.gz"))){
 			
-			//return BaseResultHelper.error("请上传后缀为tar.gz格式的文件！");
+			return BaseResultHelper.error("请上传后缀为tar.gz格式的文件！");
 		}
 		
 		//String fileName = FileUtil.renameToUUID(sourceFileName);

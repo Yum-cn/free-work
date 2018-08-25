@@ -70,6 +70,10 @@ public class SoftClassificationController   extends BaseController{
 	String SoftClassification(){
 	    return "soft/softClassification/softClassification";
 	}
+	@GetMapping("/select")
+	String SoftClassificationSelect(){
+		return "soft/softClassification/softClassificationSelect";
+	}
 	
 	@ResponseBody
 	@GetMapping("/list")
