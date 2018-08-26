@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,10 @@ import com.anhuay.strategy.service.OsGroupStrategyService;
 import com.anhuay.strategy.service.OsStrategyService;
 import com.anhuay.strategy.service.StrategyTempletService;
 import com.anhuay.system.domain.DeptDO;
+import com.anhuay.system.license.License;
+import com.anhuay.system.license.LicenseException;
+import com.anhuay.system.license.LicenseManager;
+import com.anhuay.system.license.LicenseNotFoundException;
 import com.anhuay.system.service.DeptService;
 import com.common.constant.CommonEnum;
 
@@ -45,7 +50,7 @@ import com.common.constant.CommonEnum;
  * @email wtuada@126.com
  * @date 2018-07-24 14:45:03
  */
- 
+
 @Controller
 @RequestMapping("/os/osInfo")
 public class OsInfoController {
@@ -61,65 +66,65 @@ public class OsInfoController {
 	private DeptService sysDeptService;
 	@Autowired
 	private StrategyTempletService strategyTempletService;
-	
+
 	@GetMapping()
 	@RequiresPermissions("os:osInfo:osInfo")
-	String OsInfo(){
-	    return "os/osInfo/osInfo";
+	String OsInfo() {
+		return "os/osInfo/osInfo";
 	}
-	
+
 	@GetMapping("/select")
-	String OsInfoSelect(){
-	    return "os/osInfo/osInfoSelect";
+	String OsInfoSelect() {
+		return "os/osInfo/osInfoSelect";
 	}
-	
+
 	@GetMapping("/v2")
-	String OsInfoSelectV2(){
+	String OsInfoSelectV2() {
 		return "os/osInfo/osInfoV2";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/list")
-	public PageUtils list(@RequestParam Map<String, Object> params){
-		//查询列表数据
-        Query query = new Query(params);
+	public PageUtils list(@RequestParam Map<String, Object> params) {
+		// 查询列表数据
+		Query query = new Query(params);
 		List<OsInfoDO> osInfoList = osInfoService.list(query);
-		
+
 		List<OsInfoVO> osInfoVOList = new ArrayList<OsInfoVO>();
-		if(CollectionUtils.isNotEmpty(osInfoList)){
+		if (CollectionUtils.isNotEmpty(osInfoList)) {
 			for (int j = 0; j < osInfoList.size(); j++) {
 				OsInfoVO osInfoVO = new OsInfoVO();
 				try {
 					BeanUtils.copyProperties(osInfoVO, osInfoList.get(j));
-				}catch (Exception e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				//默认策略
+
+				// 默认策略
 				osInfoVO.setTempletType(4);
 				osInfoVO.setTempletName("默认策略");
-				
-				//主机、主机组、部门、默认
+
+				// 主机、主机组、部门、默认
 				String osIp = osInfoVO.getOsIp();
 				Long id = osInfoVO.getId();
 				String strategyNames = osStrategyService.selectOsStrategy(osIp);
-				if(StringUtils.isNotBlank(strategyNames)){
+				if (StringUtils.isNotBlank(strategyNames)) {
 					osInfoVO.setTempletType(1);
 					osInfoVO.setTempletName(strategyNames);
-				}else{
-					//主机组策略
+				} else {
+					// 主机组策略
 					strategyNames = osGroupStrategyService.selectOsGroupStrategy(osIp);
-					if(StringUtils.isNotBlank(strategyNames)){
+					if (StringUtils.isNotBlank(strategyNames)) {
 						osInfoVO.setTempletType(2);
 						osInfoVO.setTempletName(strategyNames);
-					}else{
-						//部门策略
+					} else {
+						// 部门策略
 						Integer deptId = osInfoVO.getDeptId();
-						if(deptId!=null&&deptId>0){
-							
+						if (deptId != null && deptId > 0) {
+
 							List<TreeCode> treeCodeList = new ArrayList<TreeCode>();
-							List<DeptDO> sysDepts = sysDeptService.list(new HashMap<String,Object>(16));
+							List<DeptDO> sysDepts = sysDeptService.list(new HashMap<String, Object>(16));
 							for (DeptDO sysDept : sysDepts) {
 								TreeCode tree = new TreeCode();
 								tree.setTreeCodeId(sysDept.getDeptId().toString());
@@ -129,45 +134,44 @@ public class OsInfoController {
 							}
 							TreeCodeUtil treeCodeUtil = new TreeCodeUtil();
 							String deptIds = treeCodeUtil.getAllChildId(treeCodeList, String.valueOf(deptId));
-							if(StringUtils.isNotBlank(deptIds)){
+							if (StringUtils.isNotBlank(deptIds)) {
 								strategyNames = deptStrategyService.selectDeptStrategy(deptIds.split(","));
-								if(StringUtils.isNotBlank(strategyNames)){
+								if (StringUtils.isNotBlank(strategyNames)) {
 									osInfoVO.setTempletType(3);
 									osInfoVO.setTempletName(strategyNames);
 								}
 							}
-							
-							
+
 						}
 					}
 				}
-				
-				
-				osInfoVO.setServerTime(System.currentTimeMillis()/1000);
+
+				osInfoVO.setServerTime(System.currentTimeMillis() / 1000);
 				osInfoVOList.add(osInfoVO);
 			}
-			
+
 		}
-		
+
 		int total = osInfoService.count(query);
 		PageUtils pageUtils = new PageUtils(osInfoVOList, total);
 		return pageUtils;
 	}
-	
+
 	@GetMapping("/add")
 	@RequiresPermissions("os:osInfo:add")
-	String add(){
-	    return "os/osInfo/add";
+	String add() {
+		return "os/osInfo/add";
 	}
+
 	@Log("编辑主机信息")
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("os:osInfo:edit")
-	String edit(@PathVariable("id") Long id,Model model){
+	String edit(@PathVariable("id") Long id, Model model) {
 		OsInfoDO osInfo = osInfoService.get(id);
 		model.addAttribute("osInfo", osInfo);
-	    return "os/osInfo/add";
+		return "os/osInfo/add";
 	}
-	
+
 	/**
 	 * 保存
 	 */
@@ -175,57 +179,73 @@ public class OsInfoController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("os:osInfo:add")
-	public R save( OsInfoDO osInfo){
+	public R save(OsInfoDO osInfo) {
 
 		osInfo.setUpdateTime(System.currentTimeMillis() / 1000);
-		if(osInfo.getId()!=null && osInfo.getId()>0){
-			if(osInfoService.update(osInfo)>0){
+		if (osInfo.getId() != null && osInfo.getId() > 0) {
+			if (osInfoService.update(osInfo) > 0) {
 				return R.ok();
 			}
-		}else{
+		} else {
 			osInfo.setStatus(CommonEnum.STATUS.ONE.value);
 			osInfo.setCreateTime(System.currentTimeMillis() / 1000);
-			
-			if(osInfoService.save(osInfo)>0){
+
+			/*try {
+				LicenseManager licenseManager = LicenseManager.getInstance();
+				int total = osInfoService.count(new HashMap<String, Object>());
+				License license = licenseManager.getLicense();
+				System.out.println("license = " + license);
+				int number = NumberUtils.toInt(license.getFeature("number"));
+
+				if (total >= number) {
+					return R.error(CommonEnum.CODE.INVALID_LICENSE.code, CommonEnum.CODE.INVALID_LICENSE.description);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return R.error(CommonEnum.CODE.INVALID_LICENSE.code, CommonEnum.CODE.INVALID_LICENSE.description);
+			}*/
+
+			if (osInfoService.save(osInfo) > 0) {
 				return R.ok();
 			}
 		}
 		return R.error();
 	}
+
 	/**
 	 * 修改
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("os:osInfo:edit")
-	public R update( OsInfoDO osInfo){
+	public R update(OsInfoDO osInfo) {
 		osInfoService.update(osInfo);
 		return R.ok();
 	}
-	
+
 	/**
 	 * 删除
 	 */
 	@Log("删除主机信息")
-	@PostMapping( "/remove")
+	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("os:osInfo:remove")
-	public R remove( Long id){
-		if(osInfoService.updateStatus(id)>0){
-		return R.ok();
+	public R remove(Long id) {
+		if (osInfoService.updateStatus(id) > 0) {
+			return R.ok();
 		}
 		return R.error();
 	}
-	
+
 	/**
 	 * 删除
 	 */
-	@PostMapping( "/batchRemove")
+	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("os:osInfo:batchRemove")
-	public R remove(@RequestParam("ids[]") Long[] ids){
+	public R remove(@RequestParam("ids[]") Long[] ids) {
 		osInfoService.batchUpdateStatus(ids);
 		return R.ok();
 	}
-	
+
 }

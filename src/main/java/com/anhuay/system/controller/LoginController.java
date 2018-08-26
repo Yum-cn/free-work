@@ -93,26 +93,22 @@ public class LoginController extends BaseController {
 	@ResponseBody
 	Object ajaxLogin(String username, String password, HttpServletRequest request) {
 
-		/*
-		 * File file = new File("license.properties"); // 这里表示从jar同级目录加载 if
-		 * (!file.exists()) { // 如果同级目录没有，则去config下面找 file = new
-		 * File("config/license.properties"); System.out.println("从config目录加载");
-		 * }else{ System.out.println("从当前目录加载"); }
-		 * System.out.println(file.exists()+
-		 * ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+
-		 * licenseProperties.toString());
-		 */
-
-		boolean valid = false;
-		LicenseManager licenseManager = LicenseManager.getInstance();
-		try {
+		
+		/*try {
+			boolean valid = false;
+			LicenseManager licenseManager = LicenseManager.getInstance();
 			License license = licenseManager.getLicense();
 			System.out.println("license = " + license);
 			valid = licenseManager.isValidLicense(license);
-			System.out.println("valid = " + valid);
+			if(!valid){
+				return BaseResultHelper.error(CommonEnum.CODE.INVALID_LICENSE.code,
+						CommonEnum.CODE.INVALID_LICENSE.description);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+			return BaseResultHelper.error(CommonEnum.CODE.INVALID_LICENSE.code,
+					CommonEnum.CODE.INVALID_LICENSE.description);
+		}*/
 
 		password = MD5Utils.encrypt(username, password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);

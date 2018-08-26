@@ -122,6 +122,7 @@ public class CommonEnum {
 		WHITE_IP_UNAUTHORIZED(1007, "访问IP未授权"), 
 		PASSWORD_EXPIRED(1008, "密码已过期"), 
 		PASSWORD_DEFAULT(1009, "初始密码未修改"), 
+		INVALID_LICENSE(1010, "无效的授权或授权已过期，请联系管理员"), 
 		//USER_INFO_MISSING(1100, "用户信息异常"), 
 
 	

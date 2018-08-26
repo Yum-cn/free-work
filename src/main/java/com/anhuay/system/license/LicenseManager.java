@@ -32,12 +32,10 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class LicenseManager {
 
-	// public static final String LICENSE_FILE = "config/license.dat";
-	public static final String LICENSE_FILE = "config/license.dat";
+	//public static final String LICENSE_FILE = "D:/new-eclipse/neon-eclipse-workplace/anhuay/src/main/resources/license.dat";//本地调试
+	public static final String LICENSE_FILE = "config/license.dat";//线上
 	public static final String PUBLIC_KEY_FILE = "public.key";
 	public static final String SIGNATURE = "signature";
-	ClassPathResource initLicenseResource = new ClassPathResource(LICENSE_FILE);
-	ClassPathResource initPublicResource = new ClassPathResource(PUBLIC_KEY_FILE);
 
 	private static LicenseManager licenseManager = new LicenseManager();
 
@@ -65,15 +63,15 @@ public class LicenseManager {
 	}
 
 	private License loadLicense() throws Exception {
-		Properties features = PropertiesUtils.loadProperties("D:/tmp/license.dat");
+		Properties features = PropertiesUtils.loadProperties(LICENSE_FILE);
 		if (!features.containsKey(SIGNATURE)) {
 			throw new LicenseException("Missing signature");
 		}
 
 		String signature = (String) features.remove(SIGNATURE);
 		String encoded = features.toString();
-
-		PublicKey publicKey = readPublicKey("D:/tmp/public.key");
+		//System.out.println(initPublicResource.getFile().getPath());
+		PublicKey publicKey = readPublicKey(PUBLIC_KEY_FILE);
 
 		if (!verify(encoded.getBytes(), signature, publicKey)) {
 			throw new LicenseException();
