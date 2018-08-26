@@ -36,6 +36,8 @@ import com.anhuay.common.utils.R;
 import com.anhuay.common.utils.ShiroUtils;
 import com.anhuay.system.domain.MenuDO;
 import com.anhuay.system.domain.UserExtendDO;
+import com.anhuay.system.license.License;
+import com.anhuay.system.license.LicenseManager;
 import com.anhuay.system.service.MenuService;
 import com.anhuay.system.service.UserExtendService;
 import com.common.constant.CommonEnum;
@@ -90,6 +92,27 @@ public class LoginController extends BaseController {
 	@PostMapping("/login")
 	@ResponseBody
 	Object ajaxLogin(String username, String password, HttpServletRequest request) {
+
+		/*
+		 * File file = new File("license.properties"); // 这里表示从jar同级目录加载 if
+		 * (!file.exists()) { // 如果同级目录没有，则去config下面找 file = new
+		 * File("config/license.properties"); System.out.println("从config目录加载");
+		 * }else{ System.out.println("从当前目录加载"); }
+		 * System.out.println(file.exists()+
+		 * ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+
+		 * licenseProperties.toString());
+		 */
+
+		boolean valid = false;
+		LicenseManager licenseManager = LicenseManager.getInstance();
+		try {
+			License license = licenseManager.getLicense();
+			System.out.println("license = " + license);
+			valid = licenseManager.isValidLicense(license);
+			System.out.println("valid = " + valid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		password = MD5Utils.encrypt(username, password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
@@ -146,7 +169,8 @@ public class LoginController extends BaseController {
 			Calendar todayCal = Calendar.getInstance();
 
 			if (expiredCal.before(todayCal)) {
-				return BaseResultHelper.error(CommonEnum.CODE.PASSWORD_EXPIRED.code,CommonEnum.CODE.PASSWORD_EXPIRED.description);
+				return BaseResultHelper.error(CommonEnum.CODE.PASSWORD_EXPIRED.code,
+						CommonEnum.CODE.PASSWORD_EXPIRED.description);
 			}
 		}
 
@@ -225,6 +249,7 @@ public class LoginController extends BaseController {
 		}
 		return BaseResultHelper.success();
 	}
+
 	@Log("退出登录")
 	@GetMapping("/logout")
 	String logout() {
