@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.strategy.domain.SoftDistributeDO;
 import com.anhuay.strategy.service.SoftDistributeService;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -31,7 +32,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/strategy/softDistribute")
-public class SoftDistributeController {
+public class SoftDistributeController  extends BaseController{
 	@Autowired
 	private SoftDistributeService softDistributeService;
 	
@@ -74,6 +75,7 @@ public class SoftDistributeController {
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:softDistribute:add")
 	public R save( SoftDistributeDO softDistribute){
+		softDistribute.setId(getId());
 		if(softDistributeService.save(softDistribute)>0){
 			return R.ok();
 		}

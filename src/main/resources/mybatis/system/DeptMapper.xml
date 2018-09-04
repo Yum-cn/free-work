@@ -5,26 +5,26 @@
 
 	<select id="get" resultType="com.anhuay.system.domain.DeptDO">
 		select
-		`dept_id`,`parent_id`,`name`,`order_num`,`del_flag` from sys_dept
-		where dept_id = #{value}
+		"dept_id","parent_id","name","order_num","del_flag" from "server"."sys_dept"
+		where "dept_id" = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.system.domain.DeptDO">
-		select `dept_id`,`parent_id`,`name`,`order_num`,`del_flag` from
-		sys_dept
+		select "dept_id","parent_id","name","order_num","del_flag" from
+		"server"."sys_dept"
 		<where>
-			<if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
-			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="orderNum != null and orderNum != ''"> and order_num = #{orderNum} </if>
-			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+			<if test="deptId != null and deptId != ''"> and "dept_id" = #{deptId} </if>
+			<if test="parentId != null and parentId != ''"> and "parent_id" = #{parentId} </if>
+			<if test="name != null and name != ''"> and "name" = #{name} </if>
+			<if test="orderNum != null and orderNum != ''"> and "order_num" = #{orderNum} </if>
+			<if test="delFlag != null and delFlag != ''"> and "del_flag" = #{delFlag} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
-				order by dept_id desc
+				order by "dept_id" desc
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -33,24 +33,24 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from sys_dept
+		select count(*) from "server"."sys_dept"
 		<where>
-			<if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
-			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="orderNum != null and orderNum != ''"> and order_num = #{orderNum} </if>
-			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+			<if test="deptId != null and deptId != ''"> and "dept_id" = #{deptId} </if>
+			<if test="parentId != null and parentId != ''"> and "parent_id" = #{parentId} </if>
+			<if test="name != null and name != ''"> and "name" = #{name} </if>
+			<if test="orderNum != null and orderNum != ''"> and "order_num" = #{orderNum} </if>
+			<if test="delFlag != null and delFlag != ''"> and "del_flag" = #{delFlag} </if>
 		</where>
 	</select>
 
 	<insert id="save" parameterType="com.anhuay.system.domain.DeptDO"
 		useGeneratedKeys="true" keyProperty="deptId">
-		insert into sys_dept
+		insert into "server"."sys_dept"
 		(
-		`parent_id`,
-		`name`,
-		`order_num`,
-		`del_flag`
+		"parent_id",
+		"name",
+		"order_num",
+		"del_flag"
 		)
 		values
 		(
@@ -62,22 +62,22 @@
 	</insert>
 
 	<update id="update" parameterType="com.anhuay.system.domain.DeptDO">
-		update sys_dept
+		update "server"."sys_dept"
 		<set>
-			<if test="parentId != null">`parent_id` = #{parentId}, </if>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="orderNum != null">`order_num` = #{orderNum}, </if>
-			<if test="delFlag != null">`del_flag` = #{delFlag}</if>
+			<if test="parentId != null">"parent_id" = #{parentId}, </if>
+			<if test="name != null">"name" = #{name}, </if>
+			<if test="orderNum != null">"order_num" = #{orderNum}, </if>
+			<if test="delFlag != null">"del_flag" = #{delFlag}</if>
 		</set>
-		where dept_id = #{deptId}
+		where "dept_id" = #{deptId}
 	</update>
 
 	<delete id="remove">
-		delete from sys_dept where dept_id = #{value}
+		delete from "server"."sys_dept" where "dept_id" = #{value}
 	</delete>
 
 	<delete id="batchRemove">
-		delete from sys_dept where dept_id in
+		delete from "server"."sys_dept" where "dept_id" in
 		<foreach item="deptId" collection="array" open="(" separator=","
 			close=")">
 			#{deptId}
@@ -85,10 +85,10 @@
 	</delete>
 	
 	<select id="listParentDept" resultType="long">
-		select DISTINCT parent_id from sys_dept
+		select DISTINCT "parent_id" from "server"."sys_dept"
 	</select>
 
     <select id="getDeptUserNumber" resultType="int">
-		select count(*) from sys_user where dept_id = #{value}
+		select count(*) from "server"."sys_user" where "dept_id" = #{value}
 	</select>
 </mapper>

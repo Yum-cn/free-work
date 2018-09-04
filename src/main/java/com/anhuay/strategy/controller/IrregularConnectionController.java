@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.strategy.domain.IrregularConnectionDO;
 import com.anhuay.strategy.service.IrregularConnectionService;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -31,7 +32,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/strategy/irregularConnection")
-public class IrregularConnectionController {
+public class IrregularConnectionController  extends BaseController{
 	@Autowired
 	private IrregularConnectionService irregularConnectionService;
 	
@@ -74,6 +75,7 @@ public class IrregularConnectionController {
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:irregularConnection:add")
 	public R save( IrregularConnectionDO irregularConnection){
+		irregularConnection.setId(getId());
 		if(irregularConnectionService.save(irregularConnection)>0){
 			return R.ok();
 		}

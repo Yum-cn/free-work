@@ -222,6 +222,7 @@ public class TerminalFileController  extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("terminal:terminalFile:add")
 	public R save( TerminalFileDO terminalFile){
+		terminalFile.setId(getId());
 		if(terminalFileService.save(terminalFile)>0){
 			return R.ok();
 		}

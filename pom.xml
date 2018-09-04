@@ -242,6 +242,20 @@
 			<version>2.9</version>
 		</dependency>
 
+		<!--添加外部依赖 -->
+		<dependency>
+                    <groupId>com.dm</groupId>
+                    <artifactId>dmjdbc7</artifactId>
+                    <version>1.7.0</version>
+             </dependency>
+
+		
+		<!-- <dependency>
+               <groupId>com.dm</groupId>
+               <artifactId>dmjdbc7</artifactId>
+               <version>1.7.0</version>
+        </dependency> -->
+
 		<!--war包部署需要 -->
 		<!--<dependency> -->
 		<!--<groupId>org.springframework.boot</groupId> -->
@@ -271,6 +285,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 	<repositories>
 		<repository>

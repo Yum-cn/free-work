@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.domain.DictDO;
 import com.anhuay.common.domain.Tree;
 import com.anhuay.common.utils.PageUtils;
@@ -33,7 +34,7 @@ import com.common.constant.CommonEnum;
  
 @Controller
 @RequestMapping("/system/device")
-public class DeviceController {
+public class DeviceController  extends BaseController{
 	@Autowired
 	private DeviceService deviceService;
 	
@@ -99,7 +100,7 @@ public class DeviceController {
 		}else{
 			device.setStatus(CommonEnum.STATUS.ONE.value);
 			device.setCreateTime(System.currentTimeMillis() / 1000);
-			
+			device.setId(getId());
 			if(deviceService.save(device)>0){
 				return R.ok();
 			}

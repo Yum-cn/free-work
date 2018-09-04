@@ -19,6 +19,7 @@ import com.anhuay.strategy.domain.OsGroupStrategyDO;
 import com.anhuay.strategy.service.OsGroupStrategyService;
 import com.common.constant.CommonEnum;
 import com.anhuay.common.annotation.Log;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -33,7 +34,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/strategy/osGroupStrategy")
-public class OsGroupStrategyController {
+public class OsGroupStrategyController  extends BaseController{
 	@Autowired
 	private OsGroupStrategyService osGroupStrategyService;
 	
@@ -86,7 +87,7 @@ public class OsGroupStrategyController {
 		}else{
 			osGroupStrategy.setStatus(CommonEnum.STATUS.ONE.value);
 			osGroupStrategy.setCreateTime(System.currentTimeMillis() / 1000);
-			
+			osGroupStrategy.setId(getId());
 			if(osGroupStrategyService.save(osGroupStrategy)>0){
 				return R.ok();
 			}

@@ -8,5 +8,9 @@ public abstract class BaseManagerImpl implements BaseManager {
 	// private RedisTemplate<String, Object> redisTemplate;
 
 	protected IdWorker idWorker = new IdWorker(1);
+	
+	public long getId() {
+		return idWorker.nextId();
+	}
 
 }

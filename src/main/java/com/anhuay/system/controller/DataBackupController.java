@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.common.annotation.Log;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -45,7 +46,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/system/dataBackup")
-public class DataBackupController {
+public class DataBackupController  extends BaseController{
 	@Autowired
 	private DataBackupService dataBackupService;
 	@Autowired
@@ -99,7 +100,7 @@ public class DataBackupController {
 			dataBackupDO.setUpdateTime(System.currentTimeMillis() / 1000);
 			dataBackupDO.setStatus(CommonEnum.STATUS.ONE.value);
 			dataBackupDO.setCreateTime(System.currentTimeMillis() / 1000);
-			
+			dataBackupDO.setId(getId());
 			if(dataBackupService.save(dataBackupDO)>0){
 				return R.ok();
 			}

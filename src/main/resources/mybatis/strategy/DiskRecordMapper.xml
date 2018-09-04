@@ -4,20 +4,20 @@
 <mapper namespace="com.anhuay.strategy.dao.DiskRecordDao">
 
 	<select id="get" resultType="com.anhuay.strategy.domain.DiskRecordDO">
-		select `id`,`templet_id`,`disk_record_status`,`disk_record_rules`,`status`,`create_time`,`update_time` from ahy_disk_record where id = #{value}
+		select "id","templet_id","disk_record_status","disk_record_rules","status","create_time","update_time" from "server"."ahy_disk_record" where "id" = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.strategy.domain.DiskRecordDO">
-		select `id`,`templet_id`,`disk_record_status`,`disk_record_rules`,`status`,`create_time`,`update_time` from ahy_disk_record
+		select "id","templet_id","disk_record_status","disk_record_rules","status","create_time","update_time" from "server"."ahy_disk_record
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="diskRecordStatus != null and diskRecordStatus != ''"> and disk_record_status = #{diskRecordStatus} </if>
-		  		  <if test="diskRecordRules != null and diskRecordRules != ''"> and disk_record_rules = #{diskRecordRules} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-		  		  and status = 1
+		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and "templet_id" = #{templetId} </if>
+		  		  <if test="diskRecordStatus != null and diskRecordStatus != ''"> and "disk_record_status" = #{diskRecordStatus} </if>
+		  		  <if test="diskRecordRules != null and diskRecordRules != ''"> and "disk_record_rules" = #{diskRecordRules} </if>
+		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
+		  		  and "status" = 1
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -33,28 +33,28 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from ahy_disk_record
+		select count(*) from "server"."ahy_disk_record
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="diskRecordStatus != null and diskRecordStatus != ''"> and disk_record_status = #{diskRecordStatus} </if>
-		  		  <if test="diskRecordRules != null and diskRecordRules != ''"> and disk_record_rules = #{diskRecordRules} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and "templet_id" = #{templetId} </if>
+		  		  <if test="diskRecordStatus != null and diskRecordStatus != ''"> and "disk_record_status" = #{diskRecordStatus} </if>
+		  		  <if test="diskRecordRules != null and diskRecordRules != ''"> and "disk_record_rules" = #{diskRecordRules} </if>
+		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
 		  		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.anhuay.strategy.domain.DiskRecordDO">
 		insert into ahy_disk_record
 		(
-			`id`, 
-			`templet_id`, 
-			`disk_record_status`, 
-			`disk_record_rules`, 
-			`status`, 
-			`create_time`, 
-			`update_time`
+			"id", 
+			"templet_id", 
+			"disk_record_status", 
+			"disk_record_rules", 
+			"status", 
+			"create_time", 
+			"update_time"
 		)
 		values
 		(
@@ -71,33 +71,33 @@
 	<update id="update" parameterType="com.anhuay.strategy.domain.DiskRecordDO">
 		update ahy_disk_record 
 		<set>
-			<if test="templetId != null">`templet_id` = #{templetId}, </if>
-			<if test="diskRecordStatus != null">`disk_record_status` = #{diskRecordStatus}, </if>
-			<if test="diskRecordRules != null">`disk_record_rules` = #{diskRecordRules}, </if>
-			<if test="status != null">`status` = #{status}, </if>
-			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="templetId != null">"templet_id" = #{templetId}, </if>
+			<if test="diskRecordStatus != null">"disk_record_status" = #{diskRecordStatus}, </if>
+			<if test="diskRecordRules != null">"disk_record_rules" = #{diskRecordRules}, </if>
+			<if test="status != null">"status" = #{status}, </if>
+			<if test="createTime != null">"create_time" = #{createTime}, </if>
+			<if test="updateTime != null">"update_time" = #{updateTime}</if>
 		</set>
-		where id = #{id}
+		where id" = #{id}
 	</update>
 	
 	<update id="updateStatus">
-        update ahy_disk_record set status = 0 where id = #{value}
+        update ahy_disk_record set status = 0" where "id" = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update ahy_disk_record set status = 0 where id in
+        update ahy_disk_record set status = 0" where "id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from ahy_disk_record where id = #{value}
+		delete from "server"."ahy_disk_record" where "id" = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from ahy_disk_record where id in 
+		delete from "server"."ahy_disk_record" where "id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

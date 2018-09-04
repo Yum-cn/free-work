@@ -86,6 +86,7 @@ public class FileController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("common:save")
 	public R save(FileDO sysFile) {
+		sysFile.setId(getId());
 		if (sysFileService.save(sysFile) > 0) {
 			return R.ok();
 		}

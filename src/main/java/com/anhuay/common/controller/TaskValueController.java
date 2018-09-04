@@ -31,7 +31,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/common/taskValue")
-public class TaskValueController {
+public class TaskValueController  extends BaseController{
 	@Autowired
 	private TaskValueService taskValueService;
 	
@@ -74,6 +74,7 @@ public class TaskValueController {
 	@PostMapping("/save")
 	@RequiresPermissions("common:taskValue:add")
 	public R save( TaskValueDO taskValue){
+		taskValue.setId(getId());
 		if(taskValueService.save(taskValue)>0){
 			return R.ok();
 		}

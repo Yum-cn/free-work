@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.common.annotation.Log;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -31,7 +32,7 @@ import com.anhuay.strategy.service.OsAuditService;
  
 @Controller
 @RequestMapping("/strategy/osAudit")
-public class OsAuditController {
+public class OsAuditController  extends BaseController{
 	@Autowired
 	private OsAuditService osAuditService;
 	
@@ -75,6 +76,7 @@ public class OsAuditController {
 	@PostMapping("/save")
 	@RequiresPermissions(":osAudit:add")
 	public R save( OsAuditDO osAudit){
+		osAudit.setId(getId());
 		if(osAuditService.save(osAudit)>0){
 			return R.ok();
 		}

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.strategy.domain.DiskRecordDO;
 import com.anhuay.strategy.service.DiskRecordService;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -31,7 +32,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/strategy/diskRecord")
-public class DiskRecordController {
+public class DiskRecordController  extends BaseController{
 	@Autowired
 	private DiskRecordService diskRecordService;
 	
@@ -74,6 +75,7 @@ public class DiskRecordController {
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:diskRecord:add")
 	public R save( DiskRecordDO diskRecord){
+		diskRecord.setId(getId());
 		if(diskRecordService.save(diskRecord)>0){
 			return R.ok();
 		}

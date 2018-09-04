@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.anhuay.common.service.LogService;
 import com.anhuay.system.domain.UserToken;
+import com.common.id.IdWorker;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -98,6 +100,8 @@ public class LogAspect {
         // 系统当前时间
         Date date = new Date();
         sysLog.setGmtCreate(date);
+        IdWorker idWorker = new IdWorker(3);
+        sysLog.setId(idWorker.nextId());
         // 保存系统日志
         logService.save(sysLog);
     }

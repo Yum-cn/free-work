@@ -59,6 +59,7 @@ public class RoleController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
+		role.setRoleId(getId());
 		if (roleService.save(role) > 0) {
 			return R.ok();
 		} else {

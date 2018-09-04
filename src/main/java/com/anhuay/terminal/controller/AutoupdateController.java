@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.terminal.domain.AutoupdateDO;
 import com.anhuay.terminal.service.AutoupdateService;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -31,7 +32,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/terminal/autoupdate")
-public class AutoupdateController {
+public class AutoupdateController  extends BaseController{
 	@Autowired
 	private AutoupdateService autoupdateService;
 	

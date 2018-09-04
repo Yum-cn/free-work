@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.anhuay.system.domain.PropertyDO;
 import com.anhuay.system.service.PropertyService;
 import com.common.constant.CommonEnum;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -32,7 +33,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/system/property")
-public class PropertyController {
+public class PropertyController  extends BaseController{
 	@Autowired
 	private PropertyService propertyService;
 	
@@ -84,7 +85,7 @@ public class PropertyController {
 		}else{
 			property.setStatus(CommonEnum.STATUS.ONE.value);
 			property.setCreateTime(System.currentTimeMillis() / 1000);
-			
+			property.setId(getId());
 			if(propertyService.save(property)>0){
 				return R.ok();
 			}

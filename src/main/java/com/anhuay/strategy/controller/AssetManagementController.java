@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.strategy.domain.AssetManagementDO;
 import com.anhuay.strategy.service.AssetManagementService;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -31,7 +32,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/strategy/assetManagement")
-public class AssetManagementController {
+public class AssetManagementController  extends BaseController{
 	@Autowired
 	private AssetManagementService assetManagementService;
 	
@@ -74,6 +75,7 @@ public class AssetManagementController {
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:assetManagement:add")
 	public R save( AssetManagementDO assetManagement){
+		assetManagement.setId(getId());
 		if(assetManagementService.save(assetManagement)>0){
 			return R.ok();
 		}

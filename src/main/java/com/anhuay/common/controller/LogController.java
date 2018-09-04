@@ -23,7 +23,7 @@ import com.anhuay.common.utils.R;
 
 @RequestMapping("/common/log")
 @Controller
-public class LogController {
+public class LogController  extends BaseController{
 	@Autowired
 	LogService logService;
 	String prefix = "common/log";

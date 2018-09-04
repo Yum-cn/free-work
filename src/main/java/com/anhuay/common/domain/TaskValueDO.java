@@ -16,7 +16,7 @@ public class TaskValueDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//自动编号
-	private Integer id;
+	private Long id;
 	//表名称
 	private String jobName;
 	//最后更新时间
@@ -29,13 +29,13 @@ public class TaskValueDO implements Serializable {
 	/**
 	 * 设置：自动编号
 	 */
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
 	 * 获取：自动编号
 	 */
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	/**

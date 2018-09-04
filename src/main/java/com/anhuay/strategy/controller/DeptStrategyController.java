@@ -19,6 +19,7 @@ import com.anhuay.strategy.domain.DeptStrategyDO;
 import com.anhuay.strategy.service.DeptStrategyService;
 import com.common.constant.CommonEnum;
 import com.anhuay.common.annotation.Log;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -33,7 +34,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/strategy/deptStrategy")
-public class DeptStrategyController {
+public class DeptStrategyController  extends BaseController{
 	@Autowired
 	private DeptStrategyService deptStrategyService;
 	
@@ -86,7 +87,7 @@ public class DeptStrategyController {
 		}else{
 			deptStrategy.setStatus(CommonEnum.STATUS.ONE.value);
 			deptStrategy.setCreateTime(System.currentTimeMillis() / 1000);
-			
+			deptStrategy.setId(getId());
 			if(deptStrategyService.save(deptStrategy)>0){
 				return R.ok();
 			}

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.anhuay.system.domain.ServerConfigDO;
 import com.anhuay.system.service.ServerConfigService;
 import com.common.constant.CommonEnum;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -32,7 +33,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/system/serverConfig")
-public class ServerConfigController {
+public class ServerConfigController  extends BaseController{
 	@Autowired
 	private ServerConfigService serverConfigService;
 	
@@ -84,7 +85,7 @@ public class ServerConfigController {
 		}else{
 			serverConfig.setStatus(CommonEnum.STATUS.ONE.value);
 			serverConfig.setCreateTime(System.currentTimeMillis() / 1000);
-			
+			serverConfig.setId(getId());
 			if(serverConfigService.save(serverConfig)>0){
 				return R.ok();
 			}

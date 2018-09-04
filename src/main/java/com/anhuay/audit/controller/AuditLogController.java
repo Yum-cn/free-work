@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.anhuay.audit.domain.AuditAlarmLogVO;
 import com.anhuay.audit.domain.AuditLogDO;
 import com.anhuay.audit.service.AuditLogService;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -31,7 +32,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/audit/log")
-public class AuditLogController {
+public class AuditLogController  extends BaseController{
 	@Autowired
 	private AuditLogService logService;
 	
@@ -98,6 +99,7 @@ public class AuditLogController {
 	@PostMapping("/save")
 	@RequiresPermissions("audit:log:add")
 	public R save( AuditLogDO log){
+		log.setLogid(getId());
 		if(logService.save(log)>0){
 			return R.ok();
 		}

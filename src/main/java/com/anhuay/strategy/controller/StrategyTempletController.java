@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.common.annotation.Log;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.strategy.domain.DeviceControlDO;
@@ -46,7 +47,7 @@ import net.sf.json.JSONObject;
  
 @Controller
 @RequestMapping("/strategy/strategyTemplet")
-public class StrategyTempletController {
+public class StrategyTempletController  extends BaseController{
 	@Autowired
 	private StrategyTempletService strategyTempletService;
 	@Autowired

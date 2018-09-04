@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RequestMapping("/common/generator")
 @Controller
-public class GeneratorController {
+public class GeneratorController  extends BaseController{
 	String prefix = "common/generator";
 	@Autowired
 	GeneratorService generatorService;

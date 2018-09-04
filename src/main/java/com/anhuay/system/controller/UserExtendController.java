@@ -107,6 +107,7 @@ public class UserExtendController extends BaseController {
 		}else{
 			bean.setStatus(CommonEnum.STATUS.ONE.value);
 			bean.setCreateTime(System.currentTimeMillis() / 1000);
+			bean.setId(getId());
 			userExtendService.save(bean);
 		}
 		return  BaseResultHelper.success(bean);
@@ -174,6 +175,7 @@ public class UserExtendController extends BaseController {
 			}else{
 				bean.setStatus(CommonEnum.STATUS.ONE.value);
 				bean.setCreateTime(System.currentTimeMillis() / 1000);
+				bean.setId(getId());
 				userExtendService.save(bean);
 			}
 			

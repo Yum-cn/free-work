@@ -7,7 +7,8 @@ logging:
     com.anhuay: debug
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
+    #type: com.alibaba.druid.pool.DruidDataSource
+    type: com.mchange.v2.c3p0.ComboPooledDataSource
     driverClassName: dm.jdbc.driver.DmDriver
     url: jdbc:dm://localhost:5236/server?useUnicode=true&characterEncoding=utf8
     username: SYSDBA

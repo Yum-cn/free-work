@@ -8,6 +8,8 @@ import com.anhuay.common.utils.HttpServletUtils;
 import com.anhuay.common.utils.R;
 import com.anhuay.common.utils.ShiroUtils;
 import com.anhuay.system.domain.UserDO;
+import com.common.id.IdWorker;
+
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +30,7 @@ import java.util.Date;
 @RestControllerAdvice
 public class BDExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
+    IdWorker idWorker = new IdWorker(3);
     @Autowired
     LogService logService;
 //
@@ -68,6 +71,7 @@ public class BDExceptionHandler {
     @ExceptionHandler({Exception.class})
     public Object handleException(Exception e, HttpServletRequest request) {
         LogDO logDO = new LogDO();
+        logDO.setId(idWorker.nextId());
         logDO.setGmtCreate(new Date());
         logDO.setOperation(Constant.LOG_ERROR);
         logDO.setMethod(request.getRequestURL().toString());

@@ -22,6 +22,7 @@ import com.common.constant.CommonEnum;
 import net.sf.json.JSONObject;
 
 import com.anhuay.common.annotation.Log;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -36,7 +37,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/terminal/upgradeTask")
-public class UpgradeTaskController {
+public class UpgradeTaskController  extends BaseController{
 	@Autowired
 	private UpgradeTaskService upgradeTaskService;
 	
@@ -93,7 +94,7 @@ public class UpgradeTaskController {
 			upgradeTask.setStatus(CommonEnum.STATUS.ONE.value);
 			upgradeTask.setTaskStatus(CommonEnum.STATUS.ONE.value);
 			upgradeTask.setCreateTime(System.currentTimeMillis() / 1000);
-			
+			upgradeTask.setId(getId());
 			if(upgradeTaskService.save(upgradeTask)>0){
 				return R.ok();
 			}

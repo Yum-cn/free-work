@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.anhuay.alarm.domain.EmailConfigDO;
 import com.anhuay.alarm.service.EmailConfigService;
 import com.anhuay.common.annotation.Log;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
 import com.common.constant.CommonEnum;
+import com.common.id.IdWorker;
 
 /**
  * 邮箱配置
@@ -33,7 +35,7 @@ import com.common.constant.CommonEnum;
  
 @Controller
 @RequestMapping("/alarm/emailConfig")
-public class EmailConfigController {
+public class EmailConfigController  extends BaseController {
 	@Autowired
 	private EmailConfigService emailConfigService;
 	
@@ -83,6 +85,7 @@ public class EmailConfigController {
 				return R.ok();
 			}
 		}else{
+			emailConfig.setId(getId());
 			emailConfig.setStatus(CommonEnum.STATUS.ONE.value);
 			emailConfig.setCreateTime(System.currentTimeMillis() / 1000);
 			

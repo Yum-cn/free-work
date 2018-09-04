@@ -4,20 +4,20 @@
 <mapper namespace="com.anhuay.strategy.dao.IrregularConnectionDao">
 
 	<select id="get" resultType="com.anhuay.strategy.domain.IrregularConnectionDO">
-		select `id`,`templet_id`,`monitor_status`,`monitor_rules`,`status`,`create_time`,`update_time` from ahy_irregular_connection where id = #{value}
+		select "id","templet_id","monitor_status","monitor_rules","status","create_time","update_time" from "server"."ahy_irregular_connection" where "id" = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.strategy.domain.IrregularConnectionDO">
-		select `id`,`templet_id`,`monitor_status`,`monitor_rules`,`status`,`create_time`,`update_time` from ahy_irregular_connection
+		select "id","templet_id","monitor_status","monitor_rules","status","create_time","update_time" from "server"."ahy_irregular_connection
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="monitorStatus != null and monitorStatus != ''"> and monitor_status = #{monitorStatus} </if>
-		  		  <if test="monitorRules != null and monitorRules != ''"> and monitor_rules = #{monitorRules} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-		  		  and status = 1
+		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and "templet_id" = #{templetId} </if>
+		  		  <if test="monitorStatus != null and monitorStatus != ''"> and "monitor_status" = #{monitorStatus} </if>
+		  		  <if test="monitorRules != null and monitorRules != ''"> and "monitor_rules" = #{monitorRules} </if>
+		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
+		  		  and "status" = 1
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -33,28 +33,28 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from ahy_irregular_connection
+		select count(*) from "server"."ahy_irregular_connection
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="monitorStatus != null and monitorStatus != ''"> and monitor_status = #{monitorStatus} </if>
-		  		  <if test="monitorRules != null and monitorRules != ''"> and monitor_rules = #{monitorRules} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and "templet_id" = #{templetId} </if>
+		  		  <if test="monitorStatus != null and monitorStatus != ''"> and "monitor_status" = #{monitorStatus} </if>
+		  		  <if test="monitorRules != null and monitorRules != ''"> and "monitor_rules" = #{monitorRules} </if>
+		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
 		  		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.anhuay.strategy.domain.IrregularConnectionDO">
 		insert into ahy_irregular_connection
 		(
-			`id`, 
-			`templet_id`, 
-			`monitor_status`, 
-			`monitor_rules`, 
-			`status`, 
-			`create_time`, 
-			`update_time`
+			"id", 
+			"templet_id", 
+			"monitor_status", 
+			"monitor_rules", 
+			"status", 
+			"create_time", 
+			"update_time"
 		)
 		values
 		(
@@ -71,33 +71,33 @@
 	<update id="update" parameterType="com.anhuay.strategy.domain.IrregularConnectionDO">
 		update ahy_irregular_connection 
 		<set>
-			<if test="templetId != null">`templet_id` = #{templetId}, </if>
-			<if test="monitorStatus != null">`monitor_status` = #{monitorStatus}, </if>
-			<if test="monitorRules != null">`monitor_rules` = #{monitorRules}, </if>
-			<if test="status != null">`status` = #{status}, </if>
-			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="templetId != null">"templet_id" = #{templetId}, </if>
+			<if test="monitorStatus != null">"monitor_status" = #{monitorStatus}, </if>
+			<if test="monitorRules != null">"monitor_rules" = #{monitorRules}, </if>
+			<if test="status != null">"status" = #{status}, </if>
+			<if test="createTime != null">"create_time" = #{createTime}, </if>
+			<if test="updateTime != null">"update_time" = #{updateTime}</if>
 		</set>
-		where id = #{id}
+		where id" = #{id}
 	</update>
 	
 	<update id="updateStatus">
-        update ahy_irregular_connection set status = 0 where id = #{value}
+        update ahy_irregular_connection set status = 0" where "id" = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update ahy_irregular_connection set status = 0 where id in
+        update ahy_irregular_connection set status = 0" where "id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from ahy_irregular_connection where id = #{value}
+		delete from "server"."ahy_irregular_connection" where "id" = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from ahy_irregular_connection where id in 
+		delete from "server"."ahy_irregular_connection" where "id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

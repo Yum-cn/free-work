@@ -4,20 +4,20 @@
 <mapper namespace="com.anhuay.strategy.dao.OsGroupStrategyDao">
 
 	<select id="get" resultType="com.anhuay.strategy.domain.OsGroupStrategyDO">
-		select `id`,`templet_id`,`templet_name`,`os_group_ids`,`os_group_names`,`status`,`create_time`,`update_time` from ahy_os_group_strategy where id = #{value}
+		select "id","templet_id","templet_name","os_group_ids","os_group_names","status","create_time","update_time" from "server"."ahy_os_group_strategy" where "id" = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.strategy.domain.OsGroupStrategyDO">
-		select `id`,`templet_id`,`templet_name`,`os_group_ids`,`os_group_names`,`status`,`create_time`,`update_time` from ahy_os_group_strategy
+		select "id","templet_id","templet_name","os_group_ids","os_group_names","status","create_time","update_time" from "server"."ahy_os_group_strategy
         <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="templetName != null and templetName != ''"> and templet_name = #{templetName} </if>
-		  		  <if test="osGroupIds != null and osGroupIds != ''"> and os_group_ids = #{osGroupIds} </if>
-		  		  <if test="osGroupNames != null and osGroupNames != ''"> and os_group_names  LIKE CONCAT('%',#{osGroupNames},'%') </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and "templet_id" = #{templetId} </if>
+		  		  <if test="templetName != null and templetName != ''"> and "templet_name" = #{templetName} </if>
+		  		  <if test="osGroupIds != null and osGroupIds != ''"> and "os_group_ids" = #{osGroupIds} </if>
+		  		  <if test="osGroupNames != null and osGroupNames != ''"> and "os_group_names  LIKE CONCAT('%',#{osGroupNames},'%') </if>
+		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -33,29 +33,29 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from ahy_os_group_strategy
+		select count(*) from "server"."ahy_os_group_strategy
 		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
-		  		  <if test="templetName != null and templetName != ''"> and templet_name = #{templetName} </if>
-		  		  <if test="osGroupIds != null and osGroupIds != ''"> and os_group_ids = #{osGroupIds} </if>
-		  		  <if test="osGroupNames != null and osGroupNames != ''"> and os_group_names  LIKE CONCAT('%',#{osGroupNames},'%') </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and "templet_id" = #{templetId} </if>
+		  		  <if test="templetName != null and templetName != ''"> and "templet_name" = #{templetName} </if>
+		  		  <if test="osGroupIds != null and osGroupIds != ''"> and "os_group_ids" = #{osGroupIds} </if>
+		  		  <if test="osGroupNames != null and osGroupNames != ''"> and "os_group_names  LIKE CONCAT('%',#{osGroupNames},'%') </if>
+		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
 		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.anhuay.strategy.domain.OsGroupStrategyDO" useGeneratedKeys="true" keyProperty="id">
 		insert into ahy_os_group_strategy
 		(
-			`templet_id`, 
-			`templet_name`, 
-			`os_group_ids`, 
-			`os_group_names`, 
-			`status`, 
-			`create_time`, 
-			`update_time`
+			"templet_id", 
+			"templet_name", 
+			"os_group_ids", 
+			"os_group_names", 
+			"status", 
+			"create_time", 
+			"update_time"
 		)
 		values
 		(
@@ -72,41 +72,41 @@
 	<update id="update" parameterType="com.anhuay.strategy.domain.OsGroupStrategyDO">
 		update ahy_os_group_strategy 
 		<set>
-			<if test="templetId != null">`templet_id` = #{templetId}, </if>
-			<if test="templetName != null">`templet_name` = #{templetName}, </if>
-			<if test="osGroupIds != null">`os_group_ids` = #{osGroupIds}, </if>
-			<if test="osGroupNames != null">`os_group_names` = #{osGroupNames}, </if>
-			<if test="status != null">`status` = #{status}, </if>
-			<if test="createTime != null">`create_time` = #{createTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+			<if test="templetId != null">"templet_id" = #{templetId}, </if>
+			<if test="templetName != null">"templet_name" = #{templetName}, </if>
+			<if test="osGroupIds != null">"os_group_ids" = #{osGroupIds}, </if>
+			<if test="osGroupNames != null">"os_group_names" = #{osGroupNames}, </if>
+			<if test="status != null">"status" = #{status}, </if>
+			<if test="createTime != null">"create_time" = #{createTime}, </if>
+			<if test="updateTime != null">"update_time" = #{updateTime}</if>
 		</set>
-		where id = #{id}
+		where id" = #{id}
 	</update>
 	
 	<update id="updateStatus">
-        update ahy_os_group_strategy set status = 0 where id = #{value}
+        update ahy_os_group_strategy set status = 0" where "id" = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update ahy_os_group_strategy set status = 0 where id in
+        update ahy_os_group_strategy set status = 0" where "id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from ahy_os_group_strategy where id = #{value}
+		delete from "server"."ahy_os_group_strategy" where "id" = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from ahy_os_group_strategy where id in 
+		delete from "server"."ahy_os_group_strategy" where "id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
 	</delete>
 	
 	<select id="selectOsGroupStrategy" resultType="String">
-        SELECT GROUP_CONCAT( DISTINCT ts.templet_name ORDER BY ts.templet_id DESC SEPARATOR ';' ) FROM ahy_os_group t  LEFT JOIN ahy_os_group_strategy ts on ts.os_group_ids=t.id WHERE t.os_ips LIKE CONCAT('%' ,#{osIp}, '%') GROUP BY t.status;
+        SELECT GROUP_CONCAT( DISTINCT ts.templet_name ORDER BY ts.templet_id DESC SEPARATOR ';' ) from "server"."ahy_os_group t  LEFT JOIN ahy_os_group_strategy ts on ts.os_group_ids=t.id" where "t.os_ips LIKE CONCAT('%' ,#{osIp}, '%') GROUP BY t.status;
     </select>
 
 

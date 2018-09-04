@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anhuay.strategy.domain.DeviceControlDO;
 import com.anhuay.strategy.service.DeviceControlService;
+import com.anhuay.common.controller.BaseController;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
@@ -31,7 +32,7 @@ import com.anhuay.common.utils.R;
  
 @Controller
 @RequestMapping("/strategy/deviceControl")
-public class DeviceControlController {
+public class DeviceControlController  extends BaseController{
 	@Autowired
 	private DeviceControlService deviceControlService;
 	
@@ -74,6 +75,7 @@ public class DeviceControlController {
 	@PostMapping("/save")
 	@RequiresPermissions("strategy:deviceControl:add")
 	public R save( DeviceControlDO deviceControl){
+		deviceControl.setId(getId());
 		if(deviceControlService.save(deviceControl)>0){
 			return R.ok();
 		}
