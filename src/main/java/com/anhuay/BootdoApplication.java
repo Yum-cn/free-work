@@ -3,9 +3,12 @@ package com.anhuay;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +21,8 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 @MapperScan("com.anhuay.*.dao")
 @SpringBootApplication
 @EnableCaching
+//@PropertySource(value={"classpath:config/datasource.properties"},ignoreResourceNotFound=true)
+//@ConfigurationProperties(value="file:config/datasource.properties")
 public class BootdoApplication {
 
 	/**
@@ -35,6 +40,36 @@ public class BootdoApplication {
 		myObjectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		return myObjectMapper;
 	}
+	
+	   /**
+     * it's for set http url auto change to https
+     */
+/*    @Bean
+    public EmbeddedServletContainerFactory servletContainer(){
+        TomcatEmbeddedServletContainerFactory tomcat=new TomcatEmbeddedServletContainerFactory(){
+            @Override
+            protected void postProcessContext(Context context) {
+                SecurityConstraint securityConstraint=new SecurityConstraint();
+                securityConstraint.setUserConstraint("CONFIDENTIAL");//confidential
+                SecurityCollection collection=new SecurityCollection();
+                collection.addPattern("/*");
+                securityConstraint.addCollection(collection);
+                context.addConstraint(securityConstraint);
+            }
+        };
+        tomcat.addAdditionalTomcatConnectors(httpConnector());
+        return tomcat;
+    }
+
+    @Bean
+    public Connector httpConnector(){
+        Connector connector=new Connector("org.apache.coyote.http11.Http11NioProtocol");
+        connector.setScheme("http");
+        connector.setPort(8080);
+        connector.setSecure(false);
+        connector.setRedirectPort(443);
+        return connector;
+    }*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(BootdoApplication.class, args);
