@@ -4,24 +4,24 @@
 <mapper namespace="com.anhuay.terminal.dao.TerminalFileDao">
 
 	<select id="get" resultType="com.anhuay.terminal.domain.TerminalFileDO">
-		select "id","upload_url","file_name","file_tag","file_size","upload_time","crc_value","down_url","status","create_time","update_time" from "server"."ahy_terminal_file" where "id" = #{value}
+		select `id`,`upload_url`,`file_name`,`file_tag`,`file_size`,`upload_time`,`crc_value`,`down_url`,`status`,`create_time`,`update_time` from ahy_terminal_file where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.terminal.domain.TerminalFileDO">
-		select "id","upload_url","file_name","file_tag","file_size","upload_time","crc_value","down_url","status","create_time","update_time" from "server"."ahy_terminal_file
+		select `id`,`upload_url`,`file_name`,`file_tag`,`file_size`,`upload_time`,`crc_value`,`down_url`,`status`,`create_time`,`update_time` from ahy_terminal_file
         <where>  
-		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
-		  		  <if test="uploadUrl != null and uploadUrl != ''"> and "upload_url" = #{uploadUrl} </if>
-		  		  <if test="fileName != null and fileName != ''"> and "file_name LIKE CONCAT('%',#{fileName},'%') </if>
-		  		  <if test="fileTag != null and fileTag != ''"> and "file_tag" = #{fileTag} </if>
-		  		  <if test="fileSize != null and fileSize != ''"> and "file_size" = #{fileSize} </if>
-		  		  <if test="uploadTime != null and uploadTime != ''"> and "upload_time" = #{uploadTime} </if>
-		  		  <if test="crcValue != null and crcValue != ''"> and "crc_value" = #{crcValue} </if>
-		  		  <if test="downUrl != null and downUrl != ''"> and "down_url" = #{downUrl} </if>
-		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
-		  		  and "status" = 1
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uploadUrl != null and uploadUrl != ''"> and upload_url = #{uploadUrl} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name LIKE CONCAT('%',#{fileName},'%') </if>
+		  		  <if test="fileTag != null and fileTag != ''"> and file_tag = #{fileTag} </if>
+		  		  <if test="fileSize != null and fileSize != ''"> and file_size = #{fileSize} </if>
+		  		  <if test="uploadTime != null and uploadTime != ''"> and upload_time = #{uploadTime} </if>
+		  		  <if test="crcValue != null and crcValue != ''"> and crc_value = #{crcValue} </if>
+		  		  <if test="downUrl != null and downUrl != ''"> and down_url = #{downUrl} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -37,37 +37,37 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from "server"."ahy_terminal_file
+		select count(*) from ahy_terminal_file
 		 <where>  
-		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
-		  		  <if test="uploadUrl != null and uploadUrl != ''"> and "upload_url" = #{uploadUrl} </if>
-		  		  <if test="fileName != null and fileName != ''"> and "file_name  LIKE CONCAT('%',#{fileName},'%') </if>
-		  		  <if test="fileTag != null and fileTag != ''"> and "file_tag" = #{fileTag} </if>
-		  		  <if test="fileSize != null and fileSize != ''"> and "file_size" = #{fileSize} </if>
-		  		  <if test="uploadTime != null and uploadTime != ''"> and "upload_time" = #{uploadTime} </if>
-		  		  <if test="crcValue != null and crcValue != ''"> and "crc_value" = #{crcValue} </if>
-		  		  <if test="downUrl != null and downUrl != ''"> and "down_url" = #{downUrl} </if>
-		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
-		  		  and "status" = 1
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="uploadUrl != null and uploadUrl != ''"> and upload_url = #{uploadUrl} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name  LIKE CONCAT('%',#{fileName},'%') </if>
+		  		  <if test="fileTag != null and fileTag != ''"> and file_tag = #{fileTag} </if>
+		  		  <if test="fileSize != null and fileSize != ''"> and file_size = #{fileSize} </if>
+		  		  <if test="uploadTime != null and uploadTime != ''"> and upload_time = #{uploadTime} </if>
+		  		  <if test="crcValue != null and crcValue != ''"> and crc_value = #{crcValue} </if>
+		  		  <if test="downUrl != null and downUrl != ''"> and down_url = #{downUrl} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  and status = 1
 		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.anhuay.terminal.domain.TerminalFileDO">
 		insert into ahy_terminal_file
 		(
-			"id", 
-			"upload_url", 
-			"file_name", 
-			"file_tag", 
-			"file_size", 
-			"upload_time", 
-			"crc_value", 
-			"down_url", 
-			"status", 
-			"create_time", 
-			"update_time"
+			`id`, 
+			`upload_url`, 
+			`file_name`, 
+			`file_tag`, 
+			`file_size`, 
+			`upload_time`, 
+			`crc_value`, 
+			`down_url`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
 		)
 		values
 		(
@@ -88,37 +88,37 @@
 	<update id="update" parameterType="com.anhuay.terminal.domain.TerminalFileDO">
 		update ahy_terminal_file 
 		<set>
-			<if test="uploadUrl != null">"upload_url" = #{uploadUrl}, </if>
-			<if test="fileName != null">"file_name" = #{fileName}, </if>
-			<if test="fileTag != null">"file_tag" = #{fileTag}, </if>
-			<if test="fileSize != null">"file_size" = #{fileSize}, </if>
-			<if test="uploadTime != null">"upload_time" = #{uploadTime}, </if>
-			<if test="crcValue != null">"crc_value" = #{crcValue}, </if>
-			<if test="downUrl != null">"down_url" = #{downUrl}, </if>
-			<if test="status != null">"status" = #{status}, </if>
-			<if test="createTime != null">"create_time" = #{createTime}, </if>
-			<if test="updateTime != null">"update_time" = #{updateTime}</if>
+			<if test="uploadUrl != null">`upload_url` = #{uploadUrl}, </if>
+			<if test="fileName != null">`file_name` = #{fileName}, </if>
+			<if test="fileTag != null">`file_tag` = #{fileTag}, </if>
+			<if test="fileSize != null">`file_size` = #{fileSize}, </if>
+			<if test="uploadTime != null">`upload_time` = #{uploadTime}, </if>
+			<if test="crcValue != null">`crc_value` = #{crcValue}, </if>
+			<if test="downUrl != null">`down_url` = #{downUrl}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>
-		where id" = #{id}
+		where id = #{id}
 	</update>
 	
 	<update id="updateStatus">
-        update ahy_terminal_file set status = 0" where "id" = #{value}
+        update ahy_terminal_file set status = 0 where id = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update ahy_terminal_file set status = 0" where "id in
+        update ahy_terminal_file set status = 0 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from "server"."ahy_terminal_file" where "id" = #{value}
+		delete from ahy_terminal_file where id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from "server"."ahy_terminal_file" where "id in 
+		delete from ahy_terminal_file where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

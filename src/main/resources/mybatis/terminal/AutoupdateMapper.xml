@@ -4,23 +4,23 @@
 <mapper namespace="com.anhuay.terminal.dao.AutoupdateDao">
 
 	<select id="get" resultType="com.anhuay.terminal.domain.AutoupdateDO">
-		select "id","os_ip","os_id","task_id","url","srv_version","status","createtime","updatetime","notes" from "server"."tmp_autoupdate" where "id" = #{value}
+		select `id`,`os_ip`,`os_id`,`task_id`,`url`,`srv_version`,`status`,`createtime`,`updatetime`,`notes` from tmp_autoupdate where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.terminal.domain.AutoupdateDO">
-		select "id","os_ip","os_id","task_id","url","srv_version","status","createtime","updatetime","notes" from "server"."tmp_autoupdate
+		select `id`,`os_ip`,`os_id`,`task_id`,`url`,`srv_version`,`status`,`createtime`,`updatetime`,`notes` from tmp_autoupdate
         <where>  
-		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
-		  		  <if test="osIp != null and osIp != ''"> and "os_ip LIKE CONCAT('%',#{osIp},'%') </if>
-		  		  <if test="osId != null and osId != ''"> and "os_id" = #{osId} </if>
-		  		  <if test="taskId != null and taskId != ''"> and "task_id" = #{taskId} </if>
-		  		  <if test="url != null and url != ''"> and "url" = #{url} </if>
-		  		  <if test="srvVersion != null and srvVersion != ''"> and "srv_version" = #{srvVersion} </if>
-		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
-		  		  <if test="createtime != null and createtime != ''"> and "createtime" = #{createtime} </if>
-		  		  <if test="updatetime != null and updatetime != ''"> and "updatetime" = #{updatetime} </if>
-		  		  <if test="notes != null and notes != ''"> and "notes" = #{notes} </if>
-		  		  and "status" = 1
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="osIp != null and osIp != ''"> and os_ip LIKE CONCAT('%',#{osIp},'%') </if>
+		  		  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+		  		  <if test="taskId != null and taskId != ''"> and task_id = #{taskId} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="srvVersion != null and srvVersion != ''"> and srv_version = #{srvVersion} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+		  		  and status = 1
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -36,34 +36,34 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from "server"."tmp_autoupdate
+		select count(*) from tmp_autoupdate
 		 <where>  
-		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
-		  		  <if test="osIp != null and osIp != ''"> and "os_ip LIKE CONCAT('%',#{osIp},'%') </if>
-		  		  <if test="osId != null and osId != ''"> and "os_id" = #{osId} </if>
-		  		  <if test="taskId != null and taskId != ''"> and "task_id" = #{taskId} </if>
-		  		  <if test="url != null and url != ''"> and "url" = #{url} </if>
-		  		  <if test="srvVersion != null and srvVersion != ''"> and "srv_version" = #{srvVersion} </if>
-		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
-		  		  <if test="createtime != null and createtime != ''"> and "createtime" = #{createtime} </if>
-		  		  <if test="updatetime != null and updatetime != ''"> and "updatetime" = #{updatetime} </if>
-		  		  <if test="notes != null and notes != ''"> and "notes" = #{notes} </if>
-		  		  and "status" = 1
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="osIp != null and osIp != ''"> and os_ip LIKE CONCAT('%',#{osIp},'%') </if>
+		  		  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+		  		  <if test="taskId != null and taskId != ''"> and task_id = #{taskId} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="srvVersion != null and srvVersion != ''"> and srv_version = #{srvVersion} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+		  		  and status = 1
 		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.anhuay.terminal.domain.AutoupdateDO" useGeneratedKeys="true" keyProperty="id">
 		insert into tmp_autoupdate
 		(
-			"os_ip", 
-			"os_id", 
-			"task_id", 
-			"url", 
-			"srv_version", 
-			"status", 
-			"createtime", 
-			"updatetime", 
-			"notes"
+			`os_ip`, 
+			`os_id`, 
+			`task_id`, 
+			`url`, 
+			`srv_version`, 
+			`status`, 
+			`createtime`, 
+			`updatetime`, 
+			`notes`
 		)
 		values
 		(
@@ -82,36 +82,36 @@
 	<update id="update" parameterType="com.anhuay.terminal.domain.AutoupdateDO">
 		update tmp_autoupdate 
 		<set>
-			<if test="osIp != null">"os_ip" = #{osIp}, </if>
-			<if test="osId != null">"os_id" = #{osId}, </if>
-			<if test="taskId != null">"task_id" = #{taskId}, </if>
-			<if test="url != null">"url" = #{url}, </if>
-			<if test="srvVersion != null">"srv_version" = #{srvVersion}, </if>
-			<if test="status != null">"status" = #{status}, </if>
-			<if test="createtime != null">"createtime" = #{createtime}, </if>
-			<if test="updatetime != null">"updatetime" = #{updatetime}, </if>
-			<if test="notes != null">"notes" = #{notes}</if>
+			<if test="osIp != null">`os_ip` = #{osIp}, </if>
+			<if test="osId != null">`os_id` = #{osId}, </if>
+			<if test="taskId != null">`task_id` = #{taskId}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="srvVersion != null">`srv_version` = #{srvVersion}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="updatetime != null">`updatetime` = #{updatetime}, </if>
+			<if test="notes != null">`notes` = #{notes}</if>
 		</set>
-		where id" = #{id}
+		where id = #{id}
 	</update>
 	
 	<update id="updateStatus">
-        update tmp_autoupdate set status = 0" where "id" = #{value}
+        update tmp_autoupdate set status = 0 where id = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update tmp_autoupdate set status = 0" where "id in
+        update tmp_autoupdate set status = 0 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from "server"."tmp_autoupdate" where "id" = #{value}
+		delete from tmp_autoupdate where id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from "server"."tmp_autoupdate" where "id in 
+		delete from tmp_autoupdate where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
@@ -119,19 +119,19 @@
 	
 	
 	<select id="listAutoupdate" resultType="com.anhuay.terminal.domain.AutoupdateDO">
-        select "id","os_ip","os_id","task_id","url","srv_version","status","createtime","updatetime","notes" from "server"."tmp_autoupdate
+        select `id`,`os_ip`,`os_id`,`task_id`,`url`,`srv_version`,`status`,`createtime`,`updatetime`,`notes` from tmp_autoupdate
         <where>  
-                  <if test="id != null and id != ''"> and "id" = #{id} </if>
-                  <if test="osIp != null and osIp != ''"> and "os_ip" = #{osIp} </if>
-                  <if test="osId != null and osId != ''"> and "os_id" = #{osId} </if>
-                  <if test="taskId != null and taskId != ''"> and "task_id" = #{taskId} </if>
-                  <if test="url != null and url != ''"> and "url" = #{url} </if>
-                  <if test="srvVersion != null and srvVersion != ''"> and "srv_version" = #{srvVersion} </if>
-                  <if test="status != null and status != ''"> and "status" = #{status} </if>
-                  <if test="createtime != null and createtime != ''"> and "createtime" = #{createtime} </if>
-                  <if test="updatetime != null and updatetime != ''"> and "updatetime" = #{updatetime} </if>
-                  <if test="notes != null and notes != ''"> and "notes" = #{notes} </if>
-                  and "status" = 1
+                  <if test="id != null and id != ''"> and id = #{id} </if>
+                  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
+                  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+                  <if test="taskId != null and taskId != ''"> and task_id = #{taskId} </if>
+                  <if test="url != null and url != ''"> and url = #{url} </if>
+                  <if test="srvVersion != null and srvVersion != ''"> and srv_version = #{srvVersion} </if>
+                  <if test="status != null and status != ''"> and status = #{status} </if>
+                  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+                  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+                  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+                  and status = 1
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -147,19 +147,19 @@
     </select>
     
     <select id="countAutoupdate" resultType="int">
-        select count(*) from "server"."tmp_autoupdate
+        select count(*) from tmp_autoupdate
          <where>  
-                  <if test="id != null and id != ''"> and "id" = #{id} </if>
-                  <if test="osIp != null and osIp != ''"> and "os_ip" = #{osIp} </if>
-                  <if test="osId != null and osId != ''"> and "os_id" = #{osId} </if>
-                  <if test="taskId != null and taskId != ''"> and "task_id" = #{taskId} </if>
-                  <if test="url != null and url != ''"> and "url" = #{url} </if>
-                  <if test="srvVersion != null and srvVersion != ''"> and "srv_version" = #{srvVersion} </if>
-                  <if test="status != null and status != ''"> and "status" = #{status} </if>
-                  <if test="createtime != null and createtime != ''"> and "createtime" = #{createtime} </if>
-                  <if test="updatetime != null and updatetime != ''"> and "updatetime" = #{updatetime} </if>
-                  <if test="notes != null and notes != ''"> and "notes" = #{notes} </if>
-                  and "status" = 1
+                  <if test="id != null and id != ''"> and id = #{id} </if>
+                  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
+                  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+                  <if test="taskId != null and taskId != ''"> and task_id = #{taskId} </if>
+                  <if test="url != null and url != ''"> and url = #{url} </if>
+                  <if test="srvVersion != null and srvVersion != ''"> and srv_version = #{srvVersion} </if>
+                  <if test="status != null and status != ''"> and status = #{status} </if>
+                  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+                  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+                  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+                  and status = 1
         </where>
     </select>
 

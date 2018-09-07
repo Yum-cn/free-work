@@ -4,24 +4,24 @@
 <mapper namespace="com.anhuay.common.dao.FileDao">
 
 	<select id="get" resultType="com.anhuay.common.domain.FileDO">
-		select "id","type","url","create_date","file_name" from "server"."sys_file" where "id" = #{value}
+		select `id`,`type`,`url`,`create_date`,`file_name` from sys_file where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.common.domain.FileDO">
-		select "id","type","url","create_date","file_name" from "server"."sys_file"
+		select `id`,`type`,`url`,`create_date`,`file_name` from sys_file
         <where>  
-		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
-		  		  <if test="type != null and type != ''"> and "type" = #{type} </if>
-		  		  <if test="url != null and url != ''"> and "url" = #{url} </if>
-		  		  <if test="createDate != null and createDate != ''"> and "create_date" = #{createDate} </if>
-		  		  <if test="fileName != null and fileName != ''"> and "file_name" = #{fileName} </if>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by "id" desc
+                order by id desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -30,23 +30,23 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from "server"."sys_file"
+		select count(*) from sys_file
 		 <where>  
-		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
-		  		  <if test="type != null and type != ''"> and "type" = #{type} </if>
-		  		  <if test="url != null and url != ''"> and "url" = #{url} </if>
-		  		  <if test="createDate != null and createDate != ''"> and "create_date" = #{createDate} </if>
-		  		  <if test="fileName != null and fileName != ''"> and "file_name" = #{fileName} </if>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+		  		  <if test="fileName != null and fileName != ''"> and file_name = #{fileName} </if>
 		  		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.anhuay.common.domain.FileDO" useGeneratedKeys="true" keyProperty="id">
-		insert into "server"."sys_file"
+		insert into sys_file
 		(
-			"type", 
-			"url", 
-			"create_date", 
-			"file_name"
+			`type`, 
+			`url`, 
+			`create_date`, 
+			`file_name`
 		)
 		values
 		(
@@ -58,33 +58,33 @@
 	</insert>
 	 
 	<update id="update" parameterType="com.anhuay.common.domain.FileDO">
-		update "server"."sys_file" 
+		update sys_file 
 		<set>
-			<if test="type != null">"type" = #{type}, </if>
-			<if test="url != null">"url" = #{url}, </if>
-			<if test="createDate != null">"create_date" = #{createDate}, </if>
-			<if test="fileName != null">"file_name" = #{fileName}</if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="fileName != null">`file_name` = #{fileName}</if>
 		</set>
-		where id" = #{id}
+		where id = #{id}
 	</update>
 	
 	<update id="updateStatus">
-        update "server"."sys_file" set "status" = 0 where "id" = #{value}
+        update sys_file set status = 0 where id = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update "server"."sys_file" set "status" = 0 where "id" in
+        update sys_file set status = 0 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from "server"."sys_file" where "id" = #{value}
+		delete from sys_file where id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from "server"."sys_file" where "id" in 
+		delete from sys_file where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

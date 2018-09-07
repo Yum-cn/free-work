@@ -5,34 +5,34 @@
 
 	<select id="get" resultType="com.anhuay.oa.domain.NotifyDO">
 		select
-		"id","type","title","content","files","status","create_by","create_date","update_by","update_date","remarks","del_flag"
-		from oa_notify" where "id" = #{value}
+		`id`,`type`,`title`,`content`,`files`,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
+		from oa_notify where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.oa.domain.NotifyDO">
 		select
-		"id","type","title","content","files","status","create_by","create_date","update_by","update_date","remarks","del_flag"
-		from "server"."oa_notify"
+		`id`,`type`,`title`,`content`,`files`,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
+		from oa_notify
 		<where>
-			<if test="id != null and id != ''"> and "id" = #{id} </if>
-			<if test="type != null and type != ''"> and "type" = #{type} </if>
-			<if test="title != null and title != ''"> and "title" = #{title} </if>
-			<if test="content != null and content != ''"> and "content" = #{content} </if>
-			<if test="files != null and files != ''"> and "files" = #{files} </if>
-			<if test="status != null and status != ''"> and "status" = #{status} </if>
-			<if test="createBy != null and createBy != ''"> and "create_by" = #{createBy} </if>
-			<if test="createDate != null and createDate != ''"> and "create_date" = #{createDate} </if>
-			<if test="updateBy != null and updateBy != ''"> and "update_by" = #{updateBy} </if>
-			<if test="updateDate != null and updateDate != ''"> and "update_date" = #{updateDate} </if>
-			<if test="remarks != null and remarks != ''"> and "remarks" = #{remarks} </if>
-			<if test="delFlag != null and delFlag != ''"> and "del_flag" = #{delFlag} </if>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="title != null and title != ''"> and title = #{title} </if>
+			<if test="content != null and content != ''"> and content = #{content} </if>
+			<if test="files != null and files != ''"> and files = #{files} </if>
+			<if test="status != null and status != ''"> and status = #{status} </if>
+			<if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+			<if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
 				order by ${sort} ${order}
 			</when>
 			<otherwise>
-				order by "id" desc
+				order by id desc
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -41,38 +41,38 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from "server"."oa_notify"
+		select count(*) from oa_notify
 		<where>
-			<if test="id != null and id != ''"> and "id" = #{id} </if>
-			<if test="type != null and type != ''"> and "type" = #{type} </if>
-			<if test="title != null and title != ''"> and "title" = #{title} </if>
-			<if test="content != null and content != ''"> and "content" = #{content} </if>
-			<if test="files != null and files != ''"> and "files" = #{files} </if>
-			<if test="status != null and status != ''"> and "status" = #{status} </if>
-			<if test="createBy != null and createBy != ''"> and "create_by" = #{createBy} </if>
-			<if test="createDate != null and createDate != ''"> and "create_date" = #{createDate} </if>
-			<if test="updateBy != null and updateBy != ''"> and "update_by" = #{updateBy} </if>
-			<if test="updateDate != null and updateDate != ''"> and "update_date" = #{updateDate} </if>
-			<if test="remarks != null and remarks != ''"> and "remarks" = #{remarks} </if>
-			<if test="delFlag != null and delFlag != ''"> and "del_flag" = #{delFlag} </if>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="title != null and title != ''"> and title = #{title} </if>
+			<if test="content != null and content != ''"> and content = #{content} </if>
+			<if test="files != null and files != ''"> and files = #{files} </if>
+			<if test="status != null and status != ''"> and status = #{status} </if>
+			<if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+			<if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
 		</where>
 	</select>
 
 	<insert id="save" parameterType="com.anhuay.oa.domain.NotifyDO"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into "server"."oa_notify"
+		insert into oa_notify
 		(
-		"type",
-		"title",
-		"content",
-		"files",
-		"status",
-		"create_by",
-		"create_date",
-		"update_by",
-		"update_date",
-		"remarks",
-		"del_flag"
+		`type`,
+		`title`,
+		`content`,
+		`files`,
+		`status`,
+		`create_by`,
+		`create_date`,
+		`update_by`,
+		`update_date`,
+		`remarks`,
+		`del_flag`
 		)
 		values
 		(
@@ -91,29 +91,29 @@
 	</insert>
 
 	<update id="update" parameterType="com.anhuay.oa.domain.NotifyDO">
-		update "server"."oa_notify"
+		update oa_notify
 		<set>
-			<if test="type != null">"type" = #{type}, </if>
-			<if test="title != null">"title" = #{title}, </if>
-			<if test="content != null">"content" = #{content}, </if>
-			<if test="files != null">"files" = #{files}, </if>
-			<if test="status != null">"status" = #{status}, </if>
-			<if test="createBy != null">"create_by" = #{createBy}, </if>
-			<if test="createDate != null">"create_date" = #{createDate}, </if>
-			<if test="updateBy != null">"update_by" = #{updateBy}, </if>
-			<if test="updateDate != null">"update_date" = #{updateDate}, </if>
-			<if test="remarks != null">"remarks" = #{remarks}, </if>
-			<if test="delFlag != null">"del_flag" = #{delFlag}</if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="files != null">`files` = #{files}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateDate != null">`update_date` = #{updateDate}, </if>
+			<if test="remarks != null">`remarks` = #{remarks}, </if>
+			<if test="delFlag != null">`del_flag` = #{delFlag}</if>
 		</set>
-		where id" = #{id}
+		where id = #{id}
 	</update>
 
 	<delete id="remove">
-		delete from "server"."oa_notify" where "id" = #{value}
+		delete from oa_notify where id = #{value}
 	</delete>
 
 	<delete id="batchRemove">
-		delete from "server"."oa_notify" where "id in
+		delete from oa_notify where id in
 		<foreach item="id" collection="array" open="(" separator=","
 			close=")">
 			#{id}
@@ -122,8 +122,8 @@
 
 	<select id="listByIds" resultType="com.anhuay.oa.domain.NotifyDO">
 		select
-		"id","type","title","content","files","status","create_by","create_date","update_by","update_date","remarks","del_flag"
-		from "server"."oa_notify" where "id" in
+		`id`,`type`,`title`,`content`,`files`,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
+		from oa_notify where id in
 		<foreach item="id" collection="array" open="(" separator=","
 			close=")">
 			#{id}
@@ -134,24 +134,24 @@
 	<select id="countDTO" resultType="int">
 		select count(*)
 		from
-		"server"."oa_notify_record" r "right" JOIN "server"."oa_notify" n on r."notify_id"
-		= n."id" where
-		r."user_id" =#{userId} and
-		r."is_read" = #{isRead}
+		oa_notify_record r right JOIN oa_notify n on r.notify_id
+		= n.id where
+		r.user_id =#{userId} and
+		r.is_read = #{isRead}
 	</select>
 
 	<select id="listDTO" resultType="com.anhuay.oa.domain.NotifyDTO">
 		select DISTINCT
-		n."id" ,"type","title","content","files",r.is_read,"status","create_by","create_date","update_by","update_date","remarks","del_flag"
-		from "server"."oa_notify_record" r "right" JOIN "server"."oa_notify" n on r."notify_id" = n."id"
+		n.id ,`type`,`title`,`content`,`files`,r.is_read,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
+		from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id
 		<where>
-			<if test="id != null and id != ''"> and "r.id" = #{id} </if>
-			<if test="notifyId != null and notifyId != ''"> and r."notify_id" = #{notifyId} </if>
-			<if test="isRead != null and isRead != ''"> and r."is_read" = #{isRead} </if>
-			<if test="userId != null and userId != ''"> and r."user_id" = #{userId} </if>
-			<if test="readDate != null and readDate != ''"> and r."read_date" = #{readDate} </if>
+			<if test="id != null and id != ''"> and r.id = #{id} </if>
+			<if test="notifyId != null and notifyId != ''"> and r.notify_id = #{notifyId} </if>
+			<if test="isRead != null and isRead != ''"> and r.is_read = #{isRead} </if>
+			<if test="userId != null and userId != ''"> and r.user_id = #{userId} </if>
+			<if test="readDate != null and readDate != ''"> and r.read_date = #{readDate} </if>
 		</where>
-		order by "is_read" ASC, "update_date" DESC
+		order by is_read ASC, update_date DESC
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>

@@ -5,26 +5,26 @@
 
 	<select id="get" resultType="com.anhuay.oa.domain.NotifyRecordDO">
 		select
-		"id","notify_id","user_id","is_read","read_date" from "server"."oa_notify_record"
-		where "id" = #{value}
+		`id`,`notify_id`,`user_id`,`is_read`,`read_date` from oa_notify_record
+		where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.oa.domain.NotifyRecordDO">
-		select "id","notify_id","user_id","is_read","read_date" from
-		 "server"."oa_notify_record"
+		select `id`,`notify_id`,`user_id`,`is_read`,`read_date` from
+		oa_notify_record
 		<where>
-			<if test="id != null and id != ''"> and "id" = #{id} </if>
-			<if test="notifyId != null and notifyId != ''"> and "notify_id" = #{notifyId} </if>
-			<if test="userId != null and userId != ''"> and "user_id" = #{userId} </if>
-			<if test="isRead != null and isRead != ''"> and "is_read" = #{isRead} </if>
-			<if test="readDate != null and readDate != ''"> and "read_date" = #{readDate} </if>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="notifyId != null and notifyId != ''"> and notify_id = #{notifyId} </if>
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="isRead != null and isRead != ''"> and is_read = #{isRead} </if>
+			<if test="readDate != null and readDate != ''"> and read_date = #{readDate} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
 				order by #{sort} #{order}
 			</when>
 			<otherwise>
-				order by "id" desc
+				order by id desc
 			</otherwise>
 		</choose>
 		<if test="offset != null and limit != null">
@@ -33,24 +33,24 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from "server"."oa_notify_record"
+		select count(*) from oa_notify_record
 		<where>
-			<if test="id != null and id != ''"> and "id" = #{id} </if>
-			<if test="notifyId != null and notifyId != ''"> and "notify_id" = #{notifyId} </if>
-			<if test="userId != null and userId != ''"> and "user_id" = #{userId} </if>
-			<if test="isRead != null and isRead != ''"> and "is_read" = #{isRead} </if>
-			<if test="readDate != null and readDate != ''"> and "read_date" = #{readDate} </if>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="notifyId != null and notifyId != ''"> and notify_id = #{notifyId} </if>
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="isRead != null and isRead != ''"> and is_read = #{isRead} </if>
+			<if test="readDate != null and readDate != ''"> and read_date = #{readDate} </if>
 		</where>
 	</select>
 
 	<insert id="save" parameterType="com.anhuay.oa.domain.NotifyRecordDO"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into  "server"."oa_notify_record"
+		insert into oa_notify_record
 		(
-		"notify_id",
-		"user_id",
-		"is_read",
-		"read_date"
+		`notify_id`,
+		`user_id`,
+		`is_read`,
+		`read_date`
 		)
 		values
 		(
@@ -62,22 +62,22 @@
 	</insert>
 
 	<update id="update" parameterType="com.anhuay.oa.domain.NotifyRecordDO">
-		update  "server"."oa_notify_record"
+		update oa_notify_record
 		<set>
-			<if test="notifyId != null">"notify_id" = #{notifyId}, </if>
-			<if test="userId != null">"user_id" = #{userId}, </if>
-			<if test="isRead != null">"is_read" = #{isRead}, </if>
-			<if test="readDate != null">"read_date" = #{readDate}</if>
+			<if test="notifyId != null">`notify_id` = #{notifyId}, </if>
+			<if test="userId != null">`user_id` = #{userId}, </if>
+			<if test="isRead != null">`is_read` = #{isRead}, </if>
+			<if test="readDate != null">`read_date` = #{readDate}</if>
 		</set>
-		where "id" = #{id}
+		where id = #{id}
 	</update>
 
 	<delete id="remove">
-		delete from "server"."oa_notify_record" where "id" = #{value}
+		delete from oa_notify_record where id = #{value}
 	</delete>
 
 	<delete id="batchRemove">
-		delete from "server"."oa_notify_record" where "id" in
+		delete from oa_notify_record where id in
 		<foreach item="id" collection="array" open="(" separator=","
 			close=")">
 			#{id}
@@ -87,12 +87,12 @@
 
 	<insert id="batchSave" parameterType="com.anhuay.oa.domain.NotifyRecordDO"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into  "server"."oa_notify_record"
+		insert into oa_notify_record
 		(
-		"notify_id",
-		"user_id",
-		"is_read",
-		"read_date"
+		`notify_id`,
+		`user_id`,
+		`is_read`,
+		`read_date`
 		)
 		values
 		<foreach item="item" index="index" collection="list"
@@ -107,23 +107,23 @@
 	</insert>
 
 	<select id="listNotifyIds" resultType="long">
-		select distinct "notify_id" from "server"."oa_notify_record"
+		select distinct notify_id from oa_notify_record
 		<where>
-			<if test="id != null and id != ''"> and "id" = #{id} </if>
-			<if test="notifyId != null and notifyId != ''"> and "notify_id" = #{notifyId} </if>
-			<if test="userId != null and userId != ''"> and "user_id" = #{userId} </if>
-			<if test="isRead != null and isRead != ''"> and "is_read" = #{isRead} </if>
-			<if test="readDate != null and readDate != ''"> and "read_date" = #{readDate} </if>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="notifyId != null and notifyId != ''"> and notify_id = #{notifyId} </if>
+			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
+			<if test="isRead != null and isRead != ''"> and is_read = #{isRead} </if>
+			<if test="readDate != null and readDate != ''"> and read_date = #{readDate} </if>
 		</where>
 	</select>
 
 	<delete id="removeByNotifbyId">
-		delete from "server"."oa_notify_record" where "notify_id" =
+		delete from oa_notify_record where notify_id =
 		#{value}
 	</delete>
 
 	<delete id="batchRemoveByNotifbyId">
-		delete from "server"."oa_notify_record" where "notify_id" in
+		delete from oa_notify_record where notify_id in
 		<foreach item="id" collection="array" open="(" separator=","
 			close=")">
 			#{id}
@@ -131,12 +131,12 @@
 	</delete>
 
 	<update id="changeRead" parameterType="com.anhuay.oa.domain.NotifyRecordDO">
-		update  "server"."oa_notify_record"
+		update oa_notify_record
 		<set>
-			<if test="isRead != null">"is_read" = #{isRead}, </if>
-			<if test="readDate != null">"read_date" = #{readDate}</if>
+			<if test="isRead != null">`is_read` = #{isRead}, </if>
+			<if test="readDate != null">`read_date` = #{readDate}</if>
 		</set>
-		where "notify_id" = #{notifyId} and "user_id" = #{userId}
+		where notify_id = #{notifyId} and user_id = #{userId}
 	</update>
 
 

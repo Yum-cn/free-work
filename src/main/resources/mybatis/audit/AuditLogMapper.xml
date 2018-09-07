@@ -4,29 +4,29 @@
 <mapper namespace="com.anhuay.audit.dao.AuditLogDao">
 
 	<select id="get" resultType="com.anhuay.audit.domain.AuditLogDO">
-		select "logid","os_ip","os_id","info","details","result","entry_time","level","type","be_type","log_type","notes","create_by","create_time","update_by","update_time" from "server"."cli_log" where "logid" = #{value}
+		select `logid`,`os_ip`,`os_id`,`info`,`details`,`result`,`entry_time`,`level`,`type`,`be_type`,`log_type`,`notes`,`create_by`,`create_time`,`update_by`,`update_time` from cli_log where logid = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.audit.domain.AuditLogDO">
-		select "logid","os_ip","os_id","info","details","result","entry_time","level","type","be_type","log_type","notes","create_by","create_time","update_by","update_time" from "server"."cli_log"
+		select `logid`,`os_ip`,`os_id`,`info`,`details`,`result`,`entry_time`,`level`,`type`,`be_type`,`log_type`,`notes`,`create_by`,`create_time`,`update_by`,`update_time` from cli_log
         <where>  
-		  		  <if test="logid != null and logid != ''"> and "logid" = #{logid} </if>
-		  		  <if test="osIp != null and osIp != ''"> and "os_ip" = #{osIp} </if>
-		  		  <if test="osId != null and osId != ''"> and "os_id" = #{osId} </if>
-		  		  <if test="info != null and info != ''"> and "info" = #{info} </if>
-		  		  <if test="details != null and details != ''"> and "details" LIKE CONCAT('%',#{details},'%') </if>
-		  		  <if test="result != null and result != ''"> and "result" = #{result} </if>
-		  		  <if test="entryTime != null and entryTime != ''"> and "entry_time" = #{entryTime} </if>
-		  		  <if test="level != null and level != ''"> and "level" = #{level} </if>
-		  		  <if test="type != null and type != ''"> and "type" = #{type} </if>
-		  		  <if test="beType != null and beType != ''"> and "be_type" = #{beType} </if>
-		  		  <if test="logType != null and logType != ''"> and "log_type" = #{logType} </if>
-		  		  <if test="notes != null and notes != ''"> and "notes" = #{notes} </if>
-		  		  <if test="createBy != null and createBy != ''"> and "create_by" = #{createBy} </if>
-		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
-		  		  <if test="updateBy != null and updateBy != ''"> and "update_by" = #{updateBy} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
-		  		  <if test="logQueryId != null and logQueryId != ''"> and "logid" > #{logQueryId} </if>
+		  		  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+		  		  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
+		  		  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+		  		  <if test="info != null and info != ''"> and info = #{info} </if>
+		  		  <if test="details != null and details != ''"> and details LIKE CONCAT('%',#{details},'%') </if>
+		  		  <if test="result != null and result != ''"> and result = #{result} </if>
+		  		  <if test="entryTime != null and entryTime != ''"> and entry_time = #{entryTime} </if>
+		  		  <if test="level != null and level != ''"> and level = #{level} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="beType != null and beType != ''"> and be_type = #{beType} </if>
+		  		  <if test="logType != null and logType != ''"> and log_type = #{logType} </if>
+		  		  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="logQueryId != null and logQueryId != ''"> and logid > #{logQueryId} </if>
 		  		  
 		</where>
         <choose>
@@ -34,7 +34,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by "logid" desc
+                order by logid desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -46,45 +46,45 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from "server"."cli_log
+		select count(*) from cli_log
 		 <where>  
-		  		  <if test="logid != null and logid != ''"> and "logid" = #{logid} </if>
-		  		  <if test="osIp != null and osIp != ''"> and "os_ip" = #{osIp} </if>
-		  		  <if test="osId != null and osId != ''"> and "os_id" = #{osId} </if>
-		  		  <if test="info != null and info != ''"> and "info" = #{info} </if>
-		  		  <if test="details != null and details != ''"> and "details  LIKE CONCAT('%',#{details},'%')  </if>
-		  		  <if test="result != null and result != ''"> and "result" = #{result} </if>
-		  		  <if test="entryTime != null and entryTime != ''"> and "entry_time" = #{entryTime} </if>
-		  		  <if test="level != null and level != ''"> and "level" = #{level} </if>
-		  		  <if test="type != null and type != ''"> and "type" = #{type} </if>
-		  		  <if test="beType != null and beType != ''"> and "be_type" = #{beType} </if>
-		  		  <if test="logType != null and logType != ''"> and "log_type" = #{logType} </if>
-		  		  <if test="notes != null and notes != ''"> and "notes" = #{notes} </if>
-		  		  <if test="createBy != null and createBy != ''"> and "create_by" = #{createBy} </if>
-		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
-		  		  <if test="updateBy != null and updateBy != ''"> and "update_by" = #{updateBy} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
+		  		  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+		  		  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
+		  		  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+		  		  <if test="info != null and info != ''"> and info = #{info} </if>
+		  		  <if test="details != null and details != ''"> and details  LIKE CONCAT('%',#{details},'%')  </if>
+		  		  <if test="result != null and result != ''"> and result = #{result} </if>
+		  		  <if test="entryTime != null and entryTime != ''"> and entry_time = #{entryTime} </if>
+		  		  <if test="level != null and level != ''"> and level = #{level} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="beType != null and beType != ''"> and be_type = #{beType} </if>
+		  		  <if test="logType != null and logType != ''"> and log_type = #{logType} </if>
+		  		  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+		  		  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.anhuay.audit.domain.AuditLogDO" useGeneratedKeys="true" keyProperty="logid">
-		insert into  "server"."cli_log"
+		insert into cli_log
 		(
-			"os_ip", 
-			"os_id", 
-			"info", 
-			"details", 
-			"result", 
-			"entry_time", 
-			"level", 
-			"type", 
-			"be_type", 
-			"log_type", 
-			"notes", 
-			"create_by", 
-			"create_time", 
-			"update_by", 
-			"update_time"
+			`os_ip`, 
+			`os_id`, 
+			`info`, 
+			`details`, 
+			`result`, 
+			`entry_time`, 
+			`level`, 
+			`type`, 
+			`be_type`, 
+			`log_type`, 
+			`notes`, 
+			`create_by`, 
+			`create_time`, 
+			`update_by`, 
+			`update_time`
 		)
 		values
 		(
@@ -107,79 +107,79 @@
 	</insert>
 	 
 	<update id="update" parameterType="com.anhuay.audit.domain.AuditLogDO">
-		update  "server"."cli_log 
+		update cli_log 
 		<set>
-			<if test="osIp != null">"os_ip" = #{osIp}, </if>
-			<if test="osId != null">"os_id" = #{osId}, </if>
-			<if test="info != null">"info" = #{info}, </if>
-			<if test="details != null">"details" = #{details}, </if>
-			<if test="result != null">"result" = #{result}, </if>
-			<if test="entryTime != null">"entry_time" = #{entryTime}, </if>
-			<if test="level != null">"level" = #{level}, </if>
-			<if test="type != null">"type" = #{type}, </if>
-			<if test="beType != null">"be_type" = #{beType}, </if>
-			<if test="logType != null">"log_type" = #{logType}, </if>
-			<if test="notes != null">"notes" = #{notes}, </if>
-			<if test="createBy != null">"create_by" = #{createBy}, </if>
-			<if test="createTime != null">"create_time" = #{createTime}, </if>
-			<if test="updateBy != null">"update_by" = #{updateBy}, </if>
-			<if test="updateTime != null">"update_time" = #{updateTime}</if>
+			<if test="osIp != null">`os_ip` = #{osIp}, </if>
+			<if test="osId != null">`os_id` = #{osId}, </if>
+			<if test="info != null">`info` = #{info}, </if>
+			<if test="details != null">`details` = #{details}, </if>
+			<if test="result != null">`result` = #{result}, </if>
+			<if test="entryTime != null">`entry_time` = #{entryTime}, </if>
+			<if test="level != null">`level` = #{level}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="beType != null">`be_type` = #{beType}, </if>
+			<if test="logType != null">`log_type` = #{logType}, </if>
+			<if test="notes != null">`notes` = #{notes}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>
-		where "logid" = #{logid}
+		where logid = #{logid}
 	</update>
 	
 	<update id="updateStatus">
-        update  "server"."cli_log" set "status" = 0 where "logid" = #{value}
+        update cli_log set status = 0 where logid = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update  "server"."cli_log" set "status" = 0 where "logid" in
+        update cli_log set status = 0 where logid in
         <foreach item="logid" collection="array" open="(" separator="," close=")">
             #{logid}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from "server"."cli_log" where "logid" = #{value}
+		delete from cli_log where logid = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from "server"."cli_log" where "logid" in 
+		delete from cli_log where logid in 
 		<foreach item="logid" collection="array" open="(" separator="," close=")">
 			#{logid}
 		</foreach>
 	</delete>
 	
 	<select id="listAlarm" resultType="com.anhuay.audit.domain.AuditAlarmLogVO">
-        select t."logid",t."os_ip",t."os_id",t."info",t."details",t."result",t."entry_time",t."level",t."type",t."be_type",t."log_type",t."notes",t."create_by",t."create_time",t."update_by",t."update_time"
+        select t.`logid`,t.`os_ip`,t.`os_id`,t.`info`,t.`details`,t.`result`,t.`entry_time`,t.`level`,t.`type`,t.`be_type`,t.`log_type`,t.`notes`,t.`create_by`,t.`create_time`,t.`update_by`,t.`update_time`
         ,oi.dept_name,oi.person_liable_name,oi.os_name
-         from "server"."cli_log" t
-         LEFT JOIN "server"."ahy_os_info" oi on oi."os_ip"=t."os_ip"
+         from cli_log t
+         LEFT JOIN ahy_os_info oi on oi.os_ip=t.os_ip
         <where>  
-                  <if test="logid != null and logid != ''"> and t."logid" = #{logid} </if>
-                  <if test="osIp != null and osIp != ''"> and t."os_ip" = #{osIp} </if>
-                  <if test="osId != null and osId != ''"> and t."os_id" = #{osId} </if>
-                  <if test="info != null and info != ''"> and t."info" = #{info} </if>
-                  <if test="details != null and details != ''"> and t."details LIKE CONCAT('%',#{details},'%') </if>
-                  <if test="result != null and result != ''"> and t."result" = #{result} </if>
-                  <if test="entryTime != null and entryTime != ''"> and t."entry_time" = #{entryTime} </if>
-                  <if test="level != null and level != ''"> and t."level" = #{level} </if>
-                  <if test="type != null and type != ''"> and t."type" = #{type} </if>
-                  <if test="beType != null and beType != ''"> and t."be_type" = #{beType} </if>
-                  <if test="logType != null and logType != ''"> and t."log_type" = #{logType} </if>
-                  <if test="notes != null and notes != ''"> and t."notes" = #{notes} </if>
-                  <if test="createBy != null and createBy != ''"> and t."create_by" = #{createBy} </if>
-                  <if test="createTime != null and createTime != ''"> and t."create_time" = #{createTime} </if>
-                  <if test="updateBy != null and updateBy != ''"> and t."update_by" = #{updateBy} </if>
-                  <if test="updateTime != null and updateTime != ''"> and t."update_time" = #{updateTime} </if>
-                  <if test="deptId != null and deptId != ''"> and oi."dept_id" = #{deptId} </if>
+                  <if test="logid != null and logid != ''"> and t.logid = #{logid} </if>
+                  <if test="osIp != null and osIp != ''"> and t.os_ip = #{osIp} </if>
+                  <if test="osId != null and osId != ''"> and t.os_id = #{osId} </if>
+                  <if test="info != null and info != ''"> and t.info = #{info} </if>
+                  <if test="details != null and details != ''"> and t.details LIKE CONCAT('%',#{details},'%') </if>
+                  <if test="result != null and result != ''"> and t.result = #{result} </if>
+                  <if test="entryTime != null and entryTime != ''"> and t.entry_time = #{entryTime} </if>
+                  <if test="level != null and level != ''"> and t.level = #{level} </if>
+                  <if test="type != null and type != ''"> and t.type = #{type} </if>
+                  <if test="beType != null and beType != ''"> and t.be_type = #{beType} </if>
+                  <if test="logType != null and logType != ''"> and t.log_type = #{logType} </if>
+                  <if test="notes != null and notes != ''"> and t.notes = #{notes} </if>
+                  <if test="createBy != null and createBy != ''"> and t.create_by = #{createBy} </if>
+                  <if test="createTime != null and createTime != ''"> and t.create_time = #{createTime} </if>
+                  <if test="updateBy != null and updateBy != ''"> and t.update_by = #{updateBy} </if>
+                  <if test="updateTime != null and updateTime != ''"> and t.update_time = #{updateTime} </if>
+                  <if test="deptId != null and deptId != ''"> and oi.dept_id = #{deptId} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by "logid" desc
+                order by logid desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -188,48 +188,48 @@
     </select>
     
     <select id="countAlarm" resultType="int">
-        select count(*)  from "server"."cli_log t LEFT JOIN "server"."ahy_os_info" oi on oi."os_ip"=t."os_ip"
+        select count(*)  from cli_log t LEFT JOIN ahy_os_info oi on oi.os_ip=t.os_ip
          <where>  
-                  <if test="logid != null and logid != ''"> and "logid" = #{logid} </if>
-                  <if test="osIp != null and osIp != ''"> and t."os_ip" = #{osIp} </if>
-                  <if test="osId != null and osId != ''"> and "os_id" = #{osId} </if>
-                  <if test="info != null and info != ''"> and "info" = #{info} </if>
-                  <if test="details != null and details != ''"> and "details"  LIKE CONCAT('%',#{details},'%')  </if>
-                  <if test="result != null and result != ''"> and "result" = #{result} </if>
-                  <if test="entryTime != null and entryTime != ''"> and "entry_time" = #{entryTime} </if>
-                  <if test="level != null and level != ''"> and "level" = #{level} </if>
-                  <if test="type != null and type != ''"> and "type" = #{type} </if>
-                  <if test="beType != null and beType != ''"> and "be_type" = #{beType} </if>
-                  <if test="logType != null and logType != ''"> and "log_type" = #{logType} </if>
-                  <if test="notes != null and notes != ''"> and "notes" = #{notes} </if>
-                  <if test="createBy != null and createBy != ''"> and "create_by" = #{createBy} </if>
-                  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
-                  <if test="updateBy != null and updateBy != ''"> and "update_by" = #{updateBy} </if>
-                  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
-                  <if test="deptId != null and deptId != ''"> and oi."dept_id" = #{deptId} </if>
+                  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+                  <if test="osIp != null and osIp != ''"> and t.os_ip = #{osIp} </if>
+                  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+                  <if test="info != null and info != ''"> and info = #{info} </if>
+                  <if test="details != null and details != ''"> and details  LIKE CONCAT('%',#{details},'%')  </if>
+                  <if test="result != null and result != ''"> and result = #{result} </if>
+                  <if test="entryTime != null and entryTime != ''"> and entry_time = #{entryTime} </if>
+                  <if test="level != null and level != ''"> and level = #{level} </if>
+                  <if test="type != null and type != ''"> and type = #{type} </if>
+                  <if test="beType != null and beType != ''"> and be_type = #{beType} </if>
+                  <if test="logType != null and logType != ''"> and log_type = #{logType} </if>
+                  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+                  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+                  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+                  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+                  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+                  <if test="deptId != null and deptId != ''"> and oi.dept_id = #{deptId} </if>
         </where>
     </select>
     
     <select id="listLog" resultType="com.anhuay.audit.domain.AuditLogDO">
-        select "logid","be_type","log_type" from "server"."cli_log
+        select `logid`,`be_type`,`log_type` from cli_log
         <where>  
-                  <if test="logid != null and logid != ''"> and "logid" = #{logid} </if>
-                  <if test="osIp != null and osIp != ''"> and "os_ip" = #{osIp} </if>
-                  <if test="osId != null and osId != ''"> and "os_id" = #{osId} </if>
-                  <if test="info != null and info != ''"> and "info" = #{info} </if>
-                  <if test="details != null and details != ''"> and "details LIKE CONCAT('%',#{details},'%') </if>
-                  <if test="result != null and result != ''"> and "result" = #{result} </if>
-                  <if test="entryTime != null and entryTime != ''"> and "entry_time" = #{entryTime} </if>
-                  <if test="level != null and level != ''"> and "level" = #{level} </if>
-                  <if test="type != null and type != ''"> and "type" = #{type} </if>
-                  <if test="beType != null and beType != ''"> and "be_type" = #{beType} </if>
-                  <if test="logType != null and logType != ''"> and "log_type" = #{logType} </if>
-                  <if test="notes != null and notes != ''"> and "notes" = #{notes} </if>
-                  <if test="createBy != null and createBy != ''"> and "create_by" = #{createBy} </if>
-                  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
-                  <if test="updateBy != null and updateBy != ''"> and "update_by" = #{updateBy} </if>
-                  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
-                  <if test="logQueryId != null and logQueryId != ''"> and "logid > #{logQueryId} </if>
+                  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+                  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
+                  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
+                  <if test="info != null and info != ''"> and info = #{info} </if>
+                  <if test="details != null and details != ''"> and details LIKE CONCAT('%',#{details},'%') </if>
+                  <if test="result != null and result != ''"> and result = #{result} </if>
+                  <if test="entryTime != null and entryTime != ''"> and entry_time = #{entryTime} </if>
+                  <if test="level != null and level != ''"> and level = #{level} </if>
+                  <if test="type != null and type != ''"> and type = #{type} </if>
+                  <if test="beType != null and beType != ''"> and be_type = #{beType} </if>
+                  <if test="logType != null and logType != ''"> and log_type = #{logType} </if>
+                  <if test="notes != null and notes != ''"> and notes = #{notes} </if>
+                  <if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+                  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+                  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+                  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+                  <if test="logQueryId != null and logQueryId != ''"> and logid > #{logQueryId} </if>
                   
         </where>
         <choose>
@@ -237,7 +237,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by "logid" desc
+                order by logid desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

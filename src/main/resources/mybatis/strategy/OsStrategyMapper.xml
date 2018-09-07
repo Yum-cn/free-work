@@ -4,20 +4,20 @@
 <mapper namespace="com.anhuay.strategy.dao.OsStrategyDao">
 
 	<select id="get" resultType="com.anhuay.strategy.domain.OsStrategyDO">
-		select "id","templet_id","templet_name","os_ids","os_names","status","create_time","update_time" from "server"."ahy_os_strategy" where "id" = #{value}
+		select `id`,`templet_id`,`templet_name`,`os_ids`,`os_names`,`status`,`create_time`,`update_time` from ahy_os_strategy where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.strategy.domain.OsStrategyDO">
-		select "id","templet_id","templet_name","os_ids","os_names","status","create_time","update_time" from "server"."ahy_os_strategy
+		select `id`,`templet_id`,`templet_name`,`os_ids`,`os_names`,`status`,`create_time`,`update_time` from ahy_os_strategy
         <where>  
-		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and "templet_id" = #{templetId} </if>
-		  		  <if test="templetName != null and templetName != ''"> and "templet_name" = #{templetName} </if>
-		  		  <if test="osIds != null and osIds != ''"> and "os_ids" = #{osIds} </if>
-		  		  <if test="osNames != null and osNames != ''"> and "os_names  LIKE CONCAT('%',#{osNames},'%') </if>
-		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
+		  		  <if test="templetName != null and templetName != ''"> and templet_name = #{templetName} </if>
+		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
+		  		  <if test="osNames != null and osNames != ''"> and os_names  LIKE CONCAT('%',#{osNames},'%') </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -33,29 +33,29 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from "server"."ahy_os_strategy
+		select count(*) from ahy_os_strategy
 		 <where>  
-		  		  <if test="id != null and id != ''"> and "id" = #{id} </if>
-		  		  <if test="templetId != null and templetId != ''"> and "templet_id" = #{templetId} </if>
-		  		  <if test="templetName != null and templetName != ''"> and "templet_name" = #{templetName} </if>
-		  		  <if test="osIds != null and osIds != ''"> and "os_ids" = #{osIds} </if>
-		  		  <if test="osNames != null and osNames != ''"> and "os_names  LIKE CONCAT('%',#{osNames},'%') </if>
-		  		  <if test="status != null and status != ''"> and "status" = #{status} </if>
-		  		  <if test="createTime != null and createTime != ''"> and "create_time" = #{createTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and "update_time" = #{updateTime} </if>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="templetId != null and templetId != ''"> and templet_id = #{templetId} </if>
+		  		  <if test="templetName != null and templetName != ''"> and templet_name = #{templetName} </if>
+		  		  <if test="osIds != null and osIds != ''"> and os_ids = #{osIds} </if>
+		  		  <if test="osNames != null and osNames != ''"> and os_names  LIKE CONCAT('%',#{osNames},'%') </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		</where>
 	</select>
 	 
 	<insert id="save" parameterType="com.anhuay.strategy.domain.OsStrategyDO" useGeneratedKeys="true" keyProperty="id">
 		insert into ahy_os_strategy
 		(
-			"templet_id", 
-			"templet_name", 
-			"os_ids", 
-			"os_names", 
-			"status", 
-			"create_time", 
-			"update_time"
+			`templet_id`, 
+			`templet_name`, 
+			`os_ids`, 
+			`os_names`, 
+			`status`, 
+			`create_time`, 
+			`update_time`
 		)
 		values
 		(
@@ -72,34 +72,34 @@
 	<update id="update" parameterType="com.anhuay.strategy.domain.OsStrategyDO">
 		update ahy_os_strategy 
 		<set>
-			<if test="templetId != null">"templet_id" = #{templetId}, </if>
-			<if test="templetName != null">"templet_name" = #{templetName}, </if>
-			<if test="osIds != null">"os_ids" = #{osIds}, </if>
-			<if test="osNames != null">"os_names" = #{osNames}, </if>
-			<if test="status != null">"status" = #{status}, </if>
-			<if test="createTime != null">"create_time" = #{createTime}, </if>
-			<if test="updateTime != null">"update_time" = #{updateTime}</if>
+			<if test="templetId != null">`templet_id` = #{templetId}, </if>
+			<if test="templetName != null">`templet_name` = #{templetName}, </if>
+			<if test="osIds != null">`os_ids` = #{osIds}, </if>
+			<if test="osNames != null">`os_names` = #{osNames}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>
-		where id" = #{id}
+		where id = #{id}
 	</update>
 	
 	<update id="updateStatus">
-        update ahy_os_strategy set status = 0" where "id" = #{value}
+        update ahy_os_strategy set status = 0 where id = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update ahy_os_strategy set status = 0" where "id in
+        update ahy_os_strategy set status = 0 where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from "server"."ahy_os_strategy" where "id" = #{value}
+		delete from ahy_os_strategy where id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from "server"."ahy_os_strategy" where "id in 
+		delete from ahy_os_strategy where id in 
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>
@@ -107,7 +107,7 @@
 	
 	
     <select id="selectOsStrategy" resultType="String">
-        SELECT GROUP_CONCAT(distinct t.templet_name ORDER BY t.templet_id DESC SEPARATOR ';') from "server"."ahy_os_strategy t" where "  t.os_names  LIKE CONCAT('%',#{osIp},'%') GROUP BY t.os_names
+        SELECT GROUP_CONCAT(distinct t.templet_name ORDER BY t.templet_id DESC SEPARATOR ';') FROM ahy_os_strategy t where   t.os_names  LIKE CONCAT('%',#{osIp},'%') GROUP BY t.os_names
     </select>
 
 </mapper>
