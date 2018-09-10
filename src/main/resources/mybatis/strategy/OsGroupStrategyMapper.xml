@@ -106,7 +106,8 @@
 	</delete>
 	
 	<select id="selectOsGroupStrategy" resultType="String">
-        SELECT GROUP_CONCAT( DISTINCT ts.templet_name ORDER BY ts.templet_id DESC SEPARATOR ';' ) FROM ahy_os_group t  LEFT JOIN ahy_os_group_strategy ts on ts.os_group_ids=t.id WHERE t.os_ips LIKE CONCAT('%' ,#{osIp}, '%') GROUP BY t.status;
+	SELECT GROUP_CONCAT(DISTINCT tempName SEPARATOR ';') from (
+        SELECT GROUP_CONCAT( DISTINCT ts.templet_name ORDER BY ts.templet_id DESC SEPARATOR ';' ) tempName FROM ahy_os_group t  LEFT JOIN ahy_os_group_strategy ts on ts.os_group_ids=t.id WHERE t.os_ips LIKE CONCAT('%' ,#{osIp}, '%') GROUP BY t.status) tt;
     </select>
 
 

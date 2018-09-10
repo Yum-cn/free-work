@@ -108,11 +108,12 @@
 	</delete>
 	
     <select id="selectDeptStrategy" resultType="String">
-        SELECT GROUP_CONCAT(distinct t.templet_name ORDER BY t.templet_id DESC SEPARATOR ';') FROM ahy_dept_strategy t where t.dept_ids in
+    SELECT GROUP_CONCAT(DISTINCT tempName SEPARATOR ';') from (
+        SELECT GROUP_CONCAT(distinct t.templet_name ORDER BY t.templet_id DESC SEPARATOR ';') tempName FROM ahy_dept_strategy t where t.dept_ids in
         <foreach item="deptIds" collection="array" open="(" separator="," close=")">
             #{deptIds}
         </foreach>
-        GROUP BY t.status
+        GROUP BY t.status) tt;
     </select>
 
 </mapper>

@@ -11,6 +11,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +33,7 @@ import com.anhuay.common.utils.TreeCodeUtil;
 import com.anhuay.os.domain.OsInfoDO;
 import com.anhuay.os.domain.OsInfoVO;
 import com.anhuay.os.service.OsInfoService;
+import com.anhuay.strategy.manager.impl.StrategyTempletManagerImpl;
 import com.anhuay.strategy.service.DeptStrategyService;
 import com.anhuay.strategy.service.OsGroupStrategyService;
 import com.anhuay.strategy.service.OsStrategyService;
@@ -54,6 +57,9 @@ import com.common.constant.CommonEnum;
 @Controller
 @RequestMapping("/os/osInfo")
 public class OsInfoController {
+	
+	private Logger logger = LoggerFactory.getLogger(OsInfoController.class);
+	
 	@Autowired
 	private OsInfoService osInfoService;
 	@Autowired
@@ -93,61 +99,65 @@ public class OsInfoController {
 		List<OsInfoVO> osInfoVOList = new ArrayList<OsInfoVO>();
 		if (CollectionUtils.isNotEmpty(osInfoList)) {
 			for (int j = 0; j < osInfoList.size(); j++) {
-				OsInfoVO osInfoVO = new OsInfoVO();
 				try {
-					BeanUtils.copyProperties(osInfoVO, osInfoList.get(j));
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					OsInfoVO osInfoVO = new OsInfoVO();
+					try {
+						BeanUtils.copyProperties(osInfoVO, osInfoList.get(j));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
-				// 默认策略
-				osInfoVO.setTempletType(4);
-				osInfoVO.setTempletName("默认策略");
+					// 默认策略
+					osInfoVO.setTempletType(4);
+					osInfoVO.setTempletName("默认策略");
 
-				// 主机、主机组、部门、默认
-				String osIp = osInfoVO.getOsIp();
-				Long id = osInfoVO.getId();
-				String strategyNames = osStrategyService.selectOsStrategy(osIp);
-				if (StringUtils.isNotBlank(strategyNames)) {
-					osInfoVO.setTempletType(1);
-					osInfoVO.setTempletName(strategyNames);
-				} else {
-					// 主机组策略
-					strategyNames = osGroupStrategyService.selectOsGroupStrategy(osIp);
+					// 主机、主机组、部门、默认
+					String osIp = osInfoVO.getOsIp();
+					Long id = osInfoVO.getId();
+					String strategyNames = osStrategyService.selectOsStrategy(osIp);
 					if (StringUtils.isNotBlank(strategyNames)) {
-						osInfoVO.setTempletType(2);
+						osInfoVO.setTempletType(1);
 						osInfoVO.setTempletName(strategyNames);
 					} else {
-						// 部门策略
-						Integer deptId = osInfoVO.getDeptId();
-						if (deptId != null && deptId > 0) {
+						// 主机组策略
+						strategyNames = osGroupStrategyService.selectOsGroupStrategy(osIp);
+						if (StringUtils.isNotBlank(strategyNames)) {
+							osInfoVO.setTempletType(2);
+							osInfoVO.setTempletName(strategyNames);
+						} else {
+							// 部门策略
+							Integer deptId = osInfoVO.getDeptId();
+							if (deptId != null && deptId > 0) {
 
-							List<TreeCode> treeCodeList = new ArrayList<TreeCode>();
-							List<DeptDO> sysDepts = sysDeptService.list(new HashMap<String, Object>(16));
-							for (DeptDO sysDept : sysDepts) {
-								TreeCode tree = new TreeCode();
-								tree.setTreeCodeId(sysDept.getDeptId().toString());
-								tree.setParentId(sysDept.getParentId().toString());
-								tree.setTreeCodeName(sysDept.getName());
-								treeCodeList.add(tree);
-							}
-							TreeCodeUtil treeCodeUtil = new TreeCodeUtil();
-							String deptIds = treeCodeUtil.getAllChildId(treeCodeList, String.valueOf(deptId));
-							if (StringUtils.isNotBlank(deptIds)) {
-								strategyNames = deptStrategyService.selectDeptStrategy(deptIds.split(","));
-								if (StringUtils.isNotBlank(strategyNames)) {
-									osInfoVO.setTempletType(3);
-									osInfoVO.setTempletName(strategyNames);
+								List<TreeCode> treeCodeList = new ArrayList<TreeCode>();
+								List<DeptDO> sysDepts = sysDeptService.list(new HashMap<String, Object>(16));
+								for (DeptDO sysDept : sysDepts) {
+									TreeCode tree = new TreeCode();
+									tree.setTreeCodeId(sysDept.getDeptId().toString());
+									tree.setParentId(sysDept.getParentId().toString());
+									tree.setTreeCodeName(sysDept.getName());
+									treeCodeList.add(tree);
 								}
-							}
+								TreeCodeUtil treeCodeUtil = new TreeCodeUtil();
+								String deptIds = treeCodeUtil.getAllChildId(treeCodeList, String.valueOf(deptId));
+								if (StringUtils.isNotBlank(deptIds)) {
+									strategyNames = deptStrategyService.selectDeptStrategy(deptIds.split(","));
+									if (StringUtils.isNotBlank(strategyNames)) {
+										osInfoVO.setTempletType(3);
+										osInfoVO.setTempletName(strategyNames);
+									}
+								}
 
+							}
 						}
 					}
-				}
 
-				osInfoVO.setServerTime(System.currentTimeMillis() / 1000);
-				osInfoVOList.add(osInfoVO);
+					osInfoVO.setServerTime(System.currentTimeMillis() / 1000);
+					osInfoVOList.add(osInfoVO);
+				} catch (Exception e) {
+					logger.error(e.getMessage());
+				}
 			}
 
 		}
