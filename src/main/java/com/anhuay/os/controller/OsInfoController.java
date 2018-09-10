@@ -57,9 +57,9 @@ import com.common.constant.CommonEnum;
 @Controller
 @RequestMapping("/os/osInfo")
 public class OsInfoController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(OsInfoController.class);
-	
+
 	@Autowired
 	private OsInfoService osInfoService;
 	@Autowired
@@ -99,19 +99,19 @@ public class OsInfoController {
 		List<OsInfoVO> osInfoVOList = new ArrayList<OsInfoVO>();
 		if (CollectionUtils.isNotEmpty(osInfoList)) {
 			for (int j = 0; j < osInfoList.size(); j++) {
+				OsInfoVO osInfoVO = new OsInfoVO();
 				try {
-					OsInfoVO osInfoVO = new OsInfoVO();
-					try {
-						BeanUtils.copyProperties(osInfoVO, osInfoList.get(j));
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					BeanUtils.copyProperties(osInfoVO, osInfoList.get(j));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-					// 默认策略
-					osInfoVO.setTempletType(4);
-					osInfoVO.setTempletName("默认策略");
+				// 默认策略
+				osInfoVO.setTempletType(4);
+				osInfoVO.setTempletName("默认策略");
 
+				try {
 					// 主机、主机组、部门、默认
 					String osIp = osInfoVO.getOsIp();
 					Long id = osInfoVO.getId();
@@ -152,12 +152,13 @@ public class OsInfoController {
 							}
 						}
 					}
-
-					osInfoVO.setServerTime(System.currentTimeMillis() / 1000);
-					osInfoVOList.add(osInfoVO);
 				} catch (Exception e) {
 					logger.error(e.getMessage());
 				}
+
+				osInfoVO.setServerTime(System.currentTimeMillis() / 1000);
+				osInfoVOList.add(osInfoVO);
+
 			}
 
 		}
@@ -200,20 +201,21 @@ public class OsInfoController {
 			osInfo.setStatus(CommonEnum.STATUS.ONE.value);
 			osInfo.setCreateTime(System.currentTimeMillis() / 1000);
 
-			/*try {
-				LicenseManager licenseManager = LicenseManager.getInstance();
-				int total = osInfoService.count(new HashMap<String, Object>());
-				License license = licenseManager.getLicense();
-				System.out.println("license = " + license);
-				int number = NumberUtils.toInt(license.getFeature("number"));
-
-				if (total >= number) {
-					return R.error(CommonEnum.CODE.INVALID_LICENSE.code, CommonEnum.CODE.INVALID_LICENSE.description);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				return R.error(CommonEnum.CODE.INVALID_LICENSE.code, CommonEnum.CODE.INVALID_LICENSE.description);
-			}*/
+			/*
+			 * try { LicenseManager licenseManager =
+			 * LicenseManager.getInstance(); int total = osInfoService.count(new
+			 * HashMap<String, Object>()); License license =
+			 * licenseManager.getLicense(); System.out.println("license = " +
+			 * license); int number =
+			 * NumberUtils.toInt(license.getFeature("number"));
+			 * 
+			 * if (total >= number) { return
+			 * R.error(CommonEnum.CODE.INVALID_LICENSE.code,
+			 * CommonEnum.CODE.INVALID_LICENSE.description); } } catch
+			 * (Exception e) { e.printStackTrace(); return
+			 * R.error(CommonEnum.CODE.INVALID_LICENSE.code,
+			 * CommonEnum.CODE.INVALID_LICENSE.description); }
+			 */
 
 			if (osInfoService.save(osInfo) > 0) {
 				return R.ok();
