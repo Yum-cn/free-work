@@ -16,11 +16,16 @@ logging:
     com.anhuay: debug
 spring:
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/anhuay?useUnicode=true&characterEncoding=utf8
+    #type: com.alibaba.druid.pool.DruidDataSource
+    #driverClassName: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://127.0.0.1:3306/anhuay?useUnicode=true&characterEncoding=utf8
+    #username: root
+    #password: 123456
+    type: org.apache.commons.dbcp.BasicDataSource
+    driverClassName: com.gbase.jdbc.Driver
+    url: jdbc:gbase://192.144.133.68:5258/test
     username: root
-    password: 123456
+    password: gbase8a
     initialSize: 1
     minIdle: 3
     maxActive: 20
