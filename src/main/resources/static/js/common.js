@@ -86,9 +86,9 @@ function formatUnixTime(time) {
 	let unixtime = time;
 	let unixTimestamp = new Date(unixtime * 1000);
 	let Y = unixTimestamp.getFullYear();
-	let M = ((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1)
+	let M = ((unixTimestamp.getMonth() + 1) >= 10 ? (unixTimestamp.getMonth() + 1)
 			: '0' + (unixTimestamp.getMonth() + 1));
-	let D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0'
+	let D = (unixTimestamp.getDate() >= 10 ? unixTimestamp.getDate() : '0'
 			+ unixTimestamp.getDate());
 	
 	 var h = unixTimestamp.getHours();
@@ -106,12 +106,11 @@ function formatUnixTime(time) {
 function formatTimeStamp(time) {
 	//console.log(">>>"+time);
 	let unixtime = time;
-	console.log(unixtime);
 	let unixTimestamp = new Date(unixtime);
 	let Y = unixTimestamp.getFullYear();
-	let M = ((unixTimestamp.getMonth() + 1) > 10 ? (unixTimestamp.getMonth() + 1)
+	let M = ((unixTimestamp.getMonth() + 1) >= 10 ? (unixTimestamp.getMonth() + 1)
 			: '0' + (unixTimestamp.getMonth() + 1));
-	let D = (unixTimestamp.getDate() > 10 ? unixTimestamp.getDate() : '0'
+	let D = (unixTimestamp.getDate() >= 10 ? unixTimestamp.getDate() : '0'
 			+ unixTimestamp.getDate());
 	
 	 var h = unixTimestamp.getHours();
