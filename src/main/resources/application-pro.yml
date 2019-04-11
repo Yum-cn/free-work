@@ -11,6 +11,7 @@ anhuay:
   uploadPath: /var/uploaded_files/
   #downloadUrl: http://192.168.1.150:8080/terminal/terminalFile/download/
   downloadUrl: http://127.0.0.1:8080/terminal/terminalFile/download/
+  systemName: 安华易终端安全管理系统
 logging:
   level:
     root: info

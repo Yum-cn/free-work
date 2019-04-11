@@ -9,6 +9,7 @@ server:
 anhuay:
   uploadPath: D:/var/uploaded_files/
   downloadUrl: http://localhost/terminal/terminalFile/download/
+  systemName: 面向学习型的开源框架
 logging:
   level:
     root: info
