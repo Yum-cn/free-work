@@ -1,10 +1,17 @@
-anhuay:  
-  uploadPath: /var/uploaded_files/ 
+server:
+  #ssl:
+    #    证书路径
+    #key-store: config/tomcat.key
+    #keyStoreType: JKS
+    #keyAlias: tomcat
+    #    配置密码，就是在生成证书的时候输入的密码
+    #key-store-password: anhuay
+anhuay:
+  #uploadPath: D:/var/uploaded_files/
+  uploadPath: /var/uploaded_files/
+  #downloadUrl: http://192.168.1.150:8080/terminal/terminalFile/download/
   downloadUrl: http://127.0.0.1:8080/terminal/terminalFile/download/
-  #名称前面一定要有空格
-  #systemName: 安华易终端安全管理系统
-  systemName: 安华易主机监控与审计系统
-  #systemName: 安华易打印刻录监控与审计系统 V1.0
+  systemName: 安华易终端安全管理系统
 logging:
   level:
     root: info
@@ -12,10 +19,14 @@ logging:
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver    
-    url: jdbc:mysql://127.0.0.1:3306/server?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    driverClassName: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://127.0.0.1:56788/server?useUnicode=true&characterEncoding=utf8
+    #url: jdbc:mysql://127.0.0.1:56788/server?useUnicode=true&characterEncoding=utf8
+    #username: root
+    #password: 1qaz2wsx
+    url: jdbc:mysql://127.0.0.1:3306/server?useUnicode=true&characterEncoding=utf8
     username: root
-    password: 1qaz2wsx
+    password: 123123
     initialSize: 1
     minIdle: 3
     maxActive: 20
