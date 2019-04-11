@@ -9,6 +9,8 @@ import com.anhuay.common.domain.FileDO;
 import com.anhuay.common.service.FileService;
 import com.anhuay.common.utils.*;
 import com.anhuay.system.vo.UserVO;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,20 +94,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int update(UserDO user) {
-        int r = userMapper.update(user);
+    	int r = userMapper.update(user);
         Long userId = user.getUserId();
         List<Long> roles = user.getRoleIds();
-        userRoleMapper.removeByUserId(userId);
-        List<UserRoleDO> list = new ArrayList<>();
-        for (Long roleId : roles) {
-            UserRoleDO ur = new UserRoleDO();
-            ur.setUserId(userId);
-            ur.setRoleId(roleId);
-            list.add(ur);
-        }
-        if (list.size() > 0) {
-            userRoleMapper.batchSave(list);
-        }
+        
+        //if(CollectionUtils.isNotEmpty(roles)){
+        	userRoleMapper.removeByUserId(userId);
+            List<UserRoleDO> list = new ArrayList<>();
+            for (Long roleId : roles) {
+                UserRoleDO ur = new UserRoleDO();
+                ur.setUserId(userId);
+                ur.setRoleId(roleId);
+                list.add(ur);
+            }
+            if (list.size() > 0) {
+                userRoleMapper.batchSave(list);
+            }
+        //}
+        
         return r;
     }
 
