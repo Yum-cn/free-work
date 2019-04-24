@@ -80,6 +80,7 @@ public class OsGroupStrategyController {
 		
 		osGroupStrategy.setUpdateTime(System.currentTimeMillis() / 1000);
 		if(osGroupStrategy.getId()!=null && osGroupStrategy.getId()>0){
+			osGroupStrategy.setStatus(CommonEnum.STATUS.ONE.value);
 			if(osGroupStrategyService.update(osGroupStrategy)>0){
 				return R.ok();
 			}

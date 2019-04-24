@@ -80,6 +80,7 @@ public class DeptStrategyController {
 		
 		deptStrategy.setUpdateTime(System.currentTimeMillis() / 1000);
 		if(deptStrategy.getId()!=null && deptStrategy.getId()>0){
+			deptStrategy.setStatus(CommonEnum.STATUS.ONE.value);
 			if(deptStrategyService.update(deptStrategy)>0){
 				return R.ok();
 			}
