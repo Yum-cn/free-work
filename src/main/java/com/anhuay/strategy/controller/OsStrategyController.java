@@ -78,12 +78,12 @@ public class OsStrategyController {
 	@RequiresPermissions("strategy:osStrategy:add")
 	public R save( OsStrategyDO osStrategy){
 		osStrategy.setUpdateTime(System.currentTimeMillis() / 1000);
+		osStrategy.setStatus(CommonEnum.STATUS.ONE.value);
 		if(osStrategy.getId()!=null && osStrategy.getId()>0){
 			if(osStrategyService.update(osStrategy)>0){
 				return R.ok();
 			}
 		}else{
-			osStrategy.setStatus(CommonEnum.STATUS.ONE.value);
 			osStrategy.setCreateTime(System.currentTimeMillis() / 1000);
 			
 			if(osStrategyService.save(osStrategy)>0){
