@@ -23,7 +23,7 @@
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-		  		  and status = 1
+		  		  and status != 0
 		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

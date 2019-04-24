@@ -222,6 +222,7 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 				StrategyTempletDO strategyTemplet = strategyTempletService.get(strategyTempletId);
 				strategyTemplet.setOsAuditId(osAuditId);
 				strategyTemplet.setUpdateTime(System.currentTimeMillis() / 1000);
+				strategyTemplet.setStatus(CommonEnum.STATUS.ONE.value);
 				strategyTempletService.update(strategyTemplet);
 			}
 			
