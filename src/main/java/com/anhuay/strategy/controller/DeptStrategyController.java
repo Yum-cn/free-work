@@ -113,7 +113,7 @@ public class DeptStrategyController {
 	@ResponseBody
 	@RequiresPermissions("strategy:deptStrategy:remove")
 	public R remove( Long id){
-		if(deptStrategyService.updateStatus(id)>0){
+		if(deptStrategyService.remove(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -126,7 +126,7 @@ public class DeptStrategyController {
 	@ResponseBody
 	@RequiresPermissions("strategy:deptStrategy:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
-		deptStrategyService.batchUpdateStatus(ids);
+		deptStrategyService.batchRemove(ids);
 		return R.ok();
 	}
 	

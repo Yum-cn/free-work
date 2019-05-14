@@ -111,7 +111,7 @@ public class OsStrategyController {
 	@ResponseBody
 	@RequiresPermissions("strategy:osStrategy:remove")
 	public R remove( Long id){
-		if(osStrategyService.updateStatus(id)>0){
+		if(osStrategyService.remove(id)>0){
 		return R.ok();
 		}
 		return R.error();
@@ -124,7 +124,7 @@ public class OsStrategyController {
 	@ResponseBody
 	@RequiresPermissions("strategy:osStrategy:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
-		osStrategyService.batchUpdateStatus(ids);
+		osStrategyService.batchRemove(ids);
 		return R.ok();
 	}
 	
