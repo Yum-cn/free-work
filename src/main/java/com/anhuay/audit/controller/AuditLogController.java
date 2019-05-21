@@ -1,8 +1,18 @@
 package com.anhuay.audit.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +27,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.anhuay.audit.domain.AuditAlarmLogVO;
 import com.anhuay.audit.domain.AuditLogDO;
 import com.anhuay.audit.service.AuditLogService;
+import com.anhuay.common.utils.DateUtils;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
+import com.common.util.BaseResult;
+import com.common.util.ExcelUtil;
 
 /**
  * 
@@ -136,6 +149,42 @@ public class AuditLogController {
 	public R remove(@RequestParam("ids[]") Long[] logids){
 		logService.batchUpdateStatus(logids);
 		return R.ok();
+	}
+	
+	@GetMapping("/export")
+	public void export(@RequestParam Map<String, Object> params,HttpServletRequest request, HttpServletResponse response) {
+		try {
+
+			
+			String fileName = new String(
+					("主机审计日志 " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())).getBytes(), "UTF-8");
+			response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xls");
+
+			List<Map<String, Object>> excelList = new ArrayList<Map<String, Object>>();
+
+			// TODO 分页
+			BaseResult<Object> statisticsResult = logService.exportList(params);
+			@SuppressWarnings("unchecked")
+			List<Map<String, Object>> statisticsList = (List<Map<String, Object>>) statisticsResult.getData();
+			
+			String[] columnNames = { "客户端IP地址", "事件客体", "事件内容(详细信息)", "事件发生时间", "风险级别", "事件种类","行为类别","日志分类"};// 列名
+			String[] keys = { "osIp",  "info", "details",
+					 "entryTime", "level", "type", "beType", "logType" };// map中的key
+			Map<String, Object> map1 = new HashMap<String, Object>();
+			// map1.put("sheetName", "数据统计"+new SimpleDateFormat("yyyy-MM-dd
+			// HH:mm:ss").format(new Date()));
+			map1.put("sheetName", "审计日志" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "-"
+					+ StringUtils.substring(UUID.randomUUID() + "", 0, 5));
+			map1.put("columnNames", columnNames);
+			map1.put("keys", keys);
+			map1.put("data", CollectionUtils.isEmpty(statisticsList)?new ArrayList<Map<String, Object>>():statisticsList);
+			excelList.add(map1);
+
+			ExcelUtil.refactorExcel(response, excelList, fileName);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -120,12 +120,12 @@ function load(type) {
 									field : 'beType', 
 									title : '行为类别',
 									formatter : function(value, row, index){
-										if(value==1){
-											return '<span class=" ">违规行为</span>';
-										}else if(value==2){
-											return '<span class=" ">异常行为</span>';
-										}else if(value==3){
+										if (value == 1) {
 											return '<span class=" ">一般行为</span>';
+										} else if (value == 2) {
+											return '<span class=" ">异常行为</span>';
+										} else if (value == 3) {
+											return '<span class=" ">违规行为</span>';
 										}else{
 											return '<span class=" "></span>';
 										}
@@ -179,6 +179,16 @@ function edit(id) {
 		area : [ '800px', '520px' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
+}
+function exportExcel() {
+
+        var value = $('#searchName').val();
+        if(!value){
+        	value="";
+        }
+        window.location.href = prefix + '/export?details='
+                + value+"&logType="+type;
+
 }
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {

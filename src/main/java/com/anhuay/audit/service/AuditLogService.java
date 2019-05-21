@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.anhuay.audit.domain.AuditAlarmLogVO;
 import com.anhuay.audit.domain.AuditLogDO;
-import com.anhuay.common.utils.Query;
+import com.common.util.BaseResult;
 
 /**
  * 
@@ -43,4 +43,6 @@ public interface AuditLogService {
 	int countAlarm(Map<String, Object> map);
 	
 	List<AuditLogDO> listLog(Map<String, Object> map);
+	
+	BaseResult<Object> exportList(Map<String, Object> map);
 }

@@ -970,7 +970,7 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 
 		Collection collection = jsonObject.values();
 		for (Iterator iterator = collection.iterator(); iterator.hasNext();) {
-			String value = (String) iterator.next();
+			String value = iterator.next().toString();
 			if (StringUtils.isNotBlank(value)) {
 				jsonBlankTag = true;
 				return jsonBlankTag;
