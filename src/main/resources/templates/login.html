@@ -70,9 +70,9 @@ body.signin {
 				<form id="signupForm">
 					<h3 class="text-center">用户登录</h3>
 					<p class="m-t-md text-center" th:text="${welcome}"></p>
-					<input type="text" name="username" class="form-control uname"
+					<input type="text" name="username" class="form-control uname" id="username"
 						value="" /> <input type="password" name="password"
-						class="form-control pword m-b" value="" /> <a id="login"
+						class="form-control pword m-b" value="" id="password"/> <a id="login"
 						class="btn btn-login btn-block">登录</a>
 					<!--按钮模块-->
 					<!-- <div class="outside-login">
@@ -116,6 +116,7 @@ body.signin {
 
 	<!-- 自定义js -->
 	<script src="/js/content.js?v=1.0.0" th:src="@{/js/content.js?v=1.0.0}"></script>
+	<script src="/js/aes.js?v=1.0.0" th:src="@{/js/aes.js?v=1.0.0}"></script>
 
 	<!-- jQuery Validation plugin javascript-->
 	<script src="/js/ajax-util.js"></script>
@@ -138,6 +139,11 @@ body.signin {
     });
 
     function login() {
+    	
+    	$("#username").val(encrypt($("#username").val()));
+    	$("#password").val(encrypt($("#password").val()));
+    	
+    	
         $.ajax({
             type: "POST",
             url: ctx+"login",
@@ -191,6 +197,19 @@ body.signin {
                 }
             }
         })
+    }
+    
+    function encrypt(word){
+        var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
+        var srcs = CryptoJS.enc.Utf8.parse(word);
+        var encrypted = CryptoJS.AES.encrypt(srcs, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        return encrypted.toString();
+    }
+
+    function decrypt(word){
+        var key = CryptoJS.enc.Utf8.parse("abcdefgabcdefg12");
+        var decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+        return CryptoJS.enc.Utf8.stringify(decrypt).toString();
     }
 </script>
 </body>

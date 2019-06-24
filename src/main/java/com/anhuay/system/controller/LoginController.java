@@ -37,11 +37,10 @@ import com.anhuay.common.utils.R;
 import com.anhuay.common.utils.ShiroUtils;
 import com.anhuay.system.domain.MenuDO;
 import com.anhuay.system.domain.UserExtendDO;
-import com.anhuay.system.license.License;
-import com.anhuay.system.license.LicenseManager;
 import com.anhuay.system.service.MenuService;
 import com.anhuay.system.service.UserExtendService;
 import com.common.constant.CommonEnum;
+import com.common.util.Aes;
 import com.common.util.BaseResult;
 import com.common.util.BaseResultHelper;
 
@@ -99,7 +98,8 @@ public class LoginController extends BaseController {
 	@ResponseBody
 	Object ajaxLogin(String username, String password, HttpServletRequest request) {
 
-		
+		username = Aes.aesDecrypt(username);
+		password = Aes.aesDecrypt(password);
 		/*try {
 			boolean valid = false;
 			LicenseManager licenseManager = LicenseManager.getInstance();

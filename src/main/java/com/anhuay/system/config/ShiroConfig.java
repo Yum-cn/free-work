@@ -19,7 +19,6 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,7 +26,6 @@ import com.anhuay.common.config.Constant;
 import com.anhuay.common.redis.shiro.RedisCacheManager;
 import com.anhuay.common.redis.shiro.RedisManager;
 import com.anhuay.common.redis.shiro.RedisSessionDAO;
-import com.anhuay.system.domain.PropertyDO;
 import com.anhuay.system.domain.ServerConfigDO;
 import com.anhuay.system.service.ServerConfigService;
 import com.anhuay.system.shiro.UserRealm;
@@ -41,19 +39,19 @@ import net.sf.ehcache.CacheManager;
  */
 @Configuration
 public class ShiroConfig {
-    @Value("${spring.redis.host}")
+    //@Value("${spring.redis.host}")
     private String host;
-    @Value("${spring.redis.password}")
+    //@Value("${spring.redis.password}")
     private String password;
-    @Value("${spring.redis.port}")
+    //@Value("${spring.redis.port}")
     private int port;
-    @Value("${spring.redis.timeout}")
+    //@Value("${spring.redis.timeout}")
     private int timeout;
 
-    @Value("${spring.cache.type}")
+    //@Value("${spring.cache.type}")
     private String cacheType;
 
-    @Value("${server.session-timeout}")
+    //@Value("${server.session-timeout}")
     private int tomcatTimeout;
     
     @Autowired
