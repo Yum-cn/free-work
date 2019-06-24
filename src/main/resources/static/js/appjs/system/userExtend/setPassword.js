@@ -13,7 +13,9 @@ $.validator.setDefaults({
 $("#pwd_save").click(function() {
 
 	var tag = tempValidate();
-	if ($("#modifyPwd").valid() && tag) {
+	debugger;
+	if ($("#modifyPwd").valid() && tag && tempValidatePassword()) {
+		
 		$.ajax({
 			cache : true,
 			type : "POST",
@@ -63,6 +65,18 @@ function tempValidate() {
 	}
 }
 
+function tempValidatePassword() {
+
+	 var pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,12}');
+	 var password = $("#pwdNew").val();
+	 if (!pwdRegex.test(password)) {
+	     alert("您的密码复杂度太低:密码中必须包含字母、数字、特殊字符,长度8-12位!");
+	     return false;
+	 }else{
+		 return true;
+	 }
+}
+
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#modifyPwd").validate({
@@ -72,11 +86,13 @@ function validateRule() {
 			},
 			pwdNew : {
 				required : true,
-				minlength : 6
+				minlength : 8,
+				maxlength : 12
 			},
 			confirm_password : {
 				required : true,
-				minlength : 6,
+				minlength : 8,
+				maxlength : 12,
 				equalTo : "#pwdNew"
 			},
 			expiredType : {
@@ -90,11 +106,11 @@ function validateRule() {
 			},
 			pwdNew : {
 				required : icon + "新密码不能为空",
-				minlength : "*密码不能小于3个字符"
+				minlength : "*密码不能小于8个字符"
 			},
 			confirm_password : {
 				required : icon + "确认密码不能为空",
-				minlength : "*密码不能小于3个字符",
+				minlength : "*密码不能小于8个字符",
 				equalTo : "*请再次输入相同的值"
 			},
 			expiredType : {

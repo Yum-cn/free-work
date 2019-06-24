@@ -60,29 +60,47 @@
 			}
 		});
 		function update() {
-			$.ajax({
-				cache : true,
-				type : "POST",
-				url : "/sys/user/adminResetPwd",
-				data : $('#signupForm').serialize(),// 你的formid
-				async : false,
-				error : function(request) {
-					parent.layer.msg("系统错误，联系管理员");
-				},
-				success : function(data) {
-					if (data.code == 0) {
-						parent.layer.msg(data.msg);
-						parent.reLoad();
-						var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-						parent.layer.close(index);
+			
+			
+			if (tempValidatePassword()) {
+		        
+				$.ajax({
+	                cache : true,
+	                type : "POST",
+	                url : "/sys/user/adminResetPwd",
+	                data : $('#signupForm').serialize(),// 你的formid
+	                async : false,
+	                error : function(request) {
+	                    parent.layer.msg("系统错误，联系管理员");
+	                },
+	                success : function(data) {
+	                    if (data.code == 0) {
+	                        parent.layer.msg(data.msg);
+	                        parent.reLoad();
+	                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	                        parent.layer.close(index);
 
-					} else {
-						parent.layer.msg(data.msg);
-					}
+	                    } else {
+	                        parent.layer.msg(data.msg);
+	                    }
 
-				}
-			});
+	                }
+	            });
+		    }
 
+		}
+		
+
+		function tempValidatePassword() {
+
+		     var pwdRegex = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,12}');
+		     var password = $("#password").val();
+		     if (!pwdRegex.test(password)) {
+		         alert("您的密码复杂度太低:密码中必须包含字母、数字、特殊字符,长度8-12位!");
+		         return false;
+		     }else{
+		         return true;
+		     }
 		}
 
 		function validateRule() {
@@ -98,7 +116,7 @@
 				messages : {
 					password : {
 						required : icon + "请输入您的密码",
-						minlength : icon + "密码必须6个字符以上"
+						minlength : icon + "密码必须6个字符以上1111111111"
 					}
 				}
 			})
