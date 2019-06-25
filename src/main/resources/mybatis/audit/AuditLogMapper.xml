@@ -4,13 +4,13 @@
 <mapper namespace="com.anhuay.audit.dao.AuditLogDao">
 
 	<select id="get" resultType="com.anhuay.audit.domain.AuditLogDO">
-		select `logid`,`os_ip`,`os_id`,`info`,`details`,`result`,`entry_time`,`level`,`type`,`be_type`,`log_type`,`notes`,`create_by`,`create_time`,`update_by`,`update_time` from cli_log where logid = #{value}
+		select `id`,`os_ip`,`os_id`,`info`,`details`,`result`,`entry_time`,`level`,`type`,`be_type`,`log_type`,`notes`,`create_by`,`create_time`,`update_by`,`update_time` from cli_log where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.audit.domain.AuditLogDO">
-		select `logid`,`os_ip`,`os_id`,`info`,`details`,`result`,`entry_time`,`level`,`type`,`be_type`,`log_type`,`notes`,`create_by`,`create_time`,`update_by`,`update_time` from cli_log
+		select `id`,`os_ip`,`os_id`,`info`,`details`,`result`,`entry_time`,`level`,`type`,`be_type`,`log_type`,`notes`,`create_by`,`create_time`,`update_by`,`update_time` from cli_log
         <where>  
-		  		  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
 		  		  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
 		  		  <if test="info != null and info != ''"> and info = #{info} </if>
@@ -26,7 +26,7 @@
 		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
 		  		  <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-		  		  <if test="logQueryId != null and logQueryId != ''"> and logid > #{logQueryId} </if>
+		  		  <if test="logQueryId != null and logQueryId != ''"> and id > #{logQueryId} </if>
 		  		  
 		</where>
         <choose>
@@ -34,7 +34,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by logid desc
+                order by id desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -48,7 +48,7 @@
  	<select id="count" resultType="int">
 		select count(*) from cli_log
 		 <where>  
-		  		  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
 		  		  <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
 		  		  <if test="info != null and info != ''"> and info = #{info} </if>
@@ -67,7 +67,7 @@
 		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.anhuay.audit.domain.AuditLogDO" useGeneratedKeys="true" keyProperty="logid">
+	<insert id="save" parameterType="com.anhuay.audit.domain.AuditLogDO" useGeneratedKeys="true" keyProperty="id">
 		insert into cli_log
 		(
 			`os_ip`, 
@@ -125,38 +125,38 @@
 			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>
-		where logid = #{logid}
+		where id = #{id}
 	</update>
 	
 	<update id="updateStatus">
-        update cli_log set status = 0 where logid = #{value}
+        update cli_log set status = 0 where id = #{value}
     </update>
 
     <update id="batchUpdateStatus">
-        update cli_log set status = 0 where logid in
-        <foreach item="logid" collection="array" open="(" separator="," close=")">
-            #{logid}
+        update cli_log set status = 0 where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </update>
 	
 	<delete id="remove">
-		delete from cli_log where logid = #{value}
+		delete from cli_log where id = #{value}
 	</delete>
 	
 	<delete id="batchRemove">
-		delete from cli_log where logid in 
-		<foreach item="logid" collection="array" open="(" separator="," close=")">
-			#{logid}
+		delete from cli_log where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
 		</foreach>
 	</delete>
 	
 	<select id="listAlarm" resultType="com.anhuay.audit.domain.AuditAlarmLogVO">
-        select t.`logid`,t.`os_ip`,t.`os_id`,t.`info`,t.`details`,t.`result`,t.`entry_time`,t.`level`,t.`type`,t.`be_type`,t.`log_type`,t.`notes`,t.`create_by`,t.`create_time`,t.`update_by`,t.`update_time`
-        ,oi.dept_name,oi.person_liable_name,oi.os_name
+        select t.`id`,t.`os_ip`,t.`os_id`,t.`info`,t.`details`,t.`result`,t.`entry_time`,t.`level`,t.`type`,t.`be_type`,t.`log_type`,t.`notes`,t.`create_by`,t.`create_time`,t.`update_by`,t.`update_time`
+        ,oi.dept_name,oi.person_liable_name,oi.os_name,t.node_id,t.log_id,t.program
          from cli_log t
          LEFT JOIN ahy_os_info oi on oi.os_ip=t.os_ip
         <where>  
-                  <if test="logid != null and logid != ''"> and t.logid = #{logid} </if>
+                  <if test="id != null and id != ''"> and t.id = #{id} </if>
                   <if test="osIp != null and osIp != ''"> and t.os_ip = #{osIp} </if>
                   <if test="osId != null and osId != ''"> and t.os_id = #{osId} </if>
                   <if test="info != null and info != ''"> and t.info = #{info} </if>
@@ -179,7 +179,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by logid desc
+                order by id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
@@ -190,7 +190,7 @@
     <select id="countAlarm" resultType="int">
         select count(*)  from cli_log t LEFT JOIN ahy_os_info oi on oi.os_ip=t.os_ip
          <where>  
-                  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+                  <if test="id != null and id != ''"> and id = #{id} </if>
                   <if test="osIp != null and osIp != ''"> and t.os_ip = #{osIp} </if>
                   <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
                   <if test="info != null and info != ''"> and info = #{info} </if>
@@ -211,9 +211,9 @@
     </select>
     
     <select id="listLog" resultType="com.anhuay.audit.domain.AuditLogDO">
-        select `logid`,`be_type`,`log_type` from cli_log
+        select `id`,`be_type`,`log_type` from cli_log
         <where>  
-                  <if test="logid != null and logid != ''"> and logid = #{logid} </if>
+                  <if test="id != null and id != ''"> and id = #{id} </if>
                   <if test="osIp != null and osIp != ''"> and os_ip = #{osIp} </if>
                   <if test="osId != null and osId != ''"> and os_id = #{osId} </if>
                   <if test="info != null and info != ''"> and info = #{info} </if>
@@ -229,7 +229,7 @@
                   <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
                   <if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
                   <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
-                  <if test="logQueryId != null and logQueryId != ''"> and logid > #{logQueryId} </if>
+                  <if test="logQueryId != null and logQueryId != ''"> and id > #{logQueryId} </if>
                   
         </where>
         <choose>
@@ -237,7 +237,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by logid desc
+                order by id desc
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">

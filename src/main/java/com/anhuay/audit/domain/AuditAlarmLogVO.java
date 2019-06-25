@@ -16,7 +16,7 @@ public class AuditAlarmLogVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//日志id
-	private Long logid;
+	private Long id;
 	//客户端ip地址
 	private String osIp;
 	//预留与系统主机ID对应
@@ -54,20 +54,14 @@ public class AuditAlarmLogVO implements Serializable {
 	//主机名称
 	private String osName;
 	
+
+	private String nodeId;//主体id
+	
+	private String logId;//日志id
+	
+	private String program;//部件
 	
 
-	/**
-	 * 设置：日志id
-	 */
-	public void setLogid(Long logid) {
-		this.logid = logid;
-	}
-	/**
-	 * 获取：日志id
-	 */
-	public Long getLogid() {
-		return logid;
-	}
 	/**
 	 * 设置：客户端ip地址
 	 */
@@ -265,6 +259,30 @@ public class AuditAlarmLogVO implements Serializable {
 	}
 	public void setOsName(String osName) {
 		this.osName = osName;
+	}
+	public String getNodeId() {
+		return nodeId;
+	}
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
+	}
+	public String getProgram() {
+		return program;
+	}
+	public void setProgram(String program) {
+		this.program = program;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getLogId() {
+		return logId;
+	}
+	public void setLogId(String logId) {
+		this.logId = logId;
 	}
 	
 }

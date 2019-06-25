@@ -7,11 +7,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -37,8 +40,10 @@ import com.anhuay.common.utils.R;
 import com.anhuay.common.utils.ShiroUtils;
 import com.anhuay.system.domain.MenuDO;
 import com.anhuay.system.domain.UserExtendDO;
+import com.anhuay.system.domain.UserIpDO;
 import com.anhuay.system.service.MenuService;
 import com.anhuay.system.service.UserExtendService;
+import com.anhuay.system.service.UserIpService;
 import com.common.constant.CommonEnum;
 import com.common.util.Aes;
 import com.common.util.BaseResult;
@@ -58,6 +63,8 @@ public class LoginController extends BaseController {
 	private UserExtendService userExtendService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
+	@Autowired
+	UserIpService userIpService;
 
 	@GetMapping({ "/", "" })
 	String welcome(Model model) {
@@ -93,11 +100,33 @@ public class LoginController extends BaseController {
 		return "login";
 	}
 
+	ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+	
 	@Log("登录")
 	@PostMapping("/login")
 	@ResponseBody
 	Object ajaxLogin(String username, String password, HttpServletRequest request) {
 
+		final String ip = IPUtils.getIpAddr(request);
+		Map<String,Object> queryMap = new HashMap<String,Object>();
+    	queryMap.put("visitorIp", ip);
+    	List<UserIpDO> list = userIpService.list(queryMap);
+    	
+    	UserIpDO userIpDo = null;
+    	if(CollectionUtils.isNotEmpty(list)){
+    		
+    		userIpDo = list.get(0);
+    		
+    		long lockTime = NumberUtils.toLong(String.valueOf(userIpDo.getLockTime()));
+    		
+    		long currentTime = System.currentTimeMillis()/1000;
+    		
+    		if(currentTime<=lockTime){
+    			return R.error("用户或密码错误次数过多，账号锁定30分钟，请稍后重试！");
+    		}
+    	}
+		
+		
 		username = Aes.aesDecrypt(username);
 		password = Aes.aesDecrypt(password);
 		/*try {
@@ -119,6 +148,7 @@ public class LoginController extends BaseController {
 		password = MD5Utils.encrypt(username, password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		Subject subject = SecurityUtils.getSubject();
+		
 		try {
 			subject.login(token);
 
@@ -142,9 +172,49 @@ public class LoginController extends BaseController {
 			if (result.getCode() != CommonEnum.CODE.SUCCESS.code) {// 失败
 				return result;
 			}
-
+			
+			if(userIpDo != null){
+				userIpDo.setUpdateTime(System.currentTimeMillis()/1000);
+				userIpDo.setErrorCount(0);
+				userIpDo.setLockTime(0L);
+				userIpService.update(userIpDo);
+			}
+			
 			return BaseResultHelper.success();
 		} catch (AuthenticationException e) {
+			
+            singleThreadExecutor.execute(new Runnable() {
+                public void run() {
+                	
+                	Map<String,Object> queryMap = new HashMap<String,Object>();
+                	queryMap.put("visitorIp", ip);
+                	List<UserIpDO> list = userIpService.list(queryMap);
+                	
+                	UserIpDO userIpDo = null;
+                	if(CollectionUtils.isEmpty(list)){
+                		
+                		userIpDo = new UserIpDO();
+                		userIpDo.setVisitorIp(ip);
+                    	userIpDo.setErrorCount(1);
+                    	userIpDo.setStatus(CommonEnum.STATUS.ONE.value);
+                    	userIpDo.setCreateTime(System.currentTimeMillis()/1000);
+                    	userIpService.save(userIpDo);
+                	}else{
+                		
+                		userIpDo = list.get(0);
+                		int count = userIpDo.getErrorCount()+1;
+                		userIpDo.setErrorCount(count);
+                		userIpDo.setUpdateTime(System.currentTimeMillis()/1000);
+                		
+                		long currentTime = System.currentTimeMillis()/1000;
+                		if(count == 3){
+                			userIpDo.setLockTime(currentTime+60*30);
+                		}
+                		userIpService.update(userIpDo);
+                	}
+                }
+            });
+			
 			return R.error("用户或密码错误");
 		}
 	}

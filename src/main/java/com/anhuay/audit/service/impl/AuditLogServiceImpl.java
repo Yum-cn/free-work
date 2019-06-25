@@ -1,15 +1,13 @@
 package com.anhuay.audit.service.impl;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.anhuay.audit.dao.AuditLogDao;
 import com.anhuay.audit.domain.AuditAlarmLogVO;
@@ -86,7 +84,7 @@ public class AuditLogServiceImpl implements AuditLogService {
 	@Override
 	public BaseResult<Object> exportList(Map<String, Object> map) {
 
-		List<AuditLogDO> queryList = logDao.list(map);
+		List<AuditAlarmLogVO> queryList = logDao.listAlarm(map);
 		;
 
 		if (CollectionUtils.isEmpty(queryList)) {
@@ -97,18 +95,33 @@ public class AuditLogServiceImpl implements AuditLogService {
 		for (int i = 0; i < queryList.size(); i++) {
 			Map<String, Object> refactorMap = new HashMap<String, Object>();
 
-			AuditLogDO tempBean = queryList.get(i);
+			AuditAlarmLogVO tempBean = queryList.get(i);
 			if (tempBean == null) {
 				continue;
 			}
+			
+			//select t.`logid`,t.`os_ip`,t.`os_id`,t.`info`,t.`details`,t.`result`,t.`entry_time`,
+			//t.`level`,t.`type`,t.`be_type`,t.`log_type`,t.`notes`,t.`create_by`,t.`create_time`,t.`update_by`,t.`update_time`
+	        //,oi.dept_name,oi.person_liable_name,oi.os_name,t.node_id,t.log_id as log_id,t.program
+			
 			refactorMap.put("osIp", tempBean.getOsIp());
 			refactorMap.put("info", tempBean.getInfo());
 			refactorMap.put("details", tempBean.getDetails());
 			refactorMap.put("entryTime", DateUtils.format(tempBean.getEntryTime()));
+			refactorMap.put("result", getResult(tempBean.getResult()));
 			refactorMap.put("level", getLevel(tempBean.getLevel()));
 			refactorMap.put("type",  getType(tempBean.getType()));
 			refactorMap.put("beType", getBeType(tempBean.getBeType()));
 			refactorMap.put("logType", getLogType(tempBean.getLogType()));
+			
+			refactorMap.put("id", tempBean.getId());
+			refactorMap.put("logId", tempBean.getLogId());
+			refactorMap.put("nodeId", tempBean.getNodeId());
+			refactorMap.put("computerName", tempBean.getOsName());
+			refactorMap.put("userName", tempBean.getPersonLiableName());
+			refactorMap.put("department", tempBean.getDeptName());
+			refactorMap.put("program", tempBean.getProgram());
+			refactorMap.put("productType", getLogType(tempBean.getLogType()));
 
 			/*
 			 * //日志id private Long logid; //客户端ip地址 private String osIp;
@@ -194,6 +207,20 @@ public class AuditLogServiceImpl implements AuditLogService {
 			break;
 		case "3":
 			desc = "违规行为";
+			break;
+			
+		}
+		return desc;
+	}
+	
+	public static String getResult(String value) {
+		String desc = "";
+		switch (value) {
+		case "1":
+			desc = "成功";
+			break;
+		case "0":
+			desc = "失败";
 			break;
 			
 		}

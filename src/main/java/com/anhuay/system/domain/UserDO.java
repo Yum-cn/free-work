@@ -50,10 +50,6 @@ public class UserDO implements Serializable {
     private String city;
     //所在地区
     private String district;
-    //锁定时间
-    private Long lockTime;
-    //锁定次数限制
-    private Integer lockCount;
 
     public Long getUserId() {
         return userId;
@@ -222,22 +218,6 @@ public class UserDO implements Serializable {
     public void setDistrict(String district) {
         this.district = district;
     }
-
-    public Long getLockTime() {
-		return lockTime;
-	}
-
-	public void setLockTime(Long lockTime) {
-		this.lockTime = lockTime;
-	}
-
-	public Integer getLockCount() {
-		return lockCount;
-	}
-
-	public void setLockCount(Integer lockCount) {
-		this.lockCount = lockCount;
-	}
 
 	@Override
     public String toString() {

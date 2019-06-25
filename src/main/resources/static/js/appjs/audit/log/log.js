@@ -50,7 +50,7 @@ function load(type) {
 									checkbox : true
 								},
 																{
-									field : 'logid', 
+									field : 'id', 
 									title : '日志id' 
 								},
 																{
@@ -190,6 +190,16 @@ function exportExcel() {
                 + value+"&logType="+type;
 
 }
+function exportXml() {
+	
+	var value = $('#searchName').val();
+	if(!value){
+		value="";
+	}
+	window.location.href = prefix + '/exportXml?details='
+	+ value+"&logType="+type;
+	
+}
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
@@ -198,7 +208,7 @@ function remove(id) {
 			url : prefix+"/remove",
 			type : "post",
 			data : {
-				'logid' : id
+				'id' : id
 			},
 			success : function(r) {
 				if (r.code==0) {

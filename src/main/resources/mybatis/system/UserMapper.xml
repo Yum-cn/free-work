@@ -4,11 +4,11 @@
 <mapper namespace="com.anhuay.system.dao.UserDao">
 
 	<select id="get" resultType="com.anhuay.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,`lock_time`,`lock_count` from sys_user where user_id = #{value}
+		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user where user_id = #{value}
 	</select>
 
 	<select id="list" resultType="com.anhuay.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`,`lock_time`,`lock_count` from sys_user
+		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user
         <where>  
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
@@ -29,8 +29,6 @@
 		  		  <if test="province != null and province != ''"> and province = #{province} </if>
 		  		  <if test="city != null and city != ''"> and city = #{city} </if>
 		  		  <if test="district != null and district != ''"> and district = #{district} </if>
-		  		  <if test="lockTime != null and lockTime != ''"> and lock_time = #{lockTime} </if>
-		  		  <if test="lockCount != null and lockCount != ''"> and lock_count = #{lockCount} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -67,8 +65,6 @@
 		  		  <if test="province != null and province != ''"> and province = #{province} </if>
 		  		  <if test="city != null and city != ''"> and city = #{city} </if>
 		  		  <if test="district != null and district != ''"> and district = #{district} </if>
-		  		  <if test="lockTime != null and lockTime != ''"> and lock_time = #{lockTime} </if>
-		  		  <if test="lockCount != null and lockCount != ''"> and lock_count = #{lockCount} </if>
 		  		</where>
 	</select>
 	 
@@ -92,9 +88,7 @@
 			`hobby`, 
 			`province`, 
 			`city`, 
-			`district`, 
-			`lock_time`, 
-			`lock_count`
+			`district`
 		)
 		values
 		(
@@ -115,9 +109,7 @@
 			#{hobby}, 
 			#{province}, 
 			#{city}, 
-			#{district}, 
-			#{lockTime}, 
-			#{lockCount}
+			#{district}
 		)
 	</insert>
 	 
@@ -142,8 +134,6 @@
 			<if test="province != null">`province` = #{province}, </if>
 			<if test="city != null">`city` = #{city}, </if>
 			<if test="district != null">`district` = #{district}</if>
-			<if test="lockTime != null">`lock_time` = #{lockTime}</if>
-			<if test="lockCount != null">`lock_count` = #{lockCount}</if>
 		</set>
 		where user_id = #{userId}
 	</update>

@@ -71,7 +71,7 @@ public class LogNotifyJob implements Job{
 				for (int i = 0; i < logList.size(); i++) {
 					AuditLogDO bean= logList.get(i);
 					if(i==0){
-						maxId=bean.getLogid();
+						maxId=bean.getId();
 					}
 					
 					//行为类别（3-违规行为，2-异常行为，1-一般行为）

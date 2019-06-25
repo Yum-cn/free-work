@@ -149,6 +149,10 @@ body.signin {
             url: ctx+"login",
             data: $('#signupForm').serialize(),
             success: function (r) {
+            	
+            	$("#username").val(decrypt($("#username").val()));
+                $("#password").val(decrypt($("#password").val()));
+            	
                 console.log(r);
                 debugger;
                 if (r.code == 1) {
