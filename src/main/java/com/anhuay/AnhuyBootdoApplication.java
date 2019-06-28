@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 @EnableCaching
 //@PropertySource(value={"classpath:config/datasource.properties"},ignoreResourceNotFound=true)
 //@ConfigurationProperties(value="file:config/datasource.properties")
-public class BootdoApplication {
+public class AnhuyBootdoApplication {
 
 	/**
 	 * 防止json时出现错误FAIL_ON_EMPTY_BEANS
@@ -72,7 +72,7 @@ public class BootdoApplication {
     }*/
 
 	public static void main(String[] args) {
-		SpringApplication.run(BootdoApplication.class, args);
+		SpringApplication.run(AnhuyBootdoApplication.class, args);
 		System.out.println(
 				"ヾ(◍°∇°◍)ﾉﾞ    anhuay启动成功      ヾ(◍°∇°◍)ﾉﾞ\n" + " ______                    _   ______            \n"
 						+ "|_   _ \\                  / |_|_   _ `.          \n"

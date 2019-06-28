@@ -90,7 +90,7 @@ function load() {
                     {
                         field: 'gmtCreate',
                         title: '创建时间'
-                    },
+                    }/*,
                     {
                         title: '操作',
                         field: 'id',
@@ -107,7 +107,7 @@ function load() {
                                 + '\')"><i class="fa fa-key"></i></a> ';
                             return d;
                         }
-                    }]
+                    }*/]
             });
 }
 

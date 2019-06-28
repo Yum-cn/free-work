@@ -134,7 +134,7 @@
 	<select id="countDTO" resultType="int">
 		select count(*)
 		from
-		oa_notify_record r right JOIN oa_notify n on r.notify_id
+		oa_notify_record r left JOIN oa_notify n on r.notify_id
 		= n.id where
 		r.user_id =#{userId} and
 		r.is_read = #{isRead}
@@ -143,7 +143,7 @@
 	<select id="listDTO" resultType="com.anhuay.oa.domain.NotifyDTO">
 		select DISTINCT
 		n.id ,`type`,`title`,`content`,`files`,r.is_read,`status`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
-		from oa_notify_record r right JOIN oa_notify n on r.notify_id = n.id
+		from oa_notify_record r left JOIN oa_notify n on r.notify_id = n.id
 		<where>
 			<if test="id != null and id != ''"> and r.id = #{id} </if>
 			<if test="notifyId != null and notifyId != ''"> and r.notify_id = #{notifyId} </if>

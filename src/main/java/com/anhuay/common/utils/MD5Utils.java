@@ -22,7 +22,7 @@ public class MD5Utils {
 	}
 	public static void main(String[] args) {
 		
-		System.out.println(MD5Utils.encrypt("admin", "hantrend257769"));
+		System.out.println(MD5Utils.encrypt("secadm", "123456"));
 	}
 
 }

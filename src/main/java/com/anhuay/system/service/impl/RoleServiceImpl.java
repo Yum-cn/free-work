@@ -73,7 +73,12 @@ public class RoleServiceImpl implements RoleService {
         }
         roleMenuMapper.removeByRoleId(roleId);
         if (rms.size() > 0) {
-            roleMenuMapper.batchSave(rms);
+        	
+        	for (int i = 0; i < rms.size(); i++) {
+        		roleMenuMapper.save(rms.get(i));
+			}
+        	
+            //roleMenuMapper.batchSave(rms);
         }
         return count;
     }
@@ -107,7 +112,12 @@ public class RoleServiceImpl implements RoleService {
             rms.add(rmDo);
         }
         if (rms.size() > 0) {
-            roleMenuMapper.batchSave(rms);
+        	
+        	for (int i = 0; i < rms.size(); i++) {
+        		roleMenuMapper.save(rms.get(i));
+			}
+        	
+            //roleMenuMapper.batchSave(rms);
         }
         return r;
     }

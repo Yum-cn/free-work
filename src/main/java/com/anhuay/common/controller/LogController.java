@@ -23,7 +23,7 @@ import com.anhuay.common.utils.R;
 
 @RequestMapping("/common/log")
 @Controller
-public class LogController {
+public class LogController  extends BaseController{
 	@Autowired
 	LogService logService;
 	String prefix = "common/log";
@@ -36,7 +36,21 @@ public class LogController {
 	@ResponseBody
 	@GetMapping("/list")
 	PageDO<LogDO> list(@RequestParam Map<String, Object> params) {
+		
+		if(getUserId()==6){
+			params.put("userIdArray", new Long[]{11L,12L});
+		}else if(getUserId()==11){
+			params.put("userIdArray", new Long[]{6L,11L,12L});
+		}else if(getUserId()==12){
+			params.put("userIdArray", new Long[]{12L});
+		}
+		
 		Query query = new Query(params);
+		
+		/*6	secadm	安全管理员
+		11	auditdam	审计管理员
+		12	root	系统管理员*/
+		
 		PageDO<LogDO> page = logService.queryList(query);
 		return page;
 	}

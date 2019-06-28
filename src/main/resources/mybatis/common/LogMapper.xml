@@ -19,6 +19,13 @@
 		  		  <if test="params != null and params != ''"> and params = #{params} </if>
 		  		  <if test="ip != null and ip != ''"> and ip = #{ip} </if>
 		  		  <if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+		  		  <if test="userIdArray != null">
+                    and user_id in
+                    <foreach collection="userIdArray" index="index" item="item"
+                        open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                 </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -45,6 +52,13 @@
 		  		  <if test="params != null and params != ''"> and params = #{params} </if>
 		  		  <if test="ip != null and ip != ''"> and ip = #{ip} </if>
 		  		  <if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+		  		  <if test="userIdArray != null">
+                    and user_id in
+                    <foreach collection="userIdArray" index="index" item="item"
+                        open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                  </if>
 		  		</where>
 	</select>
 	 

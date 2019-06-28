@@ -818,12 +818,16 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 		String processSql = "INSERT INTO `cfg_process` (`id`,`strategy_templet_id`, `is_service`, `is_black`, `black_short_name`, `is_white`"
 				+ ", `white_short_name`,`alarm_level`, `send_time`, `is_used`, `enable_flag`, `create_by`"
 				+ ", `create_time`, `update_by`, `update_time`)  VALUES "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
+		/*String processSql = "INSERT INTO `cfg_process` (`id`,`strategy_templet_id`, `is_service`, `is_black`, `black_short_name`, `is_white`"
+				+ ", `white_short_name`,`alarm_level`, `send_time`, `is_used`, `enable_flag`, `create_by`"
+				+ ", `create_time`, `update_by`, `update_time`)  VALUES "
 				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
 				+ " ON DUPLICATE KEY UPDATE is_black=VALUES(is_black),black_short_name=VALUES(black_short_name)"
 				+ ",is_white=VALUES(is_white),white_short_name=VALUES(white_short_name)"
 				+ ",alarm_level=VALUES(alarm_level),send_time=VALUES(send_time)"
 				+ ",is_used=VALUES(is_used),enable_flag=VALUES(enable_flag),update_by=VALUES(update_by)"
-				+ " ,update_time=VALUES(update_time) ";
+				+ " ,update_time=VALUES(update_time) ";*/
 
 		UserDO user = ShiroUtils.getUser();
 		// List<Object[]> listObject = new ArrayList<Object[]>();
@@ -837,10 +841,12 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		boolean insertTag = false;
 		if (queryMap != null && NumberUtils.toLong(String.valueOf(queryMap.get("id"))) > 0) {
 			id = NumberUtils.toLong(String.valueOf(queryMap.get("id")));
 		} else {
 			id = idWorker.nextId();
+			insertTag = true;
 		}
 
 		objectArray[0] = id;
@@ -873,7 +879,29 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 		objectArray[12] = sendTime;
 		objectArray[13] = user != null ? user.getName() : null;
 		objectArray[14] = sendTime;
-		jdbcTemplate.update(processSql, objectArray);
+		
+		
+		Object[] updateArray = new Object[11];
+		updateArray[0]=objectArray[3];
+		updateArray[1]=objectArray[4];
+		updateArray[2]=objectArray[5];
+		updateArray[3]=objectArray[6];
+		updateArray[4]=objectArray[7];
+		updateArray[5]=objectArray[8];
+		updateArray[6]=objectArray[9];
+		updateArray[7]=objectArray[10];
+		updateArray[8]=objectArray[13];
+		updateArray[9]=objectArray[14];
+		updateArray[10]=objectArray[0];
+		String updateProcessSql = "update `cfg_process` set is_black=?,black_short_name=?,is_white=?,white_short_name=?,"
+				+ "alarm_level=?,send_time=?,is_used=?,enable_flag=?,update_by=?,update_time=? where id= ? ";
+		
+		if(insertTag){
+			jdbcTemplate.update(processSql, objectArray);
+		}else{
+			jdbcTemplate.update(updateProcessSql, updateArray);
+		}
+		
 
 	}
 
@@ -885,6 +913,15 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 	public void saveCofigProcessForServer(long strategyTempletId, String blackRules, String whiteRules,
 			String netAddress, int alarmLevel, int isUsed) {
 
+		/*String processSql = "INSERT INTO `cfg_process` (`id`,`strategy_templet_id`, `is_service`, `is_black`, `black_short_name`, `is_white`"
+				+ ", `white_short_name`, `net_status`,`net_address`,`alarm_level`, `send_time`, `is_used`, `enable_flag`, `create_by`"
+				+ ", `create_time`, `update_by`, `update_time`)  VALUES "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
+				+ " ON DUPLICATE KEY UPDATE is_black=VALUES(is_black),black_short_name=VALUES(black_short_name)"
+				+ ",is_white=VALUES(is_white),white_short_name=VALUES(white_short_name)"
+				+ ",net_status=VALUES(net_status),net_address=VALUES(net_address),alarm_level=VALUES(alarm_level),send_time=VALUES(send_time)"
+				+ ",is_used=VALUES(is_used),enable_flag=VALUES(enable_flag),update_by=VALUES(update_by)"
+				+ " ,update_time=VALUES(update_time) ";*/
 		String processSql = "INSERT INTO `cfg_process` (`id`,`strategy_templet_id`, `is_service`, `is_black`, `black_short_name`, `is_white`"
 				+ ", `white_short_name`, `net_status`,`net_address`,`alarm_level`, `send_time`, `is_used`, `enable_flag`, `create_by`"
 				+ ", `create_time`, `update_by`, `update_time`)  VALUES "
@@ -907,10 +944,13 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
+		
+		boolean insertTag = false;
 		if (queryMap != null && NumberUtils.toLong(String.valueOf(queryMap.get("id"))) > 0) {
 			id = NumberUtils.toLong(String.valueOf(queryMap.get("id")));
 		} else {
 			id = idWorker.nextId();
+			insertTag=true;
 		}
 
 		objectArray[0] = id;
@@ -950,8 +990,36 @@ public class StrategyTempletManagerImpl extends BaseManagerImpl implements Strat
 		objectArray[14] = sendTime;
 		objectArray[15] = user != null ? user.getName() : null;
 		objectArray[16] = sendTime;
+		
+		
+		
+		Object[] updateArray = new Object[13];
+		updateArray[0]=objectArray[3];
+		updateArray[1]=objectArray[4];
+		updateArray[2]=objectArray[5];
+		updateArray[3]=objectArray[6];
+		updateArray[4]=objectArray[7];
+		updateArray[5]=objectArray[8];
+		
+		updateArray[6]=objectArray[9];
+		updateArray[7]=objectArray[10];
+		updateArray[8]=objectArray[11];
+		updateArray[9]=objectArray[12];
+		
+		updateArray[10]=objectArray[15];
+		updateArray[11]=objectArray[16];
+		updateArray[12]=objectArray[0];
+		String updateProcessSql = "update `cfg_process` set is_black=?,black_short_name=?,is_white=?,white_short_name=?,net_status=?,net_address=?,"
+				+ "alarm_level=?,send_time=?,is_used=?,enable_flag=?,update_by=?,update_time=? where id= ? ";
+		
+		if(insertTag){
+			jdbcTemplate.update(processSql, objectArray);
+		}else{
+			jdbcTemplate.update(updateProcessSql, updateArray);
+		}
+		
 
-		jdbcTemplate.update(processSql, objectArray);
+		//jdbcTemplate.update(processSql, objectArray);
 
 	}
 
