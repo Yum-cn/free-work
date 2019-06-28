@@ -38,11 +38,11 @@ public class LogController  extends BaseController{
 	PageDO<LogDO> list(@RequestParam Map<String, Object> params) {
 		
 		if(getUserId()==6){
-			params.put("userIdArray", new Long[]{11L,12L});
+			params.put("userIdArray", new Long[]{99999999999999L});
 		}else if(getUserId()==11){
 			params.put("userIdArray", new Long[]{6L,11L,12L});
 		}else if(getUserId()==12){
-			params.put("userIdArray", new Long[]{12L});
+			params.put("userIdArray", new Long[]{9999999999999L});
 		}
 		
 		Query query = new Query(params);

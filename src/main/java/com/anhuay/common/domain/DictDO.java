@@ -27,7 +27,7 @@ public class DictDO implements Serializable {
 	//描述
 	private String description;
 	//排序（升序）
-	private BigDecimal sort;
+	private Integer sort;
 	//父级编号
 	private Long parentId;
 	//创建者
@@ -106,13 +106,13 @@ public class DictDO implements Serializable {
 	/**
 	 * 设置：排序（升序）
 	 */
-	public void setSort(BigDecimal sort) {
+	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
 	/**
 	 * 获取：排序（升序）
 	 */
-	public BigDecimal getSort() {
+	public Integer getSort() {
 		return sort;
 	}
 	/**
