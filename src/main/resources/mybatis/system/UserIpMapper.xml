@@ -106,5 +106,9 @@
 			#{id}
 		</foreach>
 	</delete>
+	
+	<update id="unLockAll">
+        update sys_user_ip set error_count = 0,lock_time=0 where 1=1
+    </update>
 
 </mapper>

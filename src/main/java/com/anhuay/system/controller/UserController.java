@@ -1,34 +1,39 @@
 package com.anhuay.system.controller;
 
-import com.anhuay.common.annotation.Log;
-import com.anhuay.common.config.Constant;
-import com.anhuay.common.controller.BaseController;
-import com.anhuay.common.domain.FileDO;
-import com.anhuay.common.domain.Tree;
-import com.anhuay.common.service.DictService;
-import com.anhuay.common.utils.*;
-import com.anhuay.system.domain.DeptDO;
-import com.anhuay.system.domain.RoleDO;
-import com.anhuay.system.domain.UserDO;
-import com.anhuay.system.service.RoleService;
-import com.anhuay.system.service.UserService;
-import com.anhuay.system.vo.UserVO;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
-import org.apache.commons.collections.CollectionUtils;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.anhuay.common.annotation.Log;
+import com.anhuay.common.config.Constant;
+import com.anhuay.common.controller.BaseController;
+import com.anhuay.common.domain.Tree;
+import com.anhuay.common.service.DictService;
+import com.anhuay.common.utils.MD5Utils;
+import com.anhuay.common.utils.PageUtils;
+import com.anhuay.common.utils.Query;
+import com.anhuay.common.utils.R;
+import com.anhuay.system.domain.DeptDO;
+import com.anhuay.system.domain.RoleDO;
+import com.anhuay.system.domain.UserDO;
+import com.anhuay.system.service.RoleService;
+import com.anhuay.system.service.UserIpService;
+import com.anhuay.system.service.UserService;
+import com.anhuay.system.vo.UserVO;
 
 @RequestMapping("/sys/user")
 @Controller
@@ -36,6 +41,8 @@ public class UserController extends BaseController {
 	private String prefix="system/user"  ;
 	@Autowired
 	UserService userService;
+	@Autowired
+	UserIpService userIpService;
 	@Autowired
 	RoleService roleService;
 	@Autowired
@@ -235,5 +242,14 @@ public class UserController extends BaseController {
 		}else {
 			return R.error("更新图像失败！");
 		}
+	}
+	
+	@PostMapping("/unLock")
+	@ResponseBody
+	R unLock() {
+		if (userIpService.unLockAll() > 0) {
+			return R.ok();
+		}
+		return R.error();
 	}
 }

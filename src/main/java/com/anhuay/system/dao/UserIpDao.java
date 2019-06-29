@@ -33,4 +33,6 @@ public interface UserIpDao {
 	int updateStatus(Long id);
 	
 	int batchUpdateStatus(Long[] ids);
+
+	int unLockAll();
 }

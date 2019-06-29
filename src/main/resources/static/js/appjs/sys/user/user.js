@@ -131,6 +131,23 @@ function remove(id) {
 		});
 	})
 }
+function unLock(id) {
+		$.ajax({
+			url : "/sys/user/unLock",
+			type : "post",
+			data : {
+				'id' : id
+			},
+			success : function(r) {
+				if (r.code == 0) {
+					layer.msg(r.msg);
+					reLoad();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+}
 function edit(id) {
 	layer.open({
 		type : 2,

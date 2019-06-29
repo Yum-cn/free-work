@@ -45,7 +45,8 @@ spring:
     driver-class-name: org.sqlite.JDBC
     class: org.sqlite.SQLiteDataSource
 
-    url: jdbc:sqlite:D:/sqllite/zjsj-server-online.db
+    #url: jdbc:sqlite:D:/sqllite/zjsj-server-online.db
+    url: jdbc:sqlite:D:/sqllite/zjsj-server-onlinev2.db
     #url: jdbc:mysql://127.0.0.1:3306/bootdo?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
     username:
     password:

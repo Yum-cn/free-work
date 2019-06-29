@@ -29,6 +29,11 @@
 									class="btn  btn-danger" onclick="batchRemove()">
 									<i class="fa fa-trash hidden" aria-hidden="true"></i>删除
 								</button>
+								<button type="button" class="btn  btn-success" shiro:hasPermission="sys:user:batchUnlock" 
+									onclick="unLock()">
+									<i class="" aria-hidden="true"></i>解除全部锁定
+								</button>
+
 							</div>
 							<div class="columns pull-right">
 								<button class="btn btn-success" onclick="reLoad()">查询</button>

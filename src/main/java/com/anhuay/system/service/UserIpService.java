@@ -31,4 +31,6 @@ public interface UserIpService {
     int updateStatus(Long id);
     
     int batchUpdateStatus(Long[] ids);
+
+	int unLockAll();
 }

@@ -21,8 +21,14 @@ public class MD5Utils {
 		return newPassword;
 	}
 	public static void main(String[] args) {
-		
+		/*secadm	安全管理员
+auditdam	审计管理员
+root	系统管理员
+xingjunhao 最高权限*/
 		System.out.println(MD5Utils.encrypt("secadm", "123456"));
+		System.out.println(MD5Utils.encrypt("auditdam", "123456"));
+		System.out.println(MD5Utils.encrypt("root", "123456"));
+		System.out.println(MD5Utils.encrypt("xingjunhao", "123456"));
 	}
 
 }

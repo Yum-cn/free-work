@@ -62,4 +62,9 @@ public class UserIpServiceImpl implements UserIpService {
     public int batchUpdateStatus(Long[] ids){
         return userIpDao.batchUpdateStatus(ids);
     }
+
+	@Override
+	public int unLockAll() {
+		return userIpDao.unLockAll();
+	}
 }
