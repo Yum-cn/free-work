@@ -35,6 +35,10 @@ function load(type) {
 								limit: params.limit,
 								offset:params.offset,
 								logType:type,
+								startTime:$('#startTime').val(),
+								endTime:$('#endTime').val(),
+								osIp:$('#osIp').val(),
+								type:$('#type').val(),
 								details:$('#searchName').val()
 					           // username:$('#searchName').val()
 							};

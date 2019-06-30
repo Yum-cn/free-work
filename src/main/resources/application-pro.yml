@@ -1,3 +1,11 @@
+#server:
+#  ssl:
+    #    证书路径
+#    key-store: tomcat.key
+#    keyStoreType: JKS
+#    keyAlias: tomcat
+    #    配置密码，就是在生成证书的时候输入的密码
+#    key-store-password: anhuay
 anhuay:  
   uploadPath: /var/uploaded_files/ 
   downloadUrl: http://127.0.0.1:8080/terminal/terminalFile/download/

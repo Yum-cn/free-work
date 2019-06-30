@@ -24,12 +24,39 @@
                                 <i class="" aria-hidden="true"></i>导出Xml
                             </button>
 						</div>
-						<div class="columns pull-right">
+						<!-- <div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="searchName" type="text" class="form-control"
 								placeholder="">
+						</div> -->
+						<div class="columns pull-right nopadding" style="float: right;text-align: right;">
+						<table style="text-align: right;">
+						
+						<tr>
+						<td>
+						  <input id="startTime"  AUTOCOMPLETE="off" class="form-control" type="text" name="startTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'});" placeholder="开始时间" style="width:150px;float: right;margin-right: 5px;"/>
+						</td>
+						<td><input id="endTime"  AUTOCOMPLETE="off" class="form-control" type="text" name="endTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'});" placeholder="结束时间"  style="width:150px;float: right;margin-right: 5px;"/>
+						</td>
+						<td><input id="osIp"  AUTOCOMPLETE="off" class="form-control" type="text" name="osIp" placeholder="主体IP"  style="width:150px;float: right;margin-right: 5px;"/>
+						</td>
+						<td><select data-placeholder="--事件种类--" name="type" style="width:150px;margin-right: 5px;"
+                                        id="type" class="form-control">
+                                        <option value="" >--事件种类--</option>
+                                        <option value="m">管理操作</option>
+                                        <option value="a">用户</option>
+                                        <option value="s">其它</option>
+                                    </select></td>
+                        <td><input id="searchName" type="text" class="form-control" style="width:190px;float: right;margin-right: 5px;"
+                                placeholder="事件内容"></td>
+                                <td><div class="columns pull-right">
+                            &nbsp;&nbsp;<button class="btn btn-success" onclick="reLoad()">查询</button>
+                        </div></td>
+						</table>
+							<input id="industryType" type="hidden" class="form-control" >
+							
 						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">

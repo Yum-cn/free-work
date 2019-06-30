@@ -81,6 +81,12 @@ public class AuditLogController {
 	@GetMapping("/list")
 	@RequiresPermissions("audit:log:log")
 	public PageUtils list(@RequestParam Map<String, Object> params){
+		
+		
+		if(params.get("endTime")!=null && !StringUtils.equals(String.valueOf(params.get("endTime")), "") && !StringUtils.equals(String.valueOf(params.get("endTime")), "null")){
+			
+			params.put("endTime", params.get("endTime")+" 23:59:59");
+		}
 		//查询列表数据
         Query query = new Query(params);
 		List<AuditLogDO> logList = logService.list(query);
