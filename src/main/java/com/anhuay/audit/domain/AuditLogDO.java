@@ -28,7 +28,7 @@ public class AuditLogDO implements Serializable {
 	//事件结果（1-成功，0-失败）
 	private String result;
 	//事件发生时间
-	private Date entryTime;
+	private String entryTime;
 	//风险级别（0-紧急，1-警报，2-关键，3-错误，4-警告，5-通知，6-信息，7-调试）
 	private String level;
 	//事件种类（m-管理操作，a-用户操作，s-其他）
@@ -42,7 +42,7 @@ public class AuditLogDO implements Serializable {
 	//创建者（保留字段）
 	private String createBy;
 	//创建时间（保留字段）
-	private Date createTime;
+	private String createTime;
 	//最后更新者（保留字段）
 	private String updateBy;
 	//最后更新时间（保留字段）
@@ -53,6 +53,9 @@ public class AuditLogDO implements Serializable {
 	private String logId;
 	
 	private String program;
+	//创建时间（保留字段）
+	private String tempCreateTime;
+	private String tempEntryTime;
 
 	
 	/**
@@ -118,13 +121,13 @@ public class AuditLogDO implements Serializable {
 	/**
 	 * 设置：事件发生时间
 	 */
-	public void setEntryTime(Date entryTime) {
+	public void setEntryTime(String entryTime) {
 		this.entryTime = entryTime;
 	}
 	/**
 	 * 获取：事件发生时间
 	 */
-	public Date getEntryTime() {
+	public String getEntryTime() {
 		return entryTime;
 	}
 	/**
@@ -202,13 +205,13 @@ public class AuditLogDO implements Serializable {
 	/**
 	 * 设置：创建时间（保留字段）
 	 */
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 	/**
 	 * 获取：创建时间（保留字段）
 	 */
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 	/**
@@ -259,6 +262,18 @@ public class AuditLogDO implements Serializable {
 	}
 	public void setLogId(String logId) {
 		this.logId = logId;
+	}
+	public String getTempCreateTime() {
+		return tempCreateTime;
+	}
+	public void setTempCreateTime(String tempCreateTime) {
+		this.tempCreateTime = tempCreateTime;
+	}
+	public String getTempEntryTime() {
+		return tempEntryTime;
+	}
+	public void setTempEntryTime(String tempEntryTime) {
+		this.tempEntryTime = tempEntryTime;
 	}
 	
 	

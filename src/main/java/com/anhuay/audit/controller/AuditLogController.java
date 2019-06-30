@@ -84,6 +84,17 @@ public class AuditLogController {
 		//查询列表数据
         Query query = new Query(params);
 		List<AuditLogDO> logList = logService.list(query);
+		if(CollectionUtils.isNotEmpty(logList)){
+			List<AuditLogDO> logListTemp = new ArrayList<AuditLogDO>();
+			for (int i = 0; i < logList.size(); i++) {
+				AuditLogDO tempBean = logList.get(i);
+				//tempBean.setTempCreateTime(DateUtils.format(tempBean.getCreateTime(),"yyyy-MM-dd HH:mm:ss"));
+				//tempBean.setTempEntryTime(DateUtils.format(tempBean.getEntryTime(),"yyyy-MM-dd HH:mm:ss"));
+				logListTemp.add(tempBean);
+				
+			}
+			//logList = logListTemp;
+		}
 		int total = logService.count(query);
 		PageUtils pageUtils = new PageUtils(logList, total);
 		return pageUtils;

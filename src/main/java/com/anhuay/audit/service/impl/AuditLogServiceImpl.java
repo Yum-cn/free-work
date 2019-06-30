@@ -107,7 +107,7 @@ public class AuditLogServiceImpl implements AuditLogService {
 			refactorMap.put("osIp", tempBean.getOsIp());
 			refactorMap.put("info", tempBean.getInfo());
 			refactorMap.put("details", tempBean.getDetails());
-			refactorMap.put("entryTime", DateUtils.format(tempBean.getEntryTime()));
+			refactorMap.put("entryTime", tempBean.getEntryTime());//DateUtils.format(tempBean.getEntryTime())
 			refactorMap.put("result", getResult(tempBean.getResult()));
 			refactorMap.put("level", getLevel(tempBean.getLevel()));
 			refactorMap.put("type",  getType(tempBean.getType()));

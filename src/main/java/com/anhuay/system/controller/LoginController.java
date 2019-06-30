@@ -1,5 +1,7 @@
 package com.anhuay.system.controller;
 
+import java.io.File;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,6 +24,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +45,7 @@ import com.anhuay.system.domain.MenuDO;
 import com.anhuay.system.domain.UserExtendDO;
 import com.anhuay.system.domain.UserIpDO;
 import com.anhuay.system.service.MenuService;
+import com.anhuay.system.service.ServerConfigService;
 import com.anhuay.system.service.UserExtendService;
 import com.anhuay.system.service.UserIpService;
 import com.common.constant.CommonEnum;
@@ -63,6 +67,10 @@ public class LoginController extends BaseController {
 	private UserExtendService userExtendService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private ServerConfigService serverConfigService;
 	@Autowired
 	UserIpService userIpService;
 
@@ -179,6 +187,7 @@ public class LoginController extends BaseController {
 				userIpDo.setLockTime(0L);
 				userIpService.update(userIpDo);
 			}
+			//File file = new File("E:\\全部软件\\软件压缩包\\Windows7_W64_SP1_ent.iso");
 			
 			return BaseResultHelper.success();
 		} catch (AuthenticationException e) {
@@ -214,7 +223,12 @@ public class LoginController extends BaseController {
                 	}
                 }
             });
-			
+            try {
+				//System.out.println(jdbcTemplate.getDataSource().getConnection().getCatalog());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			return R.error("用户或密码错误");
 		}
 	}
@@ -321,6 +335,17 @@ public class LoginController extends BaseController {
 		}
 		return BaseResultHelper.success();
 	}
+	
+	/**
+     * 获取文件长度
+     * @param file
+     */
+    public static void getFileSize1(File file) {
+        if (file.exists() && file.isFile()) {
+            String fileName = file.getName();
+            System.out.println("文件"+fileName+"的大小是："+file.length());
+        }
+    }
 
 	@Log("退出登录")
 	@GetMapping("/logout")

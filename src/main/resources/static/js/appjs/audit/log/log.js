@@ -71,10 +71,7 @@ function load(type) {
 								},
 																{
 									field : 'entryTime', 
-									title : '事件发生时间' ,
-									formatter : function(value, row, index) {
-										return formatTimeStamp(value);
-									}
+									title : '事件发生时间'
 								},
 																{
 									field : 'level', 
@@ -133,10 +130,7 @@ function load(type) {
 								},
 																{
 									field : 'createTime', 
-									title : '创建时间' ,
-									formatter : function(value, row, index) {
-										return formatTimeStamp(value);
-									}
+									title : '创建时间' 
 								}/*,
 																{
 									title : '操作',
