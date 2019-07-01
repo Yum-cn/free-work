@@ -24,6 +24,8 @@ public class LogServiceImpl implements LogService {
 
 	@Override
 	public PageDO<LogDO> queryList(Query query) {
+		query.put("sort", "");
+		query.put("order", "");
 		int total = logMapper.count(query);
 		List<LogDO> logs = logMapper.list(query);
 		PageDO<LogDO> page = new PageDO<>();
