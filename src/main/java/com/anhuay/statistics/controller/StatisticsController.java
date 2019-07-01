@@ -101,13 +101,13 @@ public class StatisticsController {
 			//风险级别
 			String sql = "select level,count(level) num from cli_log  where 1=1 ";
 			if(startDate!=null && !"".equals(startDate) && endDate!=null && !"".equals(endDate)){
-				sql = sql + " and (startDate>='"+startDate+"' or endDate<='"+endDate+"') ";
+				sql = sql + " and create_time>='"+startDate+"' and create_time<='"+endDate+"' ";
 			}else{
 				if(startDate!=null && !"".equals(startDate)){
-					sql = sql + " and startDate>='"+startDate+"'  ";
+					sql = sql + " and create_time>='"+startDate+"'  ";
 				}
 				if(endDate!=null && !"".equals(endDate)){
-					sql = sql + " and endDate<='"+endDate+"'  ";
+					sql = sql + " and create_time<='"+endDate+"'  ";
 				}
 			}
 			if(username!=null && !"".equals(username)){
@@ -129,18 +129,19 @@ public class StatisticsController {
 				sql = sql + " and be_type like '%"+xwlb+"%'  ";
 			}
 			sql = sql + " group by level order by level+0 asc";
+			System.out.println(sql);
 			List fxjblist = jdbcTemplate.queryForList(sql);
 			model.addAttribute("result", fxjblist);
 			//违规行为
 			sql = "select be_type,count(be_type) num from cli_log where 1=1 ";
 			if(startDate!=null && !"".equals(startDate) && endDate!=null && !"".equals(endDate)){
-				sql = sql + " and (startDate>='"+startDate+"' or endDate<='"+endDate+"') ";
+				sql = sql + " and create_time>='"+startDate+"' and create_time<='"+endDate+"' ";
 			}else{
 				if(startDate!=null && !"".equals(startDate)){
-					sql = sql + " and startDate>='"+startDate+"'  ";
+					sql = sql + " and create_time>='"+startDate+"'  ";
 				}
 				if(endDate!=null && !"".equals(endDate)){
-					sql = sql + " and endDate<='"+endDate+"'  ";
+					sql = sql + " and create_time<='"+endDate+"'  ";
 				}
 			}
 			if(username!=null && !"".equals(username)){
@@ -167,13 +168,13 @@ public class StatisticsController {
 			//日志分类
 			sql = "select log_type,count(log_type) num from cli_log  where 1=1 ";
 			if(startDate!=null && !"".equals(startDate) && endDate!=null && !"".equals(endDate)){
-				sql = sql + " and (startDate>='"+startDate+"' or endDate<='"+endDate+"') ";
+				sql = sql + " and create_time>='"+startDate+"' and create_time<='"+endDate+"' ";
 			}else{
 				if(startDate!=null && !"".equals(startDate)){
-					sql = sql + " and startDate>='"+startDate+"'  ";
+					sql = sql + " and create_time>='"+startDate+"'  ";
 				}
 				if(endDate!=null && !"".equals(endDate)){
-					sql = sql + " and endDate<='"+endDate+"'  ";
+					sql = sql + " and create_time<='"+endDate+"'  ";
 				}
 			}
 			if(username!=null && !"".equals(username)){

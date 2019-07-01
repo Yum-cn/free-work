@@ -16,7 +16,9 @@
 								onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>删除
 							</button> -->
-							
+							<button type="button" class="btn  btn-success" id="test1" >
+                                <i class="" aria-hidden="true"></i>导入Xml
+                            </button>
 							<button type="button" class="btn  btn-success" onclick="exportExcel()">
                                 <i class="" aria-hidden="true"></i>导出Excel
                             </button>
@@ -97,5 +99,32 @@
         
     </script>
 	<script type="text/javascript" src="/js/appjs/audit/log/log.js"></script>
+	<script src="/js/layui.js"></script>
+	<script type="text/javascript">
+// 	function exportXML() {
+// 		layer.confirm('确定要导入日志，导入后相同数据将被覆盖？', {
+// 			btn : [ '确定', '取消' ]
+// 		}, function() {alert();
+		    layui.use('upload', function () {
+		        var upload = layui.upload;
+		        //执行实例
+		        var uploadInst = upload.render({
+		            elem: '#test1', //绑定元素
+		            url: '/audit/log/upload', //上传接口
+		            size: 1000,
+		            accept: 'file',
+		            done: function (r) {
+		                layer.msg(r.msg);
+//		                 app.getData();
+		            },
+		            error: function (r) {
+		                layer.msg(r.msg);
+		            }
+		        });
+		    });
+// 		})
+// 	}
+
+	</script>
 </body>
 </html>

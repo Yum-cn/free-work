@@ -2,6 +2,7 @@ package com.anhuay.audit.controller;
 
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -36,14 +38,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.anhuay.audit.domain.AuditAlarmLogVO;
 import com.anhuay.audit.domain.AuditLogDO;
 import com.anhuay.audit.service.AuditLogService;
+import com.anhuay.common.config.BootdoConfig;
+import com.anhuay.common.domain.FileDO;
 import com.anhuay.common.utils.DateUtils;
+import com.anhuay.common.utils.FileType;
+import com.anhuay.common.utils.FileUtil;
 import com.anhuay.common.utils.PageUtils;
 import com.anhuay.common.utils.Query;
 import com.anhuay.common.utils.R;
+import com.common.id.IdWorker;
+import com.common.util.Aes;
 import com.common.util.BaseResult;
 import com.common.util.ExcelUtil;
 
@@ -354,9 +363,9 @@ public class AuditLogController {
 			String responseString = XMLToString(document);
 			
 			responseString = responseString.replace("GB2312", "utf-8");
-			
+			String encrypt = Aes.aesEncrypt(responseString, "abcdefgabcdefg12");
 			PrintWriter printWriter = response.getWriter();
-			printWriter.print( responseString );
+			printWriter.print( encrypt );
 			
 			
 			
@@ -407,4 +416,80 @@ public class AuditLogController {
         }
     }
 	
+    
+	@Autowired
+	private BootdoConfig bootdoConfig;
+	
+	@ResponseBody
+	@PostMapping("/upload")
+	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+//		if ("test".equals(getUsername())) {
+//			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+//		}
+		String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
+		System.out.println("ext>>>"+ext);
+		if(!"xml".equals(ext)){
+			return R.error(1, "文件格式不正确");
+		}
+		String sourceFileName = file.getOriginalFilename();
+		String fileName = FileUtil.renameToUUID(sourceFileName);
+		FileDO sysFile = new FileDO(FileType.fileType(fileName), bootdoConfig.getUploadPath() + fileName, new Date(),sourceFileName);
+		IdWorker idWorker = new IdWorker(2);
+		long id = idWorker.nextId();
+		sysFile.setId(id);
+		try {
+//			InputStream in = file.getInputStream();
+//			  byte b[]=new byte[(int)file.getBytes().length()];     //创建合适文件大小的数组   
+//		        in.read(file.getBytes());    //读取文件中的内容到b[]数组   
+//		        in.close();   
+			String encrypt = new String(file.getBytes());
+		    System.out.println(">>>>>>>>>"+new String(file.getBytes()));   
+		    encrypt = Aes.aesDecrypt(encrypt,"abcdefgabcdefg12");
+		    System.out.println(">>>>>>>>>"+encrypt); 
+		    Document doc = DocumentHelper.parseText(encrypt); // 将字符串转为XML
+		    Element rootElt = doc.getRootElement(); // 获取根节点
+            System.out.println("根节点：" + rootElt.getName()); // 拿到根节点的名称
+
+            Iterator iter = rootElt.elementIterator("Log"); // 获取根节点下的子节点head
+            // 遍历head节点
+            while (iter.hasNext()) {
+
+                Element recordEle = (Element) iter.next();
+                String Pri = recordEle.attributeValue("Pri"); // 拿到head节点下的子节点title值
+                String LogID = recordEle.elementTextTrim("LogID");
+                String ObjectName = recordEle.elementTextTrim("ObjectName");
+                String Details = recordEle.elementTextTrim("Details");
+                String Result = recordEle.elementTextTrim("Result");
+                String EntryStamp = recordEle.elementTextTrim("EntryStamp");
+                String Level = recordEle.elementTextTrim("Level");
+                String Type = recordEle.elementTextTrim("Type");
+                String ProductType = recordEle.elementTextTrim("ProductType");
+                String BehaviourType = recordEle.elementTextTrim("BehaviourType");
+                String Reservation = recordEle.elementTextTrim("Reservation");
+                System.out.println("Pri:" + Pri);
+                System.out.println("ObjectName:" + ObjectName);
+                Iterator iters = recordEle.elementIterator("Subject"); // 获取子节点head下的子节点script
+
+                // 遍历Header节点下的Response节点
+                while (iters.hasNext()) {
+
+                    Element itemEle = (Element) iters.next();
+
+                    String username = itemEle.elementTextTrim("username"); // 拿到head下的子节点script下的字节点username的值
+                    String password = itemEle.elementTextTrim("password");
+
+                    System.out.println("username:" + username);
+                    System.out.println("password:" + password);
+                }
+            }
+			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+		} catch (Exception e) {
+			return R.error();
+		}
+
+//		if (sysFileService.save(sysFile) > 0) {
+//			return R.ok().put("fileName",sysFile.getUrl()).put("sourceName", sourceFileName).put("id", id);
+//		}
+		return R.error(1, "导入成功！");
+	}
 }

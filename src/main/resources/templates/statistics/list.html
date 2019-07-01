@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<form id="form1" name="form1" method="post" action="/alarm/statistics/search">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div>
+							开始时间：<input id="startDate" name="startDate" style="width:150px;height:30px" type="text" placeholder="" onClick="WdatePicker()">
+							&nbsp;&nbsp;结束时间：<input id="endDate" name="endDate" style="width:150px;height:30px"  type="text" placeholder="" onClick="WdatePicker()">
+
+							&nbsp;&nbsp;用户名：<input id="username" name="username" style="width:150px;height:30px"  type="text" placeholder="">
+							&nbsp;&nbsp;IP：<input id="ip" name="ip" style="width:150px;height:30px"  type="text" placeholder="">
+							&nbsp;&nbsp;部门：<input  id="deptname" name="deptname" style="width:150px;height:30px"  type="text" placeholder="">
+							&nbsp;&nbsp;<input type="radio" name="tian" value="1" />天
+							&nbsp;&nbsp;<input type="radio" name="tian" value="2" />周
+							&nbsp;&nbsp;<input type="radio" name="tian" value="3" />月
+						</div><br>
+						<div>
+							
+							&nbsp;&nbsp;协议：<input  id="xieyi" name="xieyi"  style="width:150px;height:30px" type="text" placeholder="">
+							&nbsp;&nbsp;访问量：<input id="fangwenliang" name="fangwenliang"  style="width:150px;height:30px" type="text" placeholder="">
+							&nbsp;&nbsp;文件名：<input id="wenjianming" name="wenjianming"  style="width:150px;height:30px" type="text" placeholder="">
+							&nbsp;&nbsp;事件结果：
+							  <select name="sjjg" style="width:150px;height:30px">
+							  <option value="">全部</option>
+							    <option value="1">本地文件审计</option>
+							    <option value="2">U 盘文件审计</option>
+							    <option value="3">开机关机审计</option>
+							    <option value="4">进程监控审计</option>
+							    <option value="5">打印监控审计</option>
+							    <option value="6">主机信息审计</option>
+							    <option value="7">系统日志审计</option>
+							    <option value="8">账户监控审计</option>
+							    <option value="9">共享监控审计</option>
+							    <option value="10">异常监控审计</option>
+							    <option value="11">主机配置审计</option>
+							    <option value="12">移动介质审计</option>
+							    <option value="13">端口监控审计</option>
+							    <option value="14">服务监控审计</option>
+							    <option value="15">连接监控审计</option>
+							    <option value="16">网络流量检测</option>
+							    <option value="17">磁盘空间检测</option>
+							    <option value="18">文件控制</option>
+							    <option value="19">光盘刻录审计</option>
+
+							  </select>
+<!-- 							<input id="sjjg" name="sjjg"  style="width:150px;height:30px" type="text" placeholder=""> -->
+							&nbsp;&nbsp;风险级别：
+							  <select name="fxjb" style="width:150px;height:30px">
+							  <option value="">全部</option>
+							    <option value="0">紧急</option>
+							    <option value="1">警报</option>
+							    <option value="2">关键</option>
+							    <option value="3">错误</option>
+							    <option value="4">警告</option>
+							    <option value="5">通知</option>
+							    <option value="6">信息</option>
+							    <option value="7">调试</option>
+							  </select>
+<!-- 							<input id="fxjb" name="fxjb"  style="width:150px;height:30px" type="text" placeholder=""> -->
+							&nbsp;&nbsp;行为类别：
+							  <select name="xwlb" style="width:150px;height:30px">
+							  <option value="">全部</option>
+							    <option value="1">违规行为</option>
+							    <option value="2">异常行为</option>
+							    <option value="3">一般行为</option>
+							  </select>
+<!-- 							<input id="xwlb" name="xwlb"  style="width:150px;height:30px" type="text" placeholder=""> -->
+						</div>
+					</div>
+					<br>
+					</form>
+
+	<table class="bordered" style="width: 100%; text-align: center;" align="center">
+		<tr>
+			<td id="container" style="width:50%;height:450px;">&nbsp;</td>
+			<td id="container1" style="width:50%;height:390px;">&nbsp;</td>
+		</tr>
+	</table>
+		<table class="bordered" style="width: 100%; text-align: center;" align="center">
+		<tr>
+			<td id="container2" style="width:50%;height:450px;">&nbsp;</td>
+		</tr>
+	</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+
+</body>
+</html>
+ <script th:inline="javascript">
+ var a=0;var b=0;var c=0;var d=0;var e=0;var f=0;var g=0;var h=0;
+ var result = [[${result}]];
+ for(i=0;i<result.length;i++){
+	 if(result[i].level==1){
+		 a = result[i].num;
+	 }
+	 if(result[i].level==2){
+		 b = result[i].num;
+	 }
+	 if(result[i].level=='3'){
+		 c = result[i].num;
+	 }
+	 if(result[i].level=='4'){
+		 d = result[i].num;
+	 }
+	 if(result[i].level=='5'){
+		 e = result[i].num;
+	 }
+	 if(result[i].level=='6'){
+		 f = result[i].num;
+	 }
+	 if(result[i].level=='7'){
+		 g = result[i].num;
+	 }
+	 if(result[i].level=='8'){
+		 h = result[i].num;
+	 }
+// 	 console.log(result[i].level);
+// 	 console.log(result[i].num);
+ }
+
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+	    title : {
+	        text: '风险级别',
+	        subtext: ''
+	    },
+	    tooltip : {
+	        trigger: 'axis'
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType : {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : ['紧急','警报','关键','错误','警告','通知','信息','调试']
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value'
+	        }
+	    ],
+	    series : [
+	        {
+	            name:'蒸发量',
+	            type:'bar',
+	            data:[a, b, c, d, e, f, g, h],
+	            markPoint : {
+	                data : [
+	                    {type : 'max', name: '最大值'}
+	                ]
+	            }
+	        }
+	    ]
+	};
+	                    
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>	
+        <script th:inline="javascript">
+        var a=0;var b=0;var c=0;
+        var result = [[${wgxwlist}]];
+        for(i=0;i<result.length;i++){
+       	 if(result[i].be_type==1){
+       		 a = result[i].num;
+       	 }
+       	 if(result[i].be_type==2){
+       		 b = result[i].num;
+       	 }
+       	 if(result[i].be_type=='3'){
+       		 c = result[i].num;
+       	 }
+
+        }
+var dom = document.getElementById("container1");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+	    title : {
+	        text: '行为类别',
+	        subtext: '',
+	        x:'center'
+	    },
+	    tooltip : {
+	        trigger: 'item',
+	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	    },
+	    legend: {
+	        orient : 'vertical',
+	        x : 'left',
+	        data:['违规行为','异常行为','一般行为']
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType : {
+	                show: true, 
+	                type: ['pie', 'funnel'],
+	                option: {
+	                    funnel: {
+	                        x: '25%',
+	                        width: '50%',
+	                        funnelAlign: 'left',
+	                        max: 1548
+	                    }
+	                }
+	            },
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    series : [
+	        {
+	            name:'',
+	            type:'pie',
+	            radius : '55%',
+	            center: ['50%', '60%'],
+	            data:[
+	                {value:a, name:'违规行为'},
+	                {value:b, name:'异常行为'},
+	                {value:c, name:'一般行为'}
+	            ]
+	        }
+	    ]
+	};
+	                                
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+  <script th:inline="javascript">
+ var a=0;var b=0;var c=0;var d=0;var e=0;var f=0;var g=0;var h=0;var i=0;var j=0;var k=0;var l=0;var m=0;var n=0;var o=0;var p=0;var q=0;var r=0;var s=0;var t=0;var u=0;var v=0;var w=0;
+ var result = [[${rzfllist}]];
+ for(i=0;i<result.length;i++){
+	 if(result[i].log_type==1){
+		 a = result[i].num;
+	 }
+	 if(result[i].log_type==2){
+		 b = result[i].num;
+	 }
+	 if(result[i].log_type=='3'){
+		 c = result[i].num;
+	 }
+	 if(result[i].log_type=='4'){
+		 d = result[i].num;
+	 }
+	 if(result[i].log_type=='5'){
+		 e = result[i].num;
+	 }
+	 if(result[i].log_type=='6'){
+		 f = result[i].num;
+	 }
+	 if(result[i].log_type=='7'){
+		 g = result[i].num;
+	 }
+	 if(result[i].log_type=='8'){
+		 h = result[i].num;
+	 }
+	 
+	 if(result[i].log_type=='9'){
+		 h = result[i].num;
+	 }
+	 
+	 if(result[i].log_type=='10'){
+		 i = result[i].num;
+	 }
+	 if(result[i].log_type=='11'){
+		 j = result[i].num;
+	 }
+	 if(result[i].log_type=='12'){
+		 k = result[i].num;
+	 }
+	 if(result[i].log_type=='13'){
+		 l = result[i].num;
+	 }
+	 if(result[i].log_type=='14'){
+		 m = result[i].num;
+	 }
+	 if(result[i].log_type=='15'){
+		 n = result[i].num;
+	 }
+	 if(result[i].log_type=='16'){
+		 o = result[i].num;
+	 }
+	 if(result[i].log_type=='17'){
+		 p = result[i].num;
+	 }
+	 if(result[i].log_type=='18'){
+		 q = result[i].num;
+	 }
+	 if(result[i].log_type=='19'){
+		 r = result[i].num;
+	 }
+	 if(result[i].log_type=='20'){
+		 s = result[i].num;
+	 }
+ }
+
+var dom = document.getElementById("container2");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+	    title : {
+	        text: '事件结果',
+	        subtext: ''
+	    },
+	    tooltip : {
+	        trigger: 'axis'
+	    },
+	    toolbox: {
+	        show : true,
+	        feature : {
+	            mark : {show: true},
+	            dataView : {show: true, readOnly: false},
+	            magicType : {show: true, type: ['line', 'bar']},
+	            restore : {show: true},
+	            saveAsImage : {show: true}
+	        }
+	    },
+	    calculable : true,
+	    xAxis : [
+	        {
+	            type : 'category',
+	            data : ['本地文件审计','U 盘文件审计','开机关机审计','进程监控审计','打印监控审计','主机信息审计','系统日志审计','账户监控审计','共享监控审计','异常监控审计','主机配置审计','移动介质审计','端口监控审计','服务监控审计','连接监控审计','网络流量检测','磁盘空间检测','文件控制','光盘刻录审计']
+	        }
+	    ],
+	    yAxis : [
+	        {
+	            type : 'value'
+	        }
+	    ],
+	    
+	    series : [
+	        {
+	            name:'数量',
+	            type:'bar',
+	            data:[a, b, c, d, e, f, g, h,i, j, k, l, m, n, o, p, q, r, s],
+	            markPoint : {
+	                data : [
+	                    {type : 'max', name: '最大值'}
+	                ]
+	            }
+	        }
+	    ]
+	};
+	                    
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>	

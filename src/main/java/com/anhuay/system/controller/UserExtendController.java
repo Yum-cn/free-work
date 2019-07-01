@@ -55,7 +55,6 @@ public class UserExtendController extends BaseController {
 	 * 
 	 * @author Yum
 	 */
-	@RequiresPermissions("system:userExtend")
 	@GetMapping("/key")
 	String user(Model model) {
 		model.addAttribute("userId", getUserId());
@@ -73,7 +72,6 @@ public class UserExtendController extends BaseController {
 		return pageUtil;
 	}
 
-	@RequiresPermissions("system:userExtend:login")
 	@Log("登录设置")
 	@GetMapping("/loginConfig")
 	String add(Model model) {
